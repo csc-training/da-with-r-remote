@@ -4,7 +4,7 @@ Useful links:
 
 [CSC notebooks](https://notebooks.csc.fi/)
 
-[Teaching materials on eLena](https://e-learn.csc.fi/course/view.php?id=36)
+[eLena](https://e-learn.csc.fi)
 
 The teaching materials used in this course are derived from Software / Data Carpentry lessons and CSC teaching materials. See [LICENSE.md](LICENSE.md) for details.
 
