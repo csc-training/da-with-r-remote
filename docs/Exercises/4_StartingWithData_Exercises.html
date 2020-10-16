@@ -117,10 +117,7 @@ img {
 <h4><strong>Block 1: downloading and importing data</strong></h4>
 <p>This exercise block repeats the lecture contents - at this point it’s important that we’re all on the same page! We will need these data as we move on.</p>
 <p><strong>1.1</strong> Create a folder called <code>data</code> (Files –&gt; New folder).</p>
-<p><strong>1.2</strong> Download some example data by running the following command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="dt">url=</span><span class="st">&quot;https://tinyurl.com/portaljoined&quot;</span>,
-              <span class="dt">destfile =</span> <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</code></pre></div>
-<p><strong>1.3</strong> Using the <code>read.csv()</code> function, import the portal data set into an object called <code>surveys</code>. You can use <code>head()</code> to check that everything got imported correctly.</p>
+<p><strong>1.2</strong> Import some example data (<code>/data/portal_data_joined.csv</code>) into an object called <code>surveys</code>. When importing the data, use the argument <code>stringsAsFactors = TRUE</code>. You can use <code>head()</code> to check that everything got imported correctly.</p>
 </div>
 <div id="block-2-inspecting-data-frames" class="section level4">
 <h4><strong>Block 2: inspecting data frames</strong></h4>
@@ -144,7 +141,7 @@ img {
 <ul>
 <li>What is the class of the object <code>surveys</code>?</li>
 <li>How many rows and how many columns are in this object?</li>
-<li>How many species have been recorded during these surveys?</li>
+<li>How many different species IDs have been recorded during these surveys?</li>
 </ul>
 </div>
 <div id="block-3-indexing-and-subsetting-data-frames" class="section level4">
@@ -179,7 +176,7 @@ img {
 <p><strong>5.2</strong> Can you predict the class for each of the columns in the following example? Check your guesses using <code>str(country_climate)</code>:</p>
 <ul>
 <li>Are they what you expected? Why? Why not?</li>
-<li>What would have been different if we had added <code>stringsAsFactors = FALSE</code> when creating the data frame?</li>
+<li>What would have been different if we had added <code>stringsAsFactors = TRUE</code> when creating the data frame?</li>
 <li>What would you need to change to ensure that each column had the accurate data type?</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">country_climate &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
@@ -192,13 +189,10 @@ img {
 </div>
 <div id="block-6-arguments-for-csv-importing" class="section level4">
 <h4><strong>Block 6: arguments for CSV importing</strong></h4>
-<p><strong>6.1</strong> Use <code>download.file</code> to retrieve a new data set on car speeds from the web:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://tinyurl.com/carspeeds&quot;</span>,
-<span class="dt">destfile =</span> <span class="st">&quot;data/car_speeds.csv&quot;</span>)</code></pre></div>
-<p><strong>6.2</strong> Import the data into an object called <code>carSpeeds</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">carSpeeds &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/car_speeds.csv&quot;</span>)</code></pre></div>
-<p><strong>6.3</strong> Have a look at the structure of <code>carSpeeds</code> using <code>str()</code>. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one?</p>
-<p><strong>6.4</strong> The car colour labels contain accidental whitespaces. To fix this, try importing the data using the <code>strip.white</code> argument. NOTE - this argument must be accompanied by the <code>sep</code> argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add <code>sep = ','</code> to the import command. You can use <code>unique()</code> to check if it worked!</p>
+<p><strong>6.1</strong> Import a new data set on car speeds (<code>/data/car-speeds.csv</code>) and assign it to an object called <code>carSpeeds</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">carSpeeds &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/data/car-speeds.csv&quot;</span>)</code></pre></div>
+<p><strong>6.2</strong> Have a look at the structure of <code>carSpeeds</code> using <code>str()</code>. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one?</p>
+<p><strong>6.3</strong> The car colour labels contain accidental whitespaces. To fix this, try importing the data using the <code>strip.white</code> argument. NOTE - this argument must be accompanied by the <code>sep</code> argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add <code>sep = ','</code> to the import command. You can use <code>unique()</code> to check if it worked!</p>
 </div>
 <div id="block-7-exporting-data-and-saving-scripts" class="section level4">
 <h4><strong>Block 7: exporting data and saving scripts</strong></h4>

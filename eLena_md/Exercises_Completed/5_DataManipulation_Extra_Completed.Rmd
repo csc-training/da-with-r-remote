@@ -28,7 +28,7 @@ In this section we have some extra exercises for the first day of the R course, 
 
 The Finnish Institute for Health and Welfare (THL) open data interface is used here to observe COVID-19 infections and tests in Finland. More information on the interface can be found on the [THL website](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data/confirmed-corona-cases-in-finland-covid-19-).
 
-**Begin by installing** the package `rjstat` and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+**Begin by installing** the package `rjstat` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
 
 ```r
 install.packages("rjstat")
@@ -38,7 +38,6 @@ library(tidyverse)
 ```
 
 #### **1. Getting the data**
-
 
 You can quickly run through the following lines if you are not interested in the API.
 Make sure to **copy and run each R code chunk** in RStudio to ensure that you get the data in the correct format.
@@ -151,4 +150,4 @@ data_regionsums %>%
 
 #### **3. Saving and exporting your script**
 
-You won't need to save the data, but it's a good idea to save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the [Starting with data exercise sheet](https://e-learn.csc.fi/mod/resource/view.php?id=574) (steps 7.3 and 7.4).
+You won't need to save the data, but it's a good idea to save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).

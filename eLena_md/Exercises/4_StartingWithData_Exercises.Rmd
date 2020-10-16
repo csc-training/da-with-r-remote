@@ -38,14 +38,7 @@ same page! We will need these data as we move on.
 
 **1.1** Create a folder called `data` (Files --> New folder).
 
-**1.2** Download some example data by running the following command:
-
-```r
-download.file(url="https://tinyurl.com/portaljoined",
-              destfile = "data/portal_data_joined.csv")
-```              
-
-**1.3** Using the `read.csv()` function, import the portal data set into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
+**1.2** Import some example data (`/data/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
 
 #### **Block 2: inspecting data frames**
 
@@ -69,7 +62,7 @@ download.file(url="https://tinyurl.com/portaljoined",
 
 - What is the class of the object `surveys`?
 - How many rows and how many columns are in this object?
-- How many species have been recorded during these surveys?
+- How many different species IDs have been recorded during these surveys?
 
 #### **Block 3: indexing and subsetting data frames**
 
@@ -115,7 +108,7 @@ animal_data <- data.frame(
 **5.2** Can you predict the class for each of the columns in the following example? Check your guesses using `str(country_climate)`:
 
 - Are they what you expected? Why? Why not?
-- What would have been different if we had added `stringsAsFactors = FALSE` when creating the data frame?
+- What would have been different if we had added `stringsAsFactors = TRUE` when creating the data frame?
 - What would you need to change to ensure that each column had the accurate data type?
 
 ```r
@@ -130,24 +123,15 @@ country_climate <- data.frame(
 
 #### **Block 6: arguments for CSV importing**
 
-**6.1** Use `download.file` to retrieve a new data set on car speeds from the web:
+**6.1** Import a new data set on car speeds (`/data/car-speeds.csv`) and assign it to an object called `carSpeeds`.
 
 ```r
-download.file(url = "https://tinyurl.com/carspeeds",
-destfile = "data/car_speeds.csv")
-
+carSpeeds <- read.csv("/data/car-speeds.csv")
 ```
 
-**6.2** Import the data into an object called `carSpeeds`:
+**6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
 
-```r
-carSpeeds <- read.csv("data/car_speeds.csv")
-
-```
-
-**6.3** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
-
-**6.4** The car colour labels contain accidental whitespaces. To fix this, try importing the data using the `strip.white` argument. NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. You can use `unique()` to check if it worked!
+**6.3** The car colour labels contain accidental whitespaces. To fix this, try importing the data using the `strip.white` argument. NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. You can use `unique()` to check if it worked!
 
 #### **Block 7: exporting data and saving scripts**
 

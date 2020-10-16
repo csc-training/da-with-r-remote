@@ -36,22 +36,13 @@ https://datacarpentry.org/R-ecology-lesson/
 library(tidyverse)
 ```
 
-**1.2** Then download a version of the `surveys` data set that we worked with yesterday. If you already have the data ready, this step can be skipped.
+**1.2** Then import a version of the `surveys` data set that we worked with previously (`surveys_complete.csv`). Assign it to a tibble called `surveys_complete`, using `read_csv()`. We can use a version of the data that comes in-built in our R environment, located in the `/data` folder.
 
 ```r
-download.file(url = "https://tinyurl.com/surveyscomplete",
- destfile = "data_output/surveys_complete.csv")
-
-# note that we're downloading this into the data_output folder!
+surveys_complete <- read_csv("/data/surveys_complete.csv")
 ```
 
-**1.3** Import the data into a tibble called `surveys_complete`, using `read_csv()`.
-
-```r
-surveys_complete <- read_csv("data_output/surveys_complete.csv")
-```
-
-**1.4** Using `ggplot2` and the `surveys_complete` data set, create a scatter plot of `weight` over `species_id` with the plot types shown in different colors. What do you think - is this a good way to show these type of data? If not, how would you go about it instead?
+**1.3** Using `ggplot2` and the `surveys_complete` data set, create a scatter plot of `weight` over `species_id` with the plot types shown in different colors. What do you think - is this a good way to show these type of data? If not, how would you go about it instead?
 
 ```r
 ggplot(data = surveys_complete, 
@@ -59,7 +50,7 @@ ggplot(data = surveys_complete,
        geom_point(aes(color = plot_type))
 ```
 
-**1.5** Try setting up a plot template using the code you just wrote for creating the scatter plot above.
+**1.4** Try setting up a plot template using the code you just wrote for creating the scatter plot above.
 
 Just as a memory aid, here is a (non-exhaustive) list of different geoms we can use.
 
@@ -112,7 +103,7 @@ scale_fill_manual(values = cPalette)
 
 **3.1** Create a histogram that compares the distribution of `weight` values between males and females in the `surveys_complete` data set. You should be able to tell apart the two sexes based on how the bars are colored. For this exercise, use a white `fill`, a `binwidth` of 4 and an `alpha` value of 0.5. 
 
-**Tip:** When plotting two data sets together in the same histogram, adding `position = "dodge"` inside the `geom` can make the results easier to interpret (it asks R to produce an interleaved plot, i.e. values are shown side-by-side rather than stacked on top of one another).
+Tip: When plotting two data sets together in the same histogram, adding `position = "dodge"` inside the `geom` can make the results easier to interpret (it asks R to produce an interleaved plot, i.e. values are shown side-by-side rather than stacked on top of one another).
 
 ```r
 ggplot(surveys_complete, aes(x = weight, color = sex)) +
@@ -252,7 +243,7 @@ mytheme <- theme(
   panel.grid.major = element_blank(),         # remove grid lines
   panel.grid.minor = element_blank(),
   panel.background = element_blank(),         # remove background
-  axis.line = element_line(colour = "black")   # add axis line
+  axis.line = element_line(colour = "black")  # add axis line
   )
 
 ggplot(surveys_complete, aes(x = species_id, 
@@ -304,4 +295,4 @@ ggsave("fig_output/comboplot.png", plots_arranged,
 width = 10, dpi = 100)
 ```
 
-**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the `Starting with data` exercise sheet (steps 7.3 and 7.4).
+**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the `Starting with Data` exercise sheet (steps 7.3 and 7.4).

@@ -116,12 +116,7 @@ img {
 <p><strong>1.1</strong> Load the <code>tidyverse</code> package collection:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <p><strong>1.2</strong> Read in <code>portal_data_joined.csv</code> using <code>read_csv()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</code></pre></div>
-<p><strong>Note:</strong> If you haven’t followed the previous exercises, you will need to download the data first:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="dt">url=</span><span class="st">&quot;https://tinyurl.com/portaljoined&quot;</span>,
-              <span class="dt">destfile =</span> <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)
-
-<span class="co"># note: you also need a 'data' folder for the above to work!</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;/data/portal_data_joined.csv&quot;</span>)</code></pre></div>
 <p><strong>1.3</strong> Using pipes, subset the <code>surveys</code> data to include animals collected before 1995 and retain only the columns <code>year</code>, <code>sex</code>, and <code>weight</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys %&gt;%
 <span class="st">    </span><span class="kw">filter</span>(year &lt;<span class="st"> </span><span class="dv">1995</span>) %&gt;%
@@ -246,9 +241,9 @@ species_counts &lt;-<span class="st"> </span>surveys_complete %&gt;%
 surveys_complete &lt;-<span class="st"> </span>surveys_complete %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span>species_counts$species_id)</code></pre></div>
 <p><strong>6.3</strong> Check your data set by running <code>dim(surveys_complete)</code>. It should have 30463 rows and 13 columns!</p>
-<p><strong>6.4</strong> Save the data as a CSV file in our <code>data_output</code> folder.</p>
+<p><strong>6.4</strong> Save the data as a CSV file in the <code>data_output</code> folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_csv</span>(surveys_complete, <span class="dt">path =</span> <span class="st">&quot;data_output/surveys_complete.csv&quot;</span>)</code></pre></div>
-<p>If you run into troubles here, don’t worry. When we continue with data visualization exercises tomorrow, we can download a ready version of the data from the web (isn’t the Internet wonderful?).</p>
+<p>If you run into troubles here, don’t worry. When we continue with data visualization exercises tomorrow, we can also use an in-built backup of the <code>surveys_complete</code> data set.</p>
 </div>
 </div>
 </div>

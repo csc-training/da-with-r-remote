@@ -38,18 +38,9 @@ library(tidyverse)
 **1.2** Read in `portal_data_joined.csv` using `read_csv()`:
 
 ```r
-surveys <- read_csv("data/portal_data_joined.csv")
+surveys <- read_csv("/data/portal_data_joined.csv")
 
 ```
-
-**Note:** If you haven't followed the previous exercises, you will need to download the data first: 
-
-```r
-download.file(url="https://tinyurl.com/portaljoined",
-              destfile = "data/portal_data_joined.csv")
-
-# note: you also need a 'data' folder for the above to work!
-```        
 
 **1.3** Using pipes, subset the `surveys` data to include animals collected before 1995 and retain only the columns `year`, `sex`, and `weight`.
 
@@ -139,10 +130,10 @@ surveys_complete <- surveys_complete %>%
 
 **6.3** Check your data set by running `dim(surveys_complete)`. It should have 30463 rows and 13 columns!
 
-**6.4** Save the data as a CSV file in our `data_output` folder.
+**6.4** Save the data as a CSV file in the `data_output` folder.
 
 ```r
 write_csv(surveys_complete, path = "data_output/surveys_complete.csv")
 ```
 
-If you run into troubles here, don't worry. When we continue with data visualization exercises tomorrow, we can download a ready version of the data from the web (isn't the Internet wonderful?).
+If you run into troubles here, don't worry. When we continue with data visualization exercises tomorrow, we can also use an in-built backup of the `surveys_complete` data set.
