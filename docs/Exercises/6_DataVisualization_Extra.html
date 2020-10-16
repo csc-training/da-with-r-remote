@@ -156,6 +156,13 @@ data$value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data
  $ value                   : num  0 0 0 0 0 0 0 0 0 0 ...
  $ region                  : Factor w/ 22 levels &quot;Åland&quot;,&quot;All areas&quot;,..: 1 22 18 9 16 15 10 19 5 7 ...
  $ week                    : Date, format: &quot;2020-01-29&quot; &quot;2020-01-29&quot; ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">'data.frame'</span>:<span class="st">   </span><span class="dv">5786</span> obs. of  <span class="dv">6</span> variables:
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>dateweek2020010120201231:<span class="st"> </span>chr  <span class="st">&quot;2020-01-28&quot;</span> <span class="st">&quot;2020-01-28&quot;</span> <span class="st">&quot;2020-01-28&quot;</span> <span class="st">&quot;2020-01-28&quot;</span> ...
+ $<span class="st"> </span>hcdmunicipality2020     :<span class="st"> </span>chr  <span class="st">&quot;Åland&quot;</span> <span class="st">&quot;Southwest Finland Hospital District&quot;</span> <span class="st">&quot;Satakunta Hospital District&quot;</span> <span class="st">&quot;Kanta-Häme Hospital District&quot;</span> ...
+ $<span class="st"> </span>measure                 :<span class="st"> </span>chr  <span class="st">&quot;Number of cases&quot;</span> <span class="st">&quot;Number of cases&quot;</span> <span class="st">&quot;Number of cases&quot;</span> <span class="st">&quot;Number of cases&quot;</span> ...
+ $<span class="st"> </span>value                   :<span class="st"> </span>num  <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> ...
+ $<span class="st"> </span>region                  :<span class="st"> </span>Factor w/<span class="st"> </span><span class="dv">22</span> levels <span class="st">&quot;Åland&quot;</span>,<span class="st">&quot;All areas&quot;</span>,..:<span class="st"> </span><span class="dv">1</span> <span class="dv">21</span> <span class="dv">17</span> <span class="dv">8</span> <span class="dv">16</span> <span class="dv">15</span> <span class="dv">9</span> <span class="dv">18</span> <span class="dv">20</span> <span class="dv">6</span> ...
+ $<span class="st"> </span>week                    :<span class="st"> </span>Date, format:<span class="st"> &quot;2020-01-28&quot;</span> <span class="st">&quot;2020-01-28&quot;</span> <span class="st">&quot;2020-01-28&quot;</span> <span class="st">&quot;2020-01-28&quot;</span> ...</code></pre></div>
 <p><strong>2.6</strong> Group the data by region to create regional sums (similar to yesterday’s excercise).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata_sums &lt;-<span class="st"> </span>plotdata %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(region) %&gt;%
@@ -185,9 +192,9 @@ data$value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data
 </div>
 <div id="saving-and-exporting-your-script" class="section level4">
 <h4><strong>3. Saving and exporting your script</strong></h4>
-<p>If you don’t remember how to save and export your data from RStudio Server, follow the instructions set out in the <a href="https://e-learn.csc.fi/mod/resource/view.php?id=574">Starting with data exercise sheet</a> (steps 7.3 and 7.4).</p>
-<p>That’s it in terms of exercises! As this is the last part of the course, we will not go through the solutions in a Zoom session. However, if you’re unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.</p>
-<p>Thanks for joining the course and we hope you’ve found the contents useful!</p>
+<p>If you don’t remember how to save and export your data from RStudio Server, follow the instructions set out in the <strong>Starting with Data exercise sheet</strong> (steps 7.3 and 7.4).</p>
+<p>That’s it in terms of exercises! Depending on the course schedule, there may be a chance to go through the solutions during the beginning of Day 3. However, if you’re attending a two-day course feel unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.</p>
+<p>Thanks for joining the course (so far!) and we hope you’ve found the contents useful!</p>
 </div>
 </div>
 </div>

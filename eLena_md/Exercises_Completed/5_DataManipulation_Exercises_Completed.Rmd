@@ -231,7 +231,7 @@ surveys_complete <- surveys_complete %>%
 **6.4** Save the data as a CSV file in the `data_output` folder.
 
 ```r
-write_csv(surveys_complete, path = "data_output/surveys_complete.csv")
+write_csv(surveys_complete, file = "data_output/surveys_complete.csv")
 ```
 
 If you run into troubles here, don't worry. When we continue with data visualization exercises tomorrow, we can also use an in-built backup of the `surveys_complete` data set.

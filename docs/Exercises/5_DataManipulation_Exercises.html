@@ -183,7 +183,7 @@ surveys_complete &lt;-<span class="st"> </span>surveys_complete %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span>species_counts$species_id)</code></pre></div>
 <p><strong>6.3</strong> Check your data set by running <code>dim(surveys_complete)</code>. It should have 30463 rows and 13 columns!</p>
 <p><strong>6.4</strong> Save the data as a CSV file in the <code>data_output</code> folder.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_csv</span>(surveys_complete, <span class="dt">path =</span> <span class="st">&quot;data_output/surveys_complete.csv&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_csv</span>(surveys_complete, <span class="dt">file =</span> <span class="st">&quot;data_output/surveys_complete.csv&quot;</span>)</code></pre></div>
 <p>If you run into troubles here, don’t worry. When we continue with data visualization exercises tomorrow, we can also use an in-built backup of the <code>surveys_complete</code> data set.</p>
 </div>
 </div>

@@ -91,6 +91,16 @@ plotdata$week <- as.Date(plotdata$dateweek2020010120201231)
 str(plotdata)
 ```
 
+```r
+'data.frame':	5786 obs. of  6 variables:
+ $ dateweek2020010120201231: chr  "2020-01-28" "2020-01-28" "2020-01-28" "2020-01-28" ...
+ $ hcdmunicipality2020     : chr  "Åland" "Southwest Finland Hospital District" "Satakunta Hospital District" "Kanta-Häme Hospital District" ...
+ $ measure                 : chr  "Number of cases" "Number of cases" "Number of cases" "Number of cases" ...
+ $ value                   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ region                  : Factor w/ 22 levels "Åland","All areas",..: 1 21 17 8 16 15 9 18 20 6 ...
+ $ week                    : Date, format: "2020-01-28" "2020-01-28" "2020-01-28" "2020-01-28" ...
+```
+
 **2.6** Group the data by region to create regional sums (similar to yesterday's excercise).
 
 ```r
@@ -158,8 +168,8 @@ If you are feeling brave, get some more data from the THL website and get creati
 
 #### **3. Saving and exporting your script**
 
-If you don't remember how to save and export your data from RStudio Server, follow the instructions set out in the [Starting with data exercise sheet](https://e-learn.csc.fi/mod/resource/view.php?id=574) (steps 7.3 and 7.4).
+If you don't remember how to save and export your data from RStudio Server, follow the instructions set out in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
 
-That's it in terms of exercises! As this is the last part of the course, we will not go through the solutions in a Zoom session. However, if you're unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.
+That's it in terms of exercises! Depending on the course schedule, there may be a chance to go through the solutions during the beginning of Day 3. However, if you're attending a two-day course feel unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.
 
-Thanks for joining the course and we hope you've found the contents useful!
+Thanks for joining the course (so far!) and we hope you've found the contents useful!
