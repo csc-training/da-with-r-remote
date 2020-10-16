@@ -1,0 +1,154 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Data manipulation - independent exercises
+
+In this section we have some extra exercises for the first day of the R course, for those who are interested to test their R skills a little more. Here we explore real-life COVID-19 data as an example of using data from open data application programming interfaces (APIs). 
+
+**Exclaimer:** The exercises are only examples and should not be taken as true representations of the COVID-19 situation in Finland.
+
+The Finnish Institute for Health and Welfare (THL) open data interface is used here to observe COVID-19 infections and tests in Finland. More information on the interface can be found on the [THL website](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data/confirmed-corona-cases-in-finland-covid-19-).
+
+**Begin by installing** the package `rjstat` and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+
+```r
+install.packages("rjstat")
+
+library(rjstat)
+library(tidyverse)
+```
+
+#### **1. Getting the data**
+
+
+You can quickly run through the following lines if you are not interested in the API.
+Make sure to **copy and run each R code chunk** in RStudio to ensure that you get the data in the correct format.
+
+**1.1** Copy the address of the API from where we will retrieve the data in [json format](https://www.json.org/json-en.html):
+
+```r
+url <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?"
+```
+
+**1.2** Specify dimensions of the API that we would like to use (there are also other dimensions available). Here we have the amount of infections (`measure.infections`), the date (`time.day`) and the hospital district (`region.shp`).
+
+```r
+measure.infections <- "measure-444833"
+time.day <- "dateweek2020010120201231-443702L"
+region.shp <- "hcdmunicipality2020-445222"
+```
+
+**1.3** Write a character string to obtain the daily coronavirus infections by hospital district:
+
+```r
+url.call <- paste0(url, "column=", measure.infections, "&row=", time.day, "&row=", region.shp)
+```
+
+**1.4** Read in the data using `fromJSONstat()` and check the structure of the data frame. You should see that the data are given as as a list ("`List of 1`").
+
+```r
+data <- fromJSONstat(readLines(url.call, encoding = "UTF-8"))
+str(data)
+```
+
+**1.5** Create a data frame from the original data (this is much more likely to be useful for further analyses):
+
+```r
+data <- data$`COVID-19 cases in the infectious diseases registry`
+```
+
+Convert the `value` column to numeric:
+
+```r
+data$value <- as.numeric(data$value)
+```
+
+Now we are ready for some exercises!
+
+#### **2. Exercises**
+
+
+**2.1** Look at the first lines of the data and check the structure of the object.
+
+```r
+# Write the answer in your R script
+
+head(data)
+str(data)
+
+# can also use pipe: e.g. data %>% head()
+```
+
+Next, calculate the cases by hospital district and sum the daily numbers of infections.
+
+```r
+data_regionsums <- data %>%
+  group_by(hcdmunicipality2020) %>%
+  summarise(observations = sum(value))
+
+summary(data_regionsums)
+```
+
+**2.2** Look at the data frame below (`data_regionsums`). Why does every observation have the value `NA`? Fix the code!
+
+```r
+# Fix the code below
+
+# data_regionsums <- data %>%
+#  group_by(hcdmunicipality2020) %>%
+#  summarise(observations = sum(value))
+
+# need to remove NAs:
+
+data_regionsums <- data %>%
+  filter(!is.na(value)) %>%
+  group_by(hcdmunicipality2020) %>%
+  summarise(observations = sum(value))
+
+# or (although prefer the above because removes NAs before any further operations):
+
+data_regionsums <- data %>%
+  group_by(hcdmunicipality2020) %>%
+  summarise(observations = sum(value, na.rm = TRUE))  
+```
+
+**2.3** Delete the row that has the overall daily sum of observations ("All areas").
+```r
+# Write the answer in your R script
+
+data_regionsums <- data_regionsums %>%
+  filter(hcdmunicipality2020 != "All areas")
+```
+
+**2.4** Use `data_regionsums` to check which hospital districts have had the most COVID-19 infections and print the top 5.
+
+```r
+# Write the answer in your R script
+
+data_regionsums %>%
+  arrange(desc(observations)) %>%
+  head(5)
+```
+
+#### **3. Saving and exporting your script**
+
+You won't need to save the data, but it's a good idea to save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the [Starting with data exercise sheet](https://e-learn.csc.fi/mod/resource/view.php?id=574) (steps 7.3 and 7.4).

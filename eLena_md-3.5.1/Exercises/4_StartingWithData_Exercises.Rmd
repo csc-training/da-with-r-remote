@@ -1,0 +1,176 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Starting with data - exercise sheet
+
+
+*These exercises are partially derived from Software Carpentry teaching materials available under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
+
+https://swcarpentry.github.io/r-novice-gapminder/
+
+https://swcarpentry.github.io/r-novice-inflammation/
+
+https://datacarpentry.org/R-ecology-lesson/
+
+#### **Block 1: downloading and importing data**
+
+This exercise block repeats the lecture contents - at this point it's important that we're all on the
+same page! We will need these data as we move on.
+
+**1.1** Create a folder called `data` (Files --> New folder).
+
+**1.2** Download some example data by running the following command:
+
+```r
+download.file(url="https://tinyurl.com/portaljoined",
+              destfile = "data/portal_data_joined.csv")
+```              
+
+**1.3** Using the `read.csv()` function, import the portal data set into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
+
+#### **Block 2: inspecting data frames**
+
+**2.1** Inspect the `surveys` data set using the following functions. We don't need to memorize them now, but eventually this can be useful when you are working with your own data.
+
+- Size:
+  - `dim()` - returns a vector with the number of rows in the first element, and the number of columns as the second element (the **dim**ensions of the object)
+  - `nrow()` - number of rows
+  - `ncol()` - number of columns
+- Content:
+  - `head()` - first 6 rows
+  - `tail()` - last 6 rows
+- Names:
+  - `names()` - column names (synonym of `colnames()` for `data.frame` objects)
+  - `rownames()` - row names
+- Summary:
+  - `str()` - structure of the object and information about the class, length and content of each column
+  - `summary()` - summary statistics for each column
+
+**2.2** Based on the output of `str(surveys)`, can you answer the following questions?
+
+- What is the class of the object `surveys`?
+- How many rows and how many columns are in this object?
+- How many species have been recorded during these surveys?
+
+#### **Block 3: indexing and subsetting data frames**
+
+**3.1** Create a `data.frame` (`surveys_200`) containing only the data in row 200 of the `surveys` dataset.
+
+**3.2** Notice how `nrow()` gave you the number of rows in a `data.frame`?
+   
+   - Use that number to pull out just that last row in the data frame.
+   - Compare that with what you see as the last row using `tail()` to make sure it’s meeting expectations.
+   - Pull out that last row using `nrow()` instead of the row number.
+   - Create a new data frame (`surveys_last`) from that last row.
+
+**3.3** Use `nrow()` to extract the row that is in the middle of the data frame. Store the content of this row in an object named `surveys_middle`.
+
+**3.4** A trickier example: combine `nrow()` with the `-` notation above to reproduce the behavior of `head(surveys)`, keeping just the first through 6th rows of the surveys dataset. Don't worry if you can't get this one right!
+
+#### **Block 4: factors**
+
+**4.1** First assign the gender data from `surveys` to a new object. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
+
+```r
+sex <- surveys$sex
+levels(sex)[1] <- "undetermined"
+```
+
+**4.2** Rename “F” and “M” to “female” and “male”, respectively.
+
+**4.3** Can you reorder the data so that the levels are ordered like this: `undetermined`, `male`, `female`? After this, use `plot()` to check how the data now look.
+
+#### **Block 5: more on data frames**
+
+
+**5.1** We have seen how data frames are created when using `read.csv()`, but they can also be created by hand with the `data.frame()` function. There are a few mistakes in this hand-crafted `data.frame`. Can you spot and fix them? Don’t hesitate to experiment!
+
+```r
+animal_data <- data.frame(
+          animal = c(dog, cat, sea cucumber, sea urchin),
+          feel = c("furry", "squishy", "spiny"),
+          weight = c(45, 8 1.1, 0.8)
+          )
+```
+
+**5.2** Can you predict the class for each of the columns in the following example? Check your guesses using `str(country_climate)`:
+
+- Are they what you expected? Why? Why not?
+- What would have been different if we had added `stringsAsFactors = FALSE` when creating the data frame?
+- What would you need to change to ensure that each column had the accurate data type?
+
+```r
+country_climate <- data.frame(
+       country = c("Canada", "Panama", "South Africa", "Australia"),
+       climate = c("cold", "hot", "temperate", "hot/temperate"),
+       temperature = c(10, 30, 18, "15"),
+       northern_hemisphere = c(TRUE, TRUE, FALSE, "FALSE"),
+       has_kangaroo = c(FALSE, FALSE, FALSE, 1)
+       )
+```
+
+#### **Block 6: arguments for CSV importing**
+
+**6.1** Use `download.file` to retrieve a new data set on car speeds from the web:
+
+```r
+download.file(url = "https://tinyurl.com/carspeeds",
+destfile = "data/car_speeds.csv")
+
+```
+
+**6.2** Import the data into an object called `carSpeeds`:
+
+```r
+carSpeeds <- read.csv("data/car_speeds.csv")
+
+```
+
+**6.3** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
+
+**6.4** The car colour labels contain accidental whitespaces. To fix this, try importing the data using the `strip.white` argument. NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. You can use `unique()` to check if it worked!
+
+#### **Block 7: exporting data and saving scripts**
+
+The steps here are identical to what we just covered, but it's good to run through them by yourself!
+
+**7.1** Create a new folder for output files, called `data_output`.
+
+**7.2** Export the car speeds data. The write.csv() function requires a minimum of two arguments, the data to be saved and the name of the output file.
+
+```r
+write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
+```
+
+**7.3** Save your script (File --> Save as...).
+
+**7.4** Export your data from RStudio Server.
+
+```
+- Go to the "Files" pane (on the right, next to "Plots")
+
+- Tick the empty boxes next to the files / folders you would like to export
+
+- Click on "More" (look for a cogwheel symbol)
+
+- Click on "Export". After this, specify a suitable name for the .zip file. The file will be saved into your default downloads folder. 
+```

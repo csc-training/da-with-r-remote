@@ -1,0 +1,39 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Course description and learning outcomes
+
+**Course description**
+
+R is a language that has become one of the most popular tools for manipulating, visualizing and analyzing data. While there are many R courses, learning these skills can involve a steep learning curve, especially for people with no experience in programming or data analysis. This two-day remote course (delivered via Zoom) aims to help with this initial difficulty by equipping learners with essential skills in using R, including data wrangling and plotting.
+
+The course topics include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using both hands-on teaching and independent exercises.
+
+**Learning objectives**
+
+After attending this course, participants will be able to:
+
+- Navigate RStudio
+- Understand R syntax and how to write R code
+- Import and export data using R
+- Use tidyverse for data wrangling
+- Use ggplot2 for creating high-quality plots

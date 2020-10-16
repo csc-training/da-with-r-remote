@@ -1,0 +1,162 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Basic features - exercise sheet
+
+
+*These exercises are partially derived from Software Carpentry teaching materials available under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
+
+https://swcarpentry.github.io/r-novice-gapminder/
+
+https://datacarpentry.org/R-ecology-lesson/
+
+
+#### **Block 1: creating a project, working with objects**
+
+**1.1** In RStudio, create a project called `RIntro` (note that R is case-sensitive).
+
+**1.2** Create the following objects. What are the values after each statement?
+
+```r
+mass <- 47.5            # mass?
+age  <- 122             # age?
+mass <- mass * 2.0      # mass?
+age  <- age - 20        # age?
+mass_index <- mass/age  # mass_index?
+```
+
+**1.3** Take a moment to try out different mathematical expressions until you get the hang of it. 
+
+You can use the objects you already created as initial values or as intermediates. You can also try adding annotations to your code and removing (as well as re-creating) your objects. Remember the guidelines we covered earlier for naming objects!
+
+#### **Block 2: functions and vectors**
+
+**2.1** Round the number 3.49339 to three decimal points.
+
+```r
+round(3.49339, digits = 3)
+```
+
+**2.2** Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
+
+```r
+weights <- c(23, 55, 97, 12)
+```
+
+**2.3** Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
+
+```r
+names <- c("cat", "tortoise", "alpaca")
+```
+
+**2.4** We’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. What happens if we try to mix these types in a single vector?
+
+R implicitly converts them to all be the same type.
+
+**2.5** What will happen in each of these examples? (hint: use `class()` to check the data type of your objects):
+
+```r
+num_char <- c(1, 2, 3, "a")
+num_logical <- c(1, 2, 3, TRUE)
+char_logical <- c("a", "b", "c", TRUE)
+tricky <- c(1, 2, 3, "4")
+```
+
+Vectors can be of only one data type. R tries to convert (coerce) the content of this vector to find a “common denominator” that doesn’t lose any information.
+
+**2.6**. You’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class *coercion*. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced? 
+
+logical → numeric → character ← logical
+
+#### **Block 3: continuing with vectors**
+
+**3.1** Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
+
+```r
+heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+
+heights_no_na <- heights[!is.na(heights)] 
+# or
+heights_no_na <- na.omit(heights)
+# or
+heights_no_na <- heights[complete.cases(heights)]
+
+```
+
+**3.2** Use the function `median()` to calculate the median of the `heights` vector.
+
+```r
+median(heights, na.rm = TRUE)
+```
+
+**3.3** Use R to figure out how many people in the set are taller than 67 inches.
+
+To make things easier to remember, here is the list of comparisons and operators we discussed earlier (this one is useful to memorize):
+
+```r
+## different comparisons:
+# less than `<`
+# greater than `>`
+# less or equal `<=`
+# greater or equal `>=`
+# equal to `==`
+# not equal to `!=`
+
+## logical operators:
+# and `&`
+# or `|`
+# not `!` 
+```
+
+```r
+heights_above_67 <- heights_no_na[heights_no_na > 67]
+length(heights_above_67)
+```
+
+#### **Block 4: finding help**
+
+**4.1** Look at the help for the `c()` function. What kind of vector do you expect you will create if you evaluate the following?
+
+```r
+c(1, 2, 3)
+c('d', 'e', 'f')
+c(1, 2, 'f')
+```
+
+```r
+?c
+```
+The `c()` function creates a vector, in which all elements are the same type. In the first case, the elements are numeric, in the second, they are characters, and in the third they are characters: the numeric values are “coerced” to be characters.
+
+**4.2** Try to figure out how to use a completely new function based only on its documentation. Use `sample()` to produce
+
+- a Finnish lottery ticket: 7 randomly drawn numbers out of 40
+- a vector of 0s and 1s, representing 10 coin tosses
+
+```r
+sample(1:40, 7)
+# sample(40, 7)
+
+sample(c(0, 1), 10, replace = TRUE) # sampling with replacement
+# sample(0:1, 10, replace = TRUE)
+# sample(2, 10, replace = TRUE)
+```

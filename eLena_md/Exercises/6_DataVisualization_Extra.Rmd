@@ -1,0 +1,165 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Data visualization - independent exercises
+
+#### **1. Getting the data**
+
+**1.1** Just like we did yesterday, install the package `rjstat` (`install.packages("rjstat")`) if you do not have it already installed. Then load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio.
+
+```{r}
+library(rjstat)
+library(tidyverse)
+```
+
+**1.2** Retrieve the coronavirus observations data from the THL website. We will use the same data that we worked with yesterday.
+
+Getting the data was covered in the Day 1 extra exercises, so you can run through the following code chunk in your Rstudio session. You can highlight the code below and copy-paste it into a new R script.
+
+```{r}
+
+# Getting the data
+url <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?"
+
+measure.infections <- "measure-444833"
+time.day <- "dateweek2020010120201231-443702L"
+region.shp <- "hcdmunicipality2020-445222"
+
+# Combine the URL to a character string
+url.call <- paste0(url, "column=", measure.infections, "&row=", time.day, "&row=", region.shp)
+
+# Read the data in to an R object and select the object `COVID-19 cases in the infectious diseases registry`
+# Note how this step differs a little from what we did yesterday
+
+data <- fromJSONstat(
+  readLines(
+    url.call, encoding = "UTF-8"))$`COVID-19 cases in the infectious diseases registry`
+
+# Convert the value column to numeric
+data$value <- as.numeric(data$value)
+```
+
+#### **2. Data wrangling**
+
+First, we will do some data wrangling to format the data for `ggplot2`. Go through each step carefully to form an understanding of what is happening as you are running through the code. Make sure to copy and run each line!
+
+**2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`.
+
+```{r}
+plotdata <- data
+```
+
+**2.2** Filter out NA values.
+
+```{r}
+plotdata <- plotdata %>% filter(!is.na(value))
+```
+
+**2.3** Convert the column containing hospital districts (`hcdmunicipality2020`) into a factor.
+
+```{r}
+plotdata$region <- as.factor(plotdata$hcdmunicipality2020)
+```
+
+**2.4** Convert the date values from character format to actual dates (this is very useful for plotting).
+
+```{r}
+plotdata$week <- as.Date(plotdata$dateweek2020010120201231)
+```
+
+**2.5** Check the structure of the data. The output should look like the example below.
+```{r}
+str(plotdata)
+```
+
+**2.6** Group the data by region to create regional sums (similar to yesterday's excercise).
+
+```r
+plotdata_sums <- plotdata %>%
+  group_by(region) %>%
+  summarise(observations = sum(value, na.rm = TRUE))
+```
+
+Ok! Now we're ready to create some plots.
+
+#### **3. Exercises**
+
+**3.1** Plot the regional sums of COVID-19 observations using `plotdata_sums`. Hint: use `geom_col()`.
+
+```r
+# Write the answer in your R script
+
+```
+
+**3.2** Now let's create a plot using the original `plotdata` data frame (which has the daily values).
+This plot does not look very good...
+
+```r
+ggplot(data = plotdata,
+       aes(x = week, y = value))+
+  geom_line()
+```
+
+**3.3** Try improving the previous plot by separating each region. Hint: Add a parameter to `geom_line()`.
+
+```r
+# Write the answer in your R script
+
+```
+
+**3.4** Next, let's plot regional cumulative sums of COVID-19 observations. Add a new column that has the daily cumulative sum for each region. Note that we use `cumsum()` to calculate this.
+
+```{r}
+plotdata <- plotdata %>%
+  group_by(region) %>%
+  mutate(cumulative_sum = cumsum(value))
+```
+
+**3.5** Plot the cumulative sum. You can try different geoms here.
+
+```{r}
+# Write the answer(s) in your R script
+
+```
+
+**3.6** Play around with the plot.
+
+You can, for example, change the y-axis to log scale and select specific regions to plot.
+
+If you are feeling brave, get some more data from the THL website and get creative!
+
+```{r}
+
+# Continue the code below ...
+
+#ggplot(data = ...,
+#       aes()) +
+
+```
+
+#### **3. Saving and exporting your script**
+
+If you don't remember how to save and export your data from RStudio Server, follow the instructions set out in the [Starting with data exercise sheet](https://e-learn.csc.fi/mod/resource/view.php?id=574) (steps 7.3 and 7.4).
+
+That's it in terms of exercises! As this is the last part of the course, we will not go through the solutions in a Zoom session. However, if you're unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.
+
+Thanks for joining the course and we hope you've found the contents useful!

@@ -1,0 +1,42 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Accessing RStudio Server
+
+To launch your own instance of R:
+
+1. Go to [notebooks.csc.fi](https://notebooks.csc.fi/#/) and log in using the Haka authentication service.
+2. Click on "Account" and then "Join Group".
+3. Click "Join" after adding this joining code: **daki-test-59t9k** (This only needs to be done once.)
+4. Find "Rstudio (v4.0.2) for teaching environment" in the dashboard and click on "Launch new". Note: there is also an environment called "RStudio Server", but we won't use that during the course.
+5. Wait for the virtual machine to start and click on "Open in browser" once the link appears.
+6. A website will open with a URL similar to this: 
+
+`https://pb-aiko-the-witty-shiny.rahtiapp.fi/` 
+
+Delete `-shiny` from the URL and reload the new address, for example: 
+
+`https://pb-aiko-the-witty.rahtiapp.fi/`
+
+7. This will open up the RStudio login screen. Enter this as both the username and password: **rstudio**
+
+Note: each RStudio session on [notebooks.csc.fi](https://notebooks.csc.fi/#/) lasts for 10 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!

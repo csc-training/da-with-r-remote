@@ -1,0 +1,307 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Data visualization - exercise sheet
+
+
+*This lesson is partially derived from Data Carpentry teaching materials available under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
+
+https://datacarpentry.org/R-ecology-lesson/
+
+
+#### **Block 1: preparation and scatter plots**
+
+**1.1** `ggplot2` is part of the `tidyverse` package collection, so we'll need to load it:
+
+```r
+library(tidyverse)
+```
+
+**1.2** Then download a version of the `surveys` data set that we worked with yesterday. If you already have the data ready, this step can be skipped.
+
+```r
+download.file(url = "https://tinyurl.com/surveyscomplete",
+ destfile = "data_output/surveys_complete.csv")
+
+# note that we're downloading this into the data_output folder!
+```
+
+**1.3** Import the data into a tibble called `surveys_complete`, using `read_csv()`.
+
+```r
+surveys_complete <- read_csv("data_output/surveys_complete.csv")
+```
+
+**1.4** Using `ggplot2` and the `surveys_complete` data set, create a scatter plot of `weight` over `species_id` with the plot types shown in different colors. What do you think - is this a good way to show these type of data? If not, how would you go about it instead?
+
+```r
+ggplot(data = surveys_complete, 
+              mapping = aes(x = species_id, y = weight)) +
+       geom_point(aes(color = plot_type))
+```
+
+**1.5** Try setting up a plot template using the code you just wrote for creating the scatter plot above.
+
+Just as a memory aid, here is a (non-exhaustive) list of different geoms we can use.
+
+  ```r
+  # geom_point() for scatter plots, dot plots, etc.
+  # geom_bar() for bar plots
+  # geom_boxplot() for box plots
+  # geom_line() for trend lines, time series, etc.  
+  ```
+
+```r
+# Assign plot to a variable
+template <- ggplot(data = surveys_complete,
+                   mapping = aes(x = species_id, y = weight))
+
+# Draw the plot
+template + 
+    geom_point(aes(color = plot_type))
+```
+
+#### **Block 2: bar plots and custom colour palette**
+  
+**2.1** Recreate the the bar plot we were just examining, showing mean weights of each species. This time, also try adding the following custom palette to the plot (with the data colour by `species_id`). The palette contains a list of different RGB values that can be used for creating color-blind plots.
+
+```r
+cPalette <- c("#000000","#004949","#009292","#ff6db6","#ffb6db",
+              "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+              "#920000","#924900","#db6d00","#24ff24","#ffff6d")
+```  
+  
+To employ this custom palette, one would use one of the following:
+
+```r
+scale_fill_manual(values=cPalette) # for fills
+scale_colour_manual(values=cPalette)  # for lines and points
+```
+
+```r
+meanwt <- surveys_complete %>%
+           group_by(species_id) %>%
+           summarize(mean_weight = mean(weight))
+           
+ggplot(data = meanwt, mapping = aes(x = species_id,
+                                    y = mean_weight)) +
+geom_col(aes(fill = species_id)) +
+scale_fill_manual(values = cPalette)
+```
+
+#### **Block 3: histograms**
+
+**3.1** Create a histogram that compares the distribution of `weight` values between males and females in the `surveys_complete` data set. You should be able to tell apart the two sexes based on how the bars are colored. For this exercise, use a white `fill`, a `binwidth` of 4 and an `alpha` value of 0.5. 
+
+**Tip:** When plotting two data sets together in the same histogram, adding `position = "dodge"` inside the `geom` can make the results easier to interpret (it asks R to produce an interleaved plot, i.e. values are shown side-by-side rather than stacked on top of one another).
+
+```r
+ggplot(surveys_complete, aes(x = weight, color = sex)) +
+  geom_histogram(fill = "white", alpha = 0.5, binwidth = 4, position = "dodge") 
+```
+
+#### **Block 4: box and violin plots**
+
+**4.1** Box plots are useful summaries, but hide the *shape* of the distribution. For example, if the distribution is bimodal, we would not see it in a box plot. In addition to histograms, an alternative to the box plot is the violin plot, where the shape (of the density of points) is drawn. 
+
+Try modifying the following code to create a violin plot instead (you can use `geom_violin()`). Can you think of anything else that could be done to improve the presentation of the data?
+
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_boxplot(alpha = 0)
+```
+
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_violin(alpha = 0)
+```
+
+One could change the y axis scale (a linear scale doesn't seem to work that well).
+
+**4.2** In many types of data, it is important to consider the *scale* of the observations. For example, it may be worth changing the scale of the axis to better distribute the observations in the space of the plot. Changing the scale of the axes is done similarly to adding / modifying other components (i.e., by incrementally adding commands).
+
+Using the code you just created for the violin plot above, represent weight on the log10 scale instead; see `scale_y_log10()`.
+
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_violin(alpha = 0) +
+  scale_y_log10()
+```
+
+**4.3** Create a boxplot for `hindfoot_length`. Overlay the boxplot layer on a jitter layer to show actual measurements.
+
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
+geom_jitter(alpha = 0.3, color = "tomato") +
+geom_boxplot(alpha = 0) 
+```
+
+#### **Block 5: line plots and some preparation**
+
+Take some time to construct the `yearly_counts` data set for yourself, and trying out a line plot.
+
+**5.1** The `yearly_counts` object should contain numbers of counts per year for each genus. We need to group the data and count records within each group:
+
+```r
+yearly_counts <- surveys_complete %>%
+  count(year, genus)
+```
+
+**5.2** Create a line plot of the `yearly_counts` data as follows. Remember that we can use the `color` argument does a nice job at grouping the data for us.
+
+```r
+ggplot(data = yearly_counts, mapping = aes(x = year, y = n, color = genus)) +
+    geom_line()
+```
+
+**5.3** Let's create another object, called `yearly_sex_counts`. This should be similar to `yearly_counts`, but with the data additionally grouped by sex. We will need that in later exercises! 
+
+```r
+yearly_sex_counts <- surveys_complete %>%
+  count(year, genus, sex)
+```
+
+#### **Block 6: faceting**
+
+Here's a reminder of the two options we have for faceting using `ggplot2`:
+
+- `facet_wrap()` arranges a one-dimensional sequence of panels.
+- `facet_grid()` allows you to form a matrix of rows and columns of panels.
+
+We've tried `facet_wrap()`. Next, let's check out `facet_grid()`.
+
+**6.1** You might remember this `facet_wrap()` example that we covered earlier:
+
+```r
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_wrap(facets =  vars(genus))
+```
+
+Try using `facet_grid()` to control how panels are organised by both rows and columns, with rows corresponding to `sex` and columns to `genus`. Instead of `facets =  vars(genus)`, we would now have to use `rows = vars(...)` and `cols = vars(...)`. We haven't yet gone through the code formatting for this, so don't worry if you can't get it right!
+
+```r
+ggplot(data = yearly_sex_counts, 
+       mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_grid(rows = vars(sex), cols = vars(genus))
+```
+
+**6.2** We can also use `facet_grid()` to organise the panels only by rows (or only by columns). See if you can figure out both options.
+
+```r
+# One column, facet by rows
+ggplot(data = yearly_sex_counts, 
+       mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_grid(rows = vars(genus))
+  
+# One row, facet by column
+ggplot(data = yearly_sex_counts, 
+       mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_grid(cols = vars(genus))
+```
+
+#### **Block 7: further customization**
+
+**7.1** Try creating your own custom theme (you could call it `mytheme`) and using it to modify the appearance of the following plot. There's no right or wrong answer here, feel free to experiment!
+
+```r
+ggplot(surveys_complete, aes(x = species_id, 
+y = hindfoot_length)) +
+    geom_boxplot() +
+    mytheme
+```
+
+One example of a theme can be found here:
+
+```r
+grey_theme <- theme(axis.text.x = element_text(colour = "grey20",  
+                    size = 12, angle = 90, hjust = 0.5, 
+                    vjust = 0.5),
+                    axis.text.y = element_text(colour = "grey20",  
+                    size = 12),
+                    text = element_text(size = 16))
+```
+
+```r
+# Own example: a simple black and white theme
+
+mytheme <- theme(
+  panel.border = element_blank(),             # remove border
+  panel.grid.major = element_blank(),         # remove grid lines
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(),         # remove background
+  axis.line = element_line(colour = "black")   # add axis line
+  )
+
+ggplot(surveys_complete, aes(x = species_id, 
+y = hindfoot_length)) +
+    geom_boxplot() +
+    mytheme
+```
+
+#### **Block 8: arranging, saving and exporting**
+
+**8.1** If you don't have it already, create a folder called `fig_output` in your working directory.
+
+**8.2** Run through this rather big block of code to create a couple of plots that we were looking at earlier.
+
+```r
+# plot 1
+spp_weight_boxplot <- ggplot(data = surveys_complete, 
+                             mapping = aes(x = genus, 
+                             y = weight)) +
+  geom_boxplot() +
+  xlab("Genus") + ylab("Weight (g)") +
+  scale_y_log10() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# plot 2
+spp_count_plot <- ggplot(data = yearly_counts, 
+                         mapping = aes(x = year, y = n, 
+                         color = genus)) +
+  geom_line() + 
+  xlab("Year") + ylab("Abundance")
+```
+
+**8.3** We can use `ggsave()` to save the plots. Try saving a single plot first:
+
+```r
+ggsave("fig_output/plot1.png", my_plot, 
+width = 15, height = 10)
+```
+
+**8.4** Next we could save a `grid.arrange()` plot. First use `grid.arrange()` to combine plots 1 and 2, then use `ggsave()` to save the result (use a DPI value of 100).
+
+```r
+# if you don't have gridExtra loaded, then run: library(gridExtra)
+
+plots_arranged <- grid.arrange(spp_weight_boxplot, spp_count_plot, 
+ncol = 2, widths = c(4, 6))
+
+ggsave("fig_output/comboplot.png", plots_arranged, 
+width = 10, dpi = 100)
+```
+
+**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the `Starting with data` exercise sheet (steps 7.3 and 7.4).

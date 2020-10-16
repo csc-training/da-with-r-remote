@@ -1,0 +1,88 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Finding help
+
+*This lesson is partially derived from Software Carpentry teaching materials under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
+
+http://swcarpentry.github.io/r-novice-gapminder/
+
+**Objectives:**
+
+- Be able to read R help files for functions and special operators
+
+- Be able to use CRAN task views for problem-solving
+
+- Be able to seek help from peers
+
+#### 1. Reading help files
+
+R and every package provide help files for functions. There are two commands for searching for help on any function that is in a package loaded into your R session:
+
+```r
+?function_name
+help(function_name)
+```
+
+This will load up a help page in RStudio.
+
+Each help page is broken down into sections:
+
+- Description: An extended description of what the function does.
+- Usage: The arguments of the function and their default values.
+- Arguments: An explanation of the data each argument is expecting.
+- Details: Any important details to be aware of.
+- Value: The data the function returns.
+- See Also: Any related functions you might find useful.
+- Examples: Some examples for how to use the function.
+
+Different functions might have different sections, but these are the main ones you should be aware of. 
+
+One of the most daunting aspects of R is the large number of functions available. It would be prohibitive, if not impossible to remember the correct usage for every function you use. Luckily, the help files mean you don’t have to!
+
+**Help on operators**
+
+It is also possible to bring up help documentation for specific operators. For this we would place the operator inside quotation marks:
+
+```r
+?"<-"
+```
+
+**Help on packages**
+
+Many packages come with “vignettes”: tutorials and extended example documentation. Without any arguments, `vignette()` will list all vignettes for all installed packages; `vignette(package = "package-name")` will list all available vignettes for `package-name`, and `vignette("vignette-name")` will open the specified vignette.
+
+If a package doesn’t have any vignettes, you can usually find help by typing `help("package-name")`.
+
+#### When you have no idea where to begin
+
+If you have no idea which function or package to use, you can have a look at [CRAN Task Views](https://cran.r-project.org/web/views/), a specially maintained list of packages grouped into fields. Another useful resource is [Stack Overflow](http://stackoverflow.com/), a website with a wealth of user-submitted questions and answers on R. You can search Stack Overflow using the  `[r]` tag.
+
+You may also consider submitting a question of your own, in which case it can be useful to include information on your R session that can be used for debugging purposes (such as attached packages and their version numbers). This information can be easily generated with a single command:
+
+```r
+sessionInfo()
+```
+
+#### Challenges
+
+Let's complete **Basic Features Exercise Block 4** (~ 10 mins).
