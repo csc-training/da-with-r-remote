@@ -26,7 +26,7 @@ opts_knit$set(width=75)
 
 R is a language that has become one of the most popular tools for manipulating, visualizing and analyzing data. While there are many R courses, learning these skills can involve a steep learning curve, especially for people with no experience in programming or data analysis. This remote course (delivered via Zoom) aims to help with this initial difficulty by equipping learners with essential skills in using R, including data wrangling and plotting.
 
-The course topics include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using both hands-on teaching and independent exercises. By default the course runs over a period of two days, but can be extended to include a third day focusing on statistical testing (see learning outcomes and program below).
+The course topics include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using both hands-on teaching and independent exercises. By default the course runs over a period of two days, but can be extended to include a third day focusing on statistical testing.
 
 **Learning objectives**
 
