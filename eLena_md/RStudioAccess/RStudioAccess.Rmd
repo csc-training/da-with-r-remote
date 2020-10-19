@@ -20,7 +20,7 @@ opts_chunk$set(cache=TRUE,
 opts_knit$set(width=75)
 ```
 
-# Accessing RStudio Server
+# Accessing the RStudio teaching environment on notebooks.csc.fi
 
 To launch your own instance of R:
 

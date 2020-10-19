@@ -118,7 +118,7 @@ The following guidelines are useful to keep in mind when naming new objects:
 
 **Challenge:**
 
-At this point, let's complete **Basic Features Exercise Block 1** (~ 10 mins). 
+At this point, let's complete **Basic Features Exercise Block 1** (see separate exercise sheet on eLena) (~ 10 mins). 
 
 #### 5. Functions and their arguments
 

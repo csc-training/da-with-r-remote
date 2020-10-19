@@ -30,9 +30,9 @@ http://swcarpentry.github.io/r-novice-gapminder/
 
 R is a programming language for handling, analysing and visualizing data. It is freely downloadable and works on all major platforms, including Windows, macOS and Linux. At its core, R code is made of text-based commands that can be run from a command prompt and without a graphical user interface. R can also be run via an open-source interface such as RStudio (see [rstudio.com](http://www.rstudio.com)). RStudio provides a built in-editor and offers many advantages including ease of use, integration with version control and project management. 
 
-During this workshop we will be using RStudio Server, which lets us access a remote instance of R via a web browser.
+During this workshop we will be using a separate RStudio teaching environment, which lets us access a remote instance of R via a web browser.
 
-#### 2. Accessing RStudio Server on notebooks.csc.fi
+#### 2. Accessing the RStudio teaching environment on notebooks.csc.fi
 
 These instructions are also available via eLena.
 
