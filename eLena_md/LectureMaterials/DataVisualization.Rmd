@@ -94,12 +94,12 @@ mapping = aes(x = weight, y = hindfoot_length, color = species_id))
 
 - add ‘geoms’ – graphical representations of the data in the plot (points, lines, bars). `ggplot2` offers many different geoms; we will use some common ones today, including:
   
-  ```r
-  # geom_point() for scatter plots, dot plots, etc.
-  # geom_bar() for bar plots
-  # geom_boxplot() for box plots
-  # geom_line() for trend lines, time series, etc.  
-  ```
+```r
+# geom_point() for scatter plots, dot plots, etc.
+# geom_bar() for bar plots
+# geom_boxplot() for box plots
+# geom_line() for trend lines, time series, etc.  
+```
 
 To add a geom to the plot use the `+` operator. Because we have two continuous variables, let’s use `geom_point()` first.   
 
