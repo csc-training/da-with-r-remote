@@ -123,7 +123,10 @@ img {
 <span class="st">       </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> plot_type))</code></pre></div>
 <p><strong>1.4</strong> Try setting up a plot template using the code you just wrote for creating the scatter plot above.</p>
 <p>Just as a memory aid, here is a (non-exhaustive) list of different geoms we can use.</p>
-<p><code>r   # geom_point() for scatter plots, dot plots, etc.   # geom_bar() for bar plots   # geom_boxplot() for box plots   # geom_line() for trend lines, time series, etc.</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># geom_point() for scatter plots, dot plots, etc.</span>
+<span class="co"># geom_bar() for bar plots</span>
+<span class="co"># geom_boxplot() for box plots</span>
+<span class="co"># geom_line() for trend lines, time series, etc.  </span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assign plot to a variable</span>
 template &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> surveys_complete,
                    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> weight))
