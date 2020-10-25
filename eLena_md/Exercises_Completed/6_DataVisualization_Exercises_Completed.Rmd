@@ -54,12 +54,12 @@ ggplot(data = surveys_complete,
 
 Just as a memory aid, here is a (non-exhaustive) list of different geoms we can use.
 
-  ```r
-  # geom_point() for scatter plots, dot plots, etc.
-  # geom_bar() for bar plots
-  # geom_boxplot() for box plots
-  # geom_line() for trend lines, time series, etc.  
-  ```
+```r
+# geom_point() for scatter plots, dot plots, etc.
+# geom_bar() for bar plots
+# geom_boxplot() for box plots
+# geom_line() for trend lines, time series, etc.  
+```
 
 ```r
 # Assign plot to a variable
