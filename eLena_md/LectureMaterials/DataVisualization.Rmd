@@ -412,6 +412,20 @@ The plots produced in Exercise 6.2, on the other hand, should look like this:
 
 ![](Images/R-ecology-average-weight-time-facet-sex-columns-1.png?raw=true)
 
+```r
+# What if you didn't want to facet your plot,
+# but still wanted to group your data by two variables in a plot?
+# You could consider changing e.g. the line type, or using differently
+# shaped symbols.
+
+ggplot(yearly_sex_counts,
+       aes(x = year,
+           y = n,
+           color = genus,
+           linetype = sex)) +
+       geom_line()
+```
+
 **Note:** In earlier versions of `ggplot2` you need to use an interface using formulas to specify how plots are faceted (and this is still supported in new versions). The equivalent syntax is:
 
 ```r

@@ -36,9 +36,9 @@ https://datacarpentry.org/R-ecology-lesson/
 This exercise block repeats the lecture contents - at this point it's important that we're all on the
 same page! We will need these data as we move on.
 
-**1.1** Create a folder called `data` (Files --> New folder).
+**1.1** Import some example data (`/data/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
 
-**1.2** Import some example data (`/data/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
+**1.2** We just imported data from outside our current working directory. Let's also try something inside the working directory - create a new folder called `testfolder` (Files pane on the bottom right --> New folder).
 
 #### **Block 2: inspecting data frames**
 

@@ -116,10 +116,10 @@ img {
 <div id="block-1-downloading-and-importing-data" class="section level4">
 <h4><strong>Block 1: downloading and importing data</strong></h4>
 <p>This exercise block repeats the lecture contents - at this point it’s important that we’re all on the same page! We will need these data as we move on.</p>
-<p><strong>1.1</strong> Create a folder called <code>data</code> (Files –&gt; New folder).</p>
-<p><strong>1.2</strong> Import some example data (<code>/data/portal_data_joined.csv</code>) into an object called <code>surveys</code>. When importing the data, use the argument <code>stringsAsFactors = TRUE</code>. You can use <code>head()</code> to check that everything got imported correctly.</p>
+<p><strong>1.1</strong> Import some example data (<code>/data/portal_data_joined.csv</code>) into an object called <code>surveys</code>. When importing the data, use the argument <code>stringsAsFactors = TRUE</code>. You can use <code>head()</code> to check that everything got imported correctly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">TRUE</span>)
 <span class="kw">head</span>(surveys)</code></pre></div>
+<p><strong>1.2</strong> We just imported data from outside our current working directory. Let’s also try something inside the working directory - create a new folder called <code>testfolder</code> (Files pane on the bottom right –&gt; New folder).</p>
 </div>
 <div id="block-2-inspecting-data-frames" class="section level4">
 <h4><strong>Block 2: inspecting data frames</strong></h4>
