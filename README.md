@@ -1,31 +1,42 @@
 # Data Analysis with R (Remote Course)
 
+---
+
 **Links to CSC platforms**
 
 [Notebooks](https://notebooks.csc.fi/)
 
 [eLena](https://e-learn.csc.fi)
 
+---
+
 **Licensing**
 
 The teaching materials used in this course are derived from Software / Data Carpentry lessons and CSC teaching materials. See [LICENSE.md](LICENSE.md) for details.
 
+Links to external materials:
+
 [CSC materials](https://github.com/csc-training/R-for-beginners)
 
-Software Carpentry: https://software-carpentry.org
+[Software Carpentry](https://software-carpentry.org)
 
-Data Carpentry: https://datacarpentry.org/
+[Data Carpentry](https://datacarpentry.org/)
+
+---
 
 **Links to teaching materials**
 
 *General information*
 
+[Course description and learning outcomes](https://csc-training.github.io/da-with-r-remote/CourseDescription/CourseDescription.html)
+
+[Course schedule]([schedule](https://csc-training.github.io/da-with-r-remote/Schedule/Schedule.html)
+
 [Access to RStudio teaching environment](https://csc-training.github.io/da-with-r-remote/RStudioAccess/RStudioAccess.html)
 
+---
+
 *Lecture aids*
-
-
-------------------
 
 1. [Data Analysis Workflow](https://csc-training.github.io/da-with-r-remote/LectureMaterials/Workflow.html)
 
@@ -45,8 +56,7 @@ Data Carpentry: https://datacarpentry.org/
 
 9. [Intro to Statistical Testing in R](https://csc-training.github.io/da-with-r-remote/LectureMaterials/Statistics.html)
 
-
-------------------------------------
+---
 
 *Exercises (without solutions)*
 
@@ -62,8 +72,7 @@ Data Carpentry: https://datacarpentry.org/
 
 6. [Data Visualization (independent exercises)](https://csc-training.github.io/da-with-r-remote/Exercises/6_DataVisualization_Extra.html)
 
-
----------------------------------
+---
 
 *Exercises (with solutions)*
 
