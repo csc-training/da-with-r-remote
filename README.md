@@ -1,7 +1,5 @@
 # Data Analysis with R (Remote Course)
 
----
-
 **Links to CSC platforms**
 
 [Notebooks](https://notebooks.csc.fi/)
@@ -30,7 +28,7 @@ Links to external materials:
 
 [Course description and learning outcomes](https://csc-training.github.io/da-with-r-remote/CourseDescription/CourseDescription.html)
 
-[Course schedule]([schedule](https://csc-training.github.io/da-with-r-remote/Schedule/Schedule.html)
+[Course schedule](https://csc-training.github.io/da-with-r-remote/Schedule/Schedule.html)
 
 [Access to RStudio teaching environment](https://csc-training.github.io/da-with-r-remote/RStudioAccess/RStudioAccess.html)
 
