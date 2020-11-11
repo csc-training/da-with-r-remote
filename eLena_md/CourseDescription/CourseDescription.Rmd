@@ -43,3 +43,10 @@ Days 1-2:
 Day 3:
 
 - Employ t-tests, linear regression and Chi-squared tests in R
+
+**Course assessment**
+
+The course is based on a pass/fail assessment, with the following requirements. Students must:
+
+- Access all exercise sheets during the two- or three-day course
+- Attempt completing the exercises covered during course contact hours, as well as exercises included in independent assignments
