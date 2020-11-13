@@ -203,9 +203,11 @@ For a typical parametric analysis, we would move through the following steps:
         
 4. **Inferential statistics:** run the test and interpret the output
     
-*Remember that in some cases a non-parametric test might be your best option to start with*. The steps taken for these are very similar: describe the data, check that the assumptions are met, then go ahead with significance testing.
+Remember that in some cases a non-parametric test might be your best option to start with! The steps taken for these are very similar: describe the data, check that the assumptions are met, then go ahead with significance testing.
 
-Can you think of examples of data sets where a non-parametric test would be your first choice?
+**Zoom Breakout Discussion**
+
+Let's split into breakout rooms (around 5 people in each room). Spend up to 10 minutes (~2 mins each) taking turns to discuss the types of data you deal with in your work (or data you're anticipating to generate). Which types of statistical tests are likely to be the most suitable for these - parametric or non-parametric? Once you're ready, you can leave the breakout room and return to the main meeting (remember: don't click on the exit meeting button, this will remove you from the entire Zoom meeting!).
 
 #### 6. Examples of statistical methods
 
@@ -233,8 +235,9 @@ To have a closer look at this, let's import the `sleep` data set built into R. T
 sleepdata <- sleep # assigns sleep data to a data frame
 sleepdata
 ```
+**Challenge (and Zoom Breakout Discussion)**
 
-Let's also create a box plot of the data.
+Let's create a box plot and histogram of the data.
 
 ```r
 # this time also changing the formatting a little
@@ -246,12 +249,6 @@ Let's also create a box plot of the data.
 
 ![](Images/sleep_data.png?raw=true)
 
-If we'd take a situation where groups 1 and 2 are distinct from one another and we wanted to compare them, which test would we use? How about if we'd like to test if the mean for group 1 differs from a value reported for a third drug type?
-
-**Challenge**
-
-1. The *t*-test assumes that the _dependent value_ (`extra`) is normally distributed within each group. The box plot tells us a little, but also try inspecting histograms of the data. Do you think the assumption is successfully met?
-
 ```r
 ggplot(sleepdata, aes(x = extra)) +
  geom_histogram(color = "black", fill = "white") +
@@ -262,7 +259,15 @@ ggplot(sleepdata, aes(x = extra)) +
 
 ![](Images/sleep_normal.png?raw=true)
 
-2. Do you think the box plot we created is useful for evaluating parametric test diagnostics? Is there anything you would display differently?
+Take some time to copy these for yourself from the Codeshare session.
+
+Once you have created the plots for yourself, let's split again into Zoom Breakout Rooms (5 people in each). Discuss the following topics for ~5-10 minutes and return to the main room once you are ready: 
+
+1. If we'd take a situation where groups 1 and 2 are distinct from one another and we wanted to compare them, which test would we use? What if we'd like to test if the mean for group 1 differs from a value reported for a third drug type?
+
+2. The *t*-test assumes that the _dependent value_ (`extra`) is normally distributed within each group. Do you think the assumption is successfully met?
+
+3. Do you think the box plot is useful for evaluating parametric test diagnostics? Is there anything you would display differently?
 
 **Independent-samples *t*-test**
 
