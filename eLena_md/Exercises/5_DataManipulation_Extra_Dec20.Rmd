@@ -45,25 +45,37 @@ Make sure to **copy and run each R code chunk** in RStudio to ensure that you ge
 **1.1** Copy the address of the API from where we will retrieve the data in [json format](https://www.json.org/json-en.html):
 
 ```r
-url.call <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?row=hcdmunicipality2020-445222&column=dateweek20200101-509030&filter=measure-444833"
-
-# Note: This step was updated on 14.01.2021 to reflect changes made to the THL API.
+url <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?"
 ```
 
-**1.2** Read in the data using `fromJSONstat()` and check the structure of the data frame. You should see that the data are given as as a list ("`List of 1`").
+**1.2** Specify dimensions of the API that we would like to use (there are also other dimensions available). Here we have the amount of infections (`measure.infections`), the date (`time.day`) and the hospital district (`region.shp`).
+
+```r
+measure.infections <- "measure-444833"
+time.day <- "dateweek2020010120201231-443702L"
+region.shp <- "hcdmunicipality2020-445222"
+```
+
+**1.3** Write a character string to obtain the daily coronavirus infections by hospital district:
+
+```r
+url.call <- paste0(url, "column=", measure.infections, "&row=", time.day, "&row=", region.shp)
+```
+
+**1.4** Read in the data using `fromJSONstat()` and check the structure of the data frame. You should see that the data are given as as a list ("`List of 1`").
 
 ```r
 data <- fromJSONstat(readLines(url.call, encoding = "UTF-8"))
 str(data)
 ```
 
-**1.3** Create a data frame from the original data (this is much more likely to be useful for further analyses):
+**1.5** Create a data frame from the original data (this is much more likely to be useful for further analyses):
 
 ```r
 data <- data$`COVID-19 cases in the infectious diseases registry`
 ```
 
-**1.4** Convert the `value` column to numeric:
+Convert the `value` column to numeric:
 
 ```r
 data$value <- as.numeric(data$value)
@@ -81,7 +93,7 @@ Now we are ready for some exercises!
 
 ```
 
-Next, calculate the cases by hospital district and sum the weekly numbers of infections.
+Next, calculate the cases by hospital district and sum the daily numbers of infections.
 
 ```r
 data_regionsums <- data %>%

@@ -24,37 +24,28 @@ opts_knit$set(width=75)
 
 #### **1. Getting the data**
 
-**1.1** Just like we did yesterday, install the package `rjstat` (`install.packages("rjstat")`) if you do not have it already installed. Then load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio.
+**1.1** Just like we did yesterday, install the package `rjstat` if you do not have it already installed. Then load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio.
 
-```{r}
+```r
+install.packages("rjstat")
+
 library(rjstat)
 library(tidyverse)
 ```
 
-**1.2** Retrieve the coronavirus observations data from the THL website. We will use the same data that we worked with yesterday.
+**1.2** Retrieve coronavirus observations from the THL website. We will use the same data that we worked with yesterday.
 
 Getting the data was covered in the Day 1 extra exercises, so you can run through the following code chunk in your Rstudio session. You can highlight the code below and copy-paste it into a new R script.
 
-```{r}
-
+```r
 # Getting the data
-url <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?"
+url.call <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?row=hcdmunicipality2020-445222&column=dateweek20200101-509030&filter=measure-444833"
 
-measure.infections <- "measure-444833"
-time.day <- "dateweek2020010120201231-443702L"
-region.shp <- "hcdmunicipality2020-445222"
+# Read data into an R object
+# select the object `COVID-19 cases in the infectious diseases registry`
+data <- fromJSONstat(readLines(url.call, encoding = "UTF-8"))$`COVID-19 cases in the infectious diseases registry`
 
-# Combine the URL to a character string
-url.call <- paste0(url, "column=", measure.infections, "&row=", time.day, "&row=", region.shp)
-
-# Read the data in to an R object and select the object `COVID-19 cases in the infectious diseases registry`
-# Note how this step differs a little from what we did yesterday
-
-data <- fromJSONstat(
-  readLines(
-    url.call, encoding = "UTF-8"))$`COVID-19 cases in the infectious diseases registry`
-
-# Convert the value column to numeric
+# Convert value column to numeric
 data$value <- as.numeric(data$value)
 ```
 
@@ -64,44 +55,43 @@ First, we will do some data wrangling to format the data for `ggplot2`. Go throu
 
 **2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`.
 
-```{r}
+```r
 plotdata <- data
 ```
 
 **2.2** Filter out NA values.
 
-```{r}
-plotdata <- plotdata %>% filter(!is.na(value))
+```r
+plotdata <- plotdata %>% 
+  filter(!is.na(value))
 ```
 
-**2.3** Convert the column containing hospital districts (`hcdmunicipality2020`) into a factor.
+**2.3** There is a row in the column `dateweek20200101` that contains the word "Time" as an entry, rather than the year and week (checked 14.01.2021). Let's remove it!
 
-```{r}
+```r
+plotdata <- subset(plotdata, dateweek20200101 != "Time")
+```
+
+**2.4** Convert the column containing hospital districts (`hcdmunicipality2020`) into a factor.
+
+```r
 plotdata$region <- as.factor(plotdata$hcdmunicipality2020)
 ```
 
-**2.4** Convert the date values from character format to actual dates (this is very useful for plotting).
-
-```{r}
-plotdata$week <- as.Date(plotdata$dateweek2020010120201231)
-```
-
-**2.5** Check the structure of the data. The output should look like the example below.
-```{r}
+**2.5** Check the structure of the data. The output should look something like the example below (although the exact appearance might differ, depending on when you downloaded the data).
+```r
 str(plotdata)
 ```
 
 ```r
-'data.frame':	5786 obs. of  6 variables:
- $ dateweek2020010120201231: chr  "2020-01-28" "2020-01-28" "2020-01-28" "2020-01-28" ...
- $ hcdmunicipality2020     : chr  "Åland" "Southwest Finland Hospital District" "Satakunta Hospital District" "Kanta-Häme Hospital District" ...
- $ measure                 : chr  "Number of cases" "Number of cases" "Number of cases" "Number of cases" ...
- $ value                   : num  0 0 0 0 0 0 0 0 0 0 ...
- $ region                  : Factor w/ 22 levels "Åland","All areas",..: 1 21 17 8 16 15 9 18 20 6 ...
- $ week                    : Date, format: "2020-01-28" "2020-01-28" "2020-01-28" "2020-01-28" ...
+'data.frame':	1188 obs. of  4 variables:
+ $ hcdmunicipality2020: chr  "Åland" "Åland" "Åland" "Åland" ...
+ $ dateweek20200101   : chr  "Year 2020 Week 02" "Year 2020 Week 03" "Year 2020 Week 04" "Year 2020 Week 05" ...
+ $ value              : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ region             : Factor w/ 22 levels "Åland","All areas",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
 
-**2.6** Group the data by region to create regional sums (similar to yesterday's excercise).
+**2.6** Group the data by region to create regional sums (similar to yesterday's excercise, with regions corresponding to hospital districts).
 
 ```r
 plotdata_sums <- plotdata %>%
@@ -120,53 +110,39 @@ Ok! Now we're ready to create some plots.
 
 ```
 
-**3.2** Now let's create a plot using the original `plotdata` data frame (which has the daily values).
-This plot does not look very good...
+**3.2** Now let's create a line plot using the original `plotdata` data frame (which has the weekly values).
+This plot does not look that great (yet!).
 
 ```r
 ggplot(data = plotdata,
-       aes(x = week, y = value))+
-  geom_line()
+       aes(x = dateweek20200101, y = value)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
-**3.3** Try improving the previous plot by separating each region. Hint: Add a parameter to `geom_line()`.
+**3.3** One problem here is that we haven't yet grouped and coloured the data by region. Try fixing that!
 
 ```r
 # Write the answer in your R script
 
 ```
 
-**3.4** Next, let's plot regional cumulative sums of COVID-19 observations. Add a new column that has the daily cumulative sum for each region. Note that we use `cumsum()` to calculate this.
+**3.4** Another thing we could do is to replace the years and weeks with more succinct labels. Let's use the `string` package to remove the words "Year" and "week".
 
-```{r}
-plotdata <- plotdata %>%
-  group_by(region) %>%
-  mutate(cumulative_sum = cumsum(value))
+```r
+library(stringr)
+plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'Year', '')) 
+plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'Week', '')) 
 ```
 
-**3.5** Plot the cumulative sum. You can try different geoms here.
+**3.5** Try giving the plot more informative axis labels (such as "No. of COVID-19 cases" and "Week and year").
 
-```{r}
-# Write the answer(s) in your R script
-
-```
-
-**3.6** Play around with the plot.
-
-You can, for example, change the y-axis to log scale and select specific regions to plot.
-
-If you are feeling brave, get some more data from the THL website and get creative!
-
-```{r}
-
-# Continue the code below ...
-
-#ggplot(data = ...,
-#       aes()) +
+```r
+# Write the answer in your R script
 
 ```
 
-#### **3. Saving and exporting your script**
+#### **4. Saving and exporting your script**
 
 If you don't remember how to save and export your data from RStudio Server, follow the instructions set out in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
 
