@@ -126,7 +126,7 @@ ggplot(data = plotdata,
 
 ```r
 ggplot(data = plotdata,
-       aes(x = dateweek20200101, y = value, group = region, colour = region) +
+       aes(x = dateweek20200101, y = value, group = region, colour = region)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```

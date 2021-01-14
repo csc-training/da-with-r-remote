@@ -217,7 +217,7 @@ data$value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <p><strong>3.3</strong> One problem here is that we haven't yet grouped and coloured the data by region. Try fixing that!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> plotdata,
-       <span class="kw">aes</span>(<span class="dt">x =</span> dateweek20200101, <span class="dt">y =</span> value, <span class="dt">group =</span> region, <span class="dt">colour =</span> region) +
+       <span class="kw">aes</span>(<span class="dt">x =</span> dateweek20200101, <span class="dt">y =</span> value, <span class="dt">group =</span> region, <span class="dt">colour =</span> region)) +
 <span class="st">  </span><span class="kw">geom_line</span>() +
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <p><strong>3.4</strong> Another thing we could do is to replace the years and weeks with more succinct labels. Let's use the <code>string</code> package to remove the words &quot;Year&quot; and &quot;week&quot;.</p>
