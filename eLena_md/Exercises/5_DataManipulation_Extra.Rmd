@@ -101,7 +101,7 @@ data_regionsums <- data %>%
   summarise(observations = sum(value))
 ```
 
-**2.3** Delete the row that has the overall daily sum of observations ("All areas").
+**2.3** Delete the row that has the overall weekly sum of observations ("All areas").
 ```r
 # Write the answer in your R script
 

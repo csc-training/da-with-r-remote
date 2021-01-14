@@ -192,7 +192,7 @@
 <span class="kw">str</span>(data)
 
 <span class="co"># can also use pipe: e.g. data %&gt;% head()</span></code></pre></div>
-<p>Next, calculate the cases by hospital district and sum the daily numbers of infections.</p>
+<p>Next, calculate the cases by hospital district and sum the weekly numbers of infections.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_regionsums &lt;-<span class="st"> </span>data %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(hcdmunicipality2020) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">observations =</span> <span class="kw">sum</span>(value))

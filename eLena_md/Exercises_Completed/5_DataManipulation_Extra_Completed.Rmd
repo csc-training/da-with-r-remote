@@ -85,7 +85,7 @@ str(data)
 # can also use pipe: e.g. data %>% head()
 ```
 
-Next, calculate the cases by hospital district and sum the daily numbers of infections.
+Next, calculate the cases by hospital district and sum the weekly numbers of infections.
 
 ```r
 data_regionsums <- data %>%
