@@ -66,10 +66,10 @@ plotdata <- plotdata %>%
   filter(!is.na(value))
 ```
 
-**2.3** There is a row in the column `dateweek20200101` that contains the word "Time" as an entry, rather than the year and week (checked 14.01.2021). Let's remove it!
+**2.3** There are rows in the column dateweek20200101 that contain "All times" as an entry, rather than the year and week (checked 21.10.2021). Let's remove them!
 
 ```r
-plotdata <- subset(plotdata, dateweek20200101 != "Time")
+plotdata <- subset(plotdata, dateweek20200101 != "All times")
 ```
 
 **2.4** Convert the column containing hospital districts (`hcdmunicipality2020`) into a factor.

@@ -186,8 +186,8 @@ data$value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data
 <p><strong>2.2</strong> Filter out NA values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata &lt;-<span class="st"> </span>plotdata %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(value))</code></pre></div>
-<p><strong>2.3</strong> There is a row in the column <code>dateweek20200101</code> that contains the word &quot;Time&quot; as an entry, rather than the year and week (checked 14.01.2021). Let's remove it!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata &lt;-<span class="st"> </span><span class="kw">subset</span>(plotdata, dateweek20200101 !=<span class="st"> &quot;Time&quot;</span>)</code></pre></div>
+<p><strong>2.3</strong> There are rows in the column dateweek20200101 that contain &quot;All times&quot; as an entry, rather than the year and week (checked 21.10.2021). Let's remove them!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata &lt;-<span class="st"> </span><span class="kw">subset</span>(plotdata, dateweek20200101 !=<span class="st"> &quot;All times&quot;</span>)</code></pre></div>
 <p><strong>2.4</strong> Convert the column containing hospital districts (<code>hcdmunicipality2020</code>) into a factor.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata$region &lt;-<span class="st"> </span><span class="kw">as.factor</span>(plotdata$hcdmunicipality2020)</code></pre></div>
 <p><strong>2.5</strong> Check the structure of the data. The output should look something like the example below (although the exact appearance might differ, depending on when you downloaded the data).</p>
