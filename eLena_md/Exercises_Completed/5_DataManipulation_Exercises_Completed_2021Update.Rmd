@@ -162,7 +162,7 @@ surveys %>%
     arrange(year)
 ```
 
-#### **Block 5: spreading and gathering**
+#### **Block 5: pivoting**
 
 This topic is quite time-consuming, so chances are that you are looking at this section independently.
 

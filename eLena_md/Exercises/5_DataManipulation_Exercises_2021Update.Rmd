@@ -90,7 +90,7 @@ To make things easier, here is a list of `dplyr` functions:
 
 **4.3** What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`.
 
-#### **Block 5: spreading and gathering**
+#### **Block 5: pivoting**
 
 This topic is quite time-consuming, so chances are that you are looking at this section independently.
 

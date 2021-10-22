@@ -206,8 +206,8 @@
 <p><strong>4.2</strong> Use <code>group_by()</code> and <code>summarize()</code> to find the mean, minimum and maximum hindfoot length for each species (using <code>species_id</code>). Also try adding the number of observations (hint: use <code>n</code>).</p>
 <p><strong>4.3</strong> What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species_id</code>, and <code>weight</code>.</p>
 </div>
-<div id="block-5-spreading-and-gathering" class="section level4">
-<h4><strong>Block 5: spreading and gathering</strong></h4>
+<div id="block-5-pivoting" class="section level4">
+<h4><strong>Block 5: pivoting</strong></h4>
 <p>This topic is quite time-consuming, so chances are that you are looking at this section independently.</p>
 <p><strong>5.1</strong> Pivot the <code>surveys</code> data frame with the end result featuring <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data.</p>
 <p><strong>5.2</strong> Now take that data frame and <code>pivot_longer</code> it, so that each row is a unique <code>plot_id</code> by <code>year</code> combination.</p>
