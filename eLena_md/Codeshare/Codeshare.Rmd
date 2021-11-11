@@ -22,7 +22,7 @@ opts_knit$set(width=75)
 
 ### Link to codeshare session
 
-[Access today's codeshare session here](https://codeshare.io/MNBAMO)
+[Access today's codeshare session here](https://codeshare.io/BA8nBp)
 
 Note: the session expires in 24 hours once it's been commenced.
 In practice, it will probably expire toward the end of the course day, as a kind instructor has set it up the night before!
