@@ -69,6 +69,13 @@ data <- data$`COVID-19 cases in the infectious diseases registry`
 data$value <- as.numeric(data$value)
 ```
 
+**1.5** Remove a row in the column `dateweek20200101` with a summary of infection rates for all times.
+
+```r
+data <- data %>%
+  filter(dateweek20200101 != "All times")
+```
+
 Now we are ready for some exercises!
 
 #### **2. Exercises**

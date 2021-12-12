@@ -44,7 +44,19 @@ surveys <- read_csv("/data/portal_data_joined.csv")
 
 **1.3** Using pipes, subset the `surveys` data to include animals collected before 1995 and retain only the columns `year`, `sex`, and `weight`.
 
+```r
+surveys %>%
+    filter(year < 1995) %>%
+    select(year, sex, weight)
+```
+
 **1.4** Do the same, except this time keeping all the columns apart from `species_id`.
+
+```r
+surveys %>%
+    filter(year < 1995) %>%
+    select(-species_id)
+```
 
 #### **Block 2: the mutate function**
 
@@ -55,6 +67,14 @@ surveys <- read_csv("/data/portal_data_joined.csv")
 - All values are less than 30
 
 **Hint**: think about how the commands should be ordered to produce this data frame!
+
+```r
+surveys_hindfoot_half <- surveys %>%
+    filter(!is.na(hindfoot_length)) %>%
+    mutate(hindfoot_half = hindfoot_length / 2) %>%
+    filter(hindfoot_half < 30) %>%
+    select(species_id, hindfoot_half)
+```
 
 #### **Block 3: split-apply-combine and summarize**
 
@@ -69,6 +89,14 @@ surveys %>%
 
 It is also possible to summarize multiple variables at the same time. Extending the code above, can you figure out how to add a column indicating the minimum weight for each species for each sex?
 
+```r
+surveys %>%
+  filter(!is.na(weight)) %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight),
+            min_weight = min(weight))
+```
+
 **3.2** We can also arrange the results of the previous exercise in a different manner. Try adding a pipe at the end that sorts the data so that lighter species are displayed first. 
 
 To make things easier, here is a list of `dplyr` functions: 
@@ -80,27 +108,97 @@ To make things easier, here is a list of `dplyr` functions:
 - `arrange()`: sort results
 - `count()`: count discrete values
 
+```r
+surveys %>%
+  filter(!is.na(weight)) %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight),
+            min_weight = min(weight)) %>%
+  arrange(min_weight)
+```
+
 **3.3** How about arranging things in descending order instead? Try sorting the results by decreasing order of mean weight. For this you will need to use `desc()` inside the `arrange()` function.
+
+```r
+surveys %>%
+  filter(!is.na(weight)) %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight),
+            min_weight = min(weight)) %>%
+  arrange(desc(mean_weight))
+```
 
 #### **Block 4: counting**
 
 **4.1** How many animals were caught in each `plot_type` surveyed?
 
+```r
+surveys %>%
+    count(plot_type)
+```
+
 **4.2** Use `group_by()` and `summarize()` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
+
+```r
+surveys %>%
+    filter(!is.na(hindfoot_length)) %>%
+    group_by(species_id) %>%
+    summarize(
+        mean_hindfoot_length = mean(hindfoot_length),
+        min_hindfoot_length = min(hindfoot_length),
+        max_hindfoot_length = max(hindfoot_length),
+        n = n()
+    )
+```
 
 **4.3** What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`.
 
-#### **Block 5: pivoting**
+```r
+surveys %>%
+    filter(!is.na(weight)) %>%
+    group_by(year) %>%
+    filter(weight == max(weight)) %>%
+    select(year, genus, species, weight) %>%
+    arrange(year)
+```
+
+#### **Block 5: spreading and gathering**
 
 This topic is quite time-consuming, so chances are that you are looking at this section independently.
 
-**5.1** Pivot the `surveys` data frame with the end result featuring `year` as columns, `plot_id` as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function `n_distinct()` to get the number of unique genera within a particular chunk of data.
+**5.1** Spread the `surveys` data frame with `year` as columns, `plot_id` as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function `n_distinct()` to get the number of unique genera within a particular chunk of data.
 
-**5.2** Now take that data frame and `pivot_longer` it, so that each row is a unique `plot_id` by `year` combination.
+```r
+surveys_newspread <- surveys %>%
+  group_by(plot_id, year) %>%
+  summarize(n_genera = n_distinct(genus)) %>%
+  spread(year, n_genera)
 
-**5.3** The `surveys` data set has two measurement columns: `hindfoot_length` and `weight`. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use `pivot_longer()` to create a dataset where we have the types of measurement under a column called `measurement` and a `value` column that takes on the value of either `hindfoot_length` or `weight`. *Hint*: You’ll need to specify which columns to use for collecting the values.
+head(surveys_newspread)
+```
 
-**5.4** With this new data set, calculate the average of each `measurement` in each `year` for each different `plot_type`. Then `pivot_wider()` them into a data set with a column for `hindfoot_length` and `weight`. *Hint*: You only need to specify the `names_from` and `values_from` arguments for `pivot_wider()`.
+**5.2** Now take that data frame and `gather()` it again, so each row is a unique `plot_id` by `year` combination.
+
+```r
+surveys_newspread %>%
+  gather(year, n_genera, -plot_id)
+```
+
+**5.3** The `surveys` data set has two measurement columns: `hindfoot_length` and `weight`. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use `gather()` to create a dataset where we have a key column called `measurement` and a `value` column that takes on the value of either `hindfoot_length` or `weight`. *Hint*: You’ll need to specify which columns are being gathered.
+
+```r
+surveys_long <- surveys %>%
+  gather(measurement, value, hindfoot_length, weight)
+```
+
+**5.4** With this new data set, calculate the average of each `measurement` in each `year` for each different `plot_type`. Then `spread()` them into a data set with a column for `hindfoot_length` and `weight`. *Hint*: You only need to specify the key and value columns for `spread()`.
+
+```r
+surveys_long %>%
+  group_by(year, measurement, plot_type) %>%
+  summarize(mean_value = mean(value, na.rm=TRUE)) %>%
+  spread(measurement, mean_value)
+```
 
 #### **Block 6: using write_csv()**
 

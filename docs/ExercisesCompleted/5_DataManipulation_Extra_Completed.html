@@ -181,6 +181,9 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data$<span class="st">`</span><span class="dt">COVID-19 cases in the infectious diseases registry</span><span class="st">`</span></code></pre></div>
 <p><strong>1.4</strong> Convert the <code>value</code> column to numeric:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data$value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data$value)</code></pre></div>
+<p><strong>1.5</strong> Remove a row in the column <code>dateweek20200101</code> with a summary of infection rates for all times.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(dateweek20200101 !=<span class="st"> &quot;All times&quot;</span>)</code></pre></div>
 <p>Now we are ready for some exercises!</p>
 </div>
 <div id="exercises" class="section level4">
