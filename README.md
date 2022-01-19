@@ -1,5 +1,15 @@
 # Data Analysis with R (Remote Course)
 
+**Course description**
+
+R is a language that has become one of the most popular tools for manipulating, visualizing and analyzing data. While there are many R courses, learning these skills can involve a steep learning curve, especially for those with no experience in programming or data analysis. This course aims to help with this initial difficulty by equipping learners with essential skills in using R, including data wrangling, plotting and statistics.
+
+The course topics include basic R syntax, data importing and exporting, handling real-life data sets, creating publication-ready plots, and basic concepts of statistical testing with R. The topics are covered using both hands-on teaching and independent exercises. The course can be taught either as a two- or three-day version (including or omitting the section on statistics).
+
+The course materials (links below) can also be used for self-study.
+
+---
+
 **Links to CSC platforms**
 
 [Notebooks](https://notebooks.csc.fi/)
