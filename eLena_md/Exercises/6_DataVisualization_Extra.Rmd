@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -146,6 +152,6 @@ plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'We
 
 If you don't remember how to save and export your data from RStudio Server, follow the instructions set out in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
 
-That's it in terms of exercises! Depending on the course schedule, there may be a chance to go through the solutions during the beginning of Day 3. However, if you're attending a two-day course feel unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.
+That's it in terms of exercises! Depending on the course schedule, there may be a chance to go through the solutions during the beginning of Day 3. However, if you're attending a two-day course and feel unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.
 
 Thanks for joining the course (so far!) and we hope you've found the contents useful!

@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -191,4 +197,4 @@ width = 15, height = 10)
 
 **8.4** Next we could save a `grid.arrange()` plot. First use `grid.arrange()` to combine plots 1 and 2, then use `ggsave()` to save the result (use a DPI value of 100).
 
-**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the `Starting with Data` exercise sheet (steps 7.3 and 7.4).
+**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).

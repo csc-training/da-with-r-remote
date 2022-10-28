@@ -63,7 +63,7 @@ This might be an example of a spreadsheet setup:
 
 #### 2b. Recommendations for data organisation
 
-**The cardinal rules of using spreadsheet programs for data:**
+**The cardinal rules of using spreadsheet programs for data: **
 
 1. Put all your variables in columns - the thing you’re measuring, like ‘weight’ or ‘temperature’.
 
@@ -139,7 +139,7 @@ After altering our cars data set, we would now like to save the output. For this
 
 Before exporting the data we are going to create a new folder, `data_output`, in our working directory. It’s good practice to keep our output files separate from other files we might be using. This way, even if the files in the output folder are deleted, we can always re-generate them (since our raw data are stored elsewhere).
 
-```r
+```{r , eval=FALSE}
 # Export the data. The write.csv() function requires a minimum of two arguments, the data to be saved and the name of the output file.
 
 write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
@@ -153,7 +153,7 @@ These are actually row numbers in the data set. To address this, we can change t
 
 This argument allows us to set the names of the rows in the output data file. R’s default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`:
 
-```r
+```{r , eval=FALSE}
 write.csv(carSpeeds, file = 'data_output/car-speeds-cleaned.csv', row.names = FALSE)
 ```
 

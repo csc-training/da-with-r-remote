@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -84,29 +90,23 @@ The package `dplyr` provides easy tools for the most common data manipulation ta
 
 The package `tidyr` addresses the common problem of wanting to reshape your data for plotting and use by different R functions. Sometimes we want data sets where we have one row per measurement. Sometimes we want a data frame where each measurement type has its own column, and rows are instead more aggregated groups - like plots or aquaria. Moving back and forth between these formats is nontrivial, and `tidyr` gives you tools for this and more sophisticated data manipulation.
 
-To learn more about `dplyr` and `tidyr` after the workshop, you may want to check out this [handy data transformation with `dplyr` cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) and this [one about `tidyr`](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf).
+To learn more about `dplyr` and `tidyr` after the workshop, you may want to check out this [handy data transformation with `dplyr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf) and this [one about `tidyr`](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf).
 
 We’ll read in our data using the `read_csv()` function, from the tidyverse package `readr`, instead of `read.csv()`.
 
 ```r
 surveys <- read_csv("/data/portal_data_joined.csv")
 
-#> Parsed with column specification:
-#> cols(
-#>   record_id = col_double(),
-#>   month = col_double(),
-#>   day = col_double(),
-#>   year = col_double(),
-#>   plot_id = col_double(),
-#>   species_id = col_character(),
-#>   sex = col_character(),
-#>   hindfoot_length = col_double(),
-#>   weight = col_double(),
-#>   genus = col_character(),
-#>   species = col_character(),
-#>   taxa = col_character(),
-#>   plot_type = col_character()
-#> )
+#> Rows: 34786 Columns: 13                                                                    
+#>                           
+#> ── Column specification ─────────────────────────────────────────────────────────  
+#> Delimiter: ","  
+#> chr (6): species_id, sex, genus, species, taxa, plot_type  
+#> dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight  
+#>  
+#> ℹ Use `spec()` to retrieve the full column specification for this data.  
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.  
+
 ```
 
 ```r
@@ -412,7 +412,7 @@ surveys_pivotwider
 
 The opposing situation could occur if we had been provided with data in the form of `surveys_pivotwider` (i.e. in wide format), where the genus names are column names, but we wish to treat them as values of a genus variable instead.
 
-In this situation we want to take the column names and turn them into a pair of new variables. One variable represents the column names as values, and the other variable contains the values previously associated with the column names. Instead of the `names_from` and `values_form` arguments used by `pivot_wider()`, we use the arguments `names_to` and `values_to`.
+In this situation we want to take the column names and turn them into a pair of new variables. One variable represents the column names as values, and the other variable contains the values previously associated with the column names. Instead of the `names_from` and `values_from` arguments used by `pivot_wider()`, we use the arguments `names_to` and `values_to`.
 
 To recreate `surveys_gw` from `surveys_pivotwider`, we need to assign names back to the `genus` column and values to a column called `mean_weight`, using all columns except `plot_id` to retrieve the values. Here we drop the `plot_id` column with an exclamation mark sign. Note that, for the newly (re-)created columns, we also need to provide quotation marks.
 
