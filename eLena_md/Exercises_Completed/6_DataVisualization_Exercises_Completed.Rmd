@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -295,4 +301,4 @@ ggsave("fig_output/comboplot.png", plots_arranged,
 width = 10, dpi = 100)
 ```
 
-**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the `Starting with Data` exercise sheet (steps 7.3 and 7.4).
+**8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).

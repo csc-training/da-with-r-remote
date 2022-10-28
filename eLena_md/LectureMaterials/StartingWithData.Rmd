@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -73,7 +79,7 @@ In fact, we haven't yet explored our *working directory* in much detail, so let'
 ```r
 getwd()
 
-# This will give something like: /mnt/rstudiotest-pvc/<R-project>
+# This will give something like: /home/rstudio/<R-project>
 
 ```
 

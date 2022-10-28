@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -20,7 +26,7 @@ opts_chunk$set(cache=TRUE,
 opts_knit$set(width=75)
 ```
 
-# Basics of writing R code
+# Writing and annotating R code
 
 *This lesson is derived from Data Carpentry teaching materials available under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
 
@@ -56,7 +62,7 @@ To do useful and interesting things in R, we can assign *values* to *objects*. T
 weight_kg <- 55
 ```
 
-`<-` is the assignment operator. It assigns values on the right to objects on the left. So, after executing `x <- 3`, the value of `x` is `3`. The arrow can be read as 3 **goes into** `x`. For historical reasons, you can also use `=` for assignments, but not in every context. Because of the [slight](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html) [differences](http://r.789695.n4.nabble.com/Is-there-any-difference-between-and-tp878594p878598.html) in syntax, it is good practice to always use `<-` for assignments.
+`<-` is the assignment operator. It assigns values on the right to objects on the left. So, after executing `x <- 3`, the value of `x` is `3`. The arrow can be read as 3 **goes into** `x`. For historical reasons, you can also use `=` for assignments, but not in every context. Because of the [slight](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html) [differences](https://stackoverflow.com/questions/1741820/what-are-the-differences-between-and-assignment-operators/1742550) in syntax, it is good practice to always use `<-` for assignments.
 
 In RStudio, typing `Alt` + `-` (push Alt at the same time as the - key) will write `<-` in a single keystroke in a PC, while typing `Option` + `-`  does the same in a Mac.
 
@@ -74,20 +80,20 @@ Now that R has `weight_kg` in memory, we can do arithmetic with it. For instance
 
 We can also change an object’s value by assigning it a new one:
 
-```
+```r 
 weight_kg <- 57.5
 2.2 * weight_kg
 ```
 
 This means that assigning a value to one object does not change the values of other objects For example, let’s store the animal’s weight in pounds in a new object, `weight_lb`:
 
-```
+```r
 weight_lb <- 2.2 * weight_kg
 ```
 
 and then change `weight_kg` to 100.
 
-```
+```r
 weight_kg <- 100
 ```
 
@@ -126,7 +132,7 @@ Functions are “canned scripts” that automate more complicated sets of comman
 
 A function usually takes one or more inputs called *arguments*. Functions often (but not always) return a *value*. A typical example would be the function `sqrt()`. The input (the argument) must be a number, and the return value is the square root of that number. Executing a function (‘running it’) is called *calling* the function. An example of a function call is:
 
-```
+```r
 b <- sqrt(a)
 ```
 
@@ -140,7 +146,7 @@ Some functions take arguments which may either be specified by the user, or, if 
 
 Let’s try a function that can take multiple arguments: `round()`.
 
-```
+```r
 round(3.14159)
 #> [1] 3
 ```
@@ -174,14 +180,14 @@ It’s good practice to put the non-optional arguments (like the number you’re
 
 A vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the `c()` function. For example we can create a vector of animal weights and assign it to a new object `weight_g`:
 
-```
+```r
 weight_g <- c(50, 60, 65, 82)
 weight_g
 ```
 
 A vector can also contain characters:
 
-```
+```r
 animals <- c("mouse", "rat", "dog")
 animals
 ```
@@ -190,28 +196,28 @@ The quotes around “mouse”, “rat”, etc. are essential here. Without the q
 
 There are many functions that allow you to inspect the content of a vector. `length()` tells you how many elements are in a particular vector:
 
-```
+```r
 length(weight_g)
 length(animals)
 ```
 
 An important feature of a vector, is that all of the elements are the same type of data. The function `class()` indicates the class (the type of element) of an object:
 
-```
+```r
 class(weight_g)
 class(animals)
 ```
 
 The function `str()` provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:
 
-```
+```r
 str(weight_g)
 str(animals)
 ```
 
 You can use the `c()` function to add other elements to your vector:
 
-```
+```r
 weight_g <- c(weight_g, 90) # add to the end of the vector
 weight_g <- c(30, weight_g) # add to the beginning of the vector
 weight_g
@@ -343,7 +349,7 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 
 *Optional challenge:* Can you figure out why `"four" > "five"` returns `TRUE`?
 
-### 8. Missing data
+#### 8. Missing data
 
 As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as `NA`.
 

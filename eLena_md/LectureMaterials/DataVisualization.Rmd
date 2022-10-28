@@ -4,6 +4,12 @@ output:
     highlight: kate
 ---
 
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
@@ -72,9 +78,9 @@ download.file(url = "https://tinyurl.com/surveyscomplete",
 
 To build a `ggplot2` plot, we will use the following basic template that can be used for different types of plots:
 
-```r
+```r 
 ggplot(data = <DATA>, 
-       mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
+       mapping = aes(<MAPPINGS>)) + <GEOM_FUNCTION>()
 ```
 
 - use the `ggplot()` function and bind the plot to a specific data frame using the `data` argument
@@ -400,7 +406,7 @@ ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
 
 ![](Images/R-ecology-facet-by-species-and-sex-1.png?raw=true)
 
-This gives us an idea of how faceting works. Let's explore this further by completing [Data Visualization Exercise Block 6](https://e-learn.csc.fi/mod/resource/view.php?id=556) (~ 10 mins).
+This gives us an idea of how faceting works. Let's explore this further by completing **Data Visualization Exercise Block 6** (~ 10 mins).
 
 The result of Exercise 6.1 should look like this:
 

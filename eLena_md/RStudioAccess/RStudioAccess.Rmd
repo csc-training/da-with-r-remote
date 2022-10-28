@@ -25,9 +25,8 @@ opts_knit$set(width=75)
 To launch your own instance of R:
 
 1. Go to [notebooks.csc.fi](https://notebooks.csc.fi/#/) and log in using the Haka authentication service.
-2. Find "RStudio environment for DAKI and teaching activities" in the dashboard and click on "Launch new". Note: there is also an environment called "RStudio Server", but we won't use that during the course.
-3. Wait for the virtual machine to start and click on "Open in browser" once the link appears.
-4. Your browser will open a new window with login and password details. Press "Click to copy password & proceed".
-5. This will open up the RStudio login screen. Enter **rstudio** as the username and paste your password to open up a new RStudio session. The password can be pasted using `Ctrl + V` (Windows) or `⌘ + V` (macOS).
+2. In the top right corner, click "Join workspace" and enter the code provided by the instructors.
+3. You should see a workspace with an RStudio environment called "RStudio Server (Data Analysis with R, November 2022)". Later you can find it under "My workspaces".
+4. Click on the "Start session" button on the right to start RStudio.
 
-Note: each RStudio session on [notebooks.csc.fi](https://notebooks.csc.fi/#/) lasts for 10 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
+Note: each RStudio session in this workspace lasts for 12 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
