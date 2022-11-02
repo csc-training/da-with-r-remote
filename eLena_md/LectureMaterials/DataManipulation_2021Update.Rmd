@@ -245,7 +245,7 @@ surveys %>%
 
 **Challenge**
 
-Go through Data Manipulation **Exercise Block 2** (~5-10 mins).
+Go through **Data Manipulation Exercise Block 2** (~5-10 mins).
 
 #### 6. Split-apply-combine and `summarize`
 
