@@ -1194,16 +1194,8 @@ compute the mean <code>weight</code> by sex:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<p>As part of the output, we see the line: “<code>summarise()</code>
-ungrouping output (override with <code>.groups</code> argument)”. This
-is not an error, but a recently introduced feature in the
-<code>dplyr</code> package. We won’t go into it in detail, but for
-information: <code>dplyr</code> now comes with extra features for
-tweaking the output of split-apply-combine steps like the one above.
-This could be useful e.g. when transforming your data.</p>
-<p>You may also have noticed that the output from these calls doesn’t
-run off the screen anymore. It’s one of the advantages of the tibble
-format.</p>
+<p>You may have noticed that the output from these calls doesn’t run off
+the screen anymore. It’s one of the advantages of the tibble format.</p>
 <p>You can also group by multiple columns:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species_id) <span class="sc">%&gt;%</span></span>
@@ -1211,6 +1203,13 @@ format.</p>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Here, we see that the output is grouped by &quot;sex&quot;, even if we specify two columns in group_by:</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># `summarise()` regrouping output by &#39;sex&#39; (override with `.groups` argument)</span></span></code></pre></div>
+<p>The line in the output “<code>summarise()</code> regrouping output by
+‘sex’ (override with <code>.groups</code> argument)” is not an error,
+but a recently introduced feature in the <code>dplyr</code> package. We
+won’t go into it in detail, but for information: <code>dplyr</code> now
+comes with extra features for tweaking the output of split-apply-combine
+steps like the one above. This could be useful e.g. when transforming
+your data.</p>
 <p>When grouping both by <code>sex</code> and <code>species_id</code>,
 the last few rows are for animals that escaped before their sex and body
 weights could be determined. We can use <code>tail()</code> to look at

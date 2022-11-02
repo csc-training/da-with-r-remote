@@ -258,9 +258,7 @@ surveys %>%
   group_by(sex) %>%
   summarize(mean_weight = mean(weight, na.rm = TRUE))
 ```
-As part of the output, we see the line: "`summarise()` ungrouping output (override with `.groups` argument)". This is not an error, but a recently introduced feature in the `dplyr` package. We won't go into it in detail, but for information: `dplyr` now comes with extra features for tweaking the output of split-apply-combine steps like the one above. This could be useful e.g. when transforming your data.
-
-You may also have noticed that the output from these calls doesn’t run off the screen anymore. It’s one of the advantages of the tibble format.
+You may have noticed that the output from these calls doesn’t run off the screen anymore. It’s one of the advantages of the tibble format.
 
 You can also group by multiple columns:
 
@@ -273,6 +271,7 @@ surveys %>%
 # `summarise()` regrouping output by 'sex' (override with `.groups` argument)
 
 ```
+The line in the output "`summarise()` regrouping output by 'sex' (override with `.groups` argument)" is not an error, but a recently introduced feature in the `dplyr` package. We won't go into it in detail, but for information: `dplyr` now comes with extra features for tweaking the output of split-apply-combine steps like the one above. This could be useful e.g. when transforming your data.
 
 When grouping both by `sex` and `species_id`, the last few rows are for animals that escaped before their sex and body weights could be determined. We can use `tail()` to look at the last six rows in the data:
 
