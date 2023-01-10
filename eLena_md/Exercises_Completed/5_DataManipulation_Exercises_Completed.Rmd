@@ -44,7 +44,7 @@ library(tidyverse)
 **1.2** Read in `portal_data_joined.csv` using `read_csv()`:
 
 ```r
-surveys <- read_csv("/data/portal_data_joined.csv")
+surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 
 ```
 

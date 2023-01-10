@@ -38,7 +38,7 @@ https://datacarpentry.org/R-ecology-lesson/
 
 #### **Block 1: creating a project, working with objects**
 
-**1.1** In RStudio, create a project called `RIntro` (note that R is case-sensitive).
+**1.1** In RStudio, create a project called `RIntro` in the `my-work` directory, if not already created (note that R is case-sensitive).
 
 **1.2** Create the following objects. What are the values after each statement?
 
@@ -114,7 +114,9 @@ c('d', 'e', 'f')
 c(1, 2, 'f')
 ```
 
-**4.2** Try to figure out how to use a completely new function based only on its documentation. Use `sample()` to produce
+**4.2** Try to figure out how to use a completely new function based only on its documentation. Look at the help for the function `sample()` and find out how to use `sample()` to produce
 
 - a Finnish lottery ticket: 7 randomly drawn numbers out of 40
 - a vector of 0s and 1s, representing 10 coin tosses
+
+Tip: look at the section Examples in the end.  

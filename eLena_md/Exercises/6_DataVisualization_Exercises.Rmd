@@ -42,10 +42,10 @@ https://datacarpentry.org/R-ecology-lesson/
 library(tidyverse)
 ```
 
-**1.2** Then import a version of the `surveys` data set that we worked with previously (`surveys_complete.csv`). Assign it to a tibble called `surveys_complete`, using `read_csv()`. We can use a version of the data that comes in-built in our R environment, located in the `/data` folder.
+**1.2** Then import a version of the `surveys` data set that we worked with previously (`surveys_complete.csv`). Assign it to a tibble called `surveys_complete`, using `read_csv()`. We can use a version of the data located in the `/shared` folder.
 
 ```r
-surveys_complete <- read_csv("/data/surveys_complete.csv")
+surveys_complete <- read_csv("/home/rstudio/shared/surveys_complete.csv")
 ```
 
 **1.3** Using `ggplot2` and the `surveys_complete` data set, create a scatter plot with `weight` on the y axis and `species_id` on the x axis, with the plot types shown in different colors. What do you think - is this a good way to show these type of data? If not, how would you go about it instead?

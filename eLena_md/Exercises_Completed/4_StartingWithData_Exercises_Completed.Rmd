@@ -42,10 +42,10 @@ https://datacarpentry.org/R-ecology-lesson/
 This exercise block repeats the lecture contents - at this point it's important that we're all on the
 same page! We will need these data as we move on.
 
-**1.1** Import some example data (`/data/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
+**1.1** Import some example data (`/home/rstudio(shared/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
 
 ```r
-surveys <- read.csv("/data/portal_data_joined.csv", stringsAsFactors=TRUE)
+surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv", stringsAsFactors=TRUE)
 head(surveys)
 ```
 
@@ -185,10 +185,10 @@ country_climate <- data.frame(
 
 #### **Block 6: arguments for CSV importing**
 
-**6.1** Import a new data set on car speeds (`/data/car-speeds.csv`) and assign it to an object called `carSpeeds`.
+**6.1** Import a new data set on car speeds (`/home/rstudio/shared/car-speeds.csv`) and assign it to an object called `carSpeeds`.
 
 ```r
-carSpeeds <- read.csv("/data/car-speeds.csv")
+carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv")
 ```
 
 **6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
@@ -196,7 +196,7 @@ carSpeeds <- read.csv("/data/car-speeds.csv")
 ```r
 str(carSpeeds)
 
-carSpeeds <- read.csv("/data/car-speeds.csv", header = FALSE)
+carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv", header = FALSE)
 str(carSpeeds)
 
 # the first row of the data
@@ -212,7 +212,7 @@ unique(carSpeeds$Color) # right now we can see a problem here
 # Levels: Red Black Green Red White
 
 carSpeeds <- read.csv(
-  file = '/data/car-speeds.csv',
+  file = '/home/rstudio/shared/car-speeds.csv',
   stringsAsFactors = FALSE, 
   strip.white = TRUE,
   sep = ','

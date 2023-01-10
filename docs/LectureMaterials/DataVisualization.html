@@ -944,7 +944,7 @@ lesson.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_output/surveys_complete.csv&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or, if starting directly from this lesson:</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># surveys_complete &lt;- read_csv(&quot;/data/surveys_complete.csv&quot;)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># surveys_complete &lt;- read_csv(&quot;/home/rstudio/shared/surveys_complete.csv&quot;)</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The data can also be downloaded:</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://tinyurl.com/surveyscomplete&quot;</span>,</span>
@@ -961,7 +961,9 @@ programmatic interface for specifying what variables to plot, how they
 are displayed, and general visual properties. Therefore, we only need
 minimal changes if the underlying data change or if we decide to change
 from a bar plot to a scatter plot. This helps in creating publication
-quality plots with minimal amounts of adjustments and tweaking.</p>
+quality plots with minimal amounts of adjustments and tweaking. To learn
+more about <code>ggplot2</code> after the course, you can check <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf">this
+<code>ggplot2</code> cheatsheet</a>.</p>
 <p><code>ggplot2</code> functions like data in the ‘long’ format, i.e. a
 column for every dimension and a row for every observation.
 Well-structured data will save you lots of time when making figures with

@@ -24,29 +24,24 @@ opts_knit$set(width=75)
 
 **Course description**
 
-R is a language that has become one of the most popular tools for manipulating, visualizing and analyzing data. While there are many R courses, learning these skills can involve a steep learning curve, especially for people with no experience in programming or data analysis. This remote course (delivered via Zoom) aims to help with this initial difficulty by equipping learners with essential skills in using R, including data wrangling and plotting.
+R is a language that has become one of the most popular tools for manipulating, visualizing and analyzing data. While there are many R courses, learning these skills can involve a steep learning curve, especially for people with no experience in programming or data analysis. This course aims to help with this initial difficulty by equipping learners with essential skills in using R, including data wrangling and plotting.
 
-The course topics include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using both hands-on teaching and independent exercises. By default the course runs over a period of two days, but can be extended to include a third day focusing on statistical testing.
+The topics of this introductory course include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using hands-on teaching and exercises. By default the course runs over a period of two days (in the remote version of the course, statistical testing is covered on the optional day 3).
 
 **Learning objectives**
 
 After attending this course, participants will be able to:
 
-Days 1-2:
-
-- Navigate RStudio
-- Understand R syntax and how to write R code
-- Import and export data using R
-- Use tidyverse for data wrangling
-- Use ggplot2 for creating high-quality plots
-
-Day 3:
-
-- Employ t-tests, linear regression and Chi-squared tests in R
+Navigate RStudio  
+Understand R syntax and how to write R code  
+Import and export data using R  
+Use tidyverse package for data wrangling  
+Use ggplot2 package for creating high-quality plots  
+Perform basic statistics (t-tests, linear regression) in R  
 
 **Course assessment**
 
 The course is based on a pass/fail assessment, with the following requirements. Students must:
 
 - Be present and access all exercise sheets during the two- or three-day course
-- Attempt completing the exercises covered during course contact hours, as well as exercises included in independent assignments
+- Attempt completing the exercises covered during the course, including those labelled as independent exercises

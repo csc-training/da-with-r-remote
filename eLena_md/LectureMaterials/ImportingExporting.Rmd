@@ -73,7 +73,7 @@ This might be an example of a spreadsheet setup:
 
 4. Leave the raw data raw - don’t change it!
 
-5. Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the data, and is required by most data repositories.
+5. Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the data, and is required by most data repositories. For example, exporting an Excel spreadsheet as a CSV: File -> Save as -> File Format: Comma-separated values (.csv).
 
 Extra guidelines to avoid problems at a later stage:
 

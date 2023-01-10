@@ -4,13 +4,14 @@ output:
     highlight: kate
 ---
 
+```{=html}
 <style>
   code {
     white-space : pre-wrap !important;
     word-break: break-word;
   }
 </style>
-
+```
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
@@ -32,7 +33,7 @@ opts_knit$set(width=75)
 
 **1.1** Just like we did yesterday, install the package `rjstat` if you do not have it already installed. Then load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio.
 
-```r
+``` r
 install.packages("rjstat")
 
 library(rjstat)
@@ -43,7 +44,7 @@ library(tidyverse)
 
 Getting the data was covered in the Day 1 extra exercises, so you can run through the following code chunk in your Rstudio session. You can highlight the code below and copy-paste it into a new R script.
 
-```r
+``` r
 # Getting the data
 url.call <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?row=hcdmunicipality2020-445222&column=dateweek20200101-509030&filter=measure-444833"
 
@@ -61,36 +62,37 @@ First, we will do some data wrangling to format the data for `ggplot2`. Go throu
 
 **2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`.
 
-```r
+``` r
 plotdata <- data
 ```
 
 **2.2** Filter out NA values.
 
-```r
+``` r
 plotdata <- plotdata %>% 
   filter(!is.na(value))
 ```
 
 **2.3** There are rows in the column dateweek20200101 that contain "All times" as an entry, rather than the year and week (checked 21.10.2021). Let's remove them!
 
-```r
+``` r
 plotdata <- subset(plotdata, dateweek20200101 != "All times")
 ```
 
 **2.4** Convert the column containing hospital districts (`hcdmunicipality2020`) into a factor.
 
-```r
+``` r
 plotdata$region <- as.factor(plotdata$hcdmunicipality2020)
 ```
 
 **2.5** Check the structure of the data. The output should look something like the example below (although the exact appearance might differ, depending on when you downloaded the data).
-```r
+
+``` r
 str(plotdata)
 ```
 
-```r
-'data.frame':	1188 obs. of  4 variables:
+``` r
+'data.frame':   1188 obs. of  4 variables:
  $ hcdmunicipality2020: chr  "Åland" "Åland" "Åland" "Åland" ...
  $ dateweek20200101   : chr  "Year 2020 Week 02" "Year 2020 Week 03" "Year 2020 Week 04" "Year 2020 Week 05" ...
  $ value              : num  0 0 0 0 0 0 0 0 0 0 ...
@@ -99,7 +101,7 @@ str(plotdata)
 
 **2.6** Group the data by region to create regional sums (similar to yesterday's excercise, with regions corresponding to hospital districts).
 
-```r
+``` r
 plotdata_sums <- plotdata %>%
   group_by(region) %>%
   summarise(observations = sum(value, na.rm = TRUE))
@@ -111,15 +113,13 @@ Ok! Now we're ready to create some plots.
 
 **3.1** Plot the regional sums of COVID-19 observations using `plotdata_sums`. Hint: use `geom_col()`.
 
-```r
+``` r
 # Write the answer in your R script
-
 ```
 
-**3.2** Now let's create a line plot using the original `plotdata` data frame (which has the weekly values).
-This plot does not look that great (yet!).
+**3.2** Now let's create a line plot using the original `plotdata` data frame (which has the weekly values). This plot does not look that great (yet!).
 
-```r
+``` r
 ggplot(data = plotdata,
        aes(x = dateweek20200101, y = value)) +
   geom_line() +
@@ -128,14 +128,13 @@ ggplot(data = plotdata,
 
 **3.3** One problem here is that we haven't yet grouped and coloured the data by region. Try fixing that!
 
-```r
+``` r
 # Write the answer in your R script
-
 ```
 
-**3.4** Another thing we could do is to replace the years and weeks with more succinct labels. Let's use the `string` package to remove the words "Year" and "week".
+**3.4** Another thing we could do is to replace the years and weeks with more succinct labels. Let's use the `stringr` package to remove the words "Year" and "week".
 
-```r
+``` r
 library(stringr)
 plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'Year', '')) 
 plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'Week', '')) 
@@ -143,9 +142,8 @@ plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'We
 
 **3.5** Try giving the plot more informative axis labels (such as "No. of COVID-19 cases" and "Week and year").
 
-```r
+``` r
 # Write the answer in your R script
-
 ```
 
 #### **4. Saving and exporting your script**

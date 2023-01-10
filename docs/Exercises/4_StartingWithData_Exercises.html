@@ -930,10 +930,10 @@ license</a>:</em></p>
 important that we’re all on the same page! We will need these data as we
 move on.</p>
 <p><strong>1.1</strong> Import some example data
-(<code>/data/portal_data_joined.csv</code>) into an object called
-<code>surveys</code>. When importing the data, use the argument
-<code>stringsAsFactors = TRUE</code>. You can use <code>head()</code> to
-check that everything got imported correctly.</p>
+(<code>/home/rstudio/shared/portal_data_joined.csv</code>) into an
+object called <code>surveys</code>. When importing the data, use the
+argument <code>stringsAsFactors = TRUE</code>. You can use
+<code>head()</code> to check that everything got imported correctly.</p>
 <p><strong>1.2</strong> We just imported data from outside our current
 working directory. Let’s also try something inside the working directory
 - create a new folder called <code>testfolder</code> (Files pane on the
@@ -1054,9 +1054,9 @@ accurate data type?</li>
 <div id="block-6-arguments-for-csv-importing" class="section level4">
 <h4><strong>Block 6: arguments for CSV importing</strong></h4>
 <p><strong>6.1</strong> Import a new data set on car speeds
-(<code>/data/car-speeds.csv</code>) and assign it to an object called
-<code>carSpeeds</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/car-speeds.csv&quot;</span>)</span></code></pre></div>
+(<code>/home/rstudio/shared/car-speeds.csv</code>) and assign it to an
+object called <code>carSpeeds</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
 <p><strong>6.2</strong> Have a look at the structure of
 <code>carSpeeds</code> using <code>str()</code>. Then try reimporting
 the data with the header argument set to false. How does the new data

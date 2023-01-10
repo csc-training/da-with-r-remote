@@ -106,7 +106,7 @@ We’re going to create a new project in RStudio:
 1. Click the “File” menu button, then “New Project”
 2. Click “New Directory”
 3. Click “New Project”
-4. Type in the name of the directory to store your project, e.g. “RIntro”. Select the location to store the project directory with "Browse" --> "Choose".
+4. Type in the name of the directory to store your project, e.g. “RIntro”. Select the location to store the project directory with "Browse" --> "Choose". Choose the directory `my-work`. Note that R is case-sensitive.
 5. Click the “Create Project” button
 
 Now when we start R in this project directory, or open this project with RStudio, all of our work on this project will be entirely self-contained in this directory.
