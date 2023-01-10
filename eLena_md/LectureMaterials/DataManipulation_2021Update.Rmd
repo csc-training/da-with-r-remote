@@ -95,7 +95,7 @@ To learn more about `dplyr` and `tidyr` after the workshop, you may want to chec
 We’ll read in our data using the `read_csv()` function, from the tidyverse package `readr`, instead of `read.csv()`.
 
 ```r
-surveys <- read_csv("/data/portal_data_joined.csv")
+surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 
 #> Rows: 34786 Columns: 13                                                                    
 #>                           

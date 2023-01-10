@@ -1006,14 +1006,14 @@ the columns represent:</p>
 <h4>2. Importing the data</h4>
 <p>We will use <code>read.csv()</code> to load into memory the content
 of the CSV file as an object of class <code>data.frame</code>. The file
-is called <code>portal_data_joined.csv</code> and it resides in a data
-directory within our R instance (<code>/data</code>).</p>
+is called <code>portal_data_joined.csv</code> and it resides in a
+directory within our R instance (<code>/home/rstudio/shared</code>).</p>
 <p>In fact, we haven’t yet explored our <em>working directory</em> in
 much detail, so let’s have a quick look. Let’s check the current working
 directory using <code>getwd</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will give something like: /home/rstudio/&lt;R-project&gt;</span></span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will give something like: /home/rstudio/my-work/&lt;R-project&gt;</span></span></code></pre></div>
 <p>This looks OK for now, but we could also change it using
 <code>setwd(...)</code> (with the new path given inside the brackets).
 For now, we will use the present working directory (we can still import
@@ -1022,7 +1022,7 @@ our data from outside it).</p>
 argument <code>stringsAsFactors = TRUE</code>. More on that later in the
 course - we will come back to the <code>read.csv()</code> function call
 and its arguments in the next session.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/portal_data_joined.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If we wanted to download the file from a website instead, such as one of these:</span></span>
@@ -1034,7 +1034,7 @@ and its arguments in the next session.</p>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This would save the file in your current working directory.</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># We could also save it elsewhere by writing ... destfile = &quot;path/to/portal_data_joined.csv&quot;</span></span></code></pre></div>
-<p>The <code>surveys &lt;- read.csv(&quot;/data...&quot;)</code> statement doesn’t
+<p>The <code>surveys &lt;- read.csv(&quot;/home...&quot;)</code> statement doesn’t
 produce any output because, as you might recall, assignments don’t
 display anything. If we want to check that our data has been loaded, we
 can see the contents of the data frame by typing its name:
@@ -1270,11 +1270,11 @@ default behaviour of the <code>read.csv()</code> and
 version 4 - before it was the opposite!).</p>
 <p>Let’s compare the difference between our data read as “factor” vs
 “character”:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/portal_data_joined.csv&quot;</span>, </span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;home/rstudio/shared/portal_data_joined.csv&quot;</span>, </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/portal_data_joined.csv&quot;</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;home/rstudio/shared/portal_data_joined.csv&quot;</span>, </span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>

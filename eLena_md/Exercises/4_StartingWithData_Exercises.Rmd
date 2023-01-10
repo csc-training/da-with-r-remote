@@ -42,7 +42,7 @@ https://datacarpentry.org/R-ecology-lesson/
 This exercise block repeats the lecture contents - at this point it's important that we're all on the
 same page! We will need these data as we move on.
 
-**1.1** Import some example data (`/data/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
+**1.1** Import some example data (`/home/rstudio/shared/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
 
 **1.2** We just imported data from outside our current working directory. Let's also try something inside the working directory - create a new folder called `testfolder` (Files pane on the bottom right --> New folder).
 
@@ -129,10 +129,10 @@ country_climate <- data.frame(
 
 #### **Block 6: arguments for CSV importing**
 
-**6.1** Import a new data set on car speeds (`/data/car-speeds.csv`) and assign it to an object called `carSpeeds`.
+**6.1** Import a new data set on car speeds (`/home/rstudio/shared/car-speeds.csv`) and assign it to an object called `carSpeeds`.
 
 ```r
-carSpeeds <- read.csv("/data/car-speeds.csv")
+carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv")
 ```
 
 **6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 

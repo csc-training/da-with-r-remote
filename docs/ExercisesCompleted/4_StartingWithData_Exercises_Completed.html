@@ -930,11 +930,11 @@ license</a>:</em></p>
 important that we’re all on the same page! We will need these data as we
 move on.</p>
 <p><strong>1.1</strong> Import some example data
-(<code>/data/portal_data_joined.csv</code>) into an object called
-<code>surveys</code>. When importing the data, use the argument
-<code>stringsAsFactors = TRUE</code>. You can use <code>head()</code> to
-check that everything got imported correctly.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/portal_data_joined.csv&quot;</span>, <span class="at">stringsAsFactors=</span><span class="cn">TRUE</span>)</span>
+(<code>/home/rstudio(shared/portal_data_joined.csv</code>) into an
+object called <code>surveys</code>. When importing the data, use the
+argument <code>stringsAsFactors = TRUE</code>. You can use
+<code>head()</code> to check that everything got imported correctly.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>, <span class="at">stringsAsFactors=</span><span class="cn">TRUE</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div>
 <p><strong>1.2</strong> We just imported data from outside our current
 working directory. Let’s also try something inside the working directory
@@ -1086,16 +1086,16 @@ accurate data type?</li>
 <div id="block-6-arguments-for-csv-importing" class="section level4">
 <h4><strong>Block 6: arguments for CSV importing</strong></h4>
 <p><strong>6.1</strong> Import a new data set on car speeds
-(<code>/data/car-speeds.csv</code>) and assign it to an object called
-<code>carSpeeds</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/car-speeds.csv&quot;</span>)</span></code></pre></div>
+(<code>/home/rstudio/shared/car-speeds.csv</code>) and assign it to an
+object called <code>carSpeeds</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
 <p><strong>6.2</strong> Have a look at the structure of
 <code>carSpeeds</code> using <code>str()</code>. Then try reimporting
 the data with the header argument set to false. How does the new data
 set differ from the previous one?</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/data/car-speeds.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the first row of the data</span></span>
@@ -1113,7 +1113,7 @@ can use <code>unique()</code> to check if it worked!</p>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Levels: Red Black Green Red White</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&#39;/data/car-speeds.csv&#39;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&#39;/home/rstudio/shared/car-speeds.csv&#39;</span>,</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, </span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">strip.white =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&#39;,&#39;</span></span>

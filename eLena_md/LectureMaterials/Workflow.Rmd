@@ -40,9 +40,9 @@ We can outline a typical data analysis workflow as follows:
 
 In this workshop, we will cover almost all the different boxes in this chart! Most of our time will be spent on data pre-processing and visualization, both of which are important to learn before using R for statistical analyses and modelling.
 
-#### 2. Questions (Zoom chat)
+#### 2. Questions (group/Zoom chat)
 
 There are many questions and challenges that come up when analyzing a data set. Many of them are likely to come about even before we have started.
 
-Can you think of a question or two concerning the steps above that you might have at this point? It can be a real question you've had in mind, or a hypothetical one. It could be practical or purely conceptual. Write down your question in the chat panel in Zoom!
+Can you think of a question or two concerning the steps above that you might have at this point? It can be a real question you've had in mind, or a hypothetical one. It could be practical or purely conceptual. Share your question in a small group or write it down in the chat panel in Zoom!
 

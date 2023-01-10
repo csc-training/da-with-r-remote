@@ -72,14 +72,14 @@ We are studying the species repartition and weight of animals caught in plots in
 
 #### 2. Importing the data
 
-We will use `read.csv()` to load into memory the content of the CSV file as an object of class `data.frame`. The file is called `portal_data_joined.csv` and it resides in a data directory within our R instance (`/data`).
+We will use `read.csv()` to load into memory the content of the CSV file as an object of class `data.frame`. The file is called `portal_data_joined.csv` and it resides in a directory within our R instance (`/home/rstudio/shared`).
 
 In fact, we haven't yet explored our *working directory* in much detail, so let's have a quick look. Let's check the current working directory using `getwd`:
 
 ```r
 getwd()
 
-# This will give something like: /home/rstudio/<R-project>
+# This will give something like: /home/rstudio/my-work/<R-project>
 
 ```
 
@@ -88,7 +88,7 @@ This looks OK for now, but we could also change it using `setwd(...)` (with the 
 We can now import the data. While doing so, let's include the argument `stringsAsFactors = TRUE`. More on that later in the course - we will come back to the `read.csv()` function call and its arguments in the next session. 
 
 ```r
-surveys <- read.csv("/data/portal_data_joined.csv", stringsAsFactors = TRUE)
+surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv", stringsAsFactors = TRUE)
 ```
 
 ```r
@@ -106,7 +106,7 @@ surveys <- read.csv("/data/portal_data_joined.csv", stringsAsFactors = TRUE)
 
 ```
 
-The `surveys <- read.csv("/data...")` statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: `surveys`.
+The `surveys <- read.csv("/home...")` statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: `surveys`.
 
 Wow… that was a lot of output. At least it means the data loaded properly. Let’s check the top (the first 6 lines) of this data frame using the function `head()`:
 
@@ -306,11 +306,11 @@ You might remember that, earlier on, we imported the surveys data set using the 
 Let's compare the difference between our data read as "factor" vs "character":
 
 ```r
-surveys <- read.csv("/data/portal_data_joined.csv", 
+surveys <- read.csv("home/rstudio/shared/portal_data_joined.csv", 
 stringsAsFactors = TRUE)
 str(surveys)
 
-surveys <- read.csv("/data/portal_data_joined.csv", 
+surveys <- read.csv("home/rstudio/shared/portal_data_joined.csv", 
 stringsAsFactors = FALSE)
 str(surveys)
 

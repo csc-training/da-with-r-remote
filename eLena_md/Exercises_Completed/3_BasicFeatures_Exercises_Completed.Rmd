@@ -153,10 +153,12 @@ c(1, 2, 'f')
 ```
 The `c()` function creates a vector, in which all elements are the same type. In the first case, the elements are numeric, in the second, they are characters, and in the third they are characters: the numeric values are “coerced” to be characters.
 
-**4.2** Try to figure out how to use a completely new function based only on its documentation. Use `sample()` to produce
+**4.2** Try to figure out how to use a completely new function based only on its documentation. Look at the help for the function `sample()` and find out how to use `sample()` to produce
 
 - a Finnish lottery ticket: 7 randomly drawn numbers out of 40
 - a vector of 0s and 1s, representing 10 coin tosses
+
+Tip: look at the section Examples in the end.  
 
 ```r
 sample(1:40, 7)

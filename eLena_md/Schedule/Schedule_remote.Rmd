@@ -1,0 +1,71 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Course schedule
+
+#### **Day 1**
+
+**09:00 - 14:30**
+
+Hands-on teaching via Zoom
+
+- Basic features of R 
+- Starting with data  
+- Data manipulation (introduction) 
+
+**14:30 onward**
+
+Independent exercises 
+
+- Data manipulation (continued)
+
+#### **Day 2**
+
+**09:00 - 14:30**
+
+Hands-on teaching via Zoom
+
+- Feedback and solutions to independent exercises 
+- Data visualization (introduction) 
+
+**14:30 onward**
+
+Independent exercises
+
+- Data visualization (continued)
+
+#### **Day 3**
+
+Note: Only for the three-day variant of the course
+
+**09:00 - 14:30**
+
+Hands-on teaching via Zoom
+
+- Feedback and solutions to independent exercises
+- Statistical theory (short lecture)
+- Introduction to statistical testing in R
+
+#### **Breaks**
+
+- 10:30 - 10:45 (short coffee break)
+- 12:00 - 13:00 (lunch)
