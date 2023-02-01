@@ -34,13 +34,11 @@ During this workshop we will be using a separate RStudio teaching environment, w
 
 #### 2. Accessing the RStudio teaching environment on notebooks.csc.fi
 
-These instructions are also available via eLena.
-
 To launch your own instance of R:
 
-1. Go to [notebooks.csc.fi](https://notebooks.csc.fi/#/) and log in using the Haka authentication service.
+1. Go to [notebooks.csc.fi](https://notebooks.csc.fi/#/) and log in using the Haka or Virtu authentication service or your CSC account.
 2. In the top right corner, click "Join workspace" and enter the code provided by the instructors.
-3. You should see a workspace with an RStudio environment called "RStudio Server (Data Analysis with R, November 2022)". Later you can find it under "My workspaces". 
+3. You should see a workspace with an RStudio environment called "RStudio Server (Data Analysis with R, February 2023)". Later you can find it under "My workspaces". 
 4. Click on the "Start session" button on the right to start RStudio.
 
 Note: each RStudio session in this workspace lasts for 12 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
@@ -133,4 +131,4 @@ Some general recommendations for organising a project:
 3. Put raw data and metadata in a folder called `data`, and files generated during cleanup and analysis in a directory called `results`.
 4. Name all files to reflect their content or function.
 
-We will cover topics including data import and export later during this workshop!
+We will cover topics including data import and export later during this course!

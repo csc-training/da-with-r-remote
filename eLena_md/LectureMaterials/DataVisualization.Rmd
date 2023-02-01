@@ -348,7 +348,7 @@ ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
 
 Unfortunately, this does not work because we plotted data for all the genera together. We need to tell ggplot to draw a line for each genus by modifying the aesthetic function to include `group = genus`:
 
-```
+```r
 ggplot(data = yearly_counts, mapping = aes(x = year, y = n, 
 group = genus)) +
     geom_line()

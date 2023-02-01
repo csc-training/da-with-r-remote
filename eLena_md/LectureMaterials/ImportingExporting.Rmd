@@ -73,7 +73,7 @@ This might be an example of a spreadsheet setup:
 
 4. Leave the raw data raw - don’t change it!
 
-5. Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the data, and is required by most data repositories. For example, exporting an Excel spreadsheet as a CSV: File -> Save as -> File Format: Comma-separated values (.csv).
+5. Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the data, and is required by most data repositories. 
 
 Extra guidelines to avoid problems at a later stage:
 
@@ -83,7 +83,7 @@ Extra guidelines to avoid problems at a later stage:
 
 In the example above, the computer will see (for example) row 4 and assume that all columns A-AF refer to the same sample. Other rows are similarly problematic.
 
-- **Avoid spreading data across multible tabs.**
+- **Avoid spreading data across multiple tabs.**
   
   - You are more likely to add inconsistencies to your data if each time you take a measurement, you start recording data in a new tab, and
   
@@ -108,6 +108,9 @@ In the example above, the computer will see (for example) row 4 and assume that 
 - **Avoid spaces, numbers and special characters in column headers**. Underscores are good alternatives to spaces (which can be misinterpreted by certain parsers). Some programs don't like field names that are text strings that start with numbers.
 
 - **Record any metadata in a separate plain text file**. While important, these can disrupt how computer programs interpret your data file.
+
+#### 2c. How to export an Excel spreadsheet in CSV format
+Use Save As and choose CSV as the file format (click on the links to see examples as images): File -> [Save As](Images/excel_save_as.png) -> [File Format](Images/excel_file_format.png): [Comma-separated values (.csv)](Images/excel_file_name.png). 
 
 #### 3. Additional arguments for CSV importing
 
