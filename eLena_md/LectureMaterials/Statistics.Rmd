@@ -63,7 +63,7 @@ library(tidyverse) # Reloading tidyverse
 surveys_complete <- read_csv("data_output/surveys_complete.csv")
 
 # We also have an in-built backup of the data:
-# surveys_complete <- read_csv("/data/surveys_complete.csv")
+# surveys_complete <- read_csv("/home/rstudio/shared/surveys_complete.csv")
 
 # ... Or the data could be downloaded:
 # download.file(url = "https://tinyurl.com/surveyscomplete",

@@ -44,4 +44,4 @@ Perform basic statistics (t-tests, linear regression) in R
 The course is based on a pass/fail assessment, with the following requirements. Students must:
 
 - Be present and access all exercise sheets during the two- or three-day course
-- Attempt completing the exercises covered during the course, including those labelled as independent exercises
+- Attempt completing the exercises covered during the course (excluding those labelled as independent exercises)
