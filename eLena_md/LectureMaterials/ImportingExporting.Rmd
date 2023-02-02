@@ -110,7 +110,7 @@ In the example above, the computer will see (for example) row 4 and assume that 
 - **Record any metadata in a separate plain text file**. While important, these can disrupt how computer programs interpret your data file.
 
 #### 2c. How to export an Excel spreadsheet in CSV format
-Use Save As and choose CSV as the file format (click on the links to see examples as images): File -> [Save As](eLena_md/LectureMaterials/Images/excel_save_as.png) -> [File Format](eLena_md/LectureMaterials/Images/excel_file_format.png): [Comma-separated values (.csv)](eLena_md/LectureMaterials/Images/excel_file_name.png). 
+Use Save As and choose CSV as the file format (click on the links to see examples as images): File -> [Save As](https://github.com/csc-training/da-with-r-remote/blob/master/eLena_md/LectureMaterials/Images/excel_save_as.png) -> [File Format](https://github.com/csc-training/da-with-r-remote/blob/master/eLena_md/LectureMaterials/Images/excel_file_format.png): [Comma-separated values (.csv)](https://github.com/csc-training/da-with-r-remote/blob/master/eLena_md/LectureMaterials/Images/excel_file_name.png). 
 
 #### 3. Additional arguments for CSV importing
 
