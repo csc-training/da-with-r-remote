@@ -1,0 +1,64 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Additional resources for getting further with R
+
+#### 1. Downloading R and RStudio on your own computer
+
+R and RStudio are free to download and use. Go to [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/). Note that you have to download both R and RStudio. If you are using a university computer, your institutions software distribution system probably has R and RStudio available.
+
+Next, install some packages. A good start would be `tidyverse` that we used on the course, which is actually a collection of many useful packages. The easiest way is to use the the Packages tab -> Install in the lower right panel of RStudio. Most packages come from [CRAN](https://cran.r-project.org/), R's central software repository.
+
+#### 2. Websites and books
+
+There are lots of great books, websites and online tutorials for learning more about R. Some examples:
+
+- [R for Data Science](https://r4ds.had.co.nz/) (free e-book) A great tidyverse-based resource.
+
+- [Getting Started with R: An Introduction for Biologists](https://global.oup.com/academic/product/getting-started-with-r-9780198787846?cc=fi&lang=en&) (book) 
+
+- [Cookbook for R](http://www.cookbook-r.com/) (website) Check for example the section on graphs (lots of information on finetuning your ggplot2 plots).
+
+- [Big Book of R](https://www.bigbookofr.com/) (website) A huge collection of R resources.
+
+- [Applied Statistics with R](https://book.stat420.org/) (free e-book)
+
+- [Learning Statistics with R](https://learningstatisticswithr.com/)  (free e-book)
+
+- [An Introduction to R](https://intro2r.com/) (free e-book) Covers also the basics of R Markdown and version  control.
+
+- [Riffomonas Code Club](https://riffomonas.org/code_club/) Youtube channel and R scripts. R basics and more advanced tricks especially for microbial ecologists.
+
+#### 3. R cheat sheets
+
+Cheat sheets are handy collections of commands and options on a specific package or a topic. Here are some examples:
+
+- [`ggplot2` for plotting ](https://github.com/rstudio/cheatsheets/raw/main/data-visualization-2.1.pdf)  
+- [data manipulation with `dplyr`](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)  
+- [data tidying with `tidyr`](https://posit.co/wp-content/uploads/2022/10/tidyr.pdf)  
+
+
+#### 4. Using R on CSC's supercomputers
+
+If get to the point that your R scripts are too computationally heavy to run on your own computer, it might be time to look for extra resources. R is available on CSC's supercomputer Puhti. Like many CSC's services, Puhti is free to use if you are affiliated with a Finnish higher education institution or a state research institute. An introduction to using R in CSC's services is available as [slides here](https://a3s.fi/heli-slides/User_zoom_Rintro_23112022.pdf) and [as a talk here](https://video.csc.fi/media/t/0_t0pp68xr?pk_vid=86530b39c9d332d516753361092bbf0f), and further instructions on using the Puhti R environment can be found [here](https://docs.csc.fi/apps/r-env/).
+
+
