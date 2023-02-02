@@ -42,6 +42,8 @@ Links to external materials:
 
 [Access to RStudio teaching environment](https://csc-training.github.io/da-with-r-remote/RStudioAccess/RStudioAccess.html)
 
+[Additional materials](https://csc-training.github.io/da-with-r-remote/AdditionalResources/AdditionalResources.html)
+
 ---
 
 *Lecture aids*
