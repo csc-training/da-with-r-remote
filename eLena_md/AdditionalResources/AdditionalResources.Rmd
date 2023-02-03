@@ -54,7 +54,7 @@ Cheat sheets are handy collections of commands and options on a specific package
 
 - [`ggplot2` for plotting ](https://github.com/rstudio/cheatsheets/raw/main/data-visualization-2.1.pdf)  
 - [data manipulation with `dplyr`](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)  
-- [data tidying with `tidyr`](https://posit.co/wp-content/uploads/2022/10/tidyr.pdf)  
+- [data tidying with `tidyr`](https://github.com/rstudio/cheatsheets/raw/main/tidyr.pdf)  
 
 
 #### 4. Using R on CSC's supercomputers
