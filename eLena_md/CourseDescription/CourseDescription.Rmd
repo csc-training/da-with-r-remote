@@ -26,7 +26,7 @@ opts_knit$set(width=75)
 
 R is a language that has become one of the most popular tools for manipulating, visualizing and analyzing data. While there are many R courses, learning these skills can involve a steep learning curve, especially for people with no experience in programming or data analysis. This course aims to help with this initial difficulty by equipping learners with essential skills in using R, including data wrangling and plotting.
 
-The topics of this introductory course include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using hands-on teaching and exercises. By default the course runs over a period of two days (in the remote version of the course, statistical testing is covered on the optional day 3).
+The topics of this introductory course include data importing and exporting, handling real-life data sets and creating publication-ready plots with R. The topics will be covered using hands-on teaching and exercises. By default the course runs over a period of two days (in the remote version of the course, statistical testing is covered on day 3).
 
 **Learning objectives**
 
@@ -44,4 +44,4 @@ Perform basic statistics (t-tests, linear regression) in R
 The course is based on a pass/fail assessment, with the following requirements. Students must:
 
 - Be present and access all exercise sheets during the two- or three-day course
-- Attempt completing the exercises covered during the course (excluding those labelled as independent exercises)
+- Attempt completing the exercises covered during the course (including those labelled as independent exercises)
