@@ -969,12 +969,12 @@ are.</p>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>bio_province)</span></code></pre></div>
 <p><strong>2.2</strong> Because we want to use the month in the column
-´date_time´ for plotting, let’s do some additional formatting of this
-column. What we do here is not particularly elegant and there are
-specialized packages for dealing with dates in R but, well, it works. In
-general there are always many different ways to do any data wrangling
-step in R. Copy-past these lines to your R script and run them as they
-are.</p>
+<code>date_time</code> for plotting, let’s do some additional formatting
+of this column. What we do here is not particularly elegant and there
+are specialized packages for dealing with dates in R but, well, it
+works. In general there are always many different ways to do any data
+wrangling step in R. Copy-paste these lines to your R script and run
+them as they are.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;2022-&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
@@ -1004,7 +1004,7 @@ data).</p>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> record_quality         <span class="sc">:</span> chr  <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> ...</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> bio_province           <span class="sc">:</span> chr  <span class="st">&quot;Uusimaa (U)&quot;</span> <span class="st">&quot;Ahvenanmaa (A)&quot;</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span></code></pre></div>
 <p><strong>2.4</strong> Next, let’s remove observations with missing
-values for region (NA in the column ´bio_province´) and count
+values for region (NA in the column <code>bio_province</code>) and count
 observations by region and by month.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>swallowplot_counts <span class="ot">&lt;-</span> swallowplot <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bio_province)) <span class="sc">%&gt;%</span> </span>
@@ -1016,15 +1016,16 @@ observations by region and by month.</p>
 <h4><strong>3. Exercises</strong></h4>
 <p><strong>3.1</strong> Make a bar plot of the observation counts by
 region using <code>swallowplot_counts</code>. Hints: use
-<code>geom_col()</code>. Check ´swallowplot_counts´ to see how the
-column with observations is called.</p>
+<code>geom_col()</code>. Check <code>swallowplot_counts</code> to see
+how the column with observations is called.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.2</strong> What about a similar bar plot of observations
 but by month?</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.3</strong> Next, let’s combine the above and make a line
 plot that shows month on the x axis, counts on the y axis, and the lines
-are coloured by region (´bio_province´). Hint: use ´geom_line()´.</p>
+are coloured by region (<code>bio_province</code>). Hint: use
+<code>geom_line()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.4.</strong> Not looking too bad, but let’s make the plot
 look nicer by labelling the y axis ‘observations’ and giving the plot a

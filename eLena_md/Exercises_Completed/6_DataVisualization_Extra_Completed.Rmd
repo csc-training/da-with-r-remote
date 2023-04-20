@@ -4,13 +4,14 @@ output:
     highlight: kate
 ---
 
+```{=html}
 <style>
   code {
     white-space : pre-wrap !important;
     word-break: break-word;
   }
 </style>
-
+```
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
@@ -30,7 +31,7 @@ opts_knit$set(width=75)
 
 #### **1. Getting the data**
 
-**1.1** Just like we did yesterday, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first. 
+**1.1** Just like we did yesterday, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first.
 
 ``` r
 # installing the ´finbif´ package (if already installed, skip this line)
@@ -54,7 +55,6 @@ Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx
 
 # Retrieve the data from FinBIF
 swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
-
 ```
 
 #### **2. Data wrangling**
@@ -77,10 +77,10 @@ swallowplot <- swallowplot %>% filter(date_time < "2023-01-01" & date_time > "20
 swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 ```
 
-**2.2** Because we want to use the month in the column ´date_time´ for plotting, let's do some additional formatting of this column. What we do here is not particularly elegant and there are specialized packages for dealing with dates in R but, well, it works. In general there are always many different ways to do any data wrangling step in R. Copy-past these lines to your R script and run them as they are.
+**2.2** Because we want to use the month in the column ´date_time´ for plotting, let's do some additional formatting of this column. What we do here is not particularly elegant and there are specialized packages for dealing with dates in R but, well, it works. In general there are always many different ways to do any data wrangling step in R. Copy-paste these lines to your R script and run them as they are.
 
 ``` r
-# removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month 
+# removing the year and the date from the column `date_time` with the function ´gsub´ to leave only the month 
 swallowplot$date_time <- gsub("2022-", "", swallowplot$date_time)
 swallowplot$date_time <- gsub("-.*", "", swallowplot$date_time)
 
@@ -98,7 +98,7 @@ str(swallowplot)
 ```
 
 ``` r
-Classes ‘finbif_occ’ and 'data.frame':	4724 obs. of  13 variables:
+Classes ‘finbif_occ’ and 'data.frame':  4724 obs. of  13 variables:
  $ record_id              : chr  "http://tun.fi/JX.1448957#83" "http://tun.fi/JX.1507952#45" "http://tun.fi/JX.1543606#3" "http://tun.fi/JX.1543594#3" ...
  $ scientific_name        : chr  "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" ...
  $ abundance              : int  5 1 2 1 NA NA 3 NA 1 6 ...
@@ -114,7 +114,7 @@ Classes ‘finbif_occ’ and 'data.frame':	4724 obs. of  13 variables:
  $ bio_province           : chr  "Uusimaa (U)" "Ahvenanmaa (A)" NA NA ...
 ```
 
-**2.4** Next, let's remove observations with missing values for region (NA in the column ´bio_province´) and count observations by region and by month.
+**2.4** Next, let's remove observations with missing values for region (NA in the column `bio_province`) and count observations by region and by month.
 
 ``` r
 swallowplot_counts <- swallowplot %>% 
@@ -127,7 +127,7 @@ Ok! Now we're ready to create some plots.
 
 #### **3. Exercises**
 
-**3.1** Make a bar plot of the observation counts by region using `swallowplot_counts`. Hints: use `geom_col()`. Check ´swallowplot_counts´ to see how the column with observations is called.
+**3.1** Make a bar plot of the observation counts by region using `swallowplot_counts`. Hints: use `geom_col()`. Check `swallowplot_counts` to see how the column with observations is called.
 
 ``` r
 ggplot(data = swallowplot_counts,
@@ -144,13 +144,12 @@ ggplot(data = swallowplot_counts,
   geom_col()
 ```
 
-**3.3** Next, let's combine the above and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (´bio_province´). Hint: use ´geom_line()´.
+**3.3** Next, let's combine the above and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (`bio_province`). Hint: use `geom_line()`.
 
 ``` r
 ggplot(data = swallowplot_counts,
        aes(x = month, y = count, color = bio_province)) +
   geom_line()
-
 ```
 
 **3.4.** Not looking too bad, but let's make the plot look nicer by labelling the y axis 'observations' and giving the plot a title 'Barn swallows by region'
