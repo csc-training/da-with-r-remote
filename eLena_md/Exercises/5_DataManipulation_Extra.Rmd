@@ -4,13 +4,14 @@ output:
     highlight: kate
 ---
 
+```{=html}
 <style>
   code {
     white-space : pre-wrap !important;
     word-break: break-word;
   }
 </style>
-
+```
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
@@ -28,103 +29,90 @@ opts_knit$set(width=75)
 
 # Data manipulation - independent exercises
 
-In this section we have some extra exercises for the first day of the R course, for those who are interested to test their R skills a little more. Here we explore real-life COVID-19 data as an example of using data from open data application programming interfaces (APIs). 
+In this section we have some extra exercises for the first day of the R course, for those who are interested to test their R skills a little more. Here we explore data from [Finnish Biodiversity Information Facility (FinBIF)](https://laji.fi/en/about/2986) as an example of using data from open data application programming interfaces (APIs).
 
-**Exclaimer:** The exercises are only examples and should not be taken as true representations of the COVID-19 situation in Finland.
+We will use an R package `finbif` that is an R interface to the FinBIF API. This means we can use the R package to download data from FinBIF directly to R and then continue working with it. You can find more information on the package here: <https://luomus.github.io/finbif/>
 
-The Finnish Institute for Health and Welfare (THL) open data interface is used here to observe COVID-19 infections and tests in Finland. More information on the interface can be found on the [THL website](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data/confirmed-corona-cases-in-finland-covid-19-).
+**Begin by installing** the package `finbif` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
 
-**Begin by installing** the package `rjstat` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+``` r
+# install the package ´finbif´
+install.packages("finbif")
 
-```r
-install.packages("rjstat")
-
-library(rjstat)
+# load the packages ´finbif´ and ´tidyverse´
+library(finbif)
 library(tidyverse)
+```
+
+Next, we have to get an access token to access the FinBIF data. Replace your\@email.com with your email address. You will then receive the token by email.
+
+``` r
+finbif_request_token("your@email.com")
+```
+
+Copy the token and active it in R (technically speaking we are setting an environmental variable called FINBIF_ACCESS_TOKEN and giving the token as the value). Replace the long string in quotation marks with the token you received by email.
+
+``` r
+Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et")
+
+# Note: this is not a real token and should be replaced with your own one
 ```
 
 #### **1. Getting the data**
 
-You can quickly run through the following lines if you are not interested in the API.
-Make sure to **copy and run each R code chunk** in RStudio to ensure that you get the data in the correct format.
+Now we are ready to retrieve data. Let's retrieve the latest 5000 observations of the barn swallow (*Hirundo rustica*, haarapääsky) from FinBIF with the R package `finbif`.
 
-**1.1** Copy the address of the API from where we will retrieve the data in [json format](https://www.json.org/json-en.html):
+**1.1** Add the following command to your R script and run it as it is. To see what the options in the command `finbif_occurrence` mean and what other options are available to control data retrieval, you can check the [manual the `finbif` package on CRAN](https://cloud.r-project.org/web/packages/finbif/finbif.pdf) (the central repository for R packages).
 
-```r
-url.call <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?row=hcdmunicipality2020-445222&column=dateweek20200101-509030&filter=measure-444833"
-
-# Note: This step was updated on 14.01.2021 to reflect changes made to the THL API.
+``` r
+swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
 ```
 
-**1.2** Read in the data using `fromJSONstat()` and check the structure of the data frame. You should see that the data are given as as a list ("`List of 1`").
+**1.2** Before getting started on the exercises for data manipulation, let's make a copy of the  data to keep original data intact, Then, we will simplify the formatting of dates and remove double entries for regions (´bio_province´). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
 
-```r
-data <- fromJSONstat(readLines(url.call, encoding = "UTF-8"))
-str(data)
-```
+``` r
+# making a copy of the data
+swallows <- swallows_data
 
-**1.3** Create a data frame from the original data (this is much more likely to be useful for further analyses):
+# setting format of the column ´date_time´ to year-month-day
+swallows$date_time = as.Date(format(swallows$date_time, "%Y-%m-%d"))
 
-```r
-data <- data$`COVID-19 cases in the infectious diseases registry`
-```
+# removing observations in 2023 and before March 2022
+swallows <- swallows %>% filter(date_time < "2023-01-01" & date_time > "2022-03-01")
 
-**1.4** Convert the `value` column to numeric:
-
-```r
-data$value <- as.numeric(data$value)
-```
-
-**1.5** Remove a row in the column `dateweek20200101` with a summary of infection rates for all times.
-
-```r
-data <- data %>%
-  filter(dateweek20200101 != "All times")
+# removing double entries in the column ´bio_province´ by replacing text with the function gsub
+swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 ```
 
 Now we are ready for some exercises!
 
+
 #### **2. Exercises**
 
+**2.1** Look at the first lines of the data and check the structure of the object. 
 
-**2.1** Look at the first lines of the data and check the structure of the object.
-
-```r
-# Write the answer in your R script
-
+``` r
+# Write the answer in your R script.
 ```
 
-Next, calculate the cases by hospital district and sum the weekly numbers of infections.
+**2.1** The column `bio_province` shows the region of the observation. Let's calculate the number of swallows observations (rows in the data) by region.
 
-```r
-data_regionsums <- data %>%
-  group_by(hcdmunicipality2020) %>%
-  summarise(observations = sum(value))
-
-summary(data_regionsums)
+``` r
+# Write the answer in your R script.
 ```
 
-**2.2** Look at the data frame below (`data_regionsums`). Why does every observation have the value `NA`? Fix the code!
+Check the resulting data frame `by_region`. At the bottom there is a region called NA. If you look at the column ´bio_province´ in ´swallows´ carefully, you will notice that some observations are missing the information on region. 
 
-```r
-# Fix the code below
+**2.2** Let's fix the problem by modifying the code from the previous step. Remove observations that have NA in the column ´bio_province´.
 
-data_regionsums <- data %>%
-  group_by(hcdmunicipality2020) %>%
-  summarise(observations = sum(value))
+``` r
+# Write the answer in your R script.
 ```
 
-**2.3** Delete the row that has the overall weekly sum of observations ("All areas").
-```r
-# Write the answer in your R script
+**2.4** Use `by_region` to check which region had the most observations of barn swallows and print the top 5.
 
-```
-
-**2.4** Use `data_regionsums` to check which hospital districts have had the most COVID-19 infections and print the top 5.
-
-```r
-# Write the answer in your R script
-
+``` r
+# Write the answer in your R script.
 ```
 
 #### **3. Saving and exporting your script**
