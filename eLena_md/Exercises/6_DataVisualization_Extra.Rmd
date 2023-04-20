@@ -78,7 +78,7 @@ swallowplot <- swallowplot %>% filter(date_time < "2023-01-01" & date_time > "20
 swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 ```
 
-**2.2** Because we want to use the month in the column ´date_time´ for plotting, let's do some additional formatting of this column. What we do here is not particularly elegant and there are specialized packages for dealing with dates in R but, well, it works. In general there are always many different ways to do any data wrangling step in R. Copy-past these lines to your R script and run them as they are.
+**2.2** Because we want to use the month in the column `date_time` for plotting, let's do some additional formatting of this column. What we do here is not particularly elegant and there are specialized packages for dealing with dates in R but, well, it works. In general there are always many different ways to do any data wrangling step in R. Copy-paste these lines to your R script and run them as they are.
 
 ``` r
 # removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month 
@@ -115,7 +115,7 @@ Classes ‘finbif_occ’ and 'data.frame':	4724 obs. of  13 variables:
  $ bio_province           : chr  "Uusimaa (U)" "Ahvenanmaa (A)" NA NA ...
 ```
 
-**2.4** Next, let's remove observations with missing values for region (NA in the column ´bio_province´) and count observations by region and by month.
+**2.4** Next, let's remove observations with missing values for region (NA in the column `bio_province`) and count observations by region and by month.
 
 ``` r
 swallowplot_counts <- swallowplot %>% 
@@ -128,7 +128,7 @@ Ok! Now we're ready to create some plots.
 
 #### **3. Exercises**
 
-**3.1** Make a bar plot of the observation counts by region using `swallowplot_counts`. Hints: use `geom_col()`. Check ´swallowplot_counts´ to see how the column with observations is called.
+**3.1** Make a bar plot of the observation counts by region using `swallowplot_counts`. Hints: use `geom_col()`. Check `swallowplot_counts` to see how the column with observations is called.
 
 ``` r
 # Write the answer in your R script.
@@ -140,7 +140,7 @@ Ok! Now we're ready to create some plots.
 # Write the answer in your R script.
 ```
 
-**3.3** Next, let's combine the above and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (´bio_province´). Hint: use ´geom_line()´.
+**3.3** Next, let's combine the above and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (`bio_province`). Hint: use `geom_line()`.
 
 ``` r
 # Write the answer in your R script.
