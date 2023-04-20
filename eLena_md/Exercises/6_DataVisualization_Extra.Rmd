@@ -31,116 +31,123 @@ opts_knit$set(width=75)
 
 #### **1. Getting the data**
 
-**1.1** Just like we did yesterday, install the package `rjstat` if you do not have it already installed. Then load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio.
+**1.1** Just like we did yesterday, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first. 
 
 ``` r
-install.packages("rjstat")
+# installing the ´finbif´ package (if already installed, skip this line)
+install.packages("finbif")
 
-library(rjstat)
+#loading the packages ´finbif´ and ´tidyverse´
+library(finbif)
 library(tidyverse)
 ```
 
-**1.2** Retrieve coronavirus observations from the THL website. We will use the same data that we worked with yesterday.
+**1.2** Retrieve barn swallow observations from the FinBIF database. We will use the same data that we worked with yesterday.
 
 Getting the data was covered in the Day 1 extra exercises, so you can run through the following code chunk in your Rstudio session. You can highlight the code below and copy-paste it into a new R script.
 
 ``` r
-# Getting the data
-url.call <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?row=hcdmunicipality2020-445222&column=dateweek20200101-509030&filter=measure-444833"
+# If you got an access token by email yesterday, skip this line and use the same token 
+finbif_request_token("your@email.com")
 
-# Read data into an R object
-# select the object `COVID-19 cases in the infectious diseases registry`
-data <- fromJSONstat(readLines(url.call, encoding = "UTF-8"))$`COVID-19 cases in the infectious diseases registry`
+# Setting the access token (replace the long string in quotation marks with the token you received by email)
+Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et")
 
-# Convert value column to numeric
-data$value <- as.numeric(data$value)
+# Retrieve the data from FinBIF
+swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
+
 ```
 
 #### **2. Data wrangling**
 
 First, we will do some data wrangling to format the data for `ggplot2`. Go through each step carefully to form an understanding of what is happening as you are running through the code. Make sure to copy and run each line!
 
-**2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`.
+**2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`. First, we will repeat the steps from yesterday to simplify the date format, remove double entries in ´bio_province´ and remove unlikely observations in winter. Copy-paste these lines in your R script and run them as they are.
 
 ``` r
-plotdata <- data
+# making a copy of the data
+swallowplot <- swallows_data
+
+# setting format of the column ´date_time´ to year-month-day
+swallowplot$date_time = as.Date(format(swallowplot$date_time, "%Y-%m-%d"))
+
+# removing observations in 2023 and before March 2022
+swallowplot <- swallowplot %>% filter(date_time < "2023-01-01" & date_time > "2022-03-01")
+
+# removing double entries in the column ´bio_province´ by replacing text with the function gsub
+swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 ```
 
-**2.2** Filter out NA values.
+**2.2** Because we want to use the month in the column ´date_time´ for plotting, let's do some additional formatting of this column. What we do here is not particularly elegant and there are specialized packages for dealing with dates in R but, well, it works. In general there are always many different ways to do any data wrangling step in R. Copy-past these lines to your R script and run them as they are.
 
 ``` r
-plotdata <- plotdata %>% 
-  filter(!is.na(value))
+# removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month 
+swallowplot$date_time <- gsub("2022-", "", swallowplot$date_time)
+swallowplot$date_time <- gsub("-.*", "", swallowplot$date_time)
+
+# renaming the column ´date_time´ to ´month´, because the month is all we have left
+swallowplot <- rename(swallowplot, month = date_time)
+
+# converting the column ´month´ from characters to numbers
+swallowplot$month <-  as.numeric(swallowplot$month)
 ```
 
-**2.3** There are rows in the column dateweek20200101 that contain "All times" as an entry, rather than the year and week (checked 21.10.2021). Let's remove them!
+**2.3** Check the structure of the data. The beginning of the output should look something like the example below (although the exact appearance might differ, depending on when you downloaded the data).
 
 ``` r
-plotdata <- subset(plotdata, dateweek20200101 != "All times")
-```
-
-**2.4** Convert the column containing hospital districts (`hcdmunicipality2020`) into a factor.
-
-``` r
-plotdata$region <- as.factor(plotdata$hcdmunicipality2020)
-```
-
-**2.5** Check the structure of the data. The output should look something like the example below (although the exact appearance might differ, depending on when you downloaded the data).
-
-``` r
-str(plotdata)
+str(swallowplot)
 ```
 
 ``` r
-'data.frame':   1188 obs. of  4 variables:
- $ hcdmunicipality2020: chr  "Åland" "Åland" "Åland" "Åland" ...
- $ dateweek20200101   : chr  "Year 2020 Week 02" "Year 2020 Week 03" "Year 2020 Week 04" "Year 2020 Week 05" ...
- $ value              : num  0 0 0 0 0 0 0 0 0 0 ...
- $ region             : Factor w/ 22 levels "Åland","All areas",..: 1 1 1 1 1 1 1 1 1 1 ...
+Classes ‘finbif_occ’ and 'data.frame':	4724 obs. of  13 variables:
+ $ record_id              : chr  "http://tun.fi/JX.1448957#83" "http://tun.fi/JX.1507952#45" "http://tun.fi/JX.1543606#3" "http://tun.fi/JX.1543594#3" ...
+ $ scientific_name        : chr  "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" ...
+ $ abundance              : int  5 1 2 1 NA NA 3 NA 1 6 ...
+ $ lat_wgs84              : num  60.2 60.3 58.3 58.8 64.3 ...
+ $ lon_wgs84              : num  25 20 22 23.7 23.6 ...
+ $ date_time              : Date, format: "2022-10-15" "2022-10-09" "2022-10-06" "2022-10-04" ...
+ $ coordinates_uncertainty: num  1000 5000 1 1 10000 80 1 100 1 1 ...
+ $ any_issues             : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ requires_verification  : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ requires_identification: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ record_reliability     : chr  "UNDEFINED" "UNDEFINED" "UNDEFINED" "UNDEFINED" ...
+ $ record_quality         : chr  "Unassessed" "Unassessed" "Unassessed" "Unassessed" ...
+ $ bio_province           : chr  "Uusimaa (U)" "Ahvenanmaa (A)" NA NA ...
 ```
 
-**2.6** Group the data by region to create regional sums (similar to yesterday's excercise, with regions corresponding to hospital districts).
+**2.4** Next, let's remove observations with missing values for region (NA in the column ´bio_province´) and count observations by region and by month.
 
 ``` r
-plotdata_sums <- plotdata %>%
-  group_by(region) %>%
-  summarise(observations = sum(value, na.rm = TRUE))
+swallowplot_counts <- swallowplot %>% 
+  filter(!is.na(bio_province)) %>% 
+  group_by(month, bio_province) %>% 
+  summarise(count = n())
 ```
 
 Ok! Now we're ready to create some plots.
 
 #### **3. Exercises**
 
-**3.1** Plot the regional sums of COVID-19 observations using `plotdata_sums`. Hint: use `geom_col()`.
+**3.1** Make a bar plot of the observation counts by region using `swallowplot_counts`. Hints: use `geom_col()`. Check ´swallowplot_counts´ to see how the column with observations is called.
 
 ``` r
-# Write the answer in your R script
+# Write the answer in your R script.
 ```
 
-**3.2** Now let's create a line plot using the original `plotdata` data frame (which has the weekly values). This plot does not look that great (yet!).
+**3.2** What about a similar bar plot of observations but by month?
 
 ``` r
-ggplot(data = plotdata,
-       aes(x = dateweek20200101, y = value)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+# Write the answer in your R script.
 ```
 
-**3.3** One problem here is that we haven't yet grouped and coloured the data by region. Try fixing that!
+**3.3** Next, let's combine the above and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (´bio_province´). Hint: use ´geom_line()´.
 
 ``` r
-# Write the answer in your R script
+# Write the answer in your R script.
+
 ```
 
-**3.4** Another thing we could do is to replace the years and weeks with more succinct labels. Let's use the `stringr` package to remove the words "Year" and "week".
-
-``` r
-library(stringr)
-plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'Year', '')) 
-plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'Week', '')) 
-```
-
-**3.5** Try giving the plot more informative axis labels (such as "No. of COVID-19 cases" and "Week and year").
+**3.4.** Not looking too bad, but let's make the plot look nicer by labelling the y axis 'observations' and giving the plot a title 'Barn swallows by region'
 
 ``` r
 # Write the answer in your R script
@@ -148,8 +155,8 @@ plotdata$dateweek20200101 <- str_trim(str_replace(plotdata$dateweek20200101, 'We
 
 #### **4. Saving and exporting your script**
 
-If you don't remember how to save and export your data from RStudio Server, follow the instructions set out in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
+If you don't remember how to save and export your data from RStudio, follow the instructions set out in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
 
-That's it in terms of exercises! Depending on the course schedule, there may be a chance to go through the solutions during the beginning of Day 3. However, if you're attending a two-day course and feel unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLena.
+That's it in terms of exercises! Depending on the course schedule, there may be a chance to go through the solutions during the beginning of Day 3. However, if you're attending a two-day course and feel unsure about how to solve some of the problems above, you can have a look at the completed exercise sheets on eLearn.
 
 Thanks for joining the course (so far!) and we hope you've found the contents useful!

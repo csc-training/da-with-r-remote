@@ -920,107 +920,103 @@ word-break: break-word;
 <h1>Data manipulation - independent exercises</h1>
 <p>In this section we have some extra exercises for the first day of the
 R course, for those who are interested to test their R skills a little
-more. Here we explore real-life COVID-19 data as an example of using
-data from open data application programming interfaces (APIs).</p>
-<p><strong>Exclaimer:</strong> The exercises are only examples and
-should not be taken as true representations of the COVID-19 situation in
-Finland.</p>
-<p>The Finnish Institute for Health and Welfare (THL) open data
-interface is used here to observe COVID-19 infections and tests in
-Finland. More information on the interface can be found on the <a href="https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data/confirmed-corona-cases-in-finland-covid-19-">THL
-website</a>.</p>
-<p><strong>Begin by installing</strong> the package <code>rjstat</code>
+more. Here we explore data from <a href="https://laji.fi/en/about/2986">Finnish Biodiversity Information
+Facility (FinBIF)</a> as an example of using data from open data
+application programming interfaces (APIs).</p>
+<p>We will use an R package <code>finbif</code> that is an R interface
+to the FinBIF API. This means we can use the R package to download data
+from FinBIF directly to R and then continue working with it. You can
+find more information on the package here: <a href="https://luomus.github.io/finbif/" class="uri">https://luomus.github.io/finbif/</a></p>
+<p><strong>Begin by installing</strong> the package <code>finbif</code>
 (which is not included in the default package selection of our R
 environment) and loading the necessary libraries in RStudio. Remember to
 start a new R script (these should be the first commands on the
 script).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rjstat&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjstat)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install the package ´finbif´</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;finbif&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load the packages ´finbif´ and ´tidyverse´</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(finbif)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Next, we have to get an access token to access the FinBIF data.
+Replace your@email.com with your email address. You will then receive
+the token by email.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">finbif_request_token</span>(<span class="st">&quot;your@email.com&quot;</span>)</span></code></pre></div>
+<p>Copy the token and active it in R (technically speaking we are
+setting an environmental variable called FINBIF_ACCESS_TOKEN and giving
+the token as the value). Replace the long string in quotation marks with
+the token you received by email.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">FINBIF_ACCESS_TOKEN =</span> <span class="st">&quot;xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: this is not a real token and should be replaced with your own one</span></span></code></pre></div>
 <div id="getting-the-data" class="section level4">
 <h4><strong>1. Getting the data</strong></h4>
-<p>You can quickly run through the following lines if you are not
-interested in the API. Make sure to <strong>copy and run each R code
-chunk</strong> in RStudio to ensure that you get the data in the correct
-format.</p>
-<p><strong>1.1</strong> Copy the address of the API from where we will
-retrieve the data in <a href="https://www.json.org/json-en.html">json
-format</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url.call <span class="ot">&lt;-</span> <span class="st">&quot;https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.json?row=hcdmunicipality2020-445222&amp;column=dateweek20200101-509030&amp;filter=measure-444833&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: This step was updated on 14.01.2021 to reflect changes made to the THL API.</span></span></code></pre></div>
-<p><strong>1.2</strong> Read in the data using
-<code>fromJSONstat()</code> and check the structure of the data frame.
-You should see that the data are given as as a list
-(“<code>List of 1</code>”).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">fromJSONstat</span>(<span class="fu">readLines</span>(url.call, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
-<p><strong>1.3</strong> Create a data frame from the original data (this
-is much more likely to be useful for further analyses):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data<span class="sc">$</span><span class="st">`</span><span class="at">COVID-19 cases in the infectious diseases registry</span><span class="st">`</span></span></code></pre></div>
-<p><strong>1.4</strong> Convert the <code>value</code> column to
-numeric:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>value)</span></code></pre></div>
-<p><strong>1.5</strong> Remove a row in the column
-<code>dateweek20200101</code> with a summary of infection rates for all
-times.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dateweek20200101 <span class="sc">!=</span> <span class="st">&quot;All times&quot;</span>)</span></code></pre></div>
+<p>Now we are ready to retrieve data. Let’s retrieve the latest 5000
+observations of the barn swallow (<em>Hirundo rustica</em>, haarapääsky)
+from FinBIF with the R package <code>finbif</code>.</p>
+<p><strong>1.1</strong> Add the following command to your R script and
+run it as it is. To see what the options in the command
+<code>finbif_occurrence</code> mean and what other options are available
+to control data retrieval, you can check the <a href="https://cloud.r-project.org/web/packages/finbif/finbif.pdf">manual
+the <code>finbif</code> package on CRAN</a> (the central repository for
+R packages).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">finbif_occurrence</span>(<span class="st">&quot;Hirundo rustica&quot;</span>, <span class="at">n=</span><span class="dv">5000</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;default_vars&quot;</span>, <span class="st">&quot;bio_province&quot;</span>))</span></code></pre></div>
+<p><strong>1.2</strong> Before getting started on the exercises for data
+manipulation, let’s make a copy of the data to keep original data
+intact, Then, we will simplify the formatting of dates and remove double
+entries for regions (´bio_province´). We will also remove observations
+with dates in winter because we don’t expect swallows to occur then.
+Copy-paste these lines to your R script and run them as they are.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows_data</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># setting format of the column ´date_time´ to year-month-day</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>swallows<span class="sc">$</span>date_time <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">format</span>(swallows<span class="sc">$</span>date_time, <span class="st">&quot;%Y-%m-%d&quot;</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># removing observations in 2023 and before March 2022</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">&lt;</span> <span class="st">&quot;2023-01-01&quot;</span> <span class="sc">&amp;</span> date_time <span class="sc">&gt;</span> <span class="st">&quot;2022-03-01&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>bio_province)</span></code></pre></div>
 <p>Now we are ready for some exercises!</p>
 </div>
 <div id="exercises" class="section level4">
 <h4><strong>2. Exercises</strong></h4>
 <p><strong>2.1</strong> Look at the first lines of the data and check
 the structure of the object.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># can also use pipe: e.g. data %&gt;% head()</span></span></code></pre></div>
-<p>Next, calculate the cases by hospital district and sum the weekly
-numbers of infections.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_regionsums <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hcdmunicipality2020) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">observations =</span> <span class="fu">sum</span>(value))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_regionsums)</span></code></pre></div>
-<p><strong>2.2</strong> Look at the data frame below
-(<code>data_regionsums</code>). Why does every observation have the
-value <code>NA</code>? Fix the code!</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix the code below</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># data_regionsums &lt;- data %&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  group_by(hcdmunicipality2020) %&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  summarise(observations = sum(value))</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># need to remove NAs:</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>data_regionsums <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hcdmunicipality2020) <span class="sc">%&gt;%</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">observations =</span> <span class="fu">sum</span>(value))</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># or (although prefer the above because removes NAs before any further operations):</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>data_regionsums <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hcdmunicipality2020) <span class="sc">%&gt;%</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">observations =</span> <span class="fu">sum</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))  </span></code></pre></div>
-<p><strong>2.3</strong> Delete the row that has the overall weekly sum
-of observations (“All areas”).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>data_regionsums <span class="ot">&lt;-</span> data_regionsums <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hcdmunicipality2020 <span class="sc">!=</span> <span class="st">&quot;All areas&quot;</span>)</span></code></pre></div>
-<p><strong>2.4</strong> Use <code>data_regionsums</code> to check which
-hospital districts have had the most COVID-19 infections and print the
-top 5.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data_regionsums <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(observations)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(swallows)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(swallows)</span></code></pre></div>
+<p><strong>2.1</strong> The column <code>bio_province</code> shows the
+region of the observation. Let’s calculate the number of swallows
+observations by region.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>by_region <span class="ot">&lt;-</span> swallows <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bio_province) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>by_region <span class="ot">&lt;-</span> swallows <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(bio_province)</span></code></pre></div>
+<p>Check the resulting data frame <code>by_region</code>. At the bottom
+there is a region called NA. If you look at the column ´bio_province´ in
+´swallows´ carefully, you will notice that some observations are missing
+the information on region.</p>
+<p><strong>2.2</strong> Let’s fix the problem by modifying the code from
+the previous step. Remove observations that have NA in the column
+´bio_province´.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>by_region <span class="ot">&lt;-</span> swallows <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bio_province)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(bio_province)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or (although prefer the above because removes NAs before any further operations):</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>by_region <span class="ot">&lt;-</span> swallows <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(bio_province, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><strong>2.4</strong> Use <code>by_region</code> to check which region
+had the most observations of barn swallows and print the top 5.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>by_region <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 </div>
 <div id="saving-and-exporting-your-script" class="section level4">
 <h4><strong>3. Saving and exporting your script</strong></h4>
