@@ -68,7 +68,7 @@ Now we are ready to retrieve data. Let's retrieve the latest 5000 observations o
 swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
 ```
 
-**1.2** Before getting started on the exercises for data manipulation, let's make a copy of the  data to keep original data intact, Then, we will simplify the formatting of dates and remove double entries for regions (´bio_province´). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
+**1.2** Before getting started on the exercises for data manipulation, let's make a copy of the data to keep original data intact, Then, we will simplify the formatting of dates and remove double entries for regions (`bio_province`). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
 
 ``` r
 # making a copy of the data
@@ -86,10 +86,9 @@ swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 
 Now we are ready for some exercises!
 
-
 #### **2. Exercises**
 
-**2.1** Look at the first lines of the data and check the structure of the object. 
+**2.1** Look at the first lines of the data and check the structure of the object.
 
 ``` r
 # Write the answer in your R script.
@@ -101,9 +100,9 @@ Now we are ready for some exercises!
 # Write the answer in your R script.
 ```
 
-Check the resulting data frame `by_region`. At the bottom there is a region called NA. If you look at the column ´bio_province´ in ´swallows´ carefully, you will notice that some observations are missing the information on region. 
+Check the resulting data frame `by_region`. At the bottom there is a region called NA. If you look at the column `bio_province` in `swallows` carefully, you will notice that some observations are missing the information on region.
 
-**2.2** Let's fix the problem by modifying the code from the previous step. Remove observations that have NA in the column ´bio_province´.
+**2.2** Let's fix the problem by modifying the code from the previous step. Remove observations that have NA in the column `bio_province`.
 
 ``` r
 # Write the answer in your R script.

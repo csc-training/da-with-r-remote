@@ -31,7 +31,7 @@ opts_knit$set(width=75)
 
 #### **1. Getting the data**
 
-**1.1** Just like we did yesterday, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first. 
+**1.1** Just like we did yesterday, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first.
 
 ``` r
 # installing the ´finbif´ package (if already installed, skip this line)
@@ -55,14 +55,13 @@ Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx
 
 # Retrieve the data from FinBIF
 swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
-
 ```
 
 #### **2. Data wrangling**
 
 First, we will do some data wrangling to format the data for `ggplot2`. Go through each step carefully to form an understanding of what is happening as you are running through the code. Make sure to copy and run each line!
 
-**2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`. First, we will repeat the steps from yesterday to simplify the date format, remove double entries in ´bio_province´ and remove unlikely observations in winter. Copy-paste these lines in your R script and run them as they are.
+**2.1** Let's make a copy of the data and format them so that they are suitable for plotting with `ggplot2`. First, we will repeat the steps from yesterday to simplify the date format, remove double entries in `bio_province` and remove unlikely observations in winter. Copy-paste these lines in your R script and run them as they are.
 
 ``` r
 # making a copy of the data
@@ -99,7 +98,7 @@ str(swallowplot)
 ```
 
 ``` r
-Classes ‘finbif_occ’ and 'data.frame':	4724 obs. of  13 variables:
+Classes ‘finbif_occ’ and 'data.frame':  4724 obs. of  13 variables:
  $ record_id              : chr  "http://tun.fi/JX.1448957#83" "http://tun.fi/JX.1507952#45" "http://tun.fi/JX.1543606#3" "http://tun.fi/JX.1543594#3" ...
  $ scientific_name        : chr  "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" ...
  $ abundance              : int  5 1 2 1 NA NA 3 NA 1 6 ...
@@ -144,7 +143,6 @@ Ok! Now we're ready to create some plots.
 
 ``` r
 # Write the answer in your R script.
-
 ```
 
 **3.4.** Not looking too bad, but let's make the plot look nicer by labelling the y axis 'observations' and giving the plot a title 'Barn swallows by region'
