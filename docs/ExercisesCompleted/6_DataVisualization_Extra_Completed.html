@@ -954,9 +954,9 @@ Make sure to copy and run each line!</p>
 <p><strong>2.1</strong> Let’s make a copy of the data and format them so
 that they are suitable for plotting with <code>ggplot2</code>. First, we
 will repeat the steps from yesterday to simplify the date format, remove
-double entries in ´bio_province´ and remove unlikely observations in
-winter. Copy-paste these lines in your R script and run them as they
-are.</p>
+double entries in <code>bio_province</code> and remove unlikely
+observations in winter. Copy-paste these lines in your R script and run
+them as they are.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> swallows_data</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -969,12 +969,12 @@ are.</p>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>bio_province)</span></code></pre></div>
 <p><strong>2.2</strong> Because we want to use the month in the column
-´date_time´ for plotting, let’s do some additional formatting of this
-column. What we do here is not particularly elegant and there are
-specialized packages for dealing with dates in R but, well, it works. In
-general there are always many different ways to do any data wrangling
-step in R. Copy-paste these lines to your R script and run them as they
-are.</p>
+<code>date_time</code> for plotting, let’s do some additional formatting
+of this column. What we do here is not particularly elegant and there
+are specialized packages for dealing with dates in R but, well, it
+works. In general there are always many different ways to do any data
+wrangling step in R. Copy-paste these lines to your R script and run
+them as they are.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removing the year and the date from the column `date_time` with the function ´gsub´ to leave only the month </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;2022-&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
