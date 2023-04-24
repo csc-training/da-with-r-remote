@@ -29,6 +29,8 @@ opts_knit$set(width=75)
 
 # Data visualization - independent exercises
 
+IMPORTANT: To run these exercises, use R and RStudio on your own computer, not on Notebooks.
+
 #### **1. Getting the data**
 
 **1.1** Just like we did yesterday, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first.

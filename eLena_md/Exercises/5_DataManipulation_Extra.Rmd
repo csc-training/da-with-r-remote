@@ -29,6 +29,8 @@ opts_knit$set(width=75)
 
 # Data manipulation - independent exercises
 
+IMPORTANT: To run these exercises, use R and RStudio on your own computer, not on Notebooks.
+
 In this section we have some extra exercises for the first day of the R course, for those who are interested to test their R skills a little more. Here we explore data from [Finnish Biodiversity Information Facility (FinBIF)](https://laji.fi/en/about/2986) as an example of using data from open data application programming interfaces (APIs).
 
 We will use an R package `finbif` that is an R interface to the FinBIF API. This means we can use the R package to download data from FinBIF directly to R and then continue working with it. You can find more information on the package here: <https://luomus.github.io/finbif/>
