@@ -33,11 +33,22 @@ In this section we have some extra exercises for the first day of the R course, 
 
 We will use an R package `finbif` that is an R interface to the FinBIF API. This means we can use the R package to download data from FinBIF directly to R and then continue working with it. You can find more information on the package here: <https://luomus.github.io/finbif/>
 
-**Begin by installing** the package `finbif` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+### **1. Getting the data**
+
+**IMPORTANT:** There are two options for how to get the data. Choose one of them:
+
+**Option 1:** On your own computer that has R and RStudio installed (see [here](https://e-learn.csc.fi/mod/url/view.php?id=2191) for instructions).
+
+**Option 2:** On Notebooks as the rest of the course exercises.
+
+#### **Option 1 using your own computer: start here**
+
+Begin by installing the package `finbif` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
 
 ``` r
-# install the package ´finbif´
+# install the packages `finbif` (and `tidyverse` if not already installed)
 install.packages("finbif")
+install.packages("tidyverse")
 
 # load the packages ´finbif´ and ´tidyverse´
 library(finbif)
@@ -58,17 +69,33 @@ Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx
 # Note: this is not a real token and should be replaced with your own one
 ```
 
-#### **1. Getting the data**
-
 Now we are ready to retrieve data. Let's retrieve the latest 5000 observations of the barn swallow (*Hirundo rustica*, haarapääsky) from FinBIF with the R package `finbif`.
 
-**1.1** Add the following command to your R script and run it as it is. To see what the options in the command `finbif_occurrence` mean and what other options are available to control data retrieval, you can check the [manual the `finbif` package on CRAN](https://cloud.r-project.org/web/packages/finbif/finbif.pdf) (the central repository for R packages).
+Add the following command to your R script and run it as it is. To see what the options in the command `finbif_occurrence` mean and what other options are available to control data retrieval, you can check the [manual the `finbif` package on CRAN](https://cloud.r-project.org/web/packages/finbif/finbif.pdf) (the central repository for R packages).
 
 ``` r
 swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
 ```
 
-**1.2** Before getting started on the exercises for data manipulation, let's make a copy of the data to keep original data intact, Then, we will simplify the formatting of dates and remove double entries for regions (`bio_province`). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
+#### **Option 2 using Notebooks: start here**
+
+Launch RStudio in Notebooks. Load the tidyverse package:
+
+``` r
+library(tidyverse)
+```
+
+Import an R data object (made using the above in option 1 - please have a look at them!) into R:
+
+``` r
+swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
+```
+
+#### **Both options: continue from here!**
+
+### **2. Data formatting**
+
+**2.1** Before getting started on the exercises for data manipulation, let's make a copy of the data to keep original data intact, Then, we will simplify the formatting of dates and remove double entries for regions (`bio_province`). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
 
 ``` r
 # making a copy of the data
@@ -81,21 +108,21 @@ swallows$date_time = as.Date(format(swallows$date_time, "%Y-%m-%d"))
 swallows <- swallows %>% filter(date_time < "2023-01-01" & date_time > "2022-03-01")
 
 # removing double entries in the column ´bio_province´ by replacing text with the function gsub
-swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
+swallows$bio_province <- gsub(",.*", "", swallows$bio_province)
 ```
 
 Now we are ready for some exercises!
 
-#### **2. Exercises**
+### **3. Exercises**
 
-**2.1** Look at the first lines of the data and check the structure of the object.
+**3.1** Look at the first lines of the data and check the structure of the object.
 
 ``` r
 head(swallows)
 str(swallows)
 ```
 
-**2.1** The column `bio_province` shows the region of the observation. Let's calculate the number of swallows observations by region.
+**3.2** The column `bio_province` shows the region of the observation. Let's calculate the number of swallows observations by region.
 
 ``` r
 by_region <- swallows %>% 
@@ -108,9 +135,9 @@ by_region <- swallows %>%
   count(bio_province)
 ```
 
-Check the resulting data frame `by_region`. At the bottom there is a region called NA. If you look at the column `bio_province` in `swallows` carefully, you will notice that some observations are missing the information on region.
+Check the resulting data frame `by_region`. At the bottom there is a region called NA. If you look at the column `bio_province` in `swallows` carefully or run `tail(swallows)`, you will notice that some observations are missing the information on region.
 
-**2.2** Let's fix the problem by modifying the code from the previous step. Remove observations that have NA in the column `bio_province`.
+**3.3** Let's fix the problem by modifying the code from the previous step. Remove observations that have NA in the column `bio_province`.
 
 ``` r
 by_region <- swallows %>% 
@@ -123,14 +150,19 @@ by_region <- swallows %>%
   count(bio_province, na.rm = TRUE)
 ```
 
-**2.4** Use `by_region` to check which region had the most observations of barn swallows and print the top 5.
+**3.4** Use `by_region` to check which region had the most observations of barn swallows and print the top 5.
 
 ``` r
 by_region %>%
   arrange(desc(count)) %>%
   head(5)
+
+# or 
+by_region %>%
+  arrange(desc(n)) %>%
+  head(5)
 ```
 
-#### **3. Saving and exporting your script**
+### **4. Saving and exporting your script**
 
 You won't need to save the data, but it's a good idea to save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
