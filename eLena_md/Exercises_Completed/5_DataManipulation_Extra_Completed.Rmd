@@ -43,7 +43,7 @@ We will use an R package `finbif` that is an R interface to the FinBIF API. This
 
 #### **Option 1 using your own computer: start here**
 
-Begin by installing the package `finbif` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+Begin by installing the package `finbif` and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
 
 ``` r
 # install the packages `finbif` (and `tidyverse` if not already installed)
@@ -143,11 +143,6 @@ Check the resulting data frame `by_region`. At the bottom there is a region call
 by_region <- swallows %>% 
   filter(!is.na(bio_province)) %>% 
   count(bio_province)
-  
-# or (although prefer the above because removes NAs before any further operations):
-  
-by_region <- swallows %>% 
-  count(bio_province, na.rm = TRUE)
 ```
 
 **3.4** Use `by_region` to check which region had the most observations of barn swallows and print the top 5.
@@ -161,6 +156,8 @@ by_region %>%
 by_region %>%
   arrange(desc(n)) %>%
   head(5)
+  
+# Depending on how you did the counting in step 3.3, your column with counts is called either ´count´ or ´n´. Make sure to use the correct column name here.
 ```
 
 ### **4. Saving and exporting your script**

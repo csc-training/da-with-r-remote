@@ -43,7 +43,7 @@ We will use an R package `finbif` that is an R interface to the FinBIF API. This
 
 #### **Option 1 using your own computer: start here**
 
-Begin by installing the package `finbif` (which is not included in the default package selection of our R environment) and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+Begin by installing the package `finbif` and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
 
 ``` r
 # install the packages `finbif` (and `tidyverse` if not already installed)
