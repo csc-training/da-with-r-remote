@@ -1099,13 +1099,13 @@ like this:</p>
 <p>This is handy, but can be difficult to read if too many functions are
 nested, as R evaluates the expression from the inside out (in this case,
 filtering, then selecting).</p>
-<p>The last option, <em>pipes</em>, are a more recent addition to R.
-Pipes let you take the output of one function and send it directly to
-the next, which is useful when you need to do many things to the same
+<p>The last option, <strong>pipes</strong>, are a more recent addition
+to R. Pipes let you take the output of one function and send it directly
+to the next, which is useful when you need to do many things to the same
 dataset. Pipes in R look like <code>|&gt;</code> (often called the
-<em>native pipe operator or base R pipe</em>) or <code>%&gt;%</code>
-(the <em>magrittr pipe</em> because it comes from the
-<code>magrittr</code> package, installed automatically with
+<strong>native pipe operator or base R pipe</strong>) or
+<code>%&gt;%</code> (the <strong>magrittr pipe</strong> because it comes
+from the <code>magrittr</code> package, installed automatically with
 <code>dplyr</code>). For most purposes both pipes work the same way, but
 it is better to pick one and use it consistently. In the course
 materials, we will use the native pipe `|&gt;´.</p>
@@ -1164,8 +1164,7 @@ within the same call of <code>mutate()</code>:</p>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">weight_kg2 =</span> weight_kg <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>If this runs off your screen and you just want to see the first few
 rows, you can use a pipe to view the <code>head()</code> of the data.
-(Pipes work with non-<code>dplyr</code> functions, too, as long as the
-<code>dplyr</code> or <code>magrittr</code> package is loaded).</p>
+(Pipes work with non-<code>dplyr</code> functions, too).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
