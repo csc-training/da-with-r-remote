@@ -177,7 +177,7 @@ surveys_sml <- select(filter(surveys, weight < 5),
 
 This is handy, but can be difficult to read if too many functions are nested, as R evaluates the expression from the inside out (in this case, filtering, then selecting).
 
-The last option, *pipes*, are a more recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like `|>` (often called the *native pipe operator or base R pipe*) or `%>%` (the *magrittr pipe* because it comes from the `magrittr` package, installed automatically with `dplyr`). For most purposes both pipes work the same way, but it is better to pick one and use it consistently. In the course materials, we will use the native pipe `|>´. 
+The last option, **pipes**, are a more recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like `|>` (often called the **native pipe operator or base R pipe**) or `%>%` (the **magrittr pipe** because it comes from the `magrittr` package, installed automatically with `dplyr`). For most purposes both pipes work the same way, but it is better to pick one and use it consistently. In the course materials, we will use the native pipe `|>´. 
 
 If you use RStudio, you can type the pipe with `Ctrl` + `Shift` + `M` if you have a PC or `Cmd` + `Shift` + `M` if you have a Mac. If this gives you the magrittr pipe `%>%`, you can change the shortcut output to the native pipe `|>` in the RStudio menu Tools -> Global Options -> Code -> Use native pipe operator. 
 
@@ -226,7 +226,7 @@ surveys |>
          weight_kg2 = weight_kg * 2)
 ```
 
-If this runs off your screen and you just want to see the first few rows, you can use a pipe to view the `head()` of the data. (Pipes work with non-`dplyr` functions, too, as long as the `dplyr` or `magrittr` package is loaded).
+If this runs off your screen and you just want to see the first few rows, you can use a pipe to view the `head()` of the data. (Pipes work with non-`dplyr` functions, too).
 
 ```r
 surveys |>
