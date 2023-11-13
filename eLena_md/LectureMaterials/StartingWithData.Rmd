@@ -191,7 +191,7 @@ surveys$species_id          # Result is a vector
 
 In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.
 
-**Challenge**
+**Optional challenge**
 
 Have a look at **Starting with Data Exercise Block 3** (~ 15 mins). 
 
@@ -318,7 +318,7 @@ str(surveys)
 surveys$plot_type <- factor(surveys$plot_type)
 ```
 
-**Challenge**
+**Optional challenge**
 
 Have a look at **Starting with Data Exercise Block 5** (~ 5-10 mins). 
 

@@ -104,7 +104,7 @@ To make things easier to remember, here is the list of comparisons and operators
 # not `!` 
 ```
 
-#### **Block 4: finding help**
+#### **Optional: Block 4: finding help**
 
 **4.1** Look at the help for the `c()` function. What kind of vector do you expect you will create if you evaluate the following?
 

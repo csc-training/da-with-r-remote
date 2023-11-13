@@ -956,10 +956,10 @@ to produce this data frame!</p>
 <h4><strong>Block 3: split-apply-combine and summarize</strong></h4>
 <p><strong>3.1</strong> Consider this example that we just had a look
 at:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species_id) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.by =</span> <span class="fu">c</span>(sex, species_id))</span></code></pre></div>
 <p>It is also possible to summarize multiple variables at the same time.
 Extending the code above, can you figure out how to add a column
 indicating the minimum weight for each species for each sex?</p>
@@ -973,7 +973,7 @@ functions:</p>
 <li><code>filter()</code>: subset rows on conditions</li>
 <li><code>mutate()</code>: create new columns by using information from
 other columns</li>
-<li><code>group_by()</code> and <code>summarize()</code>: create summary
+<li>summarize()<code>and the argument</code>.by`: create summary
 statistics on grouped data</li>
 <li><code>arrange()</code>: sort results</li>
 <li><code>count()</code>: count discrete values</li>
@@ -987,16 +987,16 @@ this you will need to use <code>desc()</code> inside the
 <h4><strong>Block 4: counting</strong></h4>
 <p><strong>4.1</strong> How many animals were caught in each
 <code>plot_type</code> surveyed?</p>
-<p><strong>4.2</strong> Use <code>group_by()</code> and
-<code>summarize()</code> to find the mean, minimum and maximum hindfoot
-length for each species (using <code>species_id</code>). Also try adding
-the number of observations (hint: use <code>n</code>).</p>
+<p><strong>4.2</strong> Use <code>summarize()</code> and
+<code>.by</code> to find the mean, minimum and maximum hindfoot length
+for each species (using <code>species_id</code>). Also try adding the
+number of observations (hint: use <code>n</code>).</p>
 <p><strong>4.3</strong> What was the heaviest animal measured in each
 year? Return the columns <code>year</code>, <code>genus</code>,
 <code>species_id</code>, and <code>weight</code>.</p>
 </div>
-<div id="block-5-pivoting" class="section level4">
-<h4><strong>Block 5: pivoting</strong></h4>
+<div id="optional-block-5-pivoting" class="section level4">
+<h4><strong>OPTIONAL Block 5: pivoting</strong></h4>
 <p>This topic is quite time-consuming, so chances are that you are
 looking at this section independently.</p>
 <p><strong>5.1</strong> Pivot the <code>surveys</code> data frame with
@@ -1034,7 +1034,7 @@ just covered.</p>
 <p><strong>6.1</strong> Remove observations of animals for which
 <code>weight</code> and <code>hindfoot_length</code> are missing, or the
 <code>sex</code> has not been determined:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> surveys <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> surveys <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight),           <span class="co"># remove missing weight</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(hindfoot_length),  <span class="co"># remove missing hindfoot_length</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(sex))              <span class="co"># remove missing sex</span></span></code></pre></div>
@@ -1044,12 +1044,12 @@ first, create a data set that counts how often each species has been
 observed, and filter out the rare species. Second, extract only the
 observations for these more common species.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Extract the most common species_id</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(species_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(species_id) <span class="sc">|&gt;</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">50</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Only keep the most common species</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species_id <span class="sc">%in%</span> species_counts<span class="sc">$</span>species_id)</span></code></pre></div>
 <p><strong>6.3</strong> Check your data set by running
 <code>dim(surveys_complete)</code>. It should have 30463 rows and 13

@@ -70,7 +70,7 @@ same page! We will need these data as we move on.
 - How many rows and how many columns are in this object?
 - How many different species IDs have been recorded during these surveys?
 
-#### **Block 3: indexing and subsetting data frames**
+#### **OPTIONAL Block 3: indexing and subsetting data frames**
 
 **3.1** Create a `data.frame` (`surveys_200`) containing only the data in row 200 of the `surveys` dataset.
 
@@ -98,7 +98,7 @@ levels(sex)[1] <- "undetermined"
 
 **4.3** Can you reorder the data so that the levels are ordered like this: `undetermined`, `male`, `female`? After this, use `plot()` to check how the data now look.
 
-#### **Block 5: more on data frames**
+#### **OPTIONAL Block 5: more on data frames**
 
 
 **5.1** We have seen how data frames are created when using `read.csv()`, but they can also be created by hand with the `data.frame()` function. There are a few mistakes in this hand-crafted `data.frame`. Can you spot and fix them? Don’t hesitate to experiment!

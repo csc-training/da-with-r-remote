@@ -29,17 +29,9 @@ opts_knit$set(width=75)
 
 # Data visualization - independent exercises
 
-### **1. Getting the data**
+### **1. Loading libraries and the saved data**
 
-**IMPORTANT:** There are two options for how to get the data. Choose one of them. If you already have the object `swallows_data` ready from the data manipulation exercise, continue straight to **2. Data wrangling**.
-
-**Option 1:** On your own computer that has R and RStudio installed (see [here](https://e-learn.csc.fi/mod/url/view.php?id=2191) for instructions).
-
-**Option 2:** On Notebooks as the rest of the course exercises.
-
-#### **Option 1 using your own computer: start here**
-
-Just like we did in the extra exercises for Data Manipulation, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If you did not install the package `finbif` yet, install it first.
+Just like we did in the extra exercises for Data Manipulation, load the necessary libraries by copy-pasting the following lines into an R script and running them in RStudio. If the package `finbif` is not installed, install it first (note that the Notebooks course environment has unusual behaviour with package installations and the installations by users are not permanent).
 
 ``` r
 # installing the ´finbif´ package (if already installed, skip this line)
@@ -50,36 +42,15 @@ library(finbif)
 library(tidyverse)
 ```
 
-Retrieve barn swallow observations from the FinBIF database. We will use the same data that we worked with in the Data Manipulation extra exercises.
+We will use the same data of barn swallow observations from the FinBIF database that we worked with in the Data Manipulation extra exercises and saved as an .rds file in the end.
 
-Getting the data was covered in the Data manipulation extra exercises, so you can run through the following code chunk in your Rstudio session. You can highlight the code below and copy-paste it into a new R script.
+Getting the data was covered in the Data manipulation extra exercises. If you don't have the data file (`swallows_data.rds`), please check there how to obtain the data.
 
-``` r
-# If you got an access token by email yesterday, skip this line and use the same token 
-finbif_request_token("your@email.com")
-
-# Setting the access token (replace the long string in quotation marks with the token you received by email)
-Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et")
-
-# Retrieve the data from FinBIF
-swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
-```
-
-#### **Option 2 using Notebooks: start here**
-
-Launch RStudio in Notebooks. Load the tidyverse package:
+Now we use the command `readRDS` to read in the saved data. Because the data are saved as an R object in an .rds file, we don't need an additional import command here. 
 
 ``` r
-library(tidyverse)
+swallows_data <- readRDS("/home/rstudio/my-work/swallows_data.rds")
 ```
-
-Import an R data object into R:
-
-``` r
-swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
-```
-
-#### **Both options: continue from here!**
 
 ### **2. Data wrangling**
 
@@ -94,9 +65,6 @@ swallowplot <- swallows_data
 # setting format of the column ´date_time´ to year-month-day
 swallowplot$date_time = as.Date(format(swallowplot$date_time, "%Y-%m-%d"))
 
-# removing observations in 2023 and before March 2022
-swallowplot <- swallowplot %>% filter(date_time < "2023-01-01" & date_time > "2022-03-01")
-
 # removing double entries in the column ´bio_province´ by replacing text with the function gsub
 swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 ```
@@ -104,8 +72,8 @@ swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 **2.2** Because we want to use the month in the column `date_time` for plotting, let's do some additional formatting of this column. What we do here is not particularly elegant and there are specialized packages for dealing with dates in R but, well, it works. In general there are always many different ways to do any data wrangling step in R. Copy-paste these lines to your R script and run them as they are.
 
 ``` r
-# removing the year and the date from the column `date_time` with the function ´gsub´ to leave only the month 
-swallowplot$date_time <- gsub("2022-", "", swallowplot$date_time)
+# removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month 
+swallowplot$date_time <- gsub("2023-", "", swallowplot$date_time)
 swallowplot$date_time <- gsub("-.*", "", swallowplot$date_time)
 
 # renaming the column ´date_time´ to ´month´, because the month is all we have left
@@ -122,29 +90,29 @@ str(swallowplot)
 ```
 
 ``` r
-Classes ‘finbif_occ’ and 'data.frame':  4724 obs. of  13 variables:
- $ record_id              : chr  "http://tun.fi/JX.1448957#83" "http://tun.fi/JX.1507952#45" "http://tun.fi/JX.1543606#3" "http://tun.fi/JX.1543594#3" ...
+Classes ‘finbif_occ’ and 'data.frame':	5000 obs. of  13 variables:
+ $ record_id              : chr  "http://tun.fi/JX.1644117#15" "http://tun.fi/HR.3211/186711511-U" "http://tun.fi/JX.1642538#25" "http://tun.fi/JX.1642818#3" ...
  $ scientific_name        : chr  "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" "Hirundo rustica Linnaeus, 1758" ...
- $ abundance              : int  5 1 2 1 NA NA 3 NA 1 6 ...
- $ lat_wgs84              : num  60.2 60.3 58.3 58.8 64.3 ...
- $ lon_wgs84              : num  25 20 22 23.7 23.6 ...
- $ date_time              : Date, format: "2022-10-15" "2022-10-09" "2022-10-06" "2022-10-04" ...
- $ coordinates_uncertainty: num  1000 5000 1 1 10000 80 1 100 1 1 ...
+ $ abundance              : int  NA NA 5 NA 6 1 NA NA 1 2 ...
+ $ lat_wgs84              : num  60.4 60.2 60.4 61 60.4 ...
+ $ lon_wgs84              : num  23.1 24.9 22.2 21.4 22.2 ...
+ $ month                  : num  10 10 10 9 9 9 9 9 9 9 ...
+ $ coordinates_uncertainty: num  10000 1845 1 1000 1 ...
  $ any_issues             : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
  $ requires_verification  : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
  $ requires_identification: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
- $ record_reliability     : chr  "UNDEFINED" "UNDEFINED" "UNDEFINED" "UNDEFINED" ...
- $ record_quality         : chr  "Unassessed" "Unassessed" "Unassessed" "Unassessed" ...
- $ bio_province           : chr  "Uusimaa (U)" "Ahvenanmaa (A)" NA NA ...
+ $ record_reliability     : chr  "UNDEFINED" "RELIABLE" "UNDEFINED" "UNDEFINED" ...
+ $ record_quality         : chr  "Unassessed" "Community verified" "Unassessed" "Unassessed" ...
+ $ bio_province           : chr  "Varsinais-Suomi" "Uusimaa" "Varsinais-Suomi" "Varsinais-Suomi" ...
 ```
 
 **2.4** Next, let's remove observations with missing values for region (NA in the column `bio_province`) and count observations by region and by month.
 
 ``` r
-swallowplot_counts <- swallowplot %>% 
-  filter(!is.na(bio_province)) %>% 
-  group_by(month, bio_province) %>% 
-  summarise(count = n())
+swallowplot_counts <- swallowplot |> 
+  filter(!is.na(bio_province)) |> 
+  summarise(count = n(), 
+  .by = c(month, bio_province))
 ```
 
 Ok! Now we're ready to create some plots.

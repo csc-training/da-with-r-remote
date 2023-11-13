@@ -108,7 +108,7 @@ Take some time to construct the `yearly_counts` data set for yourself, and tryin
 **5.1** The `yearly_counts` object should contain numbers of counts per year for each genus. We need to group the data and count records within each group:
 
 ```r
-yearly_counts <- surveys_complete %>%
+yearly_counts <- surveys_complete |>
   count(year, genus)
 ```
 

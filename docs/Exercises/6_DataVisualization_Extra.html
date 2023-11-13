@@ -918,55 +918,31 @@ word-break: break-word;
 </style>
 <div id="data-visualization---independent-exercises" class="section level1">
 <h1>Data visualization - independent exercises</h1>
-<div id="getting-the-data" class="section level3">
-<h3><strong>1. Getting the data</strong></h3>
-<p><strong>IMPORTANT:</strong> There are two options for how to get the
-data. Choose one of them. If you already have the object
-<code>swallows_data</code> ready from the data manipulation exercise,
-continue straight to <strong>2. Data wrangling</strong>.</p>
-<p><strong>Option 1:</strong> On your own computer that has R and
-RStudio installed (see <a href="https://e-learn.csc.fi/mod/url/view.php?id=2191">here</a> for
-instructions).</p>
-<p><strong>Option 2:</strong> On Notebooks as the rest of the course
-exercises.</p>
-<div id="option-1-using-your-own-computer-start-here" class="section level4">
-<h4><strong>Option 1 using your own computer: start here</strong></h4>
+<div id="loading-libraries-and-the-saved-data" class="section level3">
+<h3><strong>1. Loading libraries and the saved data</strong></h3>
 <p>Just like we did in the extra exercises for Data Manipulation, load
 the necessary libraries by copy-pasting the following lines into an R
-script and running them in RStudio. If you did not install the package
-<code>finbif</code> yet, install it first.</p>
+script and running them in RStudio. If the package <code>finbif</code>
+is not installed, install it first (note that the Notebooks course
+environment has unusual behaviour with package installations and the
+installations by users are not permanent).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing the ´finbif´ package (if already installed, skip this line)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;finbif&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#loading the packages ´finbif´ and ´tidyverse´</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(finbif)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p>Retrieve barn swallow observations from the FinBIF database. We will
-use the same data that we worked with in the Data Manipulation extra
-exercises.</p>
+<p>We will use the same data of barn swallow observations from the
+FinBIF database that we worked with in the Data Manipulation extra
+exercises and saved as an .rds file in the end.</p>
 <p>Getting the data was covered in the Data manipulation extra
-exercises, so you can run through the following code chunk in your
-Rstudio session. You can highlight the code below and copy-paste it into
-a new R script.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you got an access token by email yesterday, skip this line and use the same token </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">finbif_request_token</span>(<span class="st">&quot;your@email.com&quot;</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the access token (replace the long string in quotation marks with the token you received by email)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">FINBIF_ACCESS_TOKEN =</span> <span class="st">&quot;xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et&quot;</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the data from FinBIF</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">finbif_occurrence</span>(<span class="st">&quot;Hirundo rustica&quot;</span>, <span class="at">n=</span><span class="dv">5000</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;default_vars&quot;</span>, <span class="st">&quot;bio_province&quot;</span>))</span></code></pre></div>
-</div>
-<div id="option-2-using-notebooks-start-here" class="section level4">
-<h4><strong>Option 2 using Notebooks: start here</strong></h4>
-<p>Launch RStudio in Notebooks. Load the tidyverse package:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p>Import an R data object into R:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/swallows_data.rds&quot;</span>)</span></code></pre></div>
-</div>
-<div id="both-options-continue-from-here" class="section level4">
-<h4><strong>Both options: continue from here!</strong></h4>
-</div>
+exercises. If you don’t have the data file
+(<code>swallows_data.rds</code>), please check there how to obtain the
+data.</p>
+<p>Now we use the command <code>readRDS</code> to read in the saved
+data. Because the data are saved as an R object in an .rds file, we
+don’t need an additional import command here.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/my-work/swallows_data.rds&quot;</span>)</span></code></pre></div>
 </div>
 <div id="data-wrangling" class="section level3">
 <h3><strong>2. Data wrangling</strong></h3>
@@ -980,17 +956,14 @@ will repeat the steps from yesterday to simplify the date format, remove
 double entries in <code>bio_province</code> and remove unlikely
 observations in winter. Copy-paste these lines in your R script and run
 them as they are.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> swallows_data</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># setting format of the column ´date_time´ to year-month-day</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">format</span>(swallowplot<span class="sc">$</span>date_time, <span class="st">&quot;%Y-%m-%d&quot;</span>))</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># removing observations in 2023 and before March 2022</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> swallowplot <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">&lt;</span> <span class="st">&quot;2023-01-01&quot;</span> <span class="sc">&amp;</span> date_time <span class="sc">&gt;</span> <span class="st">&quot;2022-03-01&quot;</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>bio_province)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> swallows_data</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># setting format of the column ´date_time´ to year-month-day</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">format</span>(swallowplot<span class="sc">$</span>date_time, <span class="st">&quot;%Y-%m-%d&quot;</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>bio_province)</span></code></pre></div>
 <p><strong>2.2</strong> Because we want to use the month in the column
 <code>date_time</code> for plotting, let’s do some additional formatting
 of this column. What we do here is not particularly elegant and there
@@ -998,41 +971,41 @@ are specialized packages for dealing with dates in R but, well, it
 works. In general there are always many different ways to do any data
 wrangling step in R. Copy-paste these lines to your R script and run
 them as they are.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;2022-&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># renaming the column ´date_time´ to ´month´, because the month is all we have left</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> <span class="fu">rename</span>(swallowplot, <span class="at">month =</span> date_time)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># converting the column ´month´ from characters to numbers</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>month <span class="ot">&lt;-</span>  <span class="fu">as.numeric</span>(swallowplot<span class="sc">$</span>month)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;2023-&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># renaming the column ´date_time´ to ´month´, because the month is all we have left</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> <span class="fu">rename</span>(swallowplot, <span class="at">month =</span> date_time)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># converting the column ´month´ from characters to numbers</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>swallowplot<span class="sc">$</span>month <span class="ot">&lt;-</span>  <span class="fu">as.numeric</span>(swallowplot<span class="sc">$</span>month)</span></code></pre></div>
 <p><strong>2.3</strong> Check the structure of the data. The beginning
 of the output should look something like the example below (although the
 exact appearance might differ, depending on when you downloaded the
 data).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(swallowplot)</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Classes ‘finbif_occ’ and <span class="st">&#39;data.frame&#39;</span><span class="sc">:</span>  <span class="dv">4724</span> obs. of  <span class="dv">13</span> variables<span class="sc">:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="er">$</span> record_id              <span class="sc">:</span> chr  <span class="st">&quot;http://tun.fi/JX.1448957#83&quot;</span> <span class="st">&quot;http://tun.fi/JX.1507952#45&quot;</span> <span class="st">&quot;http://tun.fi/JX.1543606#3&quot;</span> <span class="st">&quot;http://tun.fi/JX.1543594#3&quot;</span> ...</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> scientific_name        <span class="sc">:</span> chr  <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> ...</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> abundance              <span class="sc">:</span> int  <span class="dv">5</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="dv">3</span> <span class="cn">NA</span> <span class="dv">1</span> <span class="dv">6</span> ...</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> lat_wgs84              <span class="sc">:</span> num  <span class="fl">60.2</span> <span class="fl">60.3</span> <span class="fl">58.3</span> <span class="fl">58.8</span> <span class="fl">64.3</span> ...</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> lon_wgs84              <span class="sc">:</span> num  <span class="dv">25</span> <span class="dv">20</span> <span class="dv">22</span> <span class="fl">23.7</span> <span class="fl">23.6</span> ...</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> date_time              <span class="sc">:</span> Date, format<span class="sc">:</span> <span class="st">&quot;2022-10-15&quot;</span> <span class="st">&quot;2022-10-09&quot;</span> <span class="st">&quot;2022-10-06&quot;</span> <span class="st">&quot;2022-10-04&quot;</span> ...</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> coordinates_uncertainty<span class="sc">:</span> num  <span class="dv">1000</span> <span class="dv">5000</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">10000</span> <span class="dv">80</span> <span class="dv">1</span> <span class="dv">100</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> any_issues             <span class="sc">:</span> logi  <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> ...</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> requires_verification  <span class="sc">:</span> logi  <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> ...</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> requires_identification<span class="sc">:</span> logi  <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> ...</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> record_reliability     <span class="sc">:</span> chr  <span class="st">&quot;UNDEFINED&quot;</span> <span class="st">&quot;UNDEFINED&quot;</span> <span class="st">&quot;UNDEFINED&quot;</span> <span class="st">&quot;UNDEFINED&quot;</span> ...</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> record_quality         <span class="sc">:</span> chr  <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> ...</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> bio_province           <span class="sc">:</span> chr  <span class="st">&quot;Uusimaa (U)&quot;</span> <span class="st">&quot;Ahvenanmaa (A)&quot;</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(swallowplot)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Classes ‘finbif_occ’ and <span class="st">&#39;data.frame&#39;</span><span class="sc">:</span>  <span class="dv">5000</span> obs. of  <span class="dv">13</span> variables<span class="sc">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="er">$</span> record_id              <span class="sc">:</span> chr  <span class="st">&quot;http://tun.fi/JX.1644117#15&quot;</span> <span class="st">&quot;http://tun.fi/HR.3211/186711511-U&quot;</span> <span class="st">&quot;http://tun.fi/JX.1642538#25&quot;</span> <span class="st">&quot;http://tun.fi/JX.1642818#3&quot;</span> ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> scientific_name        <span class="sc">:</span> chr  <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> <span class="st">&quot;Hirundo rustica Linnaeus, 1758&quot;</span> ...</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> abundance              <span class="sc">:</span> int  <span class="cn">NA</span> <span class="cn">NA</span> <span class="dv">5</span> <span class="cn">NA</span> <span class="dv">6</span> <span class="dv">1</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="dv">1</span> <span class="dv">2</span> ...</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> lat_wgs84              <span class="sc">:</span> num  <span class="fl">60.4</span> <span class="fl">60.2</span> <span class="fl">60.4</span> <span class="dv">61</span> <span class="fl">60.4</span> ...</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> lon_wgs84              <span class="sc">:</span> num  <span class="fl">23.1</span> <span class="fl">24.9</span> <span class="fl">22.2</span> <span class="fl">21.4</span> <span class="fl">22.2</span> ...</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> month                  <span class="sc">:</span> num  <span class="dv">10</span> <span class="dv">10</span> <span class="dv">10</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> ...</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> coordinates_uncertainty<span class="sc">:</span> num  <span class="dv">10000</span> <span class="dv">1845</span> <span class="dv">1</span> <span class="dv">1000</span> <span class="dv">1</span> ...</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> any_issues             <span class="sc">:</span> logi  <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> ...</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> requires_verification  <span class="sc">:</span> logi  <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> ...</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> requires_identification<span class="sc">:</span> logi  <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">FALSE</span> ...</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> record_reliability     <span class="sc">:</span> chr  <span class="st">&quot;UNDEFINED&quot;</span> <span class="st">&quot;RELIABLE&quot;</span> <span class="st">&quot;UNDEFINED&quot;</span> <span class="st">&quot;UNDEFINED&quot;</span> ...</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> record_quality         <span class="sc">:</span> chr  <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Community verified&quot;</span> <span class="st">&quot;Unassessed&quot;</span> <span class="st">&quot;Unassessed&quot;</span> ...</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> <span class="sc">$</span> bio_province           <span class="sc">:</span> chr  <span class="st">&quot;Varsinais-Suomi&quot;</span> <span class="st">&quot;Uusimaa&quot;</span> <span class="st">&quot;Varsinais-Suomi&quot;</span> <span class="st">&quot;Varsinais-Suomi&quot;</span> ...</span></code></pre></div>
 <p><strong>2.4</strong> Next, let’s remove observations with missing
 values for region (NA in the column <code>bio_province</code>) and count
 observations by region and by month.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>swallowplot_counts <span class="ot">&lt;-</span> swallowplot <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bio_province)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month, bio_province) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>swallowplot_counts <span class="ot">&lt;-</span> swallowplot <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bio_province)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.by =</span> <span class="fu">c</span>(month, bio_province))</span></code></pre></div>
 <p>Ok! Now we’re ready to create some plots.</p>
 </div>
 <div id="exercises" class="section level3">
@@ -1041,19 +1014,19 @@ observations by region and by month.</p>
 region using <code>swallowplot_counts</code>. Hints: use
 <code>geom_col()</code>. Check <code>swallowplot_counts</code> to see
 how the column with observations is called.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.2</strong> What about a similar bar plot of observations
 but by month?</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.3</strong> Next, let’s combine the above and make a line
 plot that shows month on the x axis, counts on the y axis, and the lines
 are coloured by region (<code>bio_province</code>). Hint: use
 <code>geom_line()</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.4.</strong> Not looking too bad, but let’s make the plot
 look nicer by labelling the y axis ‘observations’ and giving the plot a
 title ‘Barn swallows by region’</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script</span></span></code></pre></div>
 </div>
 <div id="saving-and-exporting-your-script" class="section level3">
 <h3><strong>4. Saving and exporting your script</strong></h3>

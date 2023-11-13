@@ -919,8 +919,8 @@ word-break: break-word;
 <div id="data-manipulation---independent-exercises" class="section level1">
 <h1>Data manipulation - independent exercises</h1>
 <p>In this section we have some extra exercises for the first day of the
-R course, for those who are interested to test their R skills a little
-more. Here we explore data from <a href="https://laji.fi/en/about/2986">Finnish Biodiversity Information
+R course to practice using the data wrangling tools we covered there.
+Here, we explore data from <a href="https://laji.fi/en/about/2986">Finnish Biodiversity Information
 Facility (FinBIF)</a> as an example of using data from open data
 application programming interfaces (APIs).</p>
 <p>We will use an R package <code>finbif</code> that is an R interface
@@ -929,15 +929,10 @@ from FinBIF directly to R and then continue working with it. You can
 find more information on the package here: <a href="https://luomus.github.io/finbif/" class="uri">https://luomus.github.io/finbif/</a></p>
 <div id="getting-the-data" class="section level3">
 <h3><strong>1. Getting the data</strong></h3>
-<p><strong>IMPORTANT:</strong> There are two options for how to get the
-data. Choose one of them:</p>
-<p><strong>Option 1:</strong> On your own computer that has R and
-RStudio installed (see <a href="https://e-learn.csc.fi/mod/url/view.php?id=2191">here</a> for
-instructions).</p>
-<p><strong>Option 2:</strong> On Notebooks as the rest of the course
-exercises.</p>
-<div id="option-1-using-your-own-computer-start-here" class="section level4">
-<h4><strong>Option 1 using your own computer: start here</strong></h4>
+<p>(If you like, instead of the Notebooks course environment you can
+also try these exercises on your own computer that has R and RStudio
+installed - see <a href="https://e-learn.csc.fi/mod/url/view.php?id=2191">here</a> for
+instructions.)</p>
 <p>Begin by installing the package <code>finbif</code> and loading the
 necessary libraries in RStudio. Remember to start a new R script (these
 should be the first commands on the script).</p>
@@ -969,18 +964,9 @@ check the <a href="https://cloud.r-project.org/web/packages/finbif/finbif.pdf">m
 the <code>finbif</code> package on CRAN</a> (the central repository for
 R packages).</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">finbif_occurrence</span>(<span class="st">&quot;Hirundo rustica&quot;</span>, <span class="at">n=</span><span class="dv">5000</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;default_vars&quot;</span>, <span class="st">&quot;bio_province&quot;</span>))</span></code></pre></div>
-</div>
-<div id="option-2-using-notebooks-start-here" class="section level4">
-<h4><strong>Option 2 using Notebooks: start here</strong></h4>
-<p>Launch RStudio in Notebooks. Load the tidyverse package:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p>Import an R data object (made using the above in option 1 - please
-have a look at them!) into R:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/swallows_data.rds&quot;</span>)</span></code></pre></div>
-</div>
-<div id="both-options-continue-from-here" class="section level4">
-<h4><strong>Both options: continue from here!</strong></h4>
-</div>
+<p>If reading in the data fails for some reason, here is a backup option
+for reading in the data in the Notebooks course environment:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/swallows_data.rds&quot;</span>)</span></code></pre></div>
 </div>
 <div id="data-formatting" class="section level3">
 <h3><strong>2. Data formatting</strong></h3>
@@ -991,28 +977,26 @@ entries for regions (<code>bio_province</code>). We will also remove
 observations with dates in winter because we don’t expect swallows to
 occur then. Copy-paste these lines to your R script and run them as they
 are.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows_data</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># setting format of the column ´date_time´ to year-month-day</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>swallows<span class="sc">$</span>date_time <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">format</span>(swallows<span class="sc">$</span>date_time, <span class="st">&quot;%Y-%m-%d&quot;</span>))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># removing observations in 2023 and before March 2022</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">&lt;</span> <span class="st">&quot;2023-01-01&quot;</span> <span class="sc">&amp;</span> date_time <span class="sc">&gt;</span> <span class="st">&quot;2022-03-01&quot;</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>swallows<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallows<span class="sc">$</span>bio_province)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows_data</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># setting format of the column ´date_time´ to year-month-day</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>swallows<span class="sc">$</span>date_time <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">format</span>(swallows<span class="sc">$</span>date_time, <span class="st">&quot;%Y-%m-%d&quot;</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># removing double entries in the column ´bio_province´ by replacing text with the function gsub</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>swallows<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallows<span class="sc">$</span>bio_province)</span></code></pre></div>
 <p>Now we are ready for some exercises!</p>
 </div>
 <div id="exercises" class="section level3">
 <h3><strong>3. Exercises</strong></h3>
 <p><strong>3.1</strong> Look at the first lines of the data and check
 the structure of the object.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.2</strong> The column <code>bio_province</code> shows the
 region of the observation. Let’s calculate the number of swallows
-observations (rows in the data) by region.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+observations (rows in the data) by region. Save the result in a data
+frame called <code>by_region</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p>Check the resulting data frame <code>by_region</code>. At the bottom
 there is a region called NA. If you look at the column
 <code>bio_province</code> in <code>swallows</code> carefully or run
@@ -1021,18 +1005,23 @@ missing the information on region.</p>
 <p><strong>3.3</strong> Let’s fix the problem by modifying the code from
 the previous step. Remove observations that have NA in the column
 <code>bio_province</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.4</strong> Use <code>by_region</code> to check which region
 had the most observations of barn swallows and print the top 5.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 </div>
-<div id="saving-and-exporting-your-script" class="section level3">
-<h3><strong>4. Saving and exporting your script</strong></h3>
-<p>You won’t need to save the data, but it’s a good idea to save the R
-script as we will run through the answers tomorrow. Can you remember how
-to save and export it? You can find some instructions in the
-<strong>Starting with Data exercise sheet</strong> (steps 7.3 and
-7.4).</p>
+<div id="saving-and-exporting-your-script-and-saving-the-data-for-tomorrow" class="section level3">
+<h3><strong>4. Saving and exporting your script and saving the data for
+tomorrow</strong></h3>
+<p>Let’s first save the R script as we will run through the answers
+tomorrow. Can you remember how to save and export it? You can find some
+instructions in the <strong>Starting with Data exercise sheet</strong>
+(steps 7.3 and 7.4).</p>
+<p>Next, let’s save the data so that we can continue with it without
+retrieving it from the database again. Here we will save the data in the
+<code>my-work</code> directory as an R object (.rds file) with the
+command <code>saveRDS()</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(swallows_data, <span class="st">&quot;/home/rstudio/my-work/swallows_data.rds&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
