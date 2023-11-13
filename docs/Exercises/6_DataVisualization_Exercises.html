@@ -1008,7 +1008,7 @@ for yourself, and trying out a line plot.</p>
 <p><strong>5.1</strong> The <code>yearly_counts</code> object should
 contain numbers of counts per year for each genus. We need to group the
 data and count records within each group:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, genus)</span></code></pre></div>
 <p><strong>5.2</strong> Create a line plot of the
 <code>yearly_counts</code> data as follows. Remember that we can use the

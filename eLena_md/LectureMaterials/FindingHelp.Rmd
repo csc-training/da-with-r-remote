@@ -83,6 +83,6 @@ You may also consider submitting a question of your own, in which case it can be
 sessionInfo()
 ```
 
-#### Challenges
+#### Optional challenge:
 
 Let's complete **Basic Features Exercise Block 4** (~ 10 mins).

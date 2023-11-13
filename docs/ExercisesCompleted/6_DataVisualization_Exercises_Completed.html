@@ -972,9 +972,9 @@ values that can be used for creating color-blind plots.</p>
 following:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values=</span>cPalette) <span class="co"># for fills</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_colour_manual</span>(<span class="at">values=</span>cPalette)  <span class="co"># for lines and points</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>meanwt <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">group_by</span>(species_id) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>meanwt <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">.by =</span> species_id)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>           </span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> meanwt, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id,</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">y =</span> mean_weight)) <span class="sc">+</span></span>
@@ -1038,7 +1038,7 @@ for yourself, and trying out a line plot.</p>
 <p><strong>5.1</strong> The <code>yearly_counts</code> object should
 contain numbers of counts per year for each genus. We need to group the
 data and count records within each group:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, genus)</span></code></pre></div>
 <p><strong>5.2</strong> Create a line plot of the
 <code>yearly_counts</code> data as follows. Remember that we can use the
@@ -1050,7 +1050,7 @@ us.</p>
 <code>yearly_sex_counts</code>. This should be similar to
 <code>yearly_counts</code>, but with the data additionally grouped by
 sex. We will need that in later exercises!</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>yearly_sex_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>yearly_sex_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, genus, sex)</span></code></pre></div>
 </div>
 <div id="block-6-faceting" class="section level4">

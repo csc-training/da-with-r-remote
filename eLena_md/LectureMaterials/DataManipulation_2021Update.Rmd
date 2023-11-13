@@ -41,7 +41,7 @@ https://datacarpentry.org/r-socialsci/
 
 - Select rows in a data frame according to filter conditions with the `dplyr` function `filter`
 
-- Link the output of one `dplyr` function to the input of another function with the ‘pipe’ operator `%>%`
+- Link the output of one `dplyr` function to the input of another function with the ‘pipe’ operator `|>`
 
 - Add new columns to a data frame that are functions of existing columns with `mutate`.
 
@@ -129,7 +129,7 @@ We’re going to learn some of the most common `dplyr` functions:
 - `select()`: subset columns
 - `filter()`: subset rows on conditions
 - `mutate()`: create new columns by using information from other columns
-- `group_by()` and `summarize()`: create summary statistics on grouped data
+- `summarize()`: create summary statistics on (grouped) data
 - `arrange()`: sort results
 - `count()`: count discrete values
 
@@ -177,23 +177,25 @@ surveys_sml <- select(filter(surveys, weight < 5),
 
 This is handy, but can be difficult to read if too many functions are nested, as R evaluates the expression from the inside out (in this case, filtering, then selecting).
 
-The last option, *pipes*, are a more recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like `%>%` and are made available via the `magrittr` package, installed automatically with `dplyr`. If you use RStudio, you can type the pipe with `Ctrl` + `Shift` + `M` if you have a PC or `Cmd` + `Shift` + `M` if you have a Mac.
+The last option, *pipes*, are a more recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like `|>` (often called the *native pipe operator or base R pipe*) or `%>%` (the *magrittr pipe* because it comes from the `magrittr` package, installed automatically with `dplyr`). For most purposes both pipes work the same way, but it is better to pick one and use it consistently. In the course materials, we will use the native pipe `|>´. 
+
+If you use RStudio, you can type the pipe with `Ctrl` + `Shift` + `M` if you have a PC or `Cmd` + `Shift` + `M` if you have a Mac. If this gives you the magrittr pipe `%>%`, you can change the shortcut output to the native pipe `|>` in the RStudio menu Tools -> Global Options -> Code -> Use native pipe operator. 
 
 ```r
-surveys %>%
-  filter(weight < 5) %>%
+surveys |>
+  filter(weight < 5) |>
   select(species_id, sex, weight)
 ```
 
-In the above code, we use the pipe to send the `surveys` dataset first through `filter()` to keep rows where `weight` is less than 5, then through `select()` to keep only the `species_id`, `sex`, and `weight` columns. Since `%>%` takes the object on its left and passes it as the first argument to the function on its right, we don’t need to explicitly include the data frame as an argument to the `filter()` and `select()` functions any more.
+In the above code, we use the pipe to send the `surveys` dataset first through `filter()` to keep rows where `weight` is less than 5, then through `select()` to keep only the `species_id`, `sex`, and `weight` columns. Since `|>` takes the object on its left and passes it as the first argument to the function on its right, we don’t need to explicitly include the data frame as an argument to the `filter()` and `select()` functions any more.
 
 Some may find it helpful to read the pipe like the word “then”. For instance, in the above example, we take the data frame `surveys`, *then* we `filter` for rows with `weight < 5`, *then* we `select` the columns `species_id`, `sex` and `weight`. The `dplyr` functions by themselves are somewhat simple, but by combining them into linear workflows with the pipe, we can accomplish more complex manipulations of data frames.
 
 If we want to create a new object with this smaller version of the data, we can assign it a new name:
 
 ```r
-surveys_sml <- surveys %>%
-  filter(weight < 5) %>%
+surveys_sml <- surveys |>
+  filter(weight < 5) |>
   select(species_id, sex, weight)
 
 surveys_sml
@@ -212,14 +214,14 @@ Frequently you’ll want to create new columns based on the values in existing c
 To create a new column of weight in kg:
 
 ```r
-surveys %>%
+surveys |>
   mutate(weight_kg = weight / 1000)
 ```
 
 You can also create a second new column based on the first new column within the same call of `mutate()`:
 
 ```r
-surveys %>%
+surveys |>
   mutate(weight_kg = weight / 1000,
          weight_kg2 = weight_kg * 2)
 ```
@@ -227,17 +229,17 @@ surveys %>%
 If this runs off your screen and you just want to see the first few rows, you can use a pipe to view the `head()` of the data. (Pipes work with non-`dplyr` functions, too, as long as the `dplyr` or `magrittr` package is loaded).
 
 ```r
-surveys %>%
-  mutate(weight_kg = weight / 1000) %>%
+surveys |>
+  mutate(weight_kg = weight / 1000) |>
   head()
 ```
 
 The first few rows of the output are full of `NA`s, so if we wanted to remove those we could insert a `filter()` in the chain:
 
 ```r
-surveys %>%
-  filter(!is.na(weight)) %>%
-  mutate(weight_kg = weight / 1000) %>%
+surveys |>
+  filter(!is.na(weight)) |>
+  mutate(weight_kg = weight / 1000) |>
   head()
 ```
 
@@ -249,55 +251,47 @@ Go through **Data Manipulation Exercise Block 2** (~5-10 mins).
 
 #### 6. Split-apply-combine and `summarize`
 
-Many data analysis tasks can be approached using the *split-apply-combine* paradigm: split the data into groups, apply some analysis to each group, and then combine the results. `dplyr` makes this very easy through the use of the `group_by()` function.
+Many data analysis tasks can be approached using the *split-apply-combine* paradigm: split the data into groups, apply some analysis to each group, and then combine the results. `dplyr` makes this very easy through the function `summarize` and the argument `.by`.
 
-`group_by()` is often used together with the `summarize()` function, which collapses each group into a single-row summary of that group. `group_by()` takes as arguments the column names that contain the **categorical** variables for which you want to calculate the summary statistics. So to compute the mean `weight` by sex:
+When groups are defined using the argument `.by`, the function`summarize()` collapses each group into a single-row summary of that group. `.by` takes as arguments the column names that contain the **categorical** variables for which you want to calculate the summary statistics. So to compute the mean `weight` by sex:
 
 ```r
-surveys %>%
-  group_by(sex) %>%
-  summarize(mean_weight = mean(weight, na.rm = TRUE))
+surveys |>
+  summarize(mean_weight = mean(weight, na.rm = TRUE), .by = sex)
 ```
 You may have noticed that the output from these calls doesn’t run off the screen anymore. It’s one of the advantages of the tibble format.
 
 You can also group by multiple columns:
 
 ```r
-surveys %>%
-  group_by(sex, species_id) %>%
-  summarize(mean_weight = mean(weight, na.rm = TRUE))
-  
-# Here, we see that the output is grouped by "sex", even if we specify two columns in group_by:
-# `summarise()` regrouping output by 'sex' (override with `.groups` argument)
-
+surveys |>
+  summarize(mean_weight = mean(weight, na.rm = TRUE), 
+  .by = c(sex, species_id))
 ```
-The line in the output "`summarise()` regrouping output by 'sex' (override with `.groups` argument)" is not an error, but a recently introduced feature in the `dplyr` package. We won't go into it in detail, but for information: `dplyr` now comes with extra features for tweaking the output of split-apply-combine steps like the one above. This could be useful e.g. when transforming your data.
-
 When grouping both by `sex` and `species_id`, the last few rows are for animals that escaped before their sex and body weights could be determined. We can use `tail()` to look at the last six rows in the data:
 
 ```r
-surveys %>%
-  group_by(sex, species_id) %>%
-  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+surveys |>
+  summarize(mean_weight = mean(weight, na.rm = TRUE), 
+  .by = c(sex, species_id)) |>
   tail()
 ```
 
 You may notice that the last column does not contain `NA` but `NaN` (which refers to “Not a Number”). To avoid this, we can remove the missing values for weight before we attempt to calculate the summary statistics on weight. Because the missing values are removed first, we can omit `na.rm = TRUE` when computing the mean:
 
 ```r
-surveys %>%
-  filter(!is.na(weight)) %>%
-  group_by(sex, species_id) %>%
-  summarize(mean_weight = mean(weight))
+surveys |>
+  filter(!is.na(weight)) |>
+  summarize(mean_weight = mean(weight),
+  .by = c(sex, species_id))
 ```
 
 Here, again, the output from these calls doesn’t run off the screen anymore. If you want to display more data, you can use the `print()` function at the end of your chain with the argument `n` specifying the number of rows to display:
 
 ```r
-surveys %>%
-  filter(!is.na(weight)) %>%
-  group_by(sex, species_id) %>%
-  summarize(mean_weight = mean(weight)) %>%
+surveys |>
+  filter(!is.na(weight)) |>
+  summarize(mean_weight = mean(weight), .by = c(sex, species_id)) |>
   print(n = 15)
 ```
 
@@ -310,37 +304,36 @@ There are a few other things we can try out using the split-apply-combine paradi
 When working with data, we often want to know the number of observations found for each factor or combination of factors. For this task, `dplyr` provides `count()`. For example, if we wanted to count the number of rows of data for each sex, we would do:
 
 ```r
-surveys %>%
+surveys |>
     count(sex) 
 ```
 
-The `count()` function is shorthand for something we’ve already seen: grouping by a variable, and summarizing it by counting the number of observations in that group. In other words, `surveys %>% count()` is equivalent to:
+The `count()` function is shorthand for something we’ve already seen: grouping by a variable, and summarizing it by counting the number of observations in that group. In other words, `surveys |> count()` is equivalent to:
 
 ```r
-surveys %>%
-    group_by(sex) %>%
-    summarise(count = n())
+surveys |>
+    summarise(count = n(), .by = sex)
 ```
 
 For convenience, `count()` provides the `sort` argument:
 
 ```r
-surveys %>%
+surveys |>
     count(sex, sort = TRUE) 
 ```
 
 Previous example shows the use of `count()` to count the number of rows/observations for *one* factor (i.e., `sex`). If we wanted to count a *combination of factors*, such as `sex` and `species`, we would specify the first and the second factor as the arguments of `count()`:
 
 ```r
-surveys %>%
+surveys |>
   count(sex, species) 
 ```
 
 With the above code, we can proceed with `arrange()` to sort the table according to a number of criteria so that we have a better comparison. For instance, we might want to arrange the table above in (i) an alphabetical order of the levels of the species and (ii) in descending order of the count:
 
 ```r
-surveys %>%
-  count(sex, species) %>%
+surveys |>
+  count(sex, species) |>
   arrange(species, desc(n))
 ```
 
@@ -388,10 +381,9 @@ Further arguments include `values_fill` which, if set, fills in missing values w
 Let’s use `pivot_wider()` to transform surveys to find the mean weight of each species in each plot over the entire survey period. First we use `filter()`, `group_by()` and `summarise()` to filter our observations and variables of interest, and create a new variable for the `mean_weight`. We use the pipe as before too.
 
 ```r
-surveys_gw <- surveys %>%
-  filter(!is.na(weight)) %>%
-  group_by(genus, plot_id) %>%
-  summarize(mean_weight = mean(weight))
+surveys_gw <- surveys |>
+  filter(!is.na(weight)) |>
+  summarize(mean_weight = mean(weight), .by = c(genus, plot_id))
 
 str(surveys_gw)
 ```
@@ -399,9 +391,9 @@ str(surveys_gw)
 This yields `surveys_gw` where the observations for each plot are spread across multiple rows, 196 observations of 3 variables. Using `pivot_wider()` with names from the column `genus` and values from `mean_weight`, this becomes 24 observations of 11 variables, one row for each plot. The results can be organised by `plot_id` using `arrange()` and we again use pipes:
 
 ```r
-surveys_pivotwider <- surveys_gw %>%
+surveys_pivotwider <- surveys_gw |>
   pivot_wider(names_from = genus, 
-              values_from = mean_weight) %>%
+              values_from = mean_weight) |>
   arrange(plot_id)
 
 surveys_pivotwider
@@ -416,10 +408,10 @@ In this situation we want to take the column names and turn them into a pair of 
 To recreate `surveys_gw` from `surveys_pivotwider`, we need to assign names back to the `genus` column and values to a column called `mean_weight`, using all columns except `plot_id` to retrieve the values. Here we drop the `plot_id` column with an exclamation mark sign. Note that, for the newly (re-)created columns, we also need to provide quotation marks.
 
 ```r
-surveys_pivotlonger <- surveys_pivotwider %>%
+surveys_pivotlonger <- surveys_pivotwider |>
   pivot_longer(!plot_id, 
                names_to = "genus",
-               values_to = "mean_weight") %>%
+               values_to = "mean_weight") |>
   arrange(genus)
 
 surveys_pivotlonger
@@ -442,7 +434,7 @@ In preparation for our next lesson on plotting, we are going to prepare a cleane
 Let’s start by removing observations of animals for which `weight` and `hindfoot_length` are missing, or the `sex` has not been determined:
 
 ```r
-surveys_complete <- surveys %>%
+surveys_complete <- surveys |>
   filter(!is.na(weight),           # remove missing weight
          !is.na(hindfoot_length),  # remove missing hindfoot_length
          !is.na(sex))              # remove missing sex
@@ -452,12 +444,12 @@ Because we are interested in plotting how species abundances have changed throug
 
 ```r
 ## Extract the most common species_id
-species_counts <- surveys_complete %>%
-    count(species_id) %>% 
+species_counts <- surveys_complete |>
+    count(species_id) |> 
     filter(n >= 50)
 
 ## Only keep the most common species
-surveys_complete <- surveys_complete %>%
+surveys_complete <- surveys_complete |>
   filter(species_id %in% species_counts$species_id)
 ```
 

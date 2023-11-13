@@ -223,8 +223,8 @@ Choosing colors in R is a rather vast topic of its own and we won't be covering 
 What if we wanted to have something else than count data on the y axis? For example, we might want to use the mean weight of each species:
 
 ```r
-meanwt <- surveys_complete %>%
-           group_by(species_id) %>%
+meanwt <- surveys_complete |>
+           group_by(species_id) |>
            summarize(mean_weight = mean(weight))
 ```
 
@@ -333,7 +333,7 @@ Let's have a look at **Data Visualization Exercise Block 4** (~ 5-10 mins).
 Let’s calculate number of counts per year for each genus. First we need to group the data and count records within each group:
 
 ```r
-yearly_counts <- surveys_complete %>%
+yearly_counts <- surveys_complete |>
   count(year, genus)
 ```
 
@@ -392,7 +392,7 @@ ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
 Now we would like to split the line in each plot by the sex of each individual measured. To do that we need to make counts in the data frame grouped by `year`, `species_id`, and `sex` (you will notice this is the same data frame we created in exercise 5.3!):
 
 ```r
-yearly_sex_counts <- surveys_complete %>%
+yearly_sex_counts <- surveys_complete |>
   count(year, genus, sex)
 ```
 

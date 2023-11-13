@@ -526,7 +526,7 @@ First we need to shape the data into a format suitable for the *χ*<sup>2</sup> 
 Before creating the table, let's make things easier to follow by replacing the numbers with labels. We can use a `dplyr` function called `recode`:
 
 ```r
-mtcarsdata <- mtcarsdata %>%
+mtcarsdata <- mtcarsdata |>
   mutate(vs = recode(vs,
                      "0" = "Vshaped",
                      "1" = "Straight"),

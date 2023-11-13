@@ -29,19 +29,13 @@ opts_knit$set(width=75)
 
 # Data manipulation - independent exercises
 
-In this section we have some extra exercises for the first day of the R course, for those who are interested to test their R skills a little more. Here we explore data from [Finnish Biodiversity Information Facility (FinBIF)](https://laji.fi/en/about/2986) as an example of using data from open data application programming interfaces (APIs).
+In this section we have some extra exercises for the first day of the R course to practice using the data wrangling tools we covered there. Here, we explore data from [Finnish Biodiversity Information Facility (FinBIF)](https://laji.fi/en/about/2986) as an example of using data from open data application programming interfaces (APIs).
 
 We will use an R package `finbif` that is an R interface to the FinBIF API. This means we can use the R package to download data from FinBIF directly to R and then continue working with it. You can find more information on the package here: <https://luomus.github.io/finbif/>
 
 ### **1. Getting the data**
 
-**IMPORTANT:** There are two options for how to get the data. Choose one of them:
-
-**Option 1:** On your own computer that has R and RStudio installed (see [here](https://e-learn.csc.fi/mod/url/view.php?id=2191) for instructions).
-
-**Option 2:** On Notebooks as the rest of the course exercises.
-
-#### **Option 1 using your own computer: start here**
+(If you like, instead of the Notebooks course environment you can also try these exercises on your own computer that has R and RStudio installed - see [here](https://e-learn.csc.fi/mod/url/view.php?id=2191) for instructions.)
 
 Begin by installing the package `finbif` and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
 
@@ -77,21 +71,11 @@ Add the following command to your R script and run it as it is. To see what the 
 swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
 ```
 
-#### **Option 2 using Notebooks: start here**
-
-Launch RStudio in Notebooks. Load the tidyverse package:
-
-``` r
-library(tidyverse)
-```
-
-Import an R data object (made using the above in option 1 - please have a look at them!) into R:
+If reading in the data fails for some reason, here is a backup option for reading in the data in the Notebooks course environment:
 
 ``` r
 swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
 ```
-
-#### **Both options: continue from here!**
 
 ### **2. Data formatting**
 
@@ -103,9 +87,6 @@ swallows <- swallows_data
 
 # setting format of the column ´date_time´ to year-month-day
 swallows$date_time = as.Date(format(swallows$date_time, "%Y-%m-%d"))
-
-# removing observations in 2023 and before March 2022
-swallows <- swallows %>% filter(date_time < "2023-01-01" & date_time > "2022-03-01")
 
 # removing double entries in the column ´bio_province´ by replacing text with the function gsub
 swallows$bio_province <- gsub(",.*", "", swallows$bio_province)
@@ -121,7 +102,7 @@ Now we are ready for some exercises!
 # Write the answer in your R script.
 ```
 
-**3.2** The column `bio_province` shows the region of the observation. Let's calculate the number of swallows observations (rows in the data) by region.
+**3.2** The column `bio_province` shows the region of the observation. Let's calculate the number of swallows observations (rows in the data) by region. Save the result in a data frame called `by_region`. 
 
 ``` r
 # Write the answer in your R script.
@@ -141,6 +122,12 @@ Check the resulting data frame `by_region`. At the bottom there is a region call
 # Write the answer in your R script.
 ```
 
-### **4. Saving and exporting your script**
+### **4. Saving and exporting your script and saving the data for tomorrow**
 
-You won't need to save the data, but it's a good idea to save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
+Let's first save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
+
+Next, let's save the data so that we can continue with it without retrieving it from the database again. Here we will save the data in the `my-work` directory as an R object (.rds file) with the command `saveRDS()`:
+
+``` r
+saveRDS(swallows_data, "/home/rstudio/my-work/swallows_data.rds")
+```

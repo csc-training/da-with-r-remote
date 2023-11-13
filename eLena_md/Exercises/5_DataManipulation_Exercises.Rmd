@@ -67,10 +67,10 @@ surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 **3.1** Consider this example that we just had a look at:
 
 ```r
-surveys %>%
-  filter(!is.na(weight)) %>%
-  group_by(sex, species_id) %>%
-  summarize(mean_weight = mean(weight))
+surveys |>
+  filter(!is.na(weight)) |>
+  summarize(mean_weight = mean(weight),
+  .by = c(sex, species_id))
 ```
 
 It is also possible to summarize multiple variables at the same time. Extending the code above, can you figure out how to add a column indicating the minimum weight for each species for each sex?
@@ -82,7 +82,7 @@ To make things easier, here is a list of `dplyr` functions:
 - `select()`: subset columns
 - `filter()`: subset rows on conditions
 - `mutate()`: create new columns by using information from other columns
-- `group_by()` and `summarize()`: create summary statistics on grouped data
+- summarize()` and the argument `.by`: create summary statistics on grouped data
 - `arrange()`: sort results
 - `count()`: count discrete values
 
@@ -92,11 +92,11 @@ To make things easier, here is a list of `dplyr` functions:
 
 **4.1** How many animals were caught in each `plot_type` surveyed?
 
-**4.2** Use `group_by()` and `summarize()` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
+**4.2** Use `summarize()` and `.by` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
 
 **4.3** What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`.
 
-#### **Block 5: pivoting**
+#### **OPTIONAL Block 5: pivoting**
 
 This topic is quite time-consuming, so chances are that you are looking at this section independently.
 
@@ -115,7 +115,7 @@ To make sure we're all on the same page, let's repeat the steps we just covered.
 **6.1** Remove observations of animals for which `weight` and `hindfoot_length` are missing, or the `sex` has not been determined:
 
 ```r
-surveys_complete <- surveys %>%
+surveys_complete <- surveys |>
   filter(!is.na(weight),           # remove missing weight
          !is.na(hindfoot_length),  # remove missing hindfoot_length
          !is.na(sex))              # remove missing sex
@@ -125,12 +125,12 @@ surveys_complete <- surveys %>%
 
 ```r
 ## Extract the most common species_id
-species_counts <- surveys_complete %>%
-    count(species_id) %>% 
+species_counts <- surveys_complete |>
+    count(species_id) |> 
     filter(n >= 50)
 
 ## Only keep the most common species
-surveys_complete <- surveys_complete %>%
+surveys_complete <- surveys_complete |>
   filter(species_id %in% species_counts$species_id)
 ```
 
