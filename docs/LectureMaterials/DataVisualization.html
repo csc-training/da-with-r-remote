@@ -1111,8 +1111,8 @@ Cookbook section on colors and color palettes</a> in your own time!</p>
 <p>What if we wanted to have something else than count data on the y
 axis? For example, we might want to use the mean weight of each
 species:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>meanwt <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">group_by</span>(species_id) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>meanwt <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">group_by</span>(species_id) <span class="sc">|&gt;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span></code></pre></div>
 <p>Let’s try plotting the data. Note that now we are also specifying the
 y axis:</p>
@@ -1208,7 +1208,7 @@ such that it’s not hidden?</p>
 <h4>7. Line plots (time series data)</h4>
 <p>Let’s calculate number of counts per year for each genus. First we
 need to group the data and count records within each group:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, genus)</span></code></pre></div>
 <p>Time series data can be visualized as a line plot with years on the x
 axis and counts on the y axis:</p>
@@ -1261,7 +1261,7 @@ individual measured. To do that we need to make counts in the data frame
 grouped by <code>year</code>, <code>species_id</code>, and
 <code>sex</code> (you will notice this is the same data frame we created
 in exercise 5.3!):</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>yearly_sex_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>yearly_sex_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, genus, sex)</span></code></pre></div>
 <p>We can now make the faceted plot by splitting further by sex using
 <code>color</code> (within each panel):</p>
