@@ -1537,7 +1537,7 @@ known as a <em>contingency table</em>.</p>
 <p>Before creating the table, let’s make things easier to follow by
 replacing the numbers with labels. We can use a <code>dplyr</code>
 function called <code>recode</code>:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mtcarsdata <span class="ot">&lt;-</span> mtcarsdata <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mtcarsdata <span class="ot">&lt;-</span> mtcarsdata <span class="sc">|&gt;</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vs =</span> <span class="fu">recode</span>(vs,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;0&quot;</span> <span class="ot">=</span> <span class="st">&quot;Vshaped&quot;</span>,</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;Straight&quot;</span>),</span>
