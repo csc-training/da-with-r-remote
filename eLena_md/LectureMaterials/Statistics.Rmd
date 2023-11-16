@@ -105,7 +105,7 @@ There are also specific functions that we haven't yet covered:
 
 ```r
 min() # minimum, e.g. min(surveys_complete$weight)
-maximum() # maximum
+max() # maximum
 range() # minimum and maximum
 median() # median
 quantile() # quantiles
