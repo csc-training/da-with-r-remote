@@ -1017,10 +1017,10 @@ this you will need to use <code>desc()</code> inside the
 <code>plot_type</code> surveyed?</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(plot_type)</span></code></pre></div>
-<p><strong>4.2</strong> Use <code>group_by()</code> and
-<code>summarize()</code> to find the mean, minimum and maximum hindfoot
-length for each species (using <code>species_id</code>). Also try adding
-the number of observations (hint: use <code>n</code>).</p>
+<p><strong>4.2</strong> Use <code>summarize()</code> <code>.by</code> to
+find the mean, minimum and maximum hindfoot length for each species
+(using <code>species_id</code>). Also try adding the number of
+observations (hint: use <code>n</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hindfoot_length)) <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
@@ -1038,7 +1038,7 @@ argument <code>by</code> also with some dplyr functions that
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(weight <span class="sc">==</span> <span class="fu">max</span>(weight), <span class="at">.by =</span> year) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, genus, species, weight) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, genus, species_id, weight) <span class="sc">|&gt;</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(year)</span></code></pre></div>
 </div>
 <div id="block-5-pivoting" class="section level4">

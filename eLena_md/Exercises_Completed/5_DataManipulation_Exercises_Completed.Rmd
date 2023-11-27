@@ -143,7 +143,7 @@ surveys |>
     count(plot_type)
 ```
 
-**4.2** Use `group_by()` and `summarize()` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
+**4.2** Use `summarize()` `.by` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
 
 ```r
 surveys |>
@@ -164,7 +164,7 @@ also with some dplyr functions that `summarize`.
 surveys |>
     filter(!is.na(weight)) |>
     filter(weight == max(weight), .by = year) |>
-    select(year, genus, species, weight) |>
+    select(year, genus, species_id, weight) |>
     arrange(year)
 ```
 
