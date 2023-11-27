@@ -48,6 +48,8 @@ There are lots of great books, websites and online tutorials for learning more a
 
 - [Riffomonas Code Club](https://riffomonas.org/code_club/) Youtube channel and R scripts. R basics and more advanced tricks especially for microbial ecologists.
 
+- [swirl](https://swirlstats.com/): an R package for interactive self-learning within R
+
 #### 3. R cheat sheets
 
 Cheat sheets are handy collections of commands and options on a specific package or a topic. Here are some examples:
@@ -55,7 +57,6 @@ Cheat sheets are handy collections of commands and options on a specific package
 - [`ggplot2` for plotting ](https://github.com/rstudio/cheatsheets/raw/main/data-visualization-2.1.pdf)  
 - [data manipulation with `dplyr`](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)  
 - [data tidying with `tidyr`](https://github.com/rstudio/cheatsheets/raw/main/tidyr.pdf)  
-
 
 #### 4. Using R on CSC's supercomputers
 
