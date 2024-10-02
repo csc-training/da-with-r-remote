@@ -36,9 +36,9 @@ During this workshop we will be using a separate RStudio teaching environment, w
 
 To launch your own instance of R:
 
-1. Go to [notebooks.csc.fi](https://notebooks.csc.fi/#/) and log in using the Haka or Virtu authentication service or your CSC account.
+1. Go to [noppe.csc.fi](https://noppe.csc.fi/#/) and log in using the Haka or Virtu authentication service or your CSC account.
 2. In the top right corner, click "Join workspace" and enter the code provided by the instructors.
-3. You should see a workspace with an RStudio environment called "Rstudio (v431) for analytics and teaching)". Later you can find it under "My workspaces". 
+3. You should see a workspace with an RStudio environment called "RStudio / Data analysis with R, Oct 2024". Later you can find it under "My workspaces". 
 4. Click on the "Start session" button on the right to start RStudio.
 
 Note: each RStudio session in this workspace lasts for 12 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
