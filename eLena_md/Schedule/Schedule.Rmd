@@ -24,7 +24,7 @@ opts_knit$set(width=75)
 
 #### **Day 1**
 
-**09:00 - 16:00**
+**09:00 - 16:30**
 
 - Introduction
 - Basic features of R 
@@ -34,7 +34,7 @@ opts_knit$set(width=75)
 
 #### **Day 2**
 
-**09:00 - 16:00**
+**09:00 - 16:30**
 
 - Data manipulation (continued) 
 - Data visualization 
