@@ -40,6 +40,8 @@ There are lots of great books, websites and online tutorials for learning more a
 
 - [Big Book of R](https://www.bigbookofr.com/) (website) A huge collection of R resources.
 
+- [Modern Statistics with R](https://modernstatisticswithr.com/) (website and book) A great, up-to-date introduction to R and data wrangling that goes deep and wide into statistical analyses with R.
+
 - [Applied Statistics with R](https://book.stat420.org/) (free e-book)
 
 - [Learning Statistics with R](https://learningstatisticswithr.com/)  (free e-book)
@@ -49,6 +51,8 @@ There are lots of great books, websites and online tutorials for learning more a
 - [Riffomonas Code Club](https://riffomonas.org/code_club/) Youtube channel and R scripts. R basics and more advanced tricks especially for microbial ecologists.
 
 - [swirl](https://swirlstats.com/): an R package for interactive self-learning within R
+
+- [Deep R Programming](https://deepr.gagolewski.com/index.html) (website and pdf) A more programming-oriented introduction to R.
 
 #### 3. R cheat sheets
 

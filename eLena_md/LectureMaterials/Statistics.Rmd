@@ -502,6 +502,8 @@ The final part contains general information on the model:
     
 - The last line describes the statistical significance of the model. The _F_ statistic is based on a test where your model is compared against a model with no predictors. The _P_ value is the overall *P* value for the model. We can see that our model is significant (meaning that it performs better than a model without predictors!).
 
+Tip: to create a tidier output of the model summary, check the R package [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html) and its functions `tidy()`, `augment()`, and `glance()`.
+
 #### 6b. Chi-squared test of independence
 
 We will cover one more test: the Chi-squared (*χ*<sup>2</sup>) test of independence, also known as Pearson's *χ*<sup>2</sup> test. This method can be used to determine if there is a correlation between categorical variables, such as names or labels. Specifically, it is used when you want to compare frequencies (counts) between groups. This is done by comparing the observed frequencies with a set of frequencies one would expect if there was no correlation between groups.

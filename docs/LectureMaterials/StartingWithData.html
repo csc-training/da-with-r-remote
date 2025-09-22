@@ -751,7 +751,7 @@ font-weight: bold;
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -931,7 +931,6 @@ license</a>:</em></p>
 <li><p>Describe what a factor is</p></li>
 <li><p>Convert between strings and factors</p></li>
 <li><p>Reorder and rename factors</p></li>
-<li><p>Change how character strings are handled in a data frame</p></li>
 </ul>
 <div id="presentation-of-the-data" class="section level4">
 <h4>1. Presentation of the data</h4>
@@ -1011,29 +1010,28 @@ directory within our R instance (<code>/home/rstudio/shared</code>).</p>
 <p>In fact, we haven’t yet explored our <em>working directory</em> in
 much detail, so let’s have a quick look. Let’s check the current working
 directory using <code>getwd</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will give something like: /home/rstudio/my-work/&lt;R-project&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># This will give something like: /home/rstudio/my-work/&lt;R-project&gt;</span></span></code></pre></div>
 <p>This looks OK for now, but we could also change it using
 <code>setwd(...)</code> (with the new path given inside the brackets).
 For now, we will use the present working directory (we can still import
 our data from outside it).</p>
-<p>We can now import the data. While doing so, let’s include the
-argument <code>stringsAsFactors = TRUE</code>. More on that later in the
-course - we will come back to the <code>read.csv()</code> function call
-and its arguments in the next session.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If we wanted to download the file from a website instead, such as one of these:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/portal_data_joined.csv</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ... We could use download.file(): </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(url=&quot;https://tinyurl.com/portaljoined&quot;,</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#              destfile = &quot;portal_data_joined.csv&quot;)</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This would save the file in your current working directory.</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># We could also save it elsewhere by writing ... destfile = &quot;path/to/portal_data_joined.csv&quot;</span></span></code></pre></div>
+<p>We can now import the data with function call the
+<code>read.csv()</code>. We will come back to this function and its
+arguments in the next session.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Note:</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># If we wanted to download the file from a website instead, such as one of these:</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/portal_data_joined.csv</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co"># ... We could use download.file(): </span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># download.file(url=&quot;https://tinyurl.com/portaljoined&quot;,</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#              destfile = &quot;portal_data_joined.csv&quot;)</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># This would save the file in your current working directory.</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co"># We could also save it elsewhere by writing ... destfile = &quot;path/to/portal_data_joined.csv&quot;</span></span></code></pre></div>
 <p>The <code>surveys &lt;- read.csv(&quot;/home...&quot;)</code> statement doesn’t
 produce any output because, as you might recall, assignments don’t
 display anything. If we want to check that our data has been loaded, we
@@ -1042,10 +1040,10 @@ can see the contents of the data frame by typing its name:
 <p>Wow… that was a lot of output. At least it means the data loaded
 properly. Let’s check the top (the first 6 lines) of this data frame
 using the function <code>head()</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Try also</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(surveys)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">head</span>(surveys)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">## Try also</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">View</span>(surveys)</span></code></pre></div>
 <p>Ok, looks good! Let’s keep on working with the survey data.</p>
 <p><strong>Challenge:</strong></p>
 <p>At this point, let’s complete <strong>Starting with Data Exercise
@@ -1068,7 +1066,7 @@ vector.</p>
 <p><img src="data:image/png;base64,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" /></p>
 <p>We can see this when inspecting the <strong>str</strong>ucture of a
 data frame with the function <code>str()</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">str</span>(surveys)</span></code></pre></div>
 </div>
 <div id="inspecting-data.frame-objects" class="section level4">
 <h4>4. Inspecting <code>data.frame</code> objects</h4>
@@ -1092,87 +1090,91 @@ we want to extract some specific data from it, we need to specify the
 “coordinates” we want from it. Row numbers come first, followed by
 column numbers. However, note that different ways of specifying these
 coordinates lead to results with different classes.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first element in the first column of the data frame (as a vector)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">1</span>]   </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first element in the 6th column (as a vector)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">6</span>]   </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first column of the data frame (as a vector)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="dv">1</span>]    </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># first column of the data frame (as a data.frame)</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>]      </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># first three elements in the 7th column (as a vector)</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">7</span>] </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># the 3rd row of the data frame (as a data.frame)</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">3</span>, ]    </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># equivalent to head_surveys &lt;- head(surveys)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>head_surveys <span class="ot">&lt;-</span> surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ] </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># first element in the first column of the data frame (as a vector)</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">1</span>]   </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># first element in the 6th column (as a vector)</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">6</span>]   </span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># first column of the data frame (as a vector)</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>surveys[, <span class="dv">1</span>]    </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># first column of the data frame (as a data.frame)</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>surveys[<span class="dv">1</span>]      </span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># first three elements in the 7th column (as a vector)</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">7</span>] </span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co"># the 3rd row of the data frame (as a data.frame)</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>surveys[<span class="dv">3</span>, ]    </span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># equivalent to head_surveys &lt;- head(surveys)</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>head_surveys <span class="ot">&lt;-</span> surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ] </span></code></pre></div>
 <p><code>:</code> is a special function that creates numeric vectors of
 integers in increasing or decreasing order, test <code>1:10</code> and
 <code>10:1</code> for instance.</p>
 <p>You can also exclude certain indices of a data frame using the
 “<code>-</code>” sign:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The whole data frame, except the first column</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivalent to head(surveys)</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>surveys[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">34786</span>), ]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># The whole data frame, except the first column</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>surveys[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Equivalent to head(surveys)</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>surveys[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">34786</span>), ]</span></code></pre></div>
 <p>Data frames can be subset by calling indices (as shown previously),
 but also by calling their column names directly:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="st">&quot;species_id&quot;</span>]       <span class="co"># Result is a data.frame</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="st">&quot;species_id&quot;</span>]     <span class="co"># Result is a vector</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>surveys[[<span class="st">&quot;species_id&quot;</span>]]     <span class="co"># Result is a vector</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>surveys<span class="sc">$</span>species_id          <span class="co"># Result is a vector</span></span></code></pre></div>
-<p>In RStudio, you can use the autocompletion feature to get the full
-and correct names of the columns.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>surveys[<span class="st">&quot;species_id&quot;</span>]       <span class="co"># Result is a data.frame</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>surveys[, <span class="st">&quot;species_id&quot;</span>]     <span class="co"># Result is a vector</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>surveys[[<span class="st">&quot;species_id&quot;</span>]]     <span class="co"># Result is a vector</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>surveys<span class="sc">$</span>species_id          <span class="co"># Result is a vector</span></span></code></pre></div>
+<p>In RStudio, you can press the tab key to use the autocompletion
+feature to get the full and correct names of the columns.</p>
 <p><strong>Optional challenge</strong></p>
 <p>Have a look at <strong>Starting with Data Exercise Block 3</strong>
 (~ 15 mins).</p>
 </div>
 <div id="introducing-factors" class="section level4">
 <h4>6. Introducing factors</h4>
-<p>When we did <code>str(surveys)</code> we saw that several of the
-columns consist of integers. The columns <code>genus</code>,
-<code>species</code>, <code>sex</code>, <code>plot_type</code>, …
-however, are of a special class called <code>factor</code>. Factors are
-very useful and contribute to making R particularly well suited to
-working with data. So we are going to spend a little time introducing
-them.</p>
-<p>Factors represent categorical data and often include information on
-group membership (e.g. whether measurements belong to experimental
-controls or different treatment groups). They are stored as integers
-associated with labels and can be either ordered or unordered. While
-factors look (and often behave) like character vectors, they are
-actually treated as integer vectors by R. So you need to be very careful
-when treating them as strings. Let’s have a look at what this means in
-practice!</p>
+<p>When we did <code>str(surveys)</code> we saw that the columns
+<code>species_id</code>, <code>genus</code>, <code>species</code>,
+<code>taxa</code>, <code>sex</code>, and <code>plot_type</code> consist
+of character data, i.e., strings of letters. These columns are, however,
+intended to represent <em>categorical data</em>, for example information
+on group membership (e.g. whether measurements belong to experimental
+controls or different treatment groups). In R, categorical data are
+handled as a special class called <code>factor</code>. Factors are very
+useful and contribute to making R particularly well suited to working
+with data. So we are going to spend a little time introducing them.</p>
+<p>To convert the character data column <code>species_id</code> in our
+<code>surveys</code> data frame into a factor, we use the function
+<code>factor</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>species_id)</span></code></pre></div>
+<p>Factors are stored as integers associated with labels and can be
+either ordered or unordered. While factors look (and often behave) like
+character vectors, they are actually treated as integer vectors by R. So
+you need to be very careful when treating them as strings. Let’s have a
+look at what this means in practice!</p>
 <p>The defining feature of a factor is that it can have several
 <em>levels</em>. By default, R always sorts levels in alphabetical
 order. For instance, if we wanted to create a factor called “sex” with
 the levels “male” and “female”:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</span></code></pre></div>
 <p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and
 <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code>
 comes before <code>m</code>, even though the first element in this
 vector is <code>&quot;male&quot;</code>). You can see this by using the function
 <code>levels()</code> and you can find the number of levels using
 <code>nlevels()</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nlevels</span>(sex)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">nlevels</span>(sex)</span></code></pre></div>
 <p>Sometimes, the order of the factors does not matter, other times you
 might want to specify the order because it is meaningful (e.g., “low”,
 “medium”, “high”), it improves your visualization, or it is required by
 a particular type of analysis. We can first check the current order:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sex</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] male female female male  </span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: female male</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>sex</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; [1] male female female male  </span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; Levels: female male</span></span></code></pre></div>
 <p>One way to reorder our levels in the <code>sex</code> vector would
 be:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sex </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># after re-ordering</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] male female female male  </span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: male female</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>sex </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># after re-ordering</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; [1] male female female male  </span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; Levels: male female</span></span></code></pre></div>
 <p>In R’s memory, these factors are represented by integers (1, 2, 3),
 but are more informative than integers because factors are
 self-describing: <code>&quot;female&quot;</code>, <code>&quot;male&quot;</code> is more
@@ -1186,7 +1188,7 @@ dataset).</p>
 <h4>7. Converting factors</h4>
 <p>If you need to convert a factor to a character vector, you use
 <code>as.character(x)</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(sex)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">as.character</span>(sex)</span></code></pre></div>
 <p>In some cases, you may have to convert factors where the levels
 appear as numbers (such as concentration levels or years) to a numeric
 vector. For instance, in one part of your analysis the years might need
@@ -1200,12 +1202,12 @@ unwanted in this case) set of numbers. One method to avoid this is to
 convert factors to characters, and then to numbers.</p>
 <p>Another method is to use the <code>levels()</code> function.
 Compare:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>year_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1990</span>, <span class="dv">1983</span>, <span class="dv">1977</span>, <span class="dv">1998</span>, <span class="dv">1990</span>))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(year_fct) <span class="co"># Wrong! And there is no warning...</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(year_fct)) <span class="co"># Works...</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">levels</span>(year_fct))[year_fct] <span class="co"># Using levels()</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>year_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1990</span>, <span class="dv">1983</span>, <span class="dv">1977</span>, <span class="dv">1998</span>, <span class="dv">1990</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="fu">as.numeric</span>(year_fct) <span class="co"># Wrong! And there is no warning...</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(year_fct)) <span class="co"># Works...</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">levels</span>(year_fct))[year_fct] <span class="co"># Using levels()</span></span></code></pre></div>
 <p>Notice that in the <code>levels()</code> approach, three important
 steps occur:</p>
 <ul>
@@ -1223,8 +1225,8 @@ the vector <code>year_fct</code> inside the square brackets</li>
 <code>plot()</code> function to get a quick glance at the number of
 observations represented by each factor level. Let’s look at the number
 of males and females captured over the course of the experiment:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## bar plot of the number of females and males:</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(surveys<span class="sc">$</span>sex)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="do">## bar plot of the number of females and males:</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">plot</span>(surveys<span class="sc">$</span>sex)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /></p>
 <p>In addition to males and females, there are about 1700 individuals
 for which the sex information hasn’t been recorded. Additionally, for
@@ -1233,53 +1235,38 @@ missing or undetermined. Let’s rename this label to something more
 meaningful. Before doing that, we’re going to pull out the data on sex
 and work with that data, so we’re not modifying the working copy of the
 data frame:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> surveys<span class="sc">$</span>sex</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sex)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] M M        </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels:  F M</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;&quot;  &quot;F&quot; &quot;M&quot;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;undetermined&quot;</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;undetermined&quot; &quot;F&quot; &quot;M&quot;</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sex)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] M M undetermined undetermined undetermined</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] undetermined</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: undetermined F M</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">head</span>(sex)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#&gt; [1] M M        </span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co">#&gt; Levels:  F M</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;&quot;  &quot;F&quot; &quot;M&quot;</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;undetermined&quot;</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co">#&gt; [1] &quot;undetermined&quot; &quot;F&quot; &quot;M&quot;</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="fu">head</span>(sex)</span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="co">#&gt; [1] M M undetermined undetermined undetermined</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a><span class="co">#&gt; [6] undetermined</span></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="co">#&gt; Levels: undetermined F M</span></span></code></pre></div>
+<p>It is also possible to import the <code>surveys</code> data set with
+the function <code>read.csv</code> and the argument
+<code>stringsAsFactors=TRUE</code>. By using this argument, we would.
+coerce (= convert) those columns that contain characters (i.e. text)
+into factors. However, more commonly the case is that we’d rather
+perform such conversions separately and for selected columns only, after
+the data have been imported. This way we ensure that we only convert
+those columns into factors where that data type is required. This
+corresponds to <code>stringsAsFactors=FALSE</code> and is the default
+behaviour of the <code>read.csv()</code> and <code>read.table</code>
+functions (this feature was introduced with R version 4 - before it was
+the opposite!).</p>
 <p><strong>Challenge</strong></p>
 <p>Have a look at <strong>Starting with Data Exercise Block 4</strong>
 (~ 5 mins).</p>
-</div>
-<div id="stringsasfactorstrue-and-stringsasfactorsfalse" class="section level4">
-<h4>9. <code>stringsAsFactors=TRUE</code> and
-<code>stringsAsFactors=FALSE</code></h4>
-<p>You might remember that, earlier on, we imported the surveys data set
-using the argument <code>stringsAsFactors=TRUE</code>. By using this
-argument, we coerce (= convert) those columns that contain characters
-(i.e. text) into factors. However, more commonly the case is that we’d
-rather perform such conversions separately and for selected columns
-only, after the data have been imported. This way we ensure that we only
-convert those columns into factors where that data type is required.
-This corresponds to <code>stringsAsFactors=FALSE</code> and is now the
-default behaviour of the <code>read.csv()</code> and
-<code>read.table</code> functions (this feature was introduced with R
-version 4 - before it was the opposite!).</p>
-<p>Let’s compare the difference between our data read as “factor” vs
-“character”:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;home/rstudio/shared/portal_data_joined.csv&quot;</span>, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;home/rstudio/shared/portal_data_joined.csv&quot;</span>, </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the column &quot;plot_type&quot; into a factor</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>surveys<span class="sc">$</span>plot_type <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>plot_type)</span></code></pre></div>
 <p><strong>Optional challenge</strong></p>
 <p>Have a look at <strong>Starting with Data Exercise Block 5</strong>
 (~ 5-10 mins).</p>

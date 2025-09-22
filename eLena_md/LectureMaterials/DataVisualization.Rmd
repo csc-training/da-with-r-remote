@@ -547,7 +547,7 @@ Those are some hefty bits of code! Before looking at arranging and exporting plo
 
 #### 11. Arranging and exporting plots
 
-Faceting is a great tool for splitting one plot into multiple plots, but sometimes you may want to produce a single figure that contains multiple plots using different variables or even different data frames. The `gridExtra` package allows us to combine separate ggplots into a single figure using `grid.arrange()`:
+Faceting is a great tool for splitting one plot into multiple plots, but sometimes you may want to produce a single figure that contains multiple plots using different variables or even different data frames. Several R packages are allow faceting to create publication-ready multipanel figures, such as `gridExtra`, [patchwork](https://patchwork.data-imaginist.com/) and [cowplot](https://wilkelab.org/cowplot/index.html). Here, we use `gridExtra`. The `gridExtra` package allows us to combine separate ggplots into a single figure using `grid.arrange()`:
 
 ```r
 library(gridExtra)
