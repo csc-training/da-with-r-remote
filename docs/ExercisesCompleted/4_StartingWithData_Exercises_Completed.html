@@ -751,7 +751,7 @@ font-weight: bold;
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -931,11 +931,10 @@ important that we’re all on the same page! We will need these data as we
 move on.</p>
 <p><strong>1.1</strong> Import some example data
 (<code>/home/rstudio(shared/portal_data_joined.csv</code>) into an
-object called <code>surveys</code>. When importing the data, use the
-argument <code>stringsAsFactors = TRUE</code>. You can use
-<code>head()</code> to check that everything got imported correctly.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>, <span class="at">stringsAsFactors=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div>
+object called <code>surveys</code>. You can use <code>head()</code> to
+check that everything got imported correctly.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div>
 <p><strong>1.2</strong> We just imported data from outside our current
 working directory. Let’s also try something inside the working directory
 - create a new folder called <code>testfolder</code> (Files pane on the
@@ -979,19 +978,16 @@ the class, length and content of each column</li>
 <ul>
 <li>What is the class of the object <code>surveys</code>?</li>
 <li>How many rows and how many columns are in this object?</li>
-<li>How many different species IDs have been recorded during these
-surveys?</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## * class: data frame</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## * how many rows: 34786,  how many columns: 13</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## * how many species IDs: 48</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## * class: data frame</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="do">## * how many rows: 34786,  how many columns: 13</span></span></code></pre></div>
 </div>
 <div id="block-3-indexing-and-subsetting-data-frames" class="section level4">
 <h4><strong>Block 3: indexing and subsetting data frames</strong></h4>
 <p><strong>3.1</strong> Create a <code>data.frame</code>
 (<code>surveys_200</code>) containing only the data in row 200 of the
 <code>surveys</code> dataset.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>surveys_200 <span class="ot">&lt;-</span> surveys[<span class="dv">200</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>surveys_200 <span class="ot">&lt;-</span> surveys[<span class="dv">200</span>, ]</span></code></pre></div>
 <p><strong>3.2</strong> Notice how <code>nrow()</code> gave you the
 number of rows in a <code>data.frame</code>?</p>
 <ul>
@@ -1004,46 +1000,47 @@ number.</li>
 <li>Create a new data frame (<code>surveys_last</code>) from that last
 row.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(surveys)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>surveys_last1 <span class="ot">&lt;-</span> surveys[<span class="dv">34786</span>, ]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(surveys)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (Saving `n_rows` to improve readability)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>n_rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(surveys)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>surveys_last2 <span class="ot">&lt;-</span> surveys[n_rows, ]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">nrow</span>(surveys)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>surveys_last1 <span class="ot">&lt;-</span> surveys[<span class="dv">34786</span>, ]</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">tail</span>(surveys)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># (Saving `n_rows` to improve readability)</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>n_rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(surveys)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>surveys_last2 <span class="ot">&lt;-</span> surveys[n_rows, ]</span></code></pre></div>
 <p><strong>3.3</strong> Use <code>nrow()</code> to extract the row that
 is in the middle of the data frame. Store the content of this row in an
 object named <code>surveys_middle</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>surveys_middle <span class="ot">&lt;-</span> surveys[n_rows <span class="sc">/</span> <span class="dv">2</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>surveys_middle <span class="ot">&lt;-</span> surveys[n_rows <span class="sc">/</span> <span class="dv">2</span>, ]</span></code></pre></div>
 <p><strong>3.4</strong> A trickier example: combine <code>nrow()</code>
 with the <code>-</code> notation above to reproduce the behavior of
 <code>head(surveys)</code>, keeping just the first through 6th rows of
 the surveys dataset. Don’t worry if you can’t get this one right!</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>surveys_head <span class="ot">&lt;-</span> surveys[<span class="sc">-</span>(<span class="dv">7</span><span class="sc">:</span>n_rows), ]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">head</span>(surveys)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>surveys_head <span class="ot">&lt;-</span> surveys[<span class="sc">-</span>(<span class="dv">7</span><span class="sc">:</span>n_rows), ]</span></code></pre></div>
 </div>
 <div id="block-4-factors" class="section level4">
 <h4><strong>Block 4: factors</strong></h4>
 <p><strong>4.1</strong> First assign the gender data from
-<code>surveys</code> to a new object. You probably also remember there
-are some measurements where the gender information is either missing or
-undetermined, let’s call those “undetermined”.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> surveys<span class="sc">$</span>sex</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;undetermined&quot;</span></span></code></pre></div>
+<code>surveys</code> to a new object and convert it to a factor. You
+probably also remember there are some measurements where the gender
+information is either missing or undetermined, let’s call those
+“undetermined”.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;undetermined&quot;</span></span></code></pre></div>
 <p><strong>4.2</strong> Rename “F” and “M” to “female” and “male”,
 respectively.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;female&quot;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;male&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;female&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;male&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)</span></span></code></pre></div>
 <p><strong>4.3</strong> Can you reorder the data so that the levels are
 ordered like this: <code>undetermined</code>, <code>male</code>,
 <code>female</code>? After this, use <code>plot()</code> to check how
 the data now look.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;undetermined&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sex)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;undetermined&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">plot</span>(sex)</span></code></pre></div>
 </div>
 <div id="block-5-more-on-data-frames" class="section level4">
 <h4><strong>Block 5: more on data frames</strong></h4>
@@ -1052,15 +1049,15 @@ using <code>read.csv()</code>, but they can also be created by hand with
 the <code>data.frame()</code> function. There are a few mistakes in this
 hand-crafted <code>data.frame</code>. Can you spot and fix them? Don’t
 hesitate to experiment!</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>animal_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">animal =</span> <span class="fu">c</span>(dog, cat, sea cucumber, sea urchin),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">feel =</span> <span class="fu">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">8</span> <span class="fl">1.1</span>, <span class="fl">0.8</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          )</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># missing quotations around the names of the animals</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># missing entry in the feel column (one of the furry animals)</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># missing one comma in the weight column</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>animal_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>          <span class="at">animal =</span> <span class="fu">c</span>(dog, cat, sea cucumber, sea urchin),</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>          <span class="at">feel =</span> <span class="fu">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>          <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">8</span> <span class="fl">1.1</span>, <span class="fl">0.8</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>          )</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># missing quotations around the names of the animals</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># missing entry in the feel column (one of the furry animals)</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co"># missing one comma in the weight column</span></span></code></pre></div>
 <p><strong>5.2</strong> Can you predict the class for each of the
 columns in the following example? Check your guesses using
 <code>str(country_climate)</code>:</p>
@@ -1071,35 +1068,34 @@ columns in the following example? Check your guesses using
 <li>What would you need to change to ensure that each column had the
 accurate data type?</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>country_climate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">country =</span> <span class="fu">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Panama&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Australia&quot;</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">climate =</span> <span class="fu">c</span>(<span class="st">&quot;cold&quot;</span>, <span class="st">&quot;hot&quot;</span>, <span class="st">&quot;temperate&quot;</span>, <span class="st">&quot;hot/temperate&quot;</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">temperature =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="st">&quot;15&quot;</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">northern_hemisphere =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="st">&quot;FALSE&quot;</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">has_kangaroo =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="dv">1</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>       </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># country, climate, temperature, and northern_hemisphere are character vectors; has_kangaroo is numeric</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># using stringsAsFactors = TRUE would have made factors instead of character vectors</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># removing quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the has_kangaroo column</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>country_climate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>       <span class="at">country =</span> <span class="fu">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Panama&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Australia&quot;</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>       <span class="at">climate =</span> <span class="fu">c</span>(<span class="st">&quot;cold&quot;</span>, <span class="st">&quot;hot&quot;</span>, <span class="st">&quot;temperate&quot;</span>, <span class="st">&quot;hot/temperate&quot;</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>       <span class="at">temperature =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="st">&quot;15&quot;</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>       <span class="at">northern_hemisphere =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="st">&quot;FALSE&quot;</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>       <span class="at">has_kangaroo =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="dv">1</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>       )</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>       </span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># country, climate, temperature, and northern_hemisphere are character vectors; has_kangaroo is numeric</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># removing quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the has_kangaroo column</span></span></code></pre></div>
 </div>
 <div id="block-6-arguments-for-csv-importing" class="section level4">
 <h4><strong>Block 6: arguments for CSV importing</strong></h4>
 <p><strong>6.1</strong> Import a new data set on car speeds
 (<code>/home/rstudio/shared/car-speeds.csv</code>) and assign it to an
 object called <code>carSpeeds</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
 <p><strong>6.2</strong> Have a look at the structure of
 <code>carSpeeds</code> using <code>str()</code>. Then try reimporting
 the data with the header argument set to false. How does the new data
 set differ from the previous one?</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the first row of the data</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>carSpeeds[<span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co"># the first row of the data</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>carSpeeds[<span class="dv">1</span>, ]</span></code></pre></div>
 <p><strong>6.3</strong> The car colour labels contain accidental
 whitespaces. To fix this, try importing the data using the
 <code>strip.white</code> argument. NOTE - this argument must be
@@ -1107,21 +1103,20 @@ accompanied by the <code>sep</code> argument, by which we indicate the
 type of delimiter in the file (the comma for most .csv files). In other
 words, we need to add <code>sep = &#39;,&#39;</code> to the import command. You
 can use <code>unique()</code> to check if it worked!</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color) <span class="co"># right now we can see a problem here</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] Green Red White Red Black</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Levels: Red Black Green Red White</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&#39;/home/rstudio/shared/car-speeds.csv&#39;</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">strip.white =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&#39;,&#39;</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Blue&quot; &quot;Red&quot; &quot;White&quot; &quot;Black&quot;</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># That looks better!</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color) <span class="co"># right now we can see a problem here</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># [1] Green Red White Red Black</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># Levels: Red Black Green Red White</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&#39;/home/rstudio/shared/car-speeds.csv&#39;</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>  <span class="at">strip.white =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&#39;,&#39;</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>  )</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color)</span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co"># [1] &quot;Blue&quot; &quot;Red&quot; &quot;White&quot; &quot;Black&quot;</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co"># That looks better!</span></span></code></pre></div>
 </div>
 <div id="block-7-exporting-data-and-saving-scripts" class="section level4">
 <h4><strong>Block 7: exporting data and saving scripts</strong></h4>
@@ -1132,7 +1127,7 @@ to run through them by yourself!</p>
 <p><strong>7.2</strong> Export the car speeds data. The write.csv()
 function requires a minimum of two arguments, the data to be saved and
 the name of the output file.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>)</span></code></pre></div>
 <p><strong>7.3</strong> Save your script (File –&gt; Save as…).</p>
 <p><strong>7.4</strong> Export your data from RStudio Server.</p>
 <pre><code>- Go to the &quot;Files&quot; pane (on the right, next to &quot;Plots&quot;)

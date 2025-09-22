@@ -42,10 +42,10 @@ https://datacarpentry.org/R-ecology-lesson/
 This exercise block repeats the lecture contents - at this point it's important that we're all on the
 same page! We will need these data as we move on.
 
-**1.1** Import some example data (`/home/rstudio(shared/portal_data_joined.csv`) into an object called `surveys`. When importing the data, use the argument `stringsAsFactors = TRUE`. You can use `head()` to check that everything got imported correctly.
+**1.1** Import some example data (`/home/rstudio(shared/portal_data_joined.csv`) into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
 
 ```r
-surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv", stringsAsFactors=TRUE)
+surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv")
 head(surveys)
 ```
 
@@ -73,12 +73,10 @@ head(surveys)
 
 - What is the class of the object `surveys`?
 - How many rows and how many columns are in this object?
-- How many different species IDs have been recorded during these surveys?
 
 ```r
 ## * class: data frame
 ## * how many rows: 34786,  how many columns: 13
-## * how many species IDs: 48
 ```
 
 #### **Block 3: indexing and subsetting data frames**
@@ -121,10 +119,10 @@ surveys_head <- surveys[-(7:n_rows), ]
 
 #### **Block 4: factors**
 
-**4.1** First assign the gender data from `surveys` to a new object. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
+**4.1** First assign the gender data from `surveys` to a new object and convert it to a factor. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
 
 ```r
-sex <- surveys$sex
+sex <- factor(surveys$sex)
 levels(sex)[1] <- "undetermined"
 ```
 
@@ -179,7 +177,6 @@ country_climate <- data.frame(
        )
        
 # country, climate, temperature, and northern_hemisphere are character vectors; has_kangaroo is numeric
-# using stringsAsFactors = TRUE would have made factors instead of character vectors
 # removing quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the has_kangaroo column
 ```
 
@@ -213,7 +210,6 @@ unique(carSpeeds$Color) # right now we can see a problem here
 
 carSpeeds <- read.csv(
   file = '/home/rstudio/shared/car-speeds.csv',
-  stringsAsFactors = FALSE, 
   strip.white = TRUE,
   sep = ','
   )

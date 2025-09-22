@@ -4,13 +4,14 @@ output:
     highlight: kate
 ---
 
+```{=html}
 <style>
   code {
     white-space : pre-wrap !important;
     word-break: break-word;
   }
 </style>
-
+```
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
@@ -30,32 +31,30 @@ opts_knit$set(width=75)
 
 *This lesson is derived from Data Carpentry teaching materials available under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
 
-https://datacarpentry.org/R-ecology-lesson/
+<https://datacarpentry.org/R-ecology-lesson/>
 
 **Objectives:**
 
-- Load external data from a CSV file into a data frame
+-   Load external data from a CSV file into a data frame
 
-- Describe what a data frame is
+-   Describe what a data frame is
 
-- Summarize the contents of a data frame
+-   Summarize the contents of a data frame
 
-- Use indexing to subset specific portions of data frames
+-   Use indexing to subset specific portions of data frames
 
-- Describe what a factor is
+-   Describe what a factor is
 
-- Convert between strings and factors
+-   Convert between strings and factors
 
-- Reorder and rename factors
-
-- Change how character strings are handled in a data frame
+-   Reorder and rename factors
 
 #### 1. Presentation of the data
 
 We are studying the species repartition and weight of animals caught in plots in our study area. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:
 
 | Column          | Description                        |
-| --------------- | ---------------------------------- |
+|-----------------|------------------------------------|
 | record_id       | Unique id for the observation      |
 | month           | month of observation               |
 | day             | day of observation                 |
@@ -76,22 +75,21 @@ We will use `read.csv()` to load into memory the content of the CSV file as an o
 
 In fact, we haven't yet explored our *working directory* in much detail, so let's have a quick look. Let's check the current working directory using `getwd`:
 
-```r
+``` r
 getwd()
 
 # This will give something like: /home/rstudio/my-work/<R-project>
-
 ```
 
 This looks OK for now, but we could also change it using `setwd(...)` (with the new path given inside the brackets). For now, we will use the present working directory (we can still import our data from outside it).
 
-We can now import the data. While doing so, let's include the argument `stringsAsFactors = TRUE`. More on that later in the course - we will come back to the `read.csv()` function call and its arguments in the next session. 
+We can now import the data with function call the `read.csv()`. We will come back to this function and its arguments in the next session.
 
-```r
-surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv", stringsAsFactors = TRUE)
+``` r
+surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv")
 ```
 
-```r
+``` r
 # Note:
 
 # If we wanted to download the file from a website instead, such as one of these:
@@ -103,14 +101,13 @@ surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv", stringsAsFact
 
 # This would save the file in your current working directory.
 # We could also save it elsewhere by writing ... destfile = "path/to/portal_data_joined.csv"
-
 ```
 
 The `surveys <- read.csv("/home...")` statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: `surveys`.
 
 Wow… that was a lot of output. At least it means the data loaded properly. Let’s check the top (the first 6 lines) of this data frame using the function `head()`:
 
-```r
+``` r
 head(surveys)
 
 ## Try also
@@ -121,7 +118,7 @@ Ok, looks good! Let's keep on working with the survey data.
 
 **Challenge:**
 
-At this point, let's complete **Starting with Data Exercise Block 1** (~ 5 mins). 
+At this point, let's complete **Starting with Data Exercise Block 1** (\~ 5 mins).
 
 #### 3. What are data frames?
 
@@ -135,7 +132,7 @@ A data frame is the representation of data in the format of a table where the co
 
 We can see this when inspecting the **str**ucture of a data frame with the function `str()`:
 
-```r
+``` r
 str(surveys)
 ```
 
@@ -145,13 +142,13 @@ We already saw how the functions `head()` and `str()` can be useful to check the
 
 **Challenge**
 
-Let's inspect the `surveys` data set further by going through **Starting with Data Exercise Block 2** (~ 5 mins). 
+Let's inspect the `surveys` data set further by going through **Starting with Data Exercise Block 2** (\~ 5 mins).
 
 #### 5. Indexing and subsetting data frames
 
 Our survey data frame has rows and columns (it has 2 dimensions), if we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. However, note that different ways of specifying these coordinates lead to results with different classes.
 
-```r
+``` r
 # first element in the first column of the data frame (as a vector)
 surveys[1, 1]   
 # first element in the 6th column (as a vector)
@@ -172,7 +169,7 @@ head_surveys <- surveys[1:6, ]
 
 You can also exclude certain indices of a data frame using the “`-`” sign:
 
-```r
+``` r
 # The whole data frame, except the first column
 surveys[, -1]
 
@@ -182,41 +179,47 @@ surveys[-c(7:34786), ]
 
 Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:
 
-```r
+``` r
 surveys["species_id"]       # Result is a data.frame
 surveys[, "species_id"]     # Result is a vector
 surveys[["species_id"]]     # Result is a vector
 surveys$species_id          # Result is a vector
 ```
 
-In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.
+In RStudio, you can press the tab key to use the autocompletion feature to get the full and correct names of the columns.
 
 **Optional challenge**
 
-Have a look at **Starting with Data Exercise Block 3** (~ 15 mins). 
+Have a look at **Starting with Data Exercise Block 3** (\~ 15 mins).
 
 #### 6. Introducing factors
 
-When we did `str(surveys)` we saw that several of the columns consist of integers. The columns `genus`, `species`, `sex`, `plot_type`, … however, are of a special class called `factor`. Factors are very useful and contribute to making R particularly well suited to working with data. So we are going to spend a little time introducing them.
+When we did `str(surveys)` we saw that the columns `species_id`, `genus`, `species`, `taxa`, `sex`, and `plot_type` consist of character data, i.e., strings of letters. These columns are, however, intended to represent *categorical data*, for example information on group membership (e.g. whether measurements belong to experimental controls or different treatment groups). In R, categorical data are handled as a special class called `factor`. Factors are very useful and contribute to making R particularly well suited to working with data. So we are going to spend a little time introducing them.
 
-Factors represent categorical data and often include information on group membership (e.g. whether measurements belong to experimental controls or different treatment groups). They are stored as integers associated with labels and can be either ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. So you need to be very careful when treating them as strings. Let's have a look at what this means in practice!
+To convert the character data column `species_id` in our `surveys` data frame into a factor, we use the function `factor`:
+
+``` r
+sex <- factor(surveys$species_id)
+```
+
+Factors are stored as integers associated with labels and can be either ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. So you need to be very careful when treating them as strings. Let's have a look at what this means in practice!
 
 The defining feature of a factor is that it can have several *levels*. By default, R always sorts levels in alphabetical order. For instance, if we wanted to create a factor called "sex" with the levels "male" and "female":
 
-```r
+``` r
 sex <- factor(c("male", "female", "female", "male"))
 ```
 
 R will assign `1` to the level `"female"` and `2` to the level `"male"` (because `f` comes before `m`, even though the first element in this vector is `"male"`). You can see this by using the function `levels()` and you can find the number of levels using `nlevels()`:
 
-```r
+``` r
 levels(sex)
 nlevels(sex)
 ```
 
 Sometimes, the order of the factors does not matter, other times you might want to specify the order because it is meaningful (e.g., “low”, “medium”, “high”), it improves your visualization, or it is required by a particular type of analysis. We can first check the current order:
 
-```r
+``` r
 sex
 #> [1] male female female male  
 #> Levels: female male
@@ -224,7 +227,7 @@ sex
 
 One way to reorder our levels in the `sex` vector would be:
 
-```r
+``` r
 sex <- factor(sex, levels = c("male", "female"))
 sex 
 
@@ -239,7 +242,7 @@ In R’s memory, these factors are represented by integers (1, 2, 3), but are mo
 
 If you need to convert a factor to a character vector, you use `as.character(x)`.
 
-```r
+``` r
 as.character(sex)
 ```
 
@@ -247,7 +250,7 @@ In some cases, you may have to convert factors where the levels appear as number
 
 Another method is to use the `levels()` function. Compare:
 
-```r
+``` r
 year_fct <- factor(c(1990, 1983, 1977, 1998, 1990))
 
 as.numeric(year_fct) # Wrong! And there is no warning...
@@ -258,15 +261,15 @@ as.numeric(levels(year_fct))[year_fct] # Using levels()
 
 Notice that in the `levels()` approach, three important steps occur:
 
-- We obtain all the factor levels using `levels(year_fct)`
-- We convert these levels to numeric values using `as.numeric(levels(year_fct))`
-- We then access these numeric values using the underlying integers of the vector `year_fct` inside the square brackets
+-   We obtain all the factor levels using `levels(year_fct)`
+-   We convert these levels to numeric values using `as.numeric(levels(year_fct))`
+-   We then access these numeric values using the underlying integers of the vector `year_fct` inside the square brackets
 
 #### 8. Renaming factors
 
 When your data is stored as a factor, you can use the `plot()` function to get a quick glance at the number of observations represented by each factor level. Let’s look at the number of males and females captured over the course of the experiment:
 
-```r
+``` r
 ## bar plot of the number of females and males:
 plot(surveys$sex)
 ```
@@ -275,8 +278,8 @@ plot(surveys$sex)
 
 In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing or undetermined. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:
 
-```r
-sex <- surveys$sex
+``` r
+sex <- factor(surveys$sex)
 head(sex)
 
 #> [1] M M        
@@ -295,31 +298,15 @@ head(sex)
 #> Levels: undetermined F M
 ```
 
+It is also possible to import the `surveys` data set with the function `read.csv` and the argument `stringsAsFactors=TRUE`. By using this argument, we would. coerce (= convert) those columns that contain characters (i.e. text) into factors. However, more commonly the case is that we'd rather perform such conversions separately and for selected columns only, after the data have been imported. This way we ensure that we only convert those columns into factors where that data type is required. This corresponds to `stringsAsFactors=FALSE` and is the default behaviour of the `read.csv()` and `read.table` functions (this feature was introduced with R version 4 - before it was the opposite!).
+
+
 **Challenge**
 
-Have a look at **Starting with Data Exercise Block 4** (~ 5 mins). 
-
-#### 9. `stringsAsFactors=TRUE` and `stringsAsFactors=FALSE`
-
-You might remember that, earlier on, we imported the surveys data set using the argument `stringsAsFactors=TRUE`. By using this argument, we coerce (= convert) those columns that contain characters (i.e. text) into factors. However, more commonly the case is that we'd rather perform such conversions separately and for selected columns only, after the data have been imported. This way we ensure that we only convert those columns into factors where that data type is required. This corresponds to `stringsAsFactors=FALSE` and is now the default behaviour of the `read.csv()` and `read.table` functions (this feature was introduced with R version 4 - before it was the opposite!). 
-
-Let's compare the difference between our data read as "factor" vs "character":
-
-```r
-surveys <- read.csv("home/rstudio/shared/portal_data_joined.csv", 
-stringsAsFactors = TRUE)
-str(surveys)
-
-surveys <- read.csv("home/rstudio/shared/portal_data_joined.csv", 
-stringsAsFactors = FALSE)
-str(surveys)
-
-# Convert the column "plot_type" into a factor
-surveys$plot_type <- factor(surveys$plot_type)
-```
+Have a look at **Starting with Data Exercise Block 4** (\~ 5 mins).
 
 **Optional challenge**
 
-Have a look at **Starting with Data Exercise Block 5** (~ 5-10 mins). 
+Have a look at **Starting with Data Exercise Block 5** (\~ 5-10 mins).
 
 The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (for instance, a letter in a column that should only contain numbers).
