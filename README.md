@@ -12,7 +12,7 @@ The course materials (links below) can also be used for self-study.
 
 **Links to CSC platforms**
 
-[Notebooks](https://notebooks.csc.fi/)
+[Notebooks](https://noppe.csc.fi/)
 
 [eLena](https://e-learn.csc.fi)
 
