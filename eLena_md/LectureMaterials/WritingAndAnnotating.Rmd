@@ -128,6 +128,11 @@ At this point, let's complete **Basic Features Exercise Block 1** (see separate 
 
 #### 5. Functions and their arguments
 
+> "Everything that exists is an object.
+>  Everything that happens is a function call."
+>
+> `r tufte::quote_footer('--- John Chambers')`
+
 Functions are “canned scripts” that automate more complicated sets of commands including operations and assignments etc. Many functions are predefined, or can be made available by importing R *packages* (more on that later). 
 
 A function usually takes one or more inputs called *arguments*. Functions often (but not always) return a *value*. A typical example would be the function `sqrt()`. The input (the argument) must be a number, and the return value is the square root of that number. Executing a function (‘running it’) is called *calling* the function. An example of a function call is:
