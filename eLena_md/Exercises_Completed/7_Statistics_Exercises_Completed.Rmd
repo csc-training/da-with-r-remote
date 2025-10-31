@@ -1,0 +1,195 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Statistics - exercise sheet
+
+#### **Block 1: Paired samples _t_-test**
+
+**1.1** Let's use the `sleep` data built into R to perform a paired-samples _t_-test. This data set shows the effect of two drowsiness-inducing drugs (hours of extra sleep compared to a control) on ten patients. Here the position (row number) of the observations within groups matters, as the test assumes observations to be _paired_ in a meaningful way. In our case, the data are ordered by the patient ID. 
+
+Let's first assign the built-in `sleep` data into a data frame:
+
+```r
+sleepdata <- sleep
+sleepdata # the data set is small, so we can inspect the whole data set instead of using head() or str()
+```
+**1.2** Then, let's run independent samples *t*-test on `sleepdata` to compare the amount of extra sleep (`extra`) among two groups (`group`). As a reminder, the format of an independent samples *t*-test was:
+
+```r
+# independent samples t-test:
+# t.test(y ~ x, data = dataset)
+```
+
+```r
+# solution:
+t.test(extra ~ group, data = sleepdata)
+
+# output:
+#	Welch Two Sample t-test
+#
+# data:  extra by group
+# t = -1.8608, df = 17.776, p-value = 0.07939
+# alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+# 95 percent confidence interval:
+#  -3.3654832  0.2054832
+# sample estimates:
+# mean in group 1 mean in group 2 
+#           0.75            2.33 
+````
+
+**1.3** To run the paired samples *t*-test, we have to change for formatting of the data from the **long format** to the **wide format**. We are taking column names (`names_from`) from the column `group`, and giving them names `med1` and `med2` for the two drugs being tested. The measurements of extra sleep (`values_from`) come from the column `extra` in the original `sleep` data set. To more about reshaping data sets this way, see the section Data Manipulation.
+
+```r
+sleep_wide <- sleepdata |> 
+  pivot_wider(names_from = group,
+              values_from = extra,
+              names_prefix = "med")
+sleep_wide
+```
+
+**1.4** Now we are ready to run the paired-samples *t*-test. It uses the same function as independent samples *t*-test, but the syntax for a paired test is different:
+
+```r
+# paired samples t-test:
+# y1 and y2 are response data columns, where observations on the same row belong together
+# in this case, they are different measurements on the same individual
+#
+# t.test(Pair(y1, y2) ~ 1, data = dataframe)
+```
+Run the paired samples *t*-test and compare the result with the independent samples test results. How would you interpret the results? Why do you think the type of test affects the conclusion we're able to make?
+
+```r
+t.test(Pair(med1, med2) ~ 1, data = sleep_wide)
+
+# output:
+#	Paired t-test
+#
+# data:  Pair(med1, med2)
+# t = -4.0621, df = 9, p-value = 0.002833
+# alternative hypothesis: true mean difference is not equal to 0
+# 95 percent confidence interval:
+# -2.4598858 -0.7001142
+# sample estimates:
+# mean difference 
+#           -1.58 
+```
+
+Independent samples *t*-test showed no clear difference in extra sleep between the two medications (p=0.08). A paired samples *t*-test, which takes into account that each medication was tested on the same patients in turn, shows a difference (p=0.003). Properly considering the paired nature of the data and variation among patients increased the sensitivity of the test.
+
+Note that in many sources you might see a different syntax of the paired samples *t*-test, which includes the option `paired = TRUE`. The syntax was changed in R v.4.4.0 to fix a bug, and the old syntax does not work anymore in recent R versions (including the one we use on this course).
+
+#### **Block 2: Correlation**
+
+**2.1** We will use a data set built into R called `penguins`. Before starting, make sure you have read in the data, created a copy of it, and at the same time, omitted the missing observations as in the demonstration earlier. Then we inspect the contents with `str()`.
+
+```r
+penguinsdata <- na.omit(data("penguins"))
+str(penguinsdata)
+
+```
+**2.2** We are interested in the correlation of penguin body mass and flipper length. 
+
+The function `cor.test`() tests the null hypothesis that the variables are not correlated:
+
+```r
+# cor.test(dataframe$variable1, dataframe$variable2, method = "pearson")
+
+# note how $ is used to select the columns of the data frame containing the variables of interest
+```
+
+Use the function `cor.test` to test if the numeric variables `body_mass` and `flipper_len` in the data frame `penguinsdata` are correlated. To find more about the function, use `?cor.test`. 
+
+The default method is Pearson correlation (`method = "pearson"`), which assumes the samples follow normal distribution. If this is not the case, we can specify to use Spearman correlation (`method = "spearman"`), which works better for non-normal data.
+
+What is the correlation coefficient between penguin body mass and flipper length? What is your conclusion - are the variables correlated?
+
+```r
+cor.test(penguinsdata$body_mass, penguinsdata$flipper_len, method = "pearson")
+
+# output:
+#	Pearson's product-moment correlation
+#
+# data:  penguinsdata$body_mass and penguinsdata$flipper_len
+# t = 32.562, df = 331, p-value < 2.2e-16
+# alternative hypothesis: true correlation is not equal to 0
+# 95 percent confidence interval:
+# 0.8447622 0.8963550
+# sample estimates:
+#       cor 
+# 0.8729789 
+```
+
+Correlation coefficient (r) is 0.87 and p value is < 2.2e-16, which indicates the variables are correlated.
+
+#### **Block 3: ANOVA**
+
+**3.1** Our next task is to find out if the penguin flipper length differs among the three species (Adelie, Gentoo and Chinstrap) present in our `penguinsdata` data set. Flipper length is the numerical response factor and species is the categorical explanatory factor.
+
+**3.2** First, create a linear model of `flipper_len`and `species` in the data frame `penguinsdata` using the function `lm()`.
+
+Hint: the syntax needed is `my_lm <- lm(response_factor ~ explanatory_factor, data = dataframe)`
+
+```r
+flipper_lm <- lm(flipper_len ~ species, data = penguinsdata)
+```
+
+**3.3** Then, let's inspect the diagnostics of our model with `autoplot(my_lm)`. Do you see anything in the model diagnostics that concerns you or is it ok to proceed? 
+
+´´´r
+autoplot(flipper_lm)
+´´´
+
+If you get an error about the function `autoplot` not being available, make sure you have run `library(ggfortify)` to load the package `ggfortify`.
+
+**3.4.** Finally, use the function `anova()` to create an ANOVA table for your model. Does penguin flipper length differ among the species? What are the F statistic and P value of the test?
+
+```r
+anova(flipper_lm)
+
+# output:
+#Analysis of Variance Table
+#
+# Response: flipper_len
+#           Df Sum Sq Mean Sq F value    Pr(>F)    
+# species     2  50526 25262.9  567.41 < 2.2e-16 ***
+# Residuals 330  14693    44.5                      
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+
+F value is 567.41 and P value is < 2.2e-16. They show that flipper length differs among species.
+
+**3.5** Optional: if you are fast, have a try creating the same ANOVA with the functions `aov()`and `summary()`. The command structure is `my_aov <- aov(response_factor ~ explanatory_factor, data = data_frame)`. To find out more about the function `aov`, try `?aov`. When using `aov`, it is also possible to use the function `TukeyHSD` to find out which of the groups differ from each other (see `?TukeyHSD`).
+
+```r
+flipper_aov <- aov(body_mass ~ species, data = penguinsdata)
+summary(flipper_aov)
+TukeyHSD(flipper_aov)
+```
+
+**3.6** Now it's time to save and export everything we've created during the course. Can you remember how to do this? If not, you can revisit the instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).

@@ -4,7 +4,6 @@ output:
     highlight: kate
 ---
 
-
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
@@ -25,64 +24,57 @@ opts_knit$set(width=75)
 **Objectives:**
 
 Have an appreciation of:
-    
-- The difference between inferential and descriptive statistics
 
-- How hypothesis testing works
+-   The difference between inferential and descriptive statistics
 
-- The difference between parametric and non-parametric tests
+-   How hypothesis testing works
 
-- The typical sequence of steps taken to perform statistical analyses
-        
+-   The difference between parametric and non-parametric tests
+
+-   The typical sequence of steps taken to perform statistical analyses
+
 Have a working knowledge of the following statistical methods:
-    
-- Different types of *t*-test (`t.test`)
 
-- One-sample, independent two-sample and paired-sample tests
+-   Different types of *t*-test (`t.test`)
 
-- Student's vs Welch's *t*-test
+-   One-sample, independent two-sample and paired-sample tests
 
-- Linear regression (`lm`, short for "linear model")
+-   Student's vs Welch's *t*-test
 
-- Chi-squared test of independence (`chisq.test`)
+-   Linear regression (`lm`, short for "linear model")
 
-- Know how to inspect test diagnostics
+-   Chi-squared test of independence (`chisq.test`)
 
-- Interpret the output of statistical tests in R
+-   Know how to inspect test diagnostics
+
+-   Interpret the output of statistical tests in R
 
 #### 1. Introduction
 
 Welcome to the last episode of this workshop! Contrary to the others, this episode involves more of a focus on theory (although there are still a few coding exercises). This is because the concepts behind significance testing are more complex than the actual R code we're going to learn.
 
-Depending on the course schedule and how we've run through the previous exercises, we may already have quite a lot stored in our R workspace. Let's start by wiping R's memory clean, reloading `tidyverse` and reimporting the tidied survey data we prepared before:
+Depending on the course schedule and how we've run through the previous exercises, we may already have quite a lot stored in our R workspace. Let's start by wiping R's memory clean, reloading `tidyverse`, and importing a data set called `penguins` that is built into R that we will use in the examples and exercises below. It consists of 344 observations (individual penguins) and eight variables. Our data set contains missing values, so for simplicity let's remove the observations with missing values.
 
-```r
+``` r
 rm(list = ls()) # Wipes everything clean
 library(tidyverse) # Reloading tidyverse
 
-surveys_complete <- read_csv("data_output/surveys_complete.csv")
-
-# We also have an in-built backup of the data:
-# surveys_complete <- read_csv("/home/rstudio/shared/surveys_complete.csv")
-
-# ... Or the data could be downloaded:
-# download.file(url = "https://tinyurl.com/surveyscomplete",
-# destfile = "data_output/surveys_complete.csv")
-
-# the tinyurl links to:
-# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv
+head(penguins)  # Displays the first rows of the data set
+penguinsdata <- penguins |>  # Assigns data to a data frame
+                na.omit()    # Removes missing values
 ```
-The functions for *t*-tests, Chi-squared tests and linear regression come as part of a default R installation, so we don't have to load separate packages for those. However, we can load the package `ggfortify` (along with `tidyverse`), which is useful for plotting purposes:
 
-```r
-library(tidyverse)
+The functions for *t*-tests, Chi-squared tests and linear regression come as part of a default R installation, so we don't have to load separate packages for those. However, we can load the package `ggfortify` (along with `tidyverse` loaded above), which is useful for plotting purposes:
+
+``` r
 library(ggfortify)
 ```
+
 #### 2. Two types of statistics
 
-A typical goal for statistics is to _infer_ what is happening within a population based on a smaller _sample_ from that population (or one resembling it). This is what we call **inferential statistics**, with the inferences we make being based on the concept of _statistical significance_. We will cover this concept and some common statistical methods today.
+A typical goal for statistics is to *infer* what is happening within a population based on a smaller *sample* from that population (or one resembling it). This is what we call **inferential statistics**, with the inferences we make being based on the concept of *statistical significance*. We will cover this concept and some common statistical methods today.
 
-Prior to inferential statistics, we need to obtain a general understanding of the data we are working with. The branch of statistics dealing with _describing_ a data set is called **descriptive statistics**. Examples include inspecting how the data are distributed as well as computing _summary statistics_ like the mean or the median.
+Prior to inferential statistics, we need to obtain a general understanding of the data we are working with. The branch of statistics dealing with *describing* a data set is called **descriptive statistics**. Examples include inspecting how the data are distributed as well as computing *summary statistics* like the mean or the median.
 
 We will soon see how descriptive and inferential statistics go hand in hand, even when we've already had a first look at the data.
 
@@ -92,8 +84,8 @@ The earlier episodes included examples of working with descriptive statistics. F
 
 A quick way to compute summary statistics for a data frame is to use the `summary` function call:
 
-```r
-summary(surveys_complete)
+``` r
+summary(penguinsdata)
 
 # Generates lots of information, including:
 # Minimum and maximum values
@@ -103,8 +95,8 @@ summary(surveys_complete)
 
 There are also specific functions that we haven't yet covered:
 
-```r
-min() # minimum, e.g. min(surveys_complete$weight)
+``` r
+min() # minimum, e.g. min(penguinsdata$flipper_len)
 max() # maximum
 range() # minimum and maximum
 median() # median
@@ -112,10 +104,10 @@ quantile() # quantiles
 IQR() # interquantile range (Q3 - Q1)
 var() # variance
 sd() # standard deviation (= square root of variance)
-std.error() # standard error (part of the "plotrix" package)
+plotrix::std.error() # standard error (part of the "plotrix" package)
 
 # The standard error can also be calculated as:
-# Standard deviation / n (with n being the sample size)
+# Standard deviation / sqrt(n) (with sqrt(n) being the square root of sample size n)
 
 # A note on variance:
 
@@ -135,12 +127,12 @@ Most of this episode deals with inferential statistics. First let's discuss some
 More formally, there are several steps to this:
 
 1.  Formulating a *null hypothesis* (usually stating that the observations are due to pure chance). The *alternative hypothesis* is that the observations cannot be explained by chance alone.
-    
+
 2.  Deciding on the best way to test whether the null hypothesis is true.
-    
+
 3.  Determine the *P* value, i.e. the probability that a result as significant as the one we obtain would also be observed if the null hypothesis was true. The higher the *P* value, the more likely the result is due to chance (and the lower, the more likely we're seeing a real effect).
-    
-4.  Compare the *P* value to a pre-determined *alpha value* (typically 0.05). If *P* < α, the effect is said to be statistically significant (if α = 0.05, that would mean there's less than a 5% probability that the result is entirely due to chance).
+
+4.  Compare the *P* value to a pre-determined *alpha value* (typically 0.05). If *P* \< α, the effect is said to be statistically significant (if α = 0.05, that would mean there's less than a 5% probability that the result is entirely due to chance).
 
 #### 5. Parametric and non-parametric methods
 
@@ -150,9 +142,9 @@ Statistical methods can be **parametric** or **non-parametric**. Both assume tha
 
 Let's have a look at some of the key features that define parametric tests:
 
--   Parametric methods make assumptions about the underlying distribution of the data. A common scenario is the assumption of _normality_, i.e. adherence to the normal (or Gaussian) distribution. Many natural phenomena tend to follow the normal distribution, which is shaped like a bell curve. To see this in practice, let's create a histogram:
+-   Parametric methods make assumptions about the underlying distribution of the data. A common scenario is the assumption of *normality*, i.e. adherence to the normal (or Gaussian) distribution. Many natural phenomena tend to follow the normal distribution, which is shaped like a bell curve. To see this in practice, let's create a histogram:
 
-```r
+``` r
 # generate random data from normal distribution using rnorm()
 random_normal = rnorm(10000, mean = 0, sd = 1)
 # creates vector with mean of 0 and standard deviation of 1
@@ -167,47 +159,47 @@ ggplot(random_normal, aes(x = random_normal)) +
 
 ![](Images/random_normal.png?raw=true)
 
-- The assumption of normality can apply to either the observations or to _residuals_ (i.e. differences between your observations and a set of predicted values). We will talk more about residuals soon!
-    
-- Parametric methods assume a _homogeneity of variance_ between groups. For example, we might want to compare the `hindfoot_length` of males and females in the `surveys_complete` data set. A parametric test would assume the values in the two groups to have equal variances.
-    
-- Parametric methods use the mean as a measure of central tendency (in practice this means that they rely on comparisons of group means).
+-   The assumption of normality can apply to either the observations or to *residuals* (i.e. differences between your observations and a set of predicted values). We will talk more about residuals soon!
+
+-   Parametric methods assume a *homogeneity of variance* between groups. For example, we might want to compare the `flipper_len` representing flipper length of males and females in the `penguins` data set. A parametric test would assume the values in the two groups to have equal variances.
+
+-   Parametric methods use the mean as a measure of central tendency (in practice this means that they rely on comparisons of group means).
 
 **Non-parametric methods**
 
 In contrast to their parametric counterparts, non-parametric methods:
 
-- Do not assume a particular distribution or the homogeneity of variances. They still make other assumptions (while they are sometimes called "distribution-free", they are never assumption-free).
-    
-- Are suitable for the analysis of data measured at the _nominal_ level (such as names and labels).
-    
-- Employ the median as a measure of central tendency. This is important because if the study aim is to compare group medians rather than means, a non-parametric test might be preferable (even if the data could otherwise be analyzed using a parametric approach).
+-   Do not assume a particular distribution or the homogeneity of variances. They still make other assumptions (while they are sometimes called "distribution-free", they are never assumption-free).
+
+-   Are suitable for the analysis of data measured at the *nominal* level (such as names and labels).
+
+-   Employ the median as a measure of central tendency. This is important because if the study aim is to compare group medians rather than means, a non-parametric test might be preferable (even if the data could otherwise be analyzed using a parametric approach).
 
 #### 5. How to put things into practice
 
 With real data, things practically never look as neat as they did in the example above. For example, the distributions may be *skewed* or you might see multiple peaks (or *modes*). Parametric methods are nevertheless often recommended because:
 
-- When the assumptions are met, they are more sensitive than non-parametric analyses (you are more likely to detect an effect if there is one).
-    
-- If the assumptions are not met, it may be possible to address this by _transforming_ the data (e.g. using a log or _x_+1 transformation). The idea is that transfomations can help address issues including non-normality without affecting the relationship between observations (since all the data are subjected to the same transformation).
-    
+-   When the assumptions are met, they are more sensitive than non-parametric analyses (you are more likely to detect an effect if there is one).
+
+-   If the assumptions are not met, it may be possible to address this by *transforming* the data (e.g. using a log or *x*+1 transformation). The idea is that transformations can help address issues including non-normality without affecting the relationship between observations (since all the data are subjected to the same transformation).
+
 For a typical parametric analysis, we would move through the following steps:
 
-2. **Descriptive statistics:** summarize and visualize the data
-    
-3. **Test diagnostics:** check for deviations from test assumptions
-    
-- If deviations occur, transform and repeat steps 1-2
-        
-- If transformations don't help, choose a suitable non-parametric test
-        
-4. **Inferential statistics:** run the test and interpret the output
-    
+2.  **Descriptive statistics:** summarize and visualize the data
+
+3.  **Test diagnostics:** check for deviations from test assumptions
+
+-   If deviations occur, transform and repeat steps 1-2
+
+-   If transformations don't help, choose a suitable non-parametric test
+
+4.  **Inferential statistics:** run the test and interpret the output
+
 Remember that in some cases a non-parametric test might be your best option to start with! The steps taken for these are very similar: describe the data, check that the assumptions are met, then go ahead with significance testing.
 
-**Zoom Breakout Discussion**
+**Discussion**
 
-Let's split into breakout rooms (around 5 people in each room). Spend up to 10 minutes (~2 mins each) taking turns to discuss the types of data you deal with in your work (or data you're anticipating to generate). Which types of statistical tests are likely to be the most suitable for these - parametric or non-parametric? Once you're ready, you can leave the breakout room and return to the main meeting (remember: don't click on the exit meeting button, this will remove you from the entire Zoom meeting!).
+Spend up to 10 minutes (\~2 mins per person ) taking turns to discuss the types of data you deal with in your work (or data you're anticipating to generate). Which types of statistical tests are likely to be the most suitable for these - parametric or non-parametric?
 
 #### 6. Examples of statistical methods
 
@@ -217,108 +209,124 @@ We are now ready to learn about some common statistical techniques and how to us
 
 The *t*-test comes in three different flavors. Without going into mathematical details, what we need to know is that all these approaches are based on the comparison of group means. The three types are:
 
-1. The independent-samples *t*-test, which compares two separate groups
-    
-2. The paired-sample *t*-test, which compares one group at different times (or in response to two different treatments)
-    
-3. The one-sample *t*-test, which compares a group mean against a known value
+1.  The independent-samples *t*-test, which compares two separate groups
 
-The standard version of the _t_-test, also known as Student's _t_-test, assumes equal variances among groups. However, the default option in R is to implement a version that corrects for inequal variances: Welch's _t_-test. The function call is:
+2.  The paired-sample *t*-test, which compares one group at different times (or in response to two different treatments)
 
-```r
+3.  The one-sample *t*-test, which compares a group mean against a known value
+
+The standard version of the *t*-test, also known as Student's *t*-test, assumes equal variances among groups. However, the default option in R is to implement a version that corrects for unequal variances: Welch's *t*-test. The function call is:
+
+``` r
 t.test() # used for all types of t-test
 t.test(var.equal = TRUE) # if we wanted to use a Student's test
 ```
-To have a closer look at this, let's import the `sleep` data set built into R. This data set shows the effect of two soporific drugs (hours of extra sleep compared to a control) on ten patients.
 
-```r
-sleepdata <- sleep # assigns sleep data to a data frame
-sleepdata
-```
-**Challenge (and Zoom Breakout Discussion)**
+Let's first compare flipper length of female and male penguins in our `penguinsdata` data set we imported above. 
+
+**Challenge (and discussion)**
 
 Let's create a box plot and histogram of the data.
 
-```r
+``` r
 # this time also changing the formatting a little
- ggplot(data = sleepdata, mapping = aes(x = group, y = extra)) +
-  geom_boxplot() +
-  theme_bw() +
-  theme(text = element_text(size = 16))
+ penguinsdata |> 
+  ggplot(mapping = aes(x = sex, y = flipper_len)) +
+    geom_boxplot() +
+    theme_bw() +
+    theme(text = element_text(size = 16))
 ```
 
-![](Images/sleep_data.png?raw=true)
+![](Images/penguins_data.png?raw=true)
 
-```r
-ggplot(sleepdata, aes(x = extra)) +
- geom_histogram(color = "black", fill = "white") +
- facet_wrap(facets = vars(group)) +
- theme_bw() +
- theme(text = element_text(size = 16))
+``` r
+penguinsdata |> 
+  ggplot(aes(x = flipper_len)) +
+    geom_histogram(color = "black", fill = "white") +
+    facet_wrap(facets = vars(sex)) +
+    theme_bw() +
+    theme(text = element_text(size = 16))
 ```
 
-![](Images/sleep_normal.png?raw=true)
+![](Images/penguins_normal.png?raw=true)
 
-Take some time to copy these for yourself from the Codeshare session.
+Take some time to copy these for yourself.
 
-Once you have created the plots for yourself, let's split again into Zoom Breakout Rooms (5 people in each). Discuss the following topics for ~5-10 minutes and return to the main room once you are ready: 
+Once you have created the plots for yourself, discuss the following topics for \~5-10 minutes:
 
-1. If we'd take a situation where groups 1 and 2 are distinct from one another and we wanted to compare them, which test would we use? What if we'd like to test if the mean for group 1 differs from a value reported for a third drug type?
+1.  If we'd take a situation where groups 1 and 2 (here female and male penguins) are distinct from one another and we wanted to compare them, which test would we use? What if we'd like to test if the mean for female penguins differs from a value reported previously?
 
-2. The *t*-test assumes that the _dependent value_ (`extra`) is normally distributed within each group. Do you think the assumption is successfully met?
+2.  The *t*-test assumes that the *dependent value* (`flipper_len`) is normally distributed within each group. Do you think the assumption is successfully met?
 
-3. Do you think the box plot is useful for evaluating parametric test diagnostics? Is there anything you would display differently?
+3.  Do you think the box plot is useful for evaluating parametric test diagnostics? Is there anything you would display differently?
 
 **Independent-samples *t*-test**
 
-For our purposes, we can conclude that we have met the assumptions (we'll look at variance later on). We can now perform an independent-samples _t_-test, also known as a two-sample test. Notice the `~` symbol, which is indicative of _formulas_ in R. We are using it to say that we'd like to examine `extra` "by" the `group` variable:
+For our purposes, we can conclude that we have met the assumptions (we'll look at variance later on). We can now perform an independent-samples *t*-test, also known as a two-sample test. Notice the `~` symbol, which is indicative of *formulas* in R. We are using it to say that we'd like to examine `flipper_len` "by" the `sex` variable:
 
-```r
-t.test(extra ~ group, sleep)
+``` r
+t.test(flipper_len ~ sex, data = penguinsdata)
 
-# Welch Two Sample t-test
-
-# data: extra by group
-# t = -1.8608, df = 17.776, p-value = 0.07939
-# alternative hypothesis: true difference in means is not equal to 0
-
+#	Welch Two Sample t-test
+#
+# data:  flipper_len by sex
+# t = -4.8079, df = 325.28, p-value = 2.336e-06
+# alternative hypothesis: true difference in means between group female and group male is not equal to 0
 # 95 percent confidence interval:
-# -3.3654832 0.2054832
+#  -10.064811  -4.219821
 # sample estimates:
-# mean in group 1 mean in group 2
-#          0.75            2.33
+# mean in group female   mean in group male 
+#            197.3636             204.5060 
 ```
 
 The command itself is very short, but we get a lot of text as the output. For interpreting the result, this section is particularly important:
 
-
-```r
-# t = -1.8608, df = 17.776, p-value = 0.07939
+``` r
+# t = -4.8079, df = 325.28, p-value = 2.336e-06
 ```
 
-We can see that the result is not statistically significant (*P* > 0.05). We also have a couple of other values that are often reported alongside the *P* value in research reports and publications.
+We can see that the result is statistically significant (*P* \< 0.05). We also have a couple of other values that are often reported alongside the *P* value in research reports and publications.
 
-- The first part (`t = ...`) is the _test statistic_ (which for a _t_-test is the *t* statistic). We won't dwell on the mathematics, but in practice the test statistic plays a part in determining the *P* value and is calculated from the sample data.
+-   The first part (`t = ...`) is the *test statistic* (which for a *t*-test is the *t* statistic). We won't dwell on the mathematics, but in practice the test statistic plays a part in determining the *P* value and is calculated from the sample data.
 
-- The second part (`df = ...`) reports the _degrees of freedom_. Normally this equals the sample size minus the number of parameters calculated during an analysis. We get an uneven number because the Welch correction changes the outcome, but with a Student's *t*-test we'd have 18 degrees of freedom (10 + 10 observations - 2, i.e the number of groups for which we calculate means). What does it mean, though, and why does it matter?
+-   The second part (`df = ...`) reports the *degrees of freedom*. Normally this equals the sample size minus the number of parameters calculated during an analysis. We get an uneven number because the Welch correction changes the outcome, but with a Student's *t*-test we'd have 331 degrees of freedom (333 observations - 2, i.e the number of groups for which we calculate means). What does it mean, though, and why does it matter?
 
 To think of degrees of freedom in terms of an example, imagine different types of food. You'd like to eat something different every day of the week, but only have ingredients for seven different dishes.
 
-- On Monday you can use any recipe. On Tuesday there are six left (and so on). On Sunday, you no longer have a choice - you have to settle with whatever's left for the final recipe. This means that on six days, you were able to exercise some level of choice.
-    
-- Similarly, degrees of freedom refers to the number of values in a data set that are "free to vary" when estimating statistical parameters. Further to the test statistic, this value plays a role in the mathematics used to establish statistical significance.
+-   On Monday you can use any recipe. On Tuesday there are six left (and so on). On Sunday, you no longer have a choice - you have to settle with whatever is left for the final recipe. This means that on six days, you were able to exercise some level of choice.
 
-**Paired-samples _t_-test**
+-   Similarly, degrees of freedom refers to the number of values in a data set that are "free to vary" when estimating statistical parameters. Further to the test statistic, this value plays a role in the mathematics used to establish statistical significance.
 
-We could also use the `sleep` data to perform a paired-samples _t_-test. Here the position (row number) of the observations within groups matters, as the test assumes observations to be _paired_ in a meaningful way. In our case, the data are ordered by the patient ID.
+**Paired-samples *t*-test**
 
-The code itself is similar to running an independent-samples test:
+**Challenge:**: this example is included in the exercises, so if you want to give it a try, move to **Statistics Exercise Block 1** before reading further (~10 mins).
+
+Next we import another built-in data set called `sleep` to perform a paired-samples *t*-test. This data set shows the effect of two drowsiness-inducing drugs (hours of extra sleep compared to a control) on ten patients.
 
 ```r
-t.test(extra ~ group, sleep, paired = TRUE)
+sleepdata <- sleep
+sleepdata
+```
+
+Here the position (row number) of the observations within groups matters, as the test assumes observations to be *paired* in a meaningful way. In our case, the data are ordered by the patient ID. 
+
+Let's first change for format of the data from the **long format** to the **wide format**. We are taking column names from the column `group` (`names_from = group`) and giving them names `med1` and `med2` for the two drugs being tested (`names_prefix = "med"`). The measurements of extra sleep (`values_from`) come from the column `extra`. To learn more about reshaping data sets this way, see the section Data Manipulation.
+
+```r
+sleep_wide <- sleepdata |> 
+  pivot_wider(names_from = group,
+              values_from = extra,
+              names_prefix = "med")
+sleep_wide # inspect the reshaped data set
+```
+
+Now we are ready to run the paired-samples *t*-test. It uses the same function as independent samples *t*-test, but the syntax for a paired test is different:
+
+``` r
+t.test(Pair(med1, med2) ~ 1, data = sleep_wide)
 
 # Paired t-test
-
+#
 # data: extra by group
 # t = -4.0621, df = 9, p-value = 0.002833
 # alternative hypothesis: true difference in means is not equal to 0
@@ -329,21 +337,24 @@ t.test(extra ~ group, sleep, paired = TRUE)
 #                   -1.58
 ```
 
-The output also contains the same terms we saw before.
 
-- How would you interpret the results?
-    
-- Why do you think the type of test affects the conclusion we're able to make?
-    
+The output contains the same terms we saw before.
+
+-   How would you interpret the results?
+
+-   Why do you think the type of test affects the conclusion we're able to make?
+
+Note that in many sources you might see a different syntax for the paired samples *t*-test, which includes the option `paired = TRUE`. The syntax was changed in R v. 4.4.0 to fix a bug, and the old syntax does not work anymore in recent R versions (including the one we use on this course).
+
 **One-sample *t*-test**
 
-The final type of _t_-test involves comparing a single group mean against some known (or hypothetical) value. This value is specified using `mu`. For example, if we wanted to compare the entire `sleep` data set against a group that showed an average of three extra hours of sleep, we would feed this to R:
+The final type of *t*-test involves comparing a single group mean against some known (or hypothetical) value. This value is specified using `mu`. If no value is given, the test uses 0 as the value. For example, if we wanted to compare the entire `sleep` data set against a group that showed an average of three extra hours of sleep, we would feed this to R:
 
-```r
+``` r
 t.test(sleep$extra, mu = 3)
 
 # One Sample t-test
-
+#
 # data: sleep$extra
 # t = -3.2357, df = 19, p-value = 0.004352
 # alternative hypothesis: true mean is not equal to 3
@@ -356,9 +367,9 @@ t.test(sleep$extra, mu = 3)
 
 #### 6b. Linear regression
 
-Linear regression is a method that can be used to quantitatively describe the relationship between a _dependent_ variable and an _independent_ variable. The terms can be thought of along the lines of:
+Linear regression is a method that can be used to quantitatively describe the relationship between a *dependent* variable and an *independent* variable. The terms can be thought of along the lines of:
 
-```r
+``` r
 # "y depends on x"
 
 # y is the dependent and x the independent value
@@ -367,9 +378,9 @@ Linear regression is a method that can be used to quantitatively describe the re
 # In other words, x is used to predict (or "explain") y
 ```
 
-The word _linear_ is mentioned because the method assumes a linear relationship between _x_ and _y_, meaning that it can be explained by a straight line. We can describe this using the following equation:
+The word *linear* is mentioned because the method assumes a linear relationship between *x* and *y*, meaning that it can be explained by a straight line. We can describe this using the following equation:
 
-```r
+``` r
 # y = a + bx
 
 # Where...
@@ -377,157 +388,158 @@ The word _linear_ is mentioned because the method assumes a linear relationship 
 # b is the slope of the line
 ```
 
-If you think of how experimental data would look as a scatter plot, the points likely wouldn't fall perfectly onto a line drawn through them. The line passing through this "cloud of data" is called a _line of best fit_ because it tries to minimize the distance between itself and individual data points.
+If you think of how experimental data would look as a scatter plot, the points likely wouldn't fall perfectly onto a line drawn through them. The line passing through this "cloud of data" is called a *line of best fit* because it tries to minimize the distance between itself and individual data points.
 
-To illustrate, let's load another in-built data set called `cars`. It consists of 50 observations and two variables (`dist` and `speed`).
+To illustrate, let's return to the `penguins` data. We imported it above as `penguinsdata` without missing values:
 
-```r
-carsdata <- cars
-head(carsdata)
-
-#   speed dist
-# 1     4    2
-# 2     4   10
-# 3     7    4
-# 4     7   22
-# 5     8   16
-# 6     9   10
-
+``` r
+#penguinsdata <- na.omit(penguins)
+str(penguinsdata)
 ```
 
-Let's plot the observations as a scatter plot and add a line of best fit using `geom_smooth`:
+Let's plot the measurements of penguin body mass and flipper length as a scatter plot and add a line of best fit using `geom_smooth`:
 
-```r
-ggplot(carsdata, aes(x = speed, y = dist)) +
+``` r
+ggplot(penguinsdata, aes(x = body_mass, y = flipper_len)) +
  geom_point() +
  geom_smooth(method = lm) + # this part is new...
  theme_bw()
 ```
 
-![](Images/cars_bestfit.png?raw=true)
- 
-By default, this also draws the 95% confidence interval (CI). A 95% CI of the mean is a range of values describing possible values that the mean could be. In other words, if we took many samples from the same population and calculated a 95% CI for each of these, we would expect the true population mean to be found within 95% of these values. 
+![](Images/penguins_bestfit.png?raw=true)
 
-How about `method = lm` - what does it stand for? We are telling R that we'd like to use a _linear model_. Regression _models_ the relationship between _x_ and _y_ with the regression equation describing that model (and the line of best fit being a visual representation of it). Linear models are common in hypothesis testing and come in different forms. The _t_-test is also a special case of a linear model!
+By default, this also draws the 95% confidence interval (CI). A 95% CI of the mean is a range of values describing possible values that the mean could be. In other words, if we took many samples from the same population and calculated a 95% CI for each of these, we would expect the true population mean to be found within 95% of these values.
+
+How about `method = lm` - what does it stand for? We are telling R that we'd like to use a *linear model*. Regression *models* the relationship between *x* and *y* with the regression equation describing that model (and the line of best fit being a visual representation of it). Linear models are common in hypothesis testing and come in different forms. The *t*-test is also a special case of a linear model!
 
 To better understand the theory behind regression, there are a couple more points to cover before creating a model in R (outside `ggplot2`, that is).
 
-- Regression and _correlation_ are different things. Correlation analysis is another tool in the statistical toolbox that describes the relationship between two variables. However, it only describes if there is a positive or negative association between them (without predicting _y_ from _x_).
-    
-- You may remember the concept of _residuals_. The scatter plot makes this easier to follow - we can think of a residual as the distance between a data point and the line of best fit. Residuals come to play when checking if our data meet the assumptions of a linear regression model.
-    
+-   Regression and *correlation* are different things. Correlation analysis is another tool in the statistical toolbox that describes the relationship between two variables. However, it only describes if there is a positive or negative association between them (without predicting *y* from *x*).
+
+-   You may remember the concept of *residuals*. The scatter plot makes this easier to follow - we can think of a residual as the distance between a data point and the line of best fit. Residuals come to play when checking if our data meet the assumptions of a linear regression model.
+
 To examine model diagnostics, we first need to create a model:
 
-```r
-cars_lm <- lm(dist ~ speed, data = carsdata)
+``` r
+penguins_lm <- lm(flipper_len ~ body_mass, data = penguinsdata)
 ```
 
 The package `ggfortify` comes with the function `autoplot`, which can be used to create diagnostic plots. It generates four plots at once that are laid out as a panel. There is a lot of detail, but we'll explore the plots one by one:
 
-```r
-autoplot(cars_lm)
+``` r
+autoplot(penguins_lm)
 ```
 
-![](Images/cars_diagnostics.png?raw=true)
+![](Images/penguins_diagnostics.png?raw=true)
 
-1. The *residuals vs fitted* plot is used to check the homogeneity of variance. The residuals should be somewhat equally spread around the dashed horizontal line (the line of best fit). We see a few _outliers_ identified by row numbers.
-    
-- While the outliers could be removed, you should first ask why the values might differ from the rest and why their removal could be justified.
+1.  The *residuals vs fitted* plot is used to check the homogeneity of variance. The residuals should be somewhat equally spread around the dashed horizontal line (the line of best fit). We see a few *outliers* identified by row numbers.
 
-- **Question:** Can you think of a situation where it would be OK to remove an outlier? How about when it might not be a good idea?
+-   While the outliers could be removed, you should first ask why the values might differ from the rest and why their removal could be justified.
 
-2. The *Q-Q* (quantile-quantile) plot shows if the residuals are normally distributed. In a perfect scenario, everything would fall on the dashed line. Our values look OK aside from some departures around the tails, which often happens.
-    
-3. The *scale-location* plot can also be used to evaluate the homogeneity of variance. The blue line should look approximately horizontal and the spread should look similar across the range of fitted values.
-    
-- While we can see things aren't perfect, not to worry. There is no obvious co-dependence between the residuals and fitted values. While the scatter is harder to interpret, it lacks an obvious pattern.
+-   **Question:** Can you think of a situation where it would be OK to remove an outlier? How about when it might not be a good idea?
 
-4. The _residuals vs leverage_ plot can help us find out if certain observations have a pronounced effect on the model. Such values would stand out from the other points. In our case, it looks like a few values might be more influential than the others (two were also identified as outliers in the other plots).
+2.  The *Q-Q* (quantile-quantile) plot shows if the residuals are normally distributed. In a perfect scenario, everything would fall on the dashed line. Our values look OK aside from some departures around the tails, which often happens.
+
+3.  The *scale-location* plot can also be used to evaluate the homogeneity of variance. The blue line should look approximately horizontal and the spread should look similar across the range of fitted values.
+
+-   While we can see things aren't perfect, not to worry. There is no obvious co-dependence between the residuals and fitted values. While the scatter is harder to interpret, it lacks an obvious pattern.
+
+4.  The *residuals vs leverage* plot can help us find out if certain observations have a pronounced effect on the model. Such values would stand out from the other points. In our case, it looks like a few values might be more influential than the others (two were also identified as outliers in the other plots).
 
 If everything looks acceptable, we can print out the model output using the `summary` function:
 
-```r
-summary(cars_lm)
+``` r
+summary(penguins_lm)
 
 # Call:
-# lm(formula = dist ~ speed, data = carsdata)
-
+# lm(formula = flipper_len ~ body_mass, data = penguinsdata)
+# 
 # Residuals:
-#     Min     1Q Median    3Q    Max
-# -29.069 -9.525 -2.272 9.215 43.201
-
+#     Min      1Q  Median      3Q     Max 
+# -23.698  -4.983   1.056   5.101  13.933 
+#
 # Coefficients:
-#             Estimate Std. Error  t value  Pr(>|t|)
-# (Intercept) -17.5791     6.7584  -2.601    0.0123 *
-# speed         3.9324     0.4155   9.464  1.49e-12 ***
+#              Estimate Std. Error t value Pr(>|t|)    
+# (Intercept) 1.370e+02  1.999e+00   68.56   <2e-16 ***
+# body_mass   1.520e-02  4.667e-04   32.56   <2e-16 ***
 # ---
-# Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-# Residual standard error: 15.38 on 48 degrees of freedom
-# Multiple R-squared: 0.6511, Adjusted R-squared: 0.6438
-# F-statistic: 89.57 on 1 and 48 DF, p-value: 1.49e-12
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# Residual standard error: 6.847 on 331 degrees of freedom
+# Multiple R-squared:  0.7621,	Adjusted R-squared:  0.7614 
+# F-statistic:  1060 on 1 and 331 DF,  p-value: < 2.2e-16
 ```
 
-This generates a lot of information, most of which looks quite different to the _t_-test output. After the model call and some summary statistics on the residuals, we have information on the model _coefficients_.
+This generates a lot of information, most of which looks quite different to the *t*-test output. After the model call and some summary statistics on the residuals, we have information on the model *coefficients*.
 
-```r
+``` r
 # Coefficients:
-#             Estimate Std. Error  t value  Pr(>|t|)
-# (Intercept) -17.5791     6.7584  -2.601    0.0123 *
-# speed         3.9324     0.4155   9.464  1.49e-12 ***
+#              Estimate Std. Error t value Pr(>|t|)    
+# (Intercept) 1.370e+02  1.999e+00   68.56   <2e-16 ***
+# body_mass   1.520e-02  4.667e-04   32.56   <2e-16 ***
 # ---
-# Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ```
 
 The coefficients correspond to the two constants in the model (the intercept and the slope). The `Estimate` column gives the solution to the equation describing our model, which could be written as:
 
-```r
+``` r
 # (y = a + bx)
-# dist = −17.579 + 3.932 ∗ speed
+# flipper_len = 137 + 0.0152 ∗ body_mass
 ```
 
-After columns with standard errors and test statistics, we see a column containing *P* values for the coefficients. The model shows that `speed` is positively associated with `distance` (*P* < 0.001). The intercept is also significantly different from zero (which is nearly always the case).
+After columns with standard errors and test statistics, we see a column containing *P* values for the coefficients. The model shows that `speed` is positively associated with `distance` (*P* \< 0.001). The intercept is also significantly different from zero (which is nearly always the case).
 
 The final part contains general information on the model:
 
-```r
-# Residual standard error: 15.38 on 48 degrees of freedom
-# Multiple R-squared: 0.6511, Adjusted R-squared: 0.6438
-# F-statistic: 89.57 on 1 and 48 DF, p-value: 1.49e-12
+``` r
+# Residual standard error: 6.847 on 331 degrees of freedom
+# Multiple R-squared:  0.7621,	Adjusted R-squared:  0.7614 
+# F-statistic:  1060 on 1 and 331 DF,  p-value: < 2.2e-16
 ```
 
-- The residual standard error describes the model fit (if it's 0, then the model would describe the data perfectly).
-    
-- The multiple _R_-squared (_R_<sup>2</sup>) value gives the percentage of variance in the dependent variable predicted by the independent variable (in our case, 65%). This value is often reported as a measure of how well the model performs. The adjusted *R*<sup>2</sup> is used when there are many independent variables (it is a penalized version of the multiple *R*<sup>2</sup>).
-    
-- The last line describes the statistical significance of the model. The _F_ statistic is based on a test where your model is compared against a model with no predictors. The _P_ value is the overall *P* value for the model. We can see that our model is significant (meaning that it performs better than a model without predictors!).
+-   The residual standard error describes the model fit (if it's 0, then the model would describe the data perfectly).
+
+-   The multiple *R*-squared (*R*<sup>2</sup>) value gives the percentage of variance in the dependent variable predicted by the independent variable (in our case, 76%). This value is often reported as a measure of how well the model performs. The adjusted *R*<sup>2</sup> is used when there are many independent variables (it is a penalized version of the multiple *R*<sup>2</sup>).
+
+-   The last line describes the statistical significance of the model. The *F* statistic is based on a test where your model is compared against a model with no predictors. The *P* value is the overall *P* value for the model. We can see that our model is significant (meaning that it performs better than a model without predictors!).
 
 Tip: to create a tidier output of the model summary, check the R package [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html) and its functions `tidy()`, `augment()`, and `glance()`.
 
-#### 6b. Chi-squared test of independence
+**Challenge**
+
+If we are specifically interested in **correlation** of two variables, we can use the function `cor.test`. Let's have a look at this in **Statistics Exercise Block 2** (\~5 mins).
+
+**Challenge**
+
+When in linear regression the independent / explanatory variable consists of categorical data, linear regression becomes **Analysis of Variance (ANOVA)**, where the means of several groups are compared to variation within the groups. Otherwise the analysis proceeds similarly to our linear regression example above. The function `anova()` produces the ANOVA table used to present results of ANOVA. Another option is to use the functions `aov()` that runs `lm()` in the background to carry out the test and `summary()` to produce the ANOVA table.
+
+Try running an ANOVA with `lm()` and `anova()` in **Statistics Exercise Block 3** (\~5 mins).
+
+#### 6c. Chi-squared test of independence
 
 We will cover one more test: the Chi-squared (*χ*<sup>2</sup>) test of independence, also known as Pearson's *χ*<sup>2</sup> test. This method can be used to determine if there is a correlation between categorical variables, such as names or labels. Specifically, it is used when you want to compare frequencies (counts) between groups. This is done by comparing the observed frequencies with a set of frequencies one would expect if there was no correlation between groups.
 
 To have a look at this in practice, let's load another car-related data set that comes pre-built in R: `mtcars`.
 
-```r
+``` r
 mtcarsdata <- mtcars
 head(mtcars)
 ```
 
 The data set comes as a data frame with different car models as row names.
 
-- The first variable we might be interested in is the type of engine (`vs`), which can be either V-shaped (`0`) or straight (`1`).
-    
-- There is also a column for the gear count (`gear`), ranging from three to five.
+-   The first variable we might be interested in is the type of engine (`vs`), which can be either V-shaped (`0`) or straight (`1`).
+
+-   There is also a column for the gear count (`gear`), ranging from three to five.
 
 Let's say we'd like to find out if there is an association between these two variables. How to go about it?
 
-First we need to shape the data into a format suitable for the *χ*<sup>2</sup> test. To do this, let's create a frequency table listing all the combinations we're interested in. Such a table is also known as a _contingency table_.
+First we need to shape the data into a format suitable for the *χ*<sup>2</sup> test. To do this, let's create a frequency table listing all the combinations we're interested in. Such a table is also known as a *contingency table*.
 
 Before creating the table, let's make things easier to follow by replacing the numbers with labels. We can use a `dplyr` function called `recode`:
 
-```r
+``` r
 mtcarsdata <- mtcarsdata |>
   mutate(vs = recode(vs,
                      "0" = "Vshaped",
@@ -541,7 +553,7 @@ head(mtcarsdata)
 
 We can create a contingency table using `table`:
 
-```r
+``` r
 mtcarsdata_freqs <- table(mtcarsdata$vs, mtcarsdata$gear)
 mtcarsdata_freqs
 
@@ -552,15 +564,15 @@ mtcarsdata_freqs
 
 Now that the data are in the desired format, this is a good time to think about test assumptions. The *χ*<sup>2</sup> test is a non-parametric method that comes with the following requirements, aside from needing the data as counts:
 
-- The groups must be mutually exclusive (the data should fit within a single level of each variable).
-    
-- Each subject should only contribute data to one cell (e.g. comparisons of the same individual at different times are not possible). Similarly, for paired-sample designs one would need to consider another test.
-    
-- Expected values should be 5 or above in at least 80% of the cells, and no cell should have an expected value of less than one.
-    
+-   The groups must be mutually exclusive (the data should fit within a single level of each variable).
+
+-   Each subject should only contribute data to one cell (e.g. comparisons of the same individual at different times are not possible). Similarly, for paired-sample designs one would need to consider another test.
+
+-   Expected values should be 5 or above in at least 80% of the cells, and no cell should have an expected value of less than one.
+
 Looking at the numbers we have in our table, especially the last assumption might give us something to think about. To have a look at the expected values, let's run the test using `chisq.test`:
 
-```r
+``` r
 mtcarsdata_chisq <- chisq.test(mtcarsdata_freqs)
 
 # Warning message:
@@ -570,7 +582,7 @@ mtcarsdata_chisq <- chisq.test(mtcarsdata_freqs)
 
 We get a warning saying the approximation might be incorrect. We can extract the expected values from the object:
 
-```r
+``` r
 round(mtcarsdata_chisq$expected, 2) # rounding to two decimals
 
 #            Five_gears Four_gears Three_gears
@@ -580,7 +592,7 @@ round(mtcarsdata_chisq$expected, 2) # rounding to two decimals
 
 The warning is because there are some cells in the contingency table that have an expected value below five. R is telling us that the test output might be biased due to a lack of data. Out of curiosity, we could still have a look at it:
 
-```r
+``` r
 mtcarsdata_chisq
 
 # Pearson's Chi-squared test
@@ -597,4 +609,4 @@ With a small sample size like ours (and also with 2x2 contingency tables), an al
 
 #### 7. Further information
 
-Choosing the most suitable statistical method, evaluating test diagnostics and how to best transform your data are all quite vast topics of their own. While an in-depth discussion of these is beyond the scope of the workshop, useful resources that might be helpful for self-study are the [R for Data Science](https://r4ds.had.co.nz/) e-book (accessible for free) and [Getting Started with R: An Introduction for Biologists](https://global.oup.com/academic/product/getting-started-with-r-9780198787846?cc=fi&lang=en&).
+Choosing the most suitable statistical method, evaluating test diagnostics and how to best transform your data are all quite vast topics of their own. While an in-depth discussion of these is beyond the scope of the workshop, useful resources that might be helpful for self-study are the [R for Data Science](https://r4ds.had.co.nz/) e-book (accessible for free), [Getting Started with R: An Introduction for Biologists](https://global.oup.com/academic/product/getting-started-with-r-9780198787846?cc=fi&lang=en&), and [Modern Statistics with R](https://modernstatisticswithr.com/) (e-book accessible for free).

@@ -751,7 +751,7 @@ font-weight: bold;
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -935,9 +935,9 @@ types</p></li>
 <h4>1. Creating objects</h4>
 <p>You can get output from R simply by typing calculations in the
 console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> <span class="sc">/</span> <span class="dv">7</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="dv">12</span> <span class="sc">/</span> <span class="dv">7</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">5</span></span></code></pre></div>
 <p>Code without spaces (e.g. <code>1+1</code>) also works, although long
 sections of code without spaces can be difficult to read. For decimal
 points, R accepts the full stop symbol (<code>.</code>) instead of a
@@ -946,7 +946,7 @@ comma (<code>,</code>).</p>
 <em>values</em> to <em>objects</em>. To create an object, we give it a
 name followed by the assignment operator <code>&lt;-</code>, and a
 value. Let’s take an animal’s weight as an example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">55</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">55</span></span></code></pre></div>
 <p><code>&lt;-</code> is the assignment operator. It assigns values on
 the right to objects on the left. So, after executing
 <code>x &lt;- 3</code>, the value of <code>x</code> is <code>3</code>.
@@ -964,20 +964,20 @@ does the same in a Mac.</p>
 result of a calculation, when using objects the result is not
 immediately visible. We can access the output by running
 <code>weight_kg</code> on its own:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>weight_kg</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>weight_kg</span></code></pre></div>
 <p>Now that R has <code>weight_kg</code> in memory, we can do arithmetic
 with it. For instance, we may want to convert this weight into pounds
 (weight in pounds is 2.2 times the weight in kg):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code></pre></div>
 <p>We can also change an object’s value by assigning it a new one:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="fl">57.5</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="fl">57.5</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code></pre></div>
 <p>This means that assigning a value to one object does not change the
 values of other objects For example, let’s store the animal’s weight in
 pounds in a new object, <code>weight_lb</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weight_lb <span class="ot">&lt;-</span> <span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>weight_lb <span class="ot">&lt;-</span> <span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code></pre></div>
 <p>and then change <code>weight_kg</code> to 100.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">100</span></span></code></pre></div>
 <p>What do you think is the current content of the object
 <code>weight_lb</code>?</p>
 <p>126.5 or 220?</p>
@@ -1032,6 +1032,13 @@ sharing your code with others.</li>
 </div>
 <div id="functions-and-their-arguments" class="section level4">
 <h4>5. Functions and their arguments</h4>
+<blockquote>
+<p>“Everything that exists is an object. Everything that happens is a
+function call.”</p>
+<footer>
+— John Chambers
+</footer>
+</blockquote>
 <p>Functions are “canned scripts” that automate more complicated sets of
 commands including operations and assignments etc. Many functions are
 predefined, or can be made available by importing R <em>packages</em>
@@ -1043,7 +1050,7 @@ predefined, or can be made available by importing R <em>packages</em>
 return value is the square root of that number. Executing a function
 (‘running it’) is called <em>calling</em> the function. An example of a
 function call is:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(a)</span></code></pre></div>
 <p>Here, the value of <code>a</code> is given to the <code>sqrt()</code>
 function, the <code>sqrt()</code> function calculates the square root,
 and returns the value which is then assigned to the object
@@ -1066,8 +1073,8 @@ can specify a value of your choice which will be used instead of the
 default.</p>
 <p>Let’s try a function that can take multiple arguments:
 <code>round()</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
 <p>Here, we’ve called <code>round()</code> with just one argument,
 <code>3.14159</code>, and it has returned the value <code>3</code>.
 That’s because the default is to round to the nearest whole number.</p>
@@ -1076,15 +1083,15 @@ have a closer look at the <code>round</code> function using the command
 <code>?round</code> . Since we’ll go into more detail on help files
 later, right now it’s enough for us to know that we can specify the
 function <code>digits</code> inside <code>round</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># rounding to two digits</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the default definition for the round function is:</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">0</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># rounding to two digits</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># the default definition for the round function is:</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">0</span>) </span></code></pre></div>
 <p>If you provide the arguments in the exact same order as they are
 defined you don’t have to name them:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="dv">2</span>)</span></code></pre></div>
 <p>And if you do name the arguments, you can switch their order:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="fl">3.14159</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="fl">3.14159</span>)</span></code></pre></div>
 <p>It’s good practice to put the non-optional arguments (like the number
 you’re rounding) first in your function call, and to then specify the
 names of all optional arguments. If you don’t, someone reading your code
@@ -1099,11 +1106,11 @@ which can be either numbers or characters. We can assign a series of
 values to a vector using the <code>c()</code> function. For example we
 can create a vector of animal weights and assign it to a new object
 <code>weight_g</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>weight_g</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>weight_g</span></code></pre></div>
 <p>A vector can also contain characters:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>animals</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>animals</span></code></pre></div>
 <p>The quotes around “mouse”, “rat”, etc. are essential here. Without
 the quotes R will assume objects have been created called
 <code>mouse</code>, <code>rat</code> and <code>dog</code>. As these
@@ -1111,23 +1118,23 @@ objects don’t exist in R’s memory, there will be an error message.</p>
 <p>There are many functions that allow you to inspect the content of a
 vector. <code>length()</code> tells you how many elements are in a
 particular vector:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(weight_g)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(animals)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">length</span>(weight_g)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">length</span>(animals)</span></code></pre></div>
 <p>An important feature of a vector, is that all of the elements are the
 same type of data. The function <code>class()</code> indicates the class
 (the type of element) of an object:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(weight_g)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(animals)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">class</span>(weight_g)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">class</span>(animals)</span></code></pre></div>
 <p>The function <code>str()</code> provides an overview of the structure
 of an object and its elements. It is a useful function when working with
 large and complex objects:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weight_g)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(animals)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">str</span>(weight_g)</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">str</span>(animals)</span></code></pre></div>
 <p>You can use the <code>c()</code> function to add other elements to
 your vector:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(weight_g, <span class="dv">90</span>) <span class="co"># add to the end of the vector</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, weight_g) <span class="co"># add to the beginning of the vector</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>weight_g</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(weight_g, <span class="dv">90</span>) <span class="co"># add to the end of the vector</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, weight_g) <span class="co"># add to the beginning of the vector</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>weight_g</span></code></pre></div>
 <p>In the first line, we take the original vector <code>weight_g</code>,
 add the value <code>90</code> to the end of it, and save the result back
 into <code>weight_g</code>. Then we add the value <code>30</code> to the
@@ -1171,18 +1178,18 @@ later!).</p>
 <h4>7. Subsetting vectors</h4>
 <p>If we want to extract one or several values from a vector, we must
 provide one or several indices in square brackets. For instance:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>animals[<span class="dv">2</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;rat&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>animals[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)]</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;dog&quot; &quot;rat&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>animals[<span class="dv">2</span>]</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;rat&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>animals[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)]</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;dog&quot; &quot;rat&quot;</span></span></code></pre></div>
 <p>We can also repeat the indices to create an object with more elements
 than the original one:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>more_animals <span class="ot">&lt;-</span> animals[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>more_animals</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;mouse&quot; &quot;rat&quot; &quot;dog&quot; &quot;rat&quot; &quot;mouse&quot; &quot;cat&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>more_animals <span class="ot">&lt;-</span> animals[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>more_animals</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;mouse&quot; &quot;rat&quot; &quot;dog&quot; &quot;rat&quot; &quot;mouse&quot; &quot;cat&quot;</span></span></code></pre></div>
 <p>R indices start at 1. Programming languages like Fortran, MATLAB,
 Julia, and R start counting at 1, because that’s what human beings
 typically do. Languages in the C family (including C++, Java, Perl, and
@@ -1191,33 +1198,33 @@ Python) count from 0 because that’s simpler for computers to do.</p>
 <p>Another common way of subsetting is by using a logical vector.
 <code>TRUE</code> will select the element with the same index, while
 <code>FALSE</code> will not:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">39</span>, <span class="dv">54</span>, <span class="dv">55</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>weight_g[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 21 39 54</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">39</span>, <span class="dv">54</span>, <span class="dv">55</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>weight_g[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)]</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; [1] 21 39 54</span></span></code></pre></div>
 <p>Typically, these logical vectors are not typed by hand, but are the
 output of other functions or logical tests. For instance, if you wanted
 to select only the values above 50:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>weight_g <span class="sc">&gt;</span> <span class="dv">50</span>    </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># will return logicals with TRUE for the indices that meet the condition</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE FALSE FALSE  TRUE  TRUE</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># so we can use this to select only the values above 50</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>weight_g[weight_g <span class="sc">&gt;</span> <span class="dv">50</span>]</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 54 55</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>weight_g <span class="sc">&gt;</span> <span class="dv">50</span>    </span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co"># will return logicals with TRUE for the indices that meet the condition</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">#&gt; [1] FALSE FALSE FALSE  TRUE  TRUE</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co"># so we can use this to select only the values above 50</span></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>weight_g[weight_g <span class="sc">&gt;</span> <span class="dv">50</span>]</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co">#&gt; [1] 54 55</span></span></code></pre></div>
 <p>You can combine multiple tests using <code>&amp;</code> (both
 conditions are true, AND) or <code>|</code> (at least one of the
 conditions is true, OR):</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>weight_g[weight_g <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">|</span> weight_g <span class="sc">&gt;</span> <span class="dv">50</span>]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 21 54 55</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>weight_g[weight_g <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">|</span> weight_g <span class="sc">&gt;</span> <span class="dv">50</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co">#&gt; [1] 21 54 55</span></span></code></pre></div>
 <p>How about if we try:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>weight_g[weight_g <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">&amp;</span> weight_g <span class="sc">==</span> <span class="dv">21</span>]</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; numeric(0)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>weight_g[weight_g <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">&amp;</span> weight_g <span class="sc">==</span> <span class="dv">21</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co">#&gt; numeric(0)</span></span></code></pre></div>
 <p>Here, <code>&lt;</code> stands for “less than”, <code>&gt;</code> for
 “greater than”, <code>&gt;=</code> for “greater than or equal to”, and
 <code>==</code> for “equal to”. The double equal sign <code>==</code> is
@@ -1225,32 +1232,32 @@ a test for numerical equality between the left and right hand sides, and
 should not be confused with the single <code>=</code> sign, which
 performs variable assignment (similar to <code>&lt;-</code>).</p>
 <p>Here is a useful summary of possible comparisons and operators:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## different comparisons:</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># less than `&lt;`</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># greater than `&gt;`</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># less or equal `&lt;=`</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># greater or equal `&gt;=`</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># equal to `==`</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># not equal to `!=`</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="do">## logical operators:</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># and `&amp;`</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># or `|`</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co"># not `!` </span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="do">## different comparisons:</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co"># less than `&lt;`</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="co"># greater than `&gt;`</span></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co"># less or equal `&lt;=`</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="co"># greater or equal `&gt;=`</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co"># equal to `==`</span></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="co"># not equal to `!=`</span></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a><span class="do">## logical operators:</span></span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a><span class="co"># and `&amp;`</span></span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="co"># or `|`</span></span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a><span class="co"># not `!` </span></span></code></pre></div>
 <p>A common task is to search for certain strings in a vector. One could
 use the “or” operator <code>|</code> to test for equality to multiple
 values, but this can quickly become tedious. The function
 <code>%in%</code> allows you to test if any of the elements of a search
 vector are found:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>animals[animals <span class="sc">==</span> <span class="st">&quot;cat&quot;</span> <span class="sc">|</span> animals <span class="sc">==</span> <span class="st">&quot;rat&quot;</span>] </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># returns both rat and cat</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>animals <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>, <span class="st">&quot;goat&quot;</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>animals[animals <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>, <span class="st">&quot;goat&quot;</span>)]</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>animals[animals <span class="sc">==</span> <span class="st">&quot;cat&quot;</span> <span class="sc">|</span> animals <span class="sc">==</span> <span class="st">&quot;rat&quot;</span>] </span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co"># returns both rat and cat</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>animals <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>, <span class="st">&quot;goat&quot;</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>animals[animals <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>, <span class="st">&quot;goat&quot;</span>)]</span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="co">#&gt; [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</span></span></code></pre></div>
 <p><em>Optional challenge:</em> Can you figure out why
 <code>&quot;four&quot; &gt; &quot;five&quot;</code> returns <code>TRUE</code>?</p>
 </div>
@@ -1264,23 +1271,23 @@ data are represented in vectors as <code>NA</code> (Not Available).</p>
 This feature makes it harder to overlook the cases where you are dealing
 with missing data. You can add the argument <code>na.rm = TRUE</code> to
 calculate the result while ignoring the missing values.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">6</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(heights)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(heights)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(heights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(heights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">6</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="fu">mean</span>(heights)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="fu">max</span>(heights)</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="fu">mean</span>(heights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="fu">max</span>(heights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>If your data include missing values, you may want to become familiar
 with the functions <code>is.na()</code>, <code>na.omit()</code>, and
 <code>complete.cases()</code>. See below for examples.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract those elements which are not missing values.</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>heights[<span class="sc">!</span><span class="fu">is.na</span>(heights)]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns the object with incomplete cases removed. The returned object is an atomic vector of type `&quot;numeric&quot;` (or `&quot;double&quot;`).</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>(heights)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract those elements which are complete cases. The returned object is an atomic vector of type `&quot;numeric&quot;` (or `&quot;double&quot;`).</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>heights[<span class="fu">complete.cases</span>(heights)]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Extract those elements which are not missing values.</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>heights[<span class="sc">!</span><span class="fu">is.na</span>(heights)]</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co"># Returns the object with incomplete cases removed. The returned object is an atomic vector of type `&quot;numeric&quot;` (or `&quot;double&quot;`).</span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a><span class="fu">na.omit</span>(heights)</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a><span class="co"># Extract those elements which are complete cases. The returned object is an atomic vector of type `&quot;numeric&quot;` (or `&quot;double&quot;`).</span></span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>heights[<span class="fu">complete.cases</span>(heights)]</span></code></pre></div>
 <p>Recall that you can use the <code>typeof()</code> function to find
 the type of your atomic vector.</p>
 <p><strong>Challenge:</strong></p>

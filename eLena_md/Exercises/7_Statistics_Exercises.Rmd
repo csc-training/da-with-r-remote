@@ -1,0 +1,109 @@
+---
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+# Statistics - exercise sheet
+
+#### **Block 1: Paired samples _t_-test**
+
+**1.1** Let's use the `sleep` data built into R to perform a paired-samples _t_-test. This data set shows the effect of two drowsiness-inducing drugs (hours of extra sleep compared to a control) on ten patients. Here the position (row number) of the observations within groups matters, as the test assumes observations to be _paired_ in a meaningful way. In our case, the data are ordered by the patient ID. 
+
+Let's first assign the built-in `sleep` data into a data frame:
+
+```r
+sleepdata <- sleep
+sleepdata # the data set is small, so we can inspect the whole data set instead of using head() or str()
+```
+Then, let's run independent samples *t*-test on `sleepdata` to compare the amount of extra sleep (`extra`) among two groups (`group`). As a reminder, the format of an independent samples *t*-test was:
+
+```r
+# independent samples t-test:
+# t.test(y ~ x, data = dataframe)
+```
+
+To run the paired samples *t*-test, we have to change for formatting of the data from the **long format** to the **wide format**. We are taking column names (`names_from`) from the column `group`, and giving them names `med1` and `med2` for the two drugs being tested. The measurements of extra sleep (`values_from`) come from the column `extra` in the original `sleep` data set. To learn more about reshaping data sets this way, see the section Data Manipulation.
+
+```r
+sleep_wide <- sleepdata |> 
+  pivot_wider(names_from = group,
+              values_from = extra,
+              names_prefix = "med")
+sleep_wide
+```
+
+Now we are ready to run the paired-samples *t*-test. It uses the same function as independent samples *t*-test, but the syntax for a paired test is different:
+
+```r
+# paired samples t-test (y1 and y2 are response data columns, where observations on the same row belong together):
+# t.test(Pair(y1, y2) ~ 1, data = dataframe)
+```
+Run the paired samples *t*-test and compare the result with the independent samples test results. How would you interpret the results? Why do you think the type of test affects the conclusion we're able to make?
+
+Note that in many sources you might see a different syntax of the paired samples *t*-test, which includes the option `paired = TRUE`. The syntax was changed in R v.4.4.0 to fix a bug, and the old syntax does not work anymore in recent R versions (including the one we use on this course).
+
+#### **Block 2: Correlation**
+
+**2.1** We will use a data set built into R called `penguins`. Before starting, make sure you have read in the data, created a copy of it, and at the same time, omitted the missing observations as in the demonstration earlier. Then we inspect the contents with `str()`.
+
+```r
+penguinsdata <- na.omit(penguins)
+str(penguinsdata)
+
+```
+**2.2** We are interested in the correlation of penguin body mass and flipper length. 
+
+The function `cor.test`() tests the null hypothesis that the variables are not correlated:
+
+```r
+# cor.test(dataframe$variable1, dataframe$variable2, method = "pearson")
+
+# note how $ is used to select the columns of the data frame containing the variables of interest
+```
+
+Use the function `cor.test` to test if the numeric variables `body_mass` and `flipper_len` in the data frame `penguinsdata` are correlated. To find more about the function, use `?cor.test`. 
+
+The default method is Pearson correlation (`method = "pearson"`), which assumes the samples follow normal distribution. If this is not the case, we can specify to use Spearman correlation (`method = "spearman"`), which works better for non-normal data. 
+
+What is the correlation coefficient between penguin body mass and flipper length? What is your conclusion - are the variables correlated?
+
+#### **Block 3: ANOVA**
+
+**3.1** Our next task is to find out if the penguin flipper length differs among the three species (Adelie, Gentoo and Chinstrap) present in our `penguinsdata` data set. Flipper length is the numerical response factor and species is the categorical explanatory factor.
+
+**3.2** First, create a linear model of `flipper_len`and `species` in the data frame `penguinsdata` using the function `lm()`.
+
+Hint: the syntax needed is `my_lm <- lm(response_factor ~ explanatory_factor, data = dataframe)`
+
+**3.3** Then, let's inspect the diagnostics of our model with `autoplot(my_lm)`. Do you see anything in the model diagnostics that concerns you or is it ok to proceed? 
+
+If you get an error about the function `autoplot` not being available, make sure you have run `library(ggfortify)` to load the package `ggfortify`.
+
+**3.4.** Finally, use the function `anova()` to create an ANOVA table for your model. Does penguin flipper length differ among the species? What are the F statistic and P value of the test?
+
+**3.5** Optional: if you are fast, have a try creating the same ANOVA with the functions `aov()`and `summary()`. The command structure is `my_aov <- aov(response_factor ~ explanatory_factor, data = data_frame)`. To find out more about the function `aov`, try `?aov`. When using `aov`, it is also possible to use the function `TukeyHSD` to find out which of the groups differ from each other (see `?TukeyHSD`).
+
+**3.6** Now it's time to save and export everything we've created during the course. Can you remember how to do this? If not, you can revisit the instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
