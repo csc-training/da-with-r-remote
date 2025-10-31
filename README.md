@@ -100,4 +100,4 @@ Links to external materials:
 
 6. [Data Visualization (independent exercises)](https://csc-training.github.io/da-with-r-remote/ExercisesCompleted/6_DataVisualization_Extra_Completed.html)
 
-7. [Statistics](https://csc-training.github.io/da-with-r-remote/ExercisesCompleted/7_Statistics_Completed.html)
+7. [Statistics](https://csc-training.github.io/da-with-r-remote/ExercisesCompleted/7_Statistics_Exercises_Completed.html)
