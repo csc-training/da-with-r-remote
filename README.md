@@ -70,7 +70,7 @@ Links to external materials:
 
 *Exercises (without solutions)*
 
-1. [Writing and Annotating Code](https://csc-training.github.io/da-with-r-remote/Exercises/3_BasicFeatures_Exercises.html)
+1. [Basic Features](https://csc-training.github.io/da-with-r-remote/Exercises/3_BasicFeatures_Exercises.html)
 
 2. [Starting with Data](https://csc-training.github.io/da-with-r-remote/Exercises/4_StartingWithData_Exercises.html)
 
@@ -88,7 +88,7 @@ Links to external materials:
 
 *Exercises (with solutions)*
 
-1. [Writing and Annotating Code](https://csc-training.github.io/da-with-r-remote/ExercisesCompleted/3_BasicFeatures_Exercises_Completed.html)
+1. [Basic Features](https://csc-training.github.io/da-with-r-remote/ExercisesCompleted/3_BasicFeatures_Exercises_Completed.html)
 
 2. [Starting with Data](https://csc-training.github.io/da-with-r-remote/ExercisesCompleted/4_StartingWithData_Exercises_Completed.html)
 
