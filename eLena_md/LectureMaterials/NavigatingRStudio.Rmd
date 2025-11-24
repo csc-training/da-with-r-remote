@@ -28,17 +28,17 @@ http://swcarpentry.github.io/r-novice-gapminder/
 
 #### 1. Introduction to RStudio
 
-R is a programming language for handling, analysing and visualizing data. It is freely downloadable and works on all major platforms, including Windows, macOS and Linux. At its core, R code is made of text-based commands that can be run from a command prompt and without a graphical user interface. R can also be run via an open-source interface such as RStudio (see [rstudio.com](http://www.rstudio.com)). RStudio provides a built in-editor and offers many advantages including ease of use, integration with version control and project management. 
+R is a programming language for handling, analysing and visualizing data. It is freely downloadable and works on all major platforms, including Windows, macOS and Linux. At its core, R code is made of text-based commands that can be run from a command prompt and without a graphical user interface. R can also be run via an open-source interface such as RStudio (see [RStudio web site](https://posit.co/products/open-source/rstudio/?sid=1). RStudio provides a built in-editor and offers many advantages including ease of use, integration with version control and project management. 
 
 During this workshop we will be using a separate RStudio teaching environment, which lets us access a remote instance of R via a web browser.
 
-#### 2. Accessing the RStudio teaching environment on notebooks.csc.fi
+#### 2. Accessing the RStudio teaching environment on noppe.csc.fi
 
 To launch your own instance of R:
 
-1. Go to [noppe.csc.fi](https://noppe.csc.fi/#/) and log in using the Haka or Virtu authentication service or your CSC account.
+1. Go to [noppe.csc.fi](https://noppe.csc.fi/#/) and log in using the Haka or Virtu authentication service or your CSC account. If you are using a Noppe guest account, use the "special login" link.
 2. In the top right corner, click "Join workspace" and enter the code provided by the instructors.
-3. You should see a workspace with an RStudio environment called "RStudio / Data analysis with R, Oct 2024". Later you can find it under "My workspaces". 
+3. You should see a workspace with an RStudio environment called "RStudio for Data analysis with R, Dec 2025". Later you can find it under "My workspaces". 
 4. Click on the "Start session" button on the right to start RStudio.
 
 Note: each RStudio session in this workspace lasts for 12 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
@@ -74,7 +74,7 @@ RStudio offers you great flexibility in running code from within the editor wind
 
 1. Click on the `Run` button above the editor panel, or
 2. Select `Run Selected Lines` from the `Code` menu, or
-3. Hit `Ctrl + Return` in Windows or Linux or `⌘ + Return` on OS X. 
+3. Hit `Ctrl + Return` in Windows or Linux or `⌘ + Return` on macOS. 
 
 If you have modified a block of code and wish to re-run it, you can either highlight it and run the code again (using one of the options above) or use the button `Re-run the previous code region`. This will run the previous code block including the changes you have made.
 

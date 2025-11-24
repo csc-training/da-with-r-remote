@@ -83,6 +83,11 @@ You may also consider submitting a question of your own, in which case it can be
 sessionInfo()
 ```
 
+AI tools can help you get forward for example by suggesting R packages or functions
+suitable for your task. Try your favourite AI tool or search online for recommendations of tools that work well with R or can be integrated with RStudio. 
+
+Caveats: be mindful of privacy issues when entering your data in to AI tools. Be mindful of what you ask an AI tool to do: these tools speed up work best when you are able to tell if the answer makes sense or not. You must be able to understand, explain and maintain the R code that your data analysis is based on.
+
 #### Optional challenge:
 
 Let's complete **Basic Features Exercise Block 4** (~ 10 mins).

@@ -44,4 +44,8 @@ Perform basic statistics (t-tests, linear regression) in R
 The course is based on a pass/fail assessment, with the following requirements. Students must:
 
 - Be present and access all exercise sheets during the two- or three-day course
-- Attempt completing the exercises covered during the course (including those labelled as independent exercises)
+- Attempt completing the exercises covered during the course
+  - 2-day course: excluding those labelled as independent exercises
+  - 3-day course: including those labelled as independent exercises
+
+Participants who have fulfilled these requirements will receive a certificate recommending 0.5 ECTS. Please note that the decision on awarding credits is made by your university. Also note that we are not able to provide certificates for self-learners using these materials.

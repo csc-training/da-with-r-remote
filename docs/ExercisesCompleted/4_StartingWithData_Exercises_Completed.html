@@ -1098,11 +1098,14 @@ set differ from the previous one?</p>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>carSpeeds[<span class="dv">1</span>, ]</span></code></pre></div>
 <p><strong>6.3</strong> The car colour labels contain accidental
 whitespaces. To fix this, try importing the data using the
-<code>strip.white</code> argument. NOTE - this argument must be
-accompanied by the <code>sep</code> argument, by which we indicate the
-type of delimiter in the file (the comma for most .csv files). In other
-words, we need to add <code>sep = &#39;,&#39;</code> to the import command. You
-can use <code>unique()</code> to check if it worked!</p>
+<code>strip.white</code> argument.</p>
+<p>NOTE - this argument must be accompanied by the <code>sep</code>
+argument, by which we indicate the type of delimiter in the file (the
+comma for most .csv files). In other words, we need to add
+<code>sep = &#39;,&#39;</code> to the import command.</p>
+<p>Use <code>unique()</code> to check if it worked! Hint: you can refer
+to a specific column in a data frame with
+<code>dataframe$column</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color) <span class="co"># right now we can see a problem here</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># [1] Green Red White Red Black</span></span>
@@ -1120,16 +1123,33 @@ can use <code>unique()</code> to check if it worked!</p>
 </div>
 <div id="block-7-exporting-data-and-saving-scripts" class="section level4">
 <h4><strong>Block 7: exporting data and saving scripts</strong></h4>
-<p>The steps here are identical to what we just covered, but it’s good
-to run through them by yourself!</p>
+<p>The first two steps were covered in the lecture, so skip to step 7.3
+if you already ran them.</p>
 <p><strong>7.1</strong> Create a new folder for output files, called
 <code>data_output</code>.</p>
 <p><strong>7.2</strong> Export the car speeds data. The write.csv()
 function requires a minimum of two arguments, the data to be saved and
 the name of the output file.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>)</span></code></pre></div>
-<p><strong>7.3</strong> Save your script (File –&gt; Save as…).</p>
-<p><strong>7.4</strong> Export your data from RStudio Server.</p>
+<p><strong>7.3</strong> View the output file by clicking on on the file
+name and select <code>View</code> (or read the data back into R with
+<code>read.csv()</code> into a new object and inspect the object). It
+should have three columns (Color, Speed, State). What is wrong?</p>
+<p>There is an extra column of numbers that was not present in the
+data.</p>
+<p><strong>7.4</strong> Our <code>read.csv()</code> command above has
+inserted an extra column of row names into the data frame. We can use
+the argument <code>row.names</code> with <code>write.csv</code> to
+control this. R’s default for this argument is <code>TRUE</code>, and
+since it does not know what else to name the rows for the cars data set,
+it resorts to using row numbers. To correct this, we can set
+<code>row.names</code> to <code>FALSE</code>. Export your original
+carSpeeds data again with <code>write.csv</code> and this time add
+<code>row.names = FALSE</code>. View the file again to check if it
+worked.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><strong>7.5</strong> Save your script (File –&gt; Save as…).</p>
+<p><strong>7.6</strong> Export your data from RStudio Server.</p>
 <pre><code>- Go to the &quot;Files&quot; pane (on the right, next to &quot;Plots&quot;)
 
 - Tick the empty boxes next to the files / folders you would like to export
