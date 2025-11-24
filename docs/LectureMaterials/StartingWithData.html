@@ -1235,7 +1235,7 @@ missing or undetermined. Let’s rename this label to something more
 meaningful. Before doing that, we’re going to pull out the data on sex
 and work with that data, so we’re not modifying the working copy of the
 data frame:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>species_id <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">head</span>(sex)</span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#&gt; [1] M M        </span></span>
@@ -1254,7 +1254,7 @@ data frame:</p>
 <span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="co">#&gt; Levels: undetermined F M</span></span></code></pre></div>
 <p>It is also possible to import the <code>surveys</code> data set with
 the function <code>read.csv</code> and the argument
-<code>stringsAsFactors=TRUE</code>. By using this argument, we would.
+<code>stringsAsFactors=TRUE</code>. By using this argument, we would
 coerce (= convert) those columns that contain characters (i.e. text)
 into factors. However, more commonly the case is that we’d rather
 perform such conversions separately and for selected columns only, after
