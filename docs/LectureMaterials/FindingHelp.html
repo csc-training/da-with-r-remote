@@ -751,7 +751,7 @@ font-weight: bold;
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -928,8 +928,8 @@ operators</p></li>
 <p>R and every package provide help files for functions. There are two
 commands for searching for help on any function that is in a package
 loaded into your R session:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>?function_name</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(function_name)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>?function_name</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">help</span>(function_name)</span></code></pre></div>
 <p>This will load up a help page in RStudio.</p>
 <p>Each help page is broken down into sections:</p>
 <ul>
@@ -952,7 +952,7 @@ files mean you don’t have to!</p>
 <p>It is also possible to bring up help documentation for specific
 operators. For this we would place the operator inside quotation
 marks:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>?<span class="st">&quot;&lt;-&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>?<span class="st">&quot;&lt;-&quot;</span></span></code></pre></div>
 <p><strong>Help on packages</strong></p>
 <p>Many packages come with “vignettes”: tutorials and extended example
 documentation. Without any arguments, <code>vignette()</code> will list
@@ -978,7 +978,16 @@ case it can be useful to include information on your R session that can
 be used for debugging purposes (such as attached packages and their
 version numbers). This information can be easily generated with a single
 command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<p>AI tools can help you get forward for example by suggesting R
+packages or functions suitable for your task. Try your favourite AI tool
+or search online for recommendations of tools that work well with R or
+can be integrated with RStudio.</p>
+<p>Caveats: be mindful of privacy issues when entering your data in to
+AI tools. Be mindful of what you ask an AI tool to do: these tools speed
+up work best when you are able to tell if the answer makes sense or not.
+You must be able to understand, explain and maintain the R code that
+your data analysis is based on.</p>
 </div>
 <div id="optional-challenge" class="section level4">
 <h4>Optional challenge:</h4>

@@ -135,23 +135,31 @@ carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv")
 
 **6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
 
-**6.3** The car colour labels contain accidental whitespaces. To fix this, try importing the data using the `strip.white` argument. NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. You can use `unique()` to check if it worked!
+**6.3** The car colour labels contain accidental whitespaces. To fix this, try importing the data using the `strip.white` argument. 
+
+NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. 
+
+Use `unique()` to check if it worked. Hint: you can refer to a specific column in a data frame with `dataframe$column`. 
 
 #### **Block 7: exporting data and saving scripts**
 
-The steps here are identical to what we just covered, but it's good to run through them by yourself!
+The first two steps were covered in the lecture, so skip to step 7.3 if you already ran them.
 
 **7.1** Create a new folder for output files, called `data_output`.
 
-**7.2** Export the car speeds data. The write.csv() function requires a minimum of two arguments, the data to be saved and the name of the output file.
+**7.2** Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file.
 
 ```r
 write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
 ```
 
-**7.3** Save your script (File --> Save as...).
+**7.3** View the output file by clicking on on the file name and select `View` (or read the data back into R with `read.csv()` into a new object and inspect the object). It should have three columns (Color, Speed, State). What is wrong?
 
-**7.4** Export your data from RStudio Server.
+**7.4** Our `read.csv()` command above has inserted an extra column of row names into the data frame. We can use the argument `row.names` with `write.csv` to control this. R’s default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`. Export your original carSpeeds data again with `write.csv` and this time add `row.names = FALSE`. View the file again to check if it worked.
+
+**7.5** Save your R script (File --> Save as...).
+
+**7.6** Export your data from RStudio Server.
 
 ```
 - Go to the "Files" pane (on the right, next to "Plots")
