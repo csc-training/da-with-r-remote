@@ -279,7 +279,7 @@ plot(surveys$sex)
 In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing or undetermined. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:
 
 ``` r
-sex <- factor(surveys$sex)
+species_id <- factor(surveys$sex)
 head(sex)
 
 #> [1] M M        
@@ -298,7 +298,7 @@ head(sex)
 #> Levels: undetermined F M
 ```
 
-It is also possible to import the `surveys` data set with the function `read.csv` and the argument `stringsAsFactors=TRUE`. By using this argument, we would. coerce (= convert) those columns that contain characters (i.e. text) into factors. However, more commonly the case is that we'd rather perform such conversions separately and for selected columns only, after the data have been imported. This way we ensure that we only convert those columns into factors where that data type is required. This corresponds to `stringsAsFactors=FALSE` and is the default behaviour of the `read.csv()` and `read.table` functions (this feature was introduced with R version 4 - before it was the opposite!).
+It is also possible to import the `surveys` data set with the function `read.csv` and the argument `stringsAsFactors=TRUE`. By using this argument, we would coerce (= convert) those columns that contain characters (i.e. text) into factors. However, more commonly the case is that we'd rather perform such conversions separately and for selected columns only, after the data have been imported. This way we ensure that we only convert those columns into factors where that data type is required. This corresponds to `stringsAsFactors=FALSE` and is the default behaviour of the `read.csv()` and `read.table` functions (this feature was introduced with R version 4 - before it was the opposite!).
 
 
 **Challenge**

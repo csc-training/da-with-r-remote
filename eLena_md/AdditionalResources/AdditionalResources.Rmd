@@ -32,15 +32,15 @@ Next, install some packages. A good start would be `tidyverse` that we used on t
 
 There are lots of great books, websites and online tutorials for learning more about R. Some examples:
 
-- [R for Data Science](https://r4ds.had.co.nz/) (free e-book) A great tidyverse-based resource.
+- [R for Data Science](https://r4ds.hadley.nz/) (free e-book) A great tidyverse-based resource.
+
+- [Modern Statistics with R](https://modernstatisticswithr.com/) (website and book) A great, up-to-date introduction to R and data wrangling that goes deep and wide into statistical analyses with R.
 
 - [Getting Started with R: An Introduction for Biologists](https://global.oup.com/academic/product/getting-started-with-r-9780198787846?cc=fi&lang=en&) (book) 
 
-- [Cookbook for R](http://www.cookbook-r.com/) (website) Check for example the section on graphs (lots of information on finetuning your ggplot2 plots).
+- [Cookbook for R](https://rc2e.com/) (website) Check for example the section on graphs (lots of information on fine tuning your ggplot2 plots).
 
 - [Big Book of R](https://www.bigbookofr.com/) (website) A huge collection of R resources.
-
-- [Modern Statistics with R](https://modernstatisticswithr.com/) (website and book) A great, up-to-date introduction to R and data wrangling that goes deep and wide into statistical analyses with R.
 
 - [Applied Statistics with R](https://book.stat420.org/) (free e-book)
 
@@ -64,6 +64,6 @@ Cheat sheets are handy collections of commands and options on a specific package
 
 #### 4. Using R on CSC's supercomputers
 
-If get to the point that your R scripts are too computationally heavy to run on your own computer, it might be time to look for extra resources. R is available on CSC's supercomputer Puhti. Like many CSC's services, Puhti is free to use if you are affiliated with a Finnish higher education institution or a state research institute. An introduction to using R in CSC's services is available as [slides here](https://a3s.fi/heli-slides/User_zoom_Rintro_23112022.pdf) and [as a talk here](https://video.csc.fi/media/t/0_t0pp68xr?pk_vid=86530b39c9d332d516753361092bbf0f), and further instructions on using the Puhti R environment can be found [here](https://docs.csc.fi/apps/r-env/).
+If get to the point that your R scripts are too computationally heavy to run on your own computer, it might be time to look for extra resources. R is available on CSC's supercomputer Puhti. Like many CSC's services, Puhti is free to use if you are affiliated with a Finnish higher education institution or a state research institute. An introduction to using R in CSC's services is available as [slides here](https://a3s.fi/heli-slides/User_zoom_Rintro_23112022.pdf) and [as a talk here](https://video.csc.fi/media/t/0_t0pp68xr?pk_vid=86530b39c9d332d516753361092bbf0f), and further instructions on using the Puhti R environment can be found [in R documentation](https://docs.csc.fi/apps/r-env/).
 
 
