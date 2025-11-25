@@ -48,19 +48,19 @@ surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 
 ```
 
-**1.3** Using pipes, subset the `surveys` data to include animals collected before 1995 and retain only the columns `year`, `sex`, and `weight`.
+**1.3** Using pipes, subset the `surveys` data to include animals collected before 1996 and retain only the columns `year`, `genus`, and `plot_type`.
 
 ```r
 surveys |>
-    filter(year < 1995) |>
-    select(year, sex, weight)
+    filter(year < 1996) |>
+    select(year, genus, plot_type)
 ```
 
 **1.4** Do the same, except this time keeping all the columns apart from `species_id`.
 
 ```r
 surveys |>
-    filter(year < 1995) |>
+    filter(year < 1996) |>
     select(-species_id)
 ```
 
@@ -157,8 +157,7 @@ surveys |>
     )
 ```
 
-**4.3** What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`. Hint: you can use the argument `by`
-also with some dplyr functions that `summarize`.
+**4.3** What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`. Hint: you can use the argument `.by` also with some dplyr functions than `summarize`.
 
 ```r
 surveys |>
@@ -211,7 +210,7 @@ surveys_new_longer
 ```r
 surveys_new_longer |>
   summarize(mean_value = mean(value, na.rm = TRUE),
-  .by = c(year, measurement, plot_type) |>
+  .by = c(year, measurement, plot_type)) |>
   pivot_wider(names_from = measurement, 
               values_from = mean_value)
 ```
