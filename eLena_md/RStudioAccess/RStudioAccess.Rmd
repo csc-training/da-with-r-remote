@@ -19,18 +19,22 @@ opts_chunk$set(cache=TRUE,
 opts_knit$set(width=75)
 ```
 
-# Accessing the RStudio teaching environment on notebooks.csc.fi
+# Accessing the RStudio teaching environment on noppe.csc.fi
 
 To launch your own instance of R:
 
 1.  Go to [noppe.csc.fi](https://noppe.csc.fi/#/) and log in using one of these options. If you do not have access to any of the options above, please contact the course instructors.
 
 -   Haka or Virtu authentication service
--   your CSC account
+-   your CSC account, if you have one
 -   Noppe guest account provided by the instructors (use the 'special login' option)
 
 2.  In the top right corner, click "Join workspace" and enter the code provided by the instructors.
 
-3.  You should see a workspace with an RStudio environment called "RStudio for Data analysis with R, Dec 2025". Later you can find it under "My workspaces". 4. Click on the "Start session" button on the right to start RStudio.
+3.  You should see a workspace with an RStudio environment called "RStudio for Data analysis with R, Dec 2025". Later you can find it under "My workspaces".
 
-Note: each RStudio session in this workspace lasts for 12 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
+4.  Click on the "Start session" button on the right to start RStudio.
+
+**Note 1**: each RStudio session in this workspace lasts for 12 hours, after which it is automatically erased. We will cover ways to save your code and data for later work during this workshop!
+
+**Note 2:** Please note that there is a separate application available in Noppe called "RStudio for analytics and teaching" - this is not the correct one for this course.
