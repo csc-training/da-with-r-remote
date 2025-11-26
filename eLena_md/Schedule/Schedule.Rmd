@@ -43,6 +43,6 @@ opts_knit$set(width=75)
 
 #### **Breaks**
 
-- 10:30 - 10:50 (morning coffee break)
+- 10:15 - 10:30 (morning coffee break)
 - 12:00 - 13:00 (lunch)
-- 14:20-14:40 (afternoon coffee break)
+- 14:15 - 14:30 (afternoon coffee break)
