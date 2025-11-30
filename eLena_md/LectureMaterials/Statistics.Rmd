@@ -299,7 +299,7 @@ To think of degrees of freedom in terms of an example, imagine different types o
 
 **Paired-samples *t*-test**
 
-**Challenge:**: this example is included in the exercises, so if you want to give it a try, move to **Statistics Exercise Block 1** before reading further (~10 mins).
+**Challenge:** this example is included in the exercises, so if you want to give it a try, move to **Statistics Exercise Block 1** before reading further (~10 mins).
 
 Next we import another built-in data set called `sleep` to perform a paired-samples *t*-test. This data set shows the effect of two drowsiness-inducing drugs (hours of extra sleep compared to a control) on ten patients.
 

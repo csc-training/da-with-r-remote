@@ -748,6 +748,75 @@ font-weight: bold;
 </script>
     
     
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+background-color: #ffffff;
+color: #a0a0a0;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0; padding-left: 4px; }
+div.sourceCode
+{ color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } 
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } 
+code span.an { color: #ca60ca; } 
+code span.at { color: #0057ae; } 
+code span.bn { color: #b08000; } 
+code span.bu { color: #644a9b; font-weight: bold; } 
+code span.cf { color: #1f1c1b; font-weight: bold; } 
+code span.ch { color: #924c9d; } 
+code span.cn { color: #aa5500; } 
+code span.co { color: #898887; } 
+code span.cv { color: #0095ff; } 
+code span.do { color: #607880; } 
+code span.dt { color: #0057ae; } 
+code span.dv { color: #b08000; } 
+code span.er { color: #bf0303; text-decoration: underline; } 
+code span.ex { color: #0095ff; font-weight: bold; } 
+code span.fl { color: #b08000; } 
+code span.fu { color: #644a9b; } 
+code span.im { color: #ff5500; } 
+code span.in { color: #b08000; } 
+code span.kw { color: #1f1c1b; font-weight: bold; } 
+code span.op { color: #1f1c1b; } 
+code span.ot { color: #006e28; } 
+code span.pp { color: #006e28; } 
+code span.re { color: #0057ae; background-color: #e0e9f8; } 
+code span.sc { color: #3daee9; } 
+code span.ss { color: #ff5500; } 
+code span.st { color: #bf0303; } 
+code span.va { color: #0057ae; } 
+code span.vs { color: #bf0303; } 
+code span.wa { color: #bf0303; } 
+</style>
     
     
     <!-- tabsets -->
@@ -852,9 +921,13 @@ distribution system probably has R and RStudio available.</p>
 <p>Next, install some packages. A good start would be
 <code>tidyverse</code> that we used on the course, which is actually a
 collection of many useful packages. The easiest way is to use the the
-Packages tab -&gt; Install in the lower right panel of RStudio. Most
-packages come from <a href="https://cran.r-project.org/">CRAN</a>, R’s
-central software repository.</p>
+Packages tab -&gt; Install in the lower right panel of RStudio. You can
+also use the command line:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;packagename&quot;</span>)</span></code></pre></div>
+<p>Most packages come from <a href="https://cran.r-project.org/">CRAN</a>, R’s central software
+repository. Other common sources are <a href="https://www.bioconductor.org/">Bioconductor</a> and Github. Note
+that they require different installation commands. When in doubt how to
+install a package, check the package manual or website.</p>
 </div>
 <div id="websites-and-books" class="section level4">
 <h4>2. Websites and books</h4>
@@ -895,8 +968,22 @@ control.</p></li>
 interactive self-learning within R</p></li>
 </ul>
 </div>
+<div id="resources-for-working-with-and-choosing-colours-in-r" class="section level4">
+<h4>3. Resources for working with and choosing colours in R</h4>
+<ul>
+<li><a href="https://nrennie.rbind.io/blog/colours-in-r/">Working with
+colours in R</a></li>
+<li><a href="https://ggplot2-book.org/scales-colour.html">Colour scales
+and legends</a></li>
+<li><a href="https://cran.r-project.org/web/packages/khroma/vignettes/tol.html">Paul
+Tol’s colur schemes</a></li>
+<li><a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer</a>
+and the <a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html">R
+package RColorBrewer</a></li>
+</ul>
+</div>
 <div id="r-cheat-sheets" class="section level4">
-<h4>3. R cheat sheets</h4>
+<h4>4. R cheat sheets</h4>
 <p>Cheat sheets are handy collections of commands and options on a
 specific package or a topic. Here are some examples:</p>
 <ul>
@@ -911,7 +998,7 @@ tidying with <code>tidyr</code></a></li>
 </ul>
 </div>
 <div id="using-r-on-cscs-supercomputers" class="section level4">
-<h4>4. Using R on CSC’s supercomputers</h4>
+<h4>5. Using R on CSC’s supercomputers</h4>
 <p>If get to the point that your R scripts are too computationally heavy
 to run on your own computer, it might be time to look for extra
 resources. R is available on CSC’s supercomputer Puhti. Like many CSC’s

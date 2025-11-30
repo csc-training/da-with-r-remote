@@ -1105,9 +1105,19 @@ lines only have an outline in R, but bars can be filled:</p>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id)) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;darkblue&quot;</span>)</span></code></pre></div>
 <p>Choosing colors in R is a rather vast topic of its own and we won’t
-be covering that in much detail here. However, you may wish to check out
-the <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)">R
-Cookbook section on colors and color palettes</a> in your own time!</p>
+be covering that in much detail here. However, here are some materials
+you may wish to check out in your own time!</p>
+<ul>
+<li><a href="https://nrennie.rbind.io/blog/colours-in-r/">Working with
+colours in R</a></li>
+<li><a href="https://ggplot2-book.org/scales-colour.html">Colour scales
+and legends</a></li>
+<li><a href="https://cran.r-project.org/web/packages/khroma/vignettes/tol.html">Paul
+Tol’s colur schemes</a></li>
+<li><a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer</a>
+and the <a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html">R
+package RColorBrewer</a></li>
+</ul>
 <p>What if we wanted to have something else than count data on the y
 axis? For example, we might want to use the mean weight of each
 species:</p>
