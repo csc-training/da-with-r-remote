@@ -751,7 +751,7 @@ font-weight: bold;
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -926,13 +926,13 @@ license</a>:</em></p>
 <h4><strong>Block 1: preparation and scatter plots</strong></h4>
 <p><strong>1.1</strong> <code>ggplot2</code> is part of the
 <code>tidyverse</code> package collection, so we’ll need to load it:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p><strong>1.2</strong> Then import a version of the
 <code>surveys</code> data set that we worked with previously
 (<code>surveys_complete.csv</code>). Assign it to a tibble called
 <code>surveys_complete</code>, using <code>read_csv()</code>. We can use
 a version of the data located in the <code>/shared</code> folder.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;/home/rstudio/shared/surveys_complete.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;/home/rstudio/shared/surveys_complete.csv&quot;</span>)</span></code></pre></div>
 <p><strong>1.3</strong> Using <code>ggplot2</code> and the
 <code>surveys_complete</code> data set, create a scatter plot with
 <code>weight</code> on the y axis and <code>species_id</code> on the x
@@ -943,10 +943,10 @@ about it instead?</p>
 you just wrote for creating the scatter plot above.</p>
 <p>Just as a memory aid, here is a (non-exhaustive) list of different
 geoms we can use.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_point() for scatter plots, dot plots, etc.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_bar() for bar plots</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_boxplot() for box plots</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_line() for trend lines, time series, etc.  </span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># geom_point() for scatter plots, dot plots, etc.</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># geom_bar() for bar plots</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># geom_boxplot() for box plots</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># geom_line() for trend lines, time series, etc.  </span></span></code></pre></div>
 </div>
 <div id="block-2-bar-plots-and-custom-colour-palette" class="section level4">
 <h4><strong>Block 2: bar plots and custom colour palette</strong></h4>
@@ -955,13 +955,18 @@ examining, showing mean weights of each species. This time, also try
 adding the following custom palette to the plot (with the data colour by
 <code>species_id</code>). The palette contains a list of different RGB
 values that can be used for creating color-blind plots.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cPalette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#000000&quot;</span>,<span class="st">&quot;#004949&quot;</span>,<span class="st">&quot;#009292&quot;</span>,<span class="st">&quot;#ff6db6&quot;</span>,<span class="st">&quot;#ffb6db&quot;</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;#490092&quot;</span>,<span class="st">&quot;#006ddb&quot;</span>,<span class="st">&quot;#b66dff&quot;</span>,<span class="st">&quot;#6db6ff&quot;</span>,<span class="st">&quot;#b6dbff&quot;</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;#920000&quot;</span>,<span class="st">&quot;#924900&quot;</span>,<span class="st">&quot;#db6d00&quot;</span>,<span class="st">&quot;#24ff24&quot;</span>,<span class="st">&quot;#ffff6d&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>cPalette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#000000&quot;</span>,<span class="st">&quot;#004949&quot;</span>,<span class="st">&quot;#009292&quot;</span>,<span class="st">&quot;#ff6db6&quot;</span>,<span class="st">&quot;#ffb6db&quot;</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>              <span class="st">&quot;#490092&quot;</span>,<span class="st">&quot;#006ddb&quot;</span>,<span class="st">&quot;#b66dff&quot;</span>,<span class="st">&quot;#6db6ff&quot;</span>,<span class="st">&quot;#b6dbff&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="st">&quot;#920000&quot;</span>,<span class="st">&quot;#924900&quot;</span>,<span class="st">&quot;#db6d00&quot;</span>,<span class="st">&quot;#24ff24&quot;</span>,<span class="st">&quot;#ffff6d&quot;</span>)</span></code></pre></div>
 <p>To employ this custom palette, one would use one of the
 following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values=</span>cPalette) <span class="co"># for fills</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_colour_manual</span>(<span class="at">values=</span>cPalette)  <span class="co"># for lines and points</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values=</span>cPalette) <span class="co"># for fills</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">scale_colour_manual</span>(<span class="at">values=</span>cPalette)  <span class="co"># for lines and points</span></span></code></pre></div>
+<p>As a reminder, here is the code for calculating the mean weights of
+each species:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>meanwt <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>           <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>           <span class="at">.by =</span> species_id)</span></code></pre></div>
 </div>
 <div id="block-3-histograms" class="section level4">
 <h4><strong>Block 3: histograms</strong></h4>
@@ -987,8 +992,8 @@ the density of points) is drawn.</p>
 <p>Try modifying the following code to create a violin plot instead (you
 can use <code>geom_violin()</code>). Can you think of anything else that
 could be done to improve the presentation of the data?</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><strong>4.2</strong> In many types of data, it is important to
 consider the <em>scale</em> of the observations. For example, it may be
 worth changing the scale of the axis to better distribute the
@@ -1008,14 +1013,14 @@ for yourself, and trying out a line plot.</p>
 <p><strong>5.1</strong> The <code>yearly_counts</code> object should
 contain numbers of counts per year for each genus. We need to group the
 data and count records within each group:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, genus)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">count</span>(year, genus)</span></code></pre></div>
 <p><strong>5.2</strong> Create a line plot of the
 <code>yearly_counts</code> data as follows. Remember that we can use the
 <code>color</code> argument does a nice job at grouping the data for
 us.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> yearly_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> yearly_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
 <p><strong>5.3</strong> Let’s create another object, called
 <code>yearly_sex_counts</code>. This should be similar to
 <code>yearly_counts</code>, but with the data additionally grouped by
@@ -1035,9 +1040,9 @@ columns of panels.</li>
 <code>facet_grid()</code>.</p>
 <p><strong>6.1</strong> You might remember this
 <code>facet_wrap()</code> example that we covered earlier:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> yearly_sex_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span>  <span class="fu">vars</span>(genus))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> yearly_sex_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span>  <span class="fu">vars</span>(genus))</span></code></pre></div>
 <p>Try using <code>facet_grid()</code> to control how panels are
 organised by both rows and columns, with rows corresponding to
 <code>sex</code> and columns to <code>genus</code>. Instead of
@@ -1055,17 +1060,20 @@ figure out both options.</p>
 call it <code>mytheme</code>) and using it to modify the appearance of
 the following plot. There’s no right or wrong answer here, feel free to
 experiment!</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(surveys_complete, <span class="fu">aes</span>(<span class="at">x =</span> species_id, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> hindfoot_length)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    mytheme</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(surveys_complete, <span class="fu">aes</span>(<span class="at">x =</span> species_id, </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="at">y =</span> hindfoot_length)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    mytheme</span></code></pre></div>
 <p>One example of a theme can be found here:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>grey_theme <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;grey20&quot;</span>,  </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">size =</span> <span class="dv">12</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">vjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;grey20&quot;</span>,  </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>grey_theme <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;grey20&quot;</span>,  </span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                    <span class="at">size =</span> <span class="dv">12</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                    <span class="at">vjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>                    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;grey20&quot;</span>,  </span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>                    <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>                    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
+<p>A comprehensive list of plot items that can be modified with themes
+can be found <a href="https://ggplot2.tidyverse.org/reference/theme.html">here in
+ggplot2 documentation</a>.</p>
 </div>
 <div id="block-8-arranging-saving-and-exporting" class="section level4">
 <h4><strong>Block 8: arranging, saving and exporting</strong></h4>
@@ -1073,29 +1081,30 @@ experiment!</p>
 called <code>fig_output</code> in your working directory.</p>
 <p><strong>8.2</strong> Run through this rather big block of code to
 create a couple of plots that we were looking at earlier.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot 1</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>spp_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> genus, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Genus&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Weight (g)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot 2</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>spp_count_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> yearly_counts, </span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, </span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">color =</span> genus)) <span class="sc">+</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Abundance&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># plot 1</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>spp_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>                             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> genus, </span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>                             <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Genus&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Weight (g)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># plot 2</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>spp_count_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> yearly_counts, </span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>                         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, </span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>                         <span class="at">color =</span> genus)) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Abundance&quot;</span>)</span></code></pre></div>
 <p><strong>8.3</strong> We can use <code>ggsave()</code> to save the
-plots. Try saving a single plot first:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;fig_output/plot1.png&quot;</span>, my_plot, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">10</span>)</span></code></pre></div>
+plots. Try saving a single plot first. Instead of png, save the plot as
+a pdf file.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;fig_output/plot1.png&quot;</span>, my_plot, </span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p><strong>8.4</strong> Next we could save a <code>grid.arrange()</code>
 plot. First use <code>grid.arrange()</code> to combine plots 1 and 2,
-then use <code>ggsave()</code> to save the result (use a DPI value of
-100).</p>
+then use <code>ggsave()</code> to save the result as a pdf (use a DPI
+value of 100).</p>
 <p><strong>8.5</strong> Now it’s time to save and export everything
 we’ve created so far. Can you remember how to do this? If not, you can
 revisit the instructions in the <strong>Starting with Data exercise

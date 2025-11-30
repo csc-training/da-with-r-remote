@@ -218,7 +218,12 @@ ggplot(data = surveys_complete, mapping = aes(x = species_id)) +
   geom_bar(fill = "darkblue")
 ```
 
-Choosing colors in R is a rather vast topic of its own and we won't be covering that in much detail here. However, you may wish to check out the [R Cookbook section on colors and color palettes](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)) in your own time! 
+Choosing colors in R is a rather vast topic of its own and we won't be covering that in much detail here. However, here are some materials you may wish to check out in your own time!  
+
+- [Working with colours in R](https://nrennie.rbind.io/blog/colours-in-r/)
+- [Colour scales and legends](https://ggplot2-book.org/scales-colour.html)
+- [Paul Tol's colur schemes](https://cran.r-project.org/web/packages/khroma/vignettes/tol.html)
+- [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) and the [R package RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
 
 What if we wanted to have something else than count data on the y axis? For example, we might want to use the mean weight of each species:
 
