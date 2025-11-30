@@ -488,7 +488,7 @@ The coefficients correspond to the two constants in the model (the intercept and
 # flipper_len = 137 + 0.0152 ∗ body_mass
 ```
 
-After columns with standard errors and test statistics, we see a column containing *P* values for the coefficients. The model shows that `speed` is positively associated with `distance` (*P* \< 0.001). The intercept is also significantly different from zero (which is nearly always the case).
+After columns with standard errors and test statistics, we see a column containing *P* values for the coefficients. The model shows that `body_mass` is positively associated with `flipper_len` (*P* \< 0.001). The intercept is also significantly different from zero (which is nearly always the case).
 
 The final part contains general information on the model:
 
