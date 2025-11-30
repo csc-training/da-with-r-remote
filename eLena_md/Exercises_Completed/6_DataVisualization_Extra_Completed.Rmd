@@ -73,7 +73,7 @@ swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 
 ``` r
 # removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month 
-swallowplot$date_time <- gsub("2023-", "", swallowplot$date_time)
+swallowplot$date_time <- gsub("2025-", "", swallowplot$date_time)
 swallowplot$date_time <- gsub("-.*", "", swallowplot$date_time)
 
 # renaming the column ´date_time´ to ´month´, because the month is all we have left
@@ -81,6 +81,9 @@ swallowplot <- rename(swallowplot, month = date_time)
 
 # converting the column ´month´ from characters to numbers
 swallowplot$month <-  as.numeric(swallowplot$month)
+
+# let's make sure all out data is months from the year 2025
+swallowplot <- swallowplot |> filter(month < 13)
 ```
 
 **2.3** Check the structure of the data. The beginning of the output should look something like the example below (although the exact appearance might differ, depending on when you downloaded the data).
