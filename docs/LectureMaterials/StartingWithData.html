@@ -1141,7 +1141,7 @@ with data. So we are going to spend a little time introducing them.</p>
 <p>To convert the character data column <code>species_id</code> in our
 <code>surveys</code> data frame into a factor, we use the function
 <code>factor</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>species_id)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>species_id <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>species_id)</span></code></pre></div>
 <p>Factors are stored as integers associated with labels and can be
 either ordered or unordered. While factors look (and often behave) like
 character vectors, they are actually treated as integer vectors by R. So
@@ -1235,7 +1235,7 @@ missing or undetermined. Let’s rename this label to something more
 meaningful. Before doing that, we’re going to pull out the data on sex
 and work with that data, so we’re not modifying the working copy of the
 data frame:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>species_id <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">head</span>(sex)</span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#&gt; [1] M M        </span></span>
