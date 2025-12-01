@@ -76,7 +76,7 @@ str(penguinsdata)
 ```
 **2.2** We are interested in the correlation of penguin body mass and flipper length. 
 
-The function `cor.test`() tests the null hypothesis that the variables are not correlated:
+The function `cor.test()` tests the null hypothesis that the variables are not correlated:
 
 ```r
 # cor.test(dataframe$variable1, dataframe$variable2, method = "pearson")
