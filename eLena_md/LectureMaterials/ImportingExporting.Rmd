@@ -60,6 +60,7 @@ This might be an example of a spreadsheet setup:
  ![](Images/spreadsheet-setup-updated.png?raw=true)
 
 **Note:** When you start creating more R code, using Git / Github is a great way to keep track of your code and work effectively with others. While we won't cover Git / GitHub lessons in this workshop, feel free to explore the materials below in your own time!
+
 - [Software Carpentry lesson on maintaining version control over your data using Git](http://swcarpentry.github.io/git-novice/)
 - [Coderefinery Git lesson](https://coderefinery.github.io/git-intro/)
 - [RStudio-focused introduction to Git for R users](https://happygitwithr.com/) 

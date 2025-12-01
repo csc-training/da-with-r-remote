@@ -1014,7 +1014,7 @@ contents with <code>str()</code>.</p>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">str</span>(penguinsdata)</span></code></pre></div>
 <p><strong>2.2</strong> We are interested in the correlation of penguin
 body mass and flipper length.</p>
-<p>The function <code>cor.test</code>() tests the null hypothesis that
+<p>The function <code>cor.test()</code> tests the null hypothesis that
 the variables are not correlated:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># cor.test(dataframe$variable1, dataframe$variable2, method = &quot;pearson&quot;)</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
@@ -1063,7 +1063,7 @@ explanatory factor.</p>
 <p><strong>3.3</strong> Then, let’s inspect the diagnostics of our model
 with <code>autoplot(my_lm)</code>. Do you see anything in the model
 diagnostics that concerns you or is it ok to proceed?</p>
-<p>´´´r autoplot(flipper_lm) ´´´</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">autoplot</span>(flipper_lm)</span></code></pre></div>
 <p>If you get an error about the function <code>autoplot</code> not
 being available, make sure you have run <code>library(ggfortify)</code>
 to load the package <code>ggfortify</code>.</p>
@@ -1071,17 +1071,17 @@ to load the package <code>ggfortify</code>.</p>
 to create an ANOVA table for your model. Does penguin flipper length
 differ among the species? What are the F statistic and P value of the
 test?</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">anova</span>(flipper_lm)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># output:</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#Analysis of Variance Table</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># Response: flipper_len</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#           Df Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># species     2  50526 25262.9  567.41 &lt; 2.2e-16 ***</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># Residuals 330  14693    44.5                      </span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># ---</span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">anova</span>(flipper_lm)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co"># output:</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#Analysis of Variance Table</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co"># Response: flipper_len</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#           Df Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co"># species     2  50526 25262.9  567.41 &lt; 2.2e-16 ***</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co"># Residuals 330  14693    44.5                      </span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># ---</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span></code></pre></div>
 <p>F value is 567.41 and P value is &lt; 2.2e-16. They show that flipper
 length differs among species.</p>
 <p><strong>3.5</strong> Optional: if you are fast, have a try creating
@@ -1092,9 +1092,9 @@ To find out more about the function <code>aov</code>, try
 <code>?aov</code>. When using <code>aov</code>, it is also possible to
 use the function <code>TukeyHSD</code> to find out which of the groups
 differ from each other (see <code>?TukeyHSD</code>).</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>flipper_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(body_mass <span class="sc">~</span> species, <span class="at">data =</span> penguinsdata)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">summary</span>(flipper_aov)</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="fu">TukeyHSD</span>(flipper_aov)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>flipper_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(body_mass <span class="sc">~</span> species, <span class="at">data =</span> penguinsdata)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">summary</span>(flipper_aov)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="fu">TukeyHSD</span>(flipper_aov)</span></code></pre></div>
 <p><strong>3.6</strong> Now it’s time to save and export everything
 we’ve created during the course. Can you remember how to do this? If
 not, you can revisit the instructions in the <strong>Starting with Data

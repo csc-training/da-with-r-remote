@@ -114,7 +114,7 @@ str(penguinsdata)
 ```
 **2.2** We are interested in the correlation of penguin body mass and flipper length. 
 
-The function `cor.test`() tests the null hypothesis that the variables are not correlated:
+The function `cor.test()` tests the null hypothesis that the variables are not correlated:
 
 ```r
 # cor.test(dataframe$variable1, dataframe$variable2, method = "pearson")
@@ -160,9 +160,9 @@ flipper_lm <- lm(flipper_len ~ species, data = penguinsdata)
 
 **3.3** Then, let's inspect the diagnostics of our model with `autoplot(my_lm)`. Do you see anything in the model diagnostics that concerns you or is it ok to proceed? 
 
-´´´r
+```r
 autoplot(flipper_lm)
-´´´
+```
 
 If you get an error about the function `autoplot` not being available, make sure you have run `library(ggfortify)` to load the package `ggfortify`.
 
