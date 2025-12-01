@@ -199,7 +199,7 @@ When we did `str(surveys)` we saw that the columns `species_id`, `genus`, `speci
 To convert the character data column `species_id` in our `surveys` data frame into a factor, we use the function `factor`:
 
 ``` r
-sex <- factor(surveys$species_id)
+species_id <- factor(surveys$species_id)
 ```
 
 Factors are stored as integers associated with labels and can be either ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. So you need to be very careful when treating them as strings. Let's have a look at what this means in practice!
@@ -279,7 +279,7 @@ plot(surveys$sex)
 In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing or undetermined. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:
 
 ``` r
-species_id <- factor(surveys$sex)
+sex <- factor(surveys$sex)
 head(sex)
 
 #> [1] M M        
