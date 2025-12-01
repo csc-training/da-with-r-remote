@@ -197,7 +197,7 @@ The scatter plot resulting from exercise 1.4 should look like this:
 
 #### 4. Bar plots
 
-There may be times when we'd like to display our data as bar plots, for example if we were interested in comparing the total counts of each species (instead of plotting individual data points).
+There may be times when we'd like to display our data as bar plots, for example if we were interested in **comparing the total counts of each species** (instead of plotting individual data points).
 
 One approach would be to use R to calculate how many measurements we have for each species, followed by plotting. However, the `geom_bar` layer in `ggplot2` makes it easy to plot the species counts without a separate calculation step:
 
@@ -229,8 +229,7 @@ What if we wanted to have something else than count data on the y axis? For exam
 
 ```r
 meanwt <- surveys_complete |>
-           group_by(species_id) |>
-           summarize(mean_weight = mean(weight))
+           summarize(mean_weight = mean(weight), .by = species_id)
 ```
 
 Let's try plotting the data. Note that now we are also specifying the y axis:
@@ -275,7 +274,7 @@ Let's complete **Data Visualization Exercise Block 2** (~ 10-15 mins).
 
 #### 5. Histograms
 
-Bar plots and histograms look quite similar, but they serve different purposes. While bar plots are used to compare discrete variables, histograms are used to visualize the frequency distribution of a continuous variable. For example, we might want to have a look at how `hindfoot_length` values are distributed within the `surveys_complete` data set. The code for doing this looks quite similar to what we used for plotting the numbers of measurements for different species with `geom_bar`:
+Bar plots and histograms look quite similar, but they serve different purposes. While bar plots are used to compare discrete variables, histograms are used to visualize the **frequency distribution of a continuous variable**. For example, we might want to have a look at how `hindfoot_length` values are distributed within the `surveys_complete` data set. The code for doing this looks quite similar to what we used for plotting the numbers of measurements for different species with `geom_bar`:
 
 ```r
 ggplot(surveys_complete, aes(x = hindfoot_length)) + 
@@ -307,7 +306,7 @@ Complete **Data Visualization Exercise Block 3** (~ 5-10 mins).
 
 #### 6. Box plots
 
-Histograms provide detailed information about the distribution of a given data set. However, comparing different sets of measurements in this way can become challenging, particularly when we are interested in comparing multiple groups with one another. While they do not offer the same level of detail for individual sets of data, box plots provide a useful way to accomplish this. For example, we could use box plots to summarize the distribution of weight within each species:
+Histograms provide detailed information about the distribution of a given data set. However, comparing different sets of measurements in this way can become challenging, particularly when we are interested in **comparing multiple groups with one another**. While they do not offer the same level of detail for individual sets of data, box plots provide a useful way to accomplish this. For example, we could use box plots to summarize the distribution of weight within each species:
 
 ```r
 ggplot(data = surveys_complete, mapping = aes(x = species_id, 
