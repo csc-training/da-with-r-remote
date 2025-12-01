@@ -1083,8 +1083,9 @@ this:</p>
 <div id="bar-plots" class="section level4">
 <h4>4. Bar plots</h4>
 <p>There may be times when we’d like to display our data as bar plots,
-for example if we were interested in comparing the total counts of each
-species (instead of plotting individual data points).</p>
+for example if we were interested in <strong>comparing the total counts
+of each species</strong> (instead of plotting individual data
+points).</p>
 <p>One approach would be to use R to calculate how many measurements we
 have for each species, followed by plotting. However, the
 <code>geom_bar</code> layer in <code>ggplot2</code> makes it easy to
@@ -1122,8 +1123,7 @@ package RColorBrewer</a></li>
 axis? For example, we might want to use the mean weight of each
 species:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>meanwt <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>           <span class="fu">group_by</span>(species_id) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>           <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span></code></pre></div>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>           <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">.by =</span> species_id)</span></code></pre></div>
 <p>Let’s try plotting the data. Note that now we are also specifying the
 y axis:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> meanwt, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id,</span>
@@ -1160,9 +1160,9 @@ other!</p>
 <h4>5. Histograms</h4>
 <p>Bar plots and histograms look quite similar, but they serve different
 purposes. While bar plots are used to compare discrete variables,
-histograms are used to visualize the frequency distribution of a
-continuous variable. For example, we might want to have a look at how
-<code>hindfoot_length</code> values are distributed within the
+histograms are used to visualize the <strong>frequency distribution of a
+continuous variable</strong>. For example, we might want to have a look
+at how <code>hindfoot_length</code> values are distributed within the
 <code>surveys_complete</code> data set. The code for doing this looks
 quite similar to what we used for plotting the numbers of measurements
 for different species with <code>geom_bar</code>:</p>
@@ -1193,10 +1193,11 @@ mins).</p>
 <p>Histograms provide detailed information about the distribution of a
 given data set. However, comparing different sets of measurements in
 this way can become challenging, particularly when we are interested in
-comparing multiple groups with one another. While they do not offer the
-same level of detail for individual sets of data, box plots provide a
-useful way to accomplish this. For example, we could use box plots to
-summarize the distribution of weight within each species:</p>
+<strong>comparing multiple groups with one another</strong>. While they
+do not offer the same level of detail for individual sets of data, box
+plots provide a useful way to accomplish this. For example, we could use
+box plots to summarize the distribution of weight within each
+species:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id, </span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="at">y =</span> weight)) <span class="sc">+</span></span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code></pre></div>
