@@ -79,7 +79,7 @@ swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
 
 ### **2. Data formatting**
 
-**2.1** Before getting started on the exercises for data manipulation, let's make a copy of the data to keep original data intact, Then, we will simplify the formatting of dates and remove double entries for regions (`bio_province`). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
+**2.1** Before getting started on the exercises for data manipulation, let's make a copy of the data to keep original data intact. Next, we will simplify the formatting of dates and remove double entries for regions (`bio_province`). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
 
 ``` r
 # making a copy of the data
