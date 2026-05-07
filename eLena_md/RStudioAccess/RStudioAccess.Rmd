@@ -23,7 +23,7 @@ opts_knit$set(width=75)
 
 To launch your own instance of R:
 
-1.  Go to [noppe.csc.fi](https://noppe.csc.fi/#/) and log in using one of these options. If you do not have access to any of the options above, please contact the course instructors.
+1.  Go to [noppe.csc.fi](https://noppe.csc.fi/#/) and log in using one of these options. If you do not have access to any of the options above and have not received separate log in credentials by email, please contact the course instructors.
 
 -   Haka or Virtu authentication service
 -   your CSC account, if you have one
@@ -31,7 +31,7 @@ To launch your own instance of R:
 
 2.  In the top right corner, click "Join workspace" and enter the code provided by the instructors.
 
-3.  You should see a workspace with an RStudio environment called "RStudio for Data analysis with R, Dec 2025". Later you can find it under "My workspaces".
+3.  You should see a workspace with an RStudio environment called "RStudio for Data analysis with R, May 2026". Later you can find it under "My workspaces".
 
 4.  Click on the "Start session" button on the right to start RStudio.
 
