@@ -31,53 +31,46 @@ opts_knit$set(width=75)
 
 In this section we have some extra exercises for the first day of the R course to practice using the data wrangling tools we covered there. Here, we explore data from [Finnish Biodiversity Information Facility (FinBIF)](https://laji.fi/en/about/2986) as an example of using data from open data application programming interfaces (APIs).
 
-We will use an R package `finbif` that is an R interface to the FinBIF API. This means we can use the R package to download data from FinBIF directly to R and then continue working with it. You can find more information on the package here: <https://luomus.github.io/finbif/>
+We will use data downloaded with an R package `finbif` that is an R interface to the FinBIF API. This means we can use the R package to download data from FinBIF directly to R and then continue working with it. You can find more information on the package here: <https://luomus.github.io/finbif/>
 
-### **1. Getting the data**
+### **1. Getting the data (optional)**
 
-(If you like, instead of the Notebooks course environment you can also try these exercises on your own computer that has R and RStudio installed - see [here](https://e-learn.csc.fi/mod/url/view.php?id=2191) for instructions.)
-
-Begin by installing the package `finbif` and loading the necessary libraries in RStudio. Remember to start a new R script (these should be the first commands on the script).
+This section shows how the data used in the following exercises was downloaded from FinBIF. **If you are carrying out these exercises for the addition 0.5 credits, it is recommended to use the pre-downloaded data and start from step 2.** 
 
 ``` r
-# install the packages `finbif` (and `tidyverse` if not already installed)
+# Install the packages `finbif`
 install.packages("finbif")
-install.packages("tidyverse")
 
-# load the packages ´finbif´ and ´tidyverse´
+# Load the package `finbif` 
 library(finbif)
-library(tidyverse)
-```
 
-Next, we have to get an access token to access the FinBIF data. Replace your\@email.com with your email address. You will then receive the token by email.
-
-``` r
+# Request an access token to access the FinBIF data (the token will arrive by email)
 finbif_request_token("your@email.com")
-```
 
-Copy the token and active it in R (technically speaking we are setting an environmental variable called FINBIF_ACCESS_TOKEN and giving the token as the value). Replace the long string in quotation marks with the token you received by email.
-
-``` r
+# Copy the token (the long string of characters) from the email and activate it in R
+# Technically speaking, setting an environmental variable called FINBIF_ACCESS_TOKEN and giving the token as the value
 Sys.setenv(FINBIF_ACCESS_TOKEN = "xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et")
 
 # Note: this is not a real token and should be replaced with your own one
-```
 
-Now we are ready to retrieve data. Let's retrieve the latest 5000 observations of the barn swallow (*Hirundo rustica*, haarapääsky) from FinBIF with the R package `finbif`.
+# Retrieving the latest 5000 observations of the barn swallow (*Hirundo rustica*, haarapääsky) from FinBIF with the R package `finbif`.
 
-Add the following command to your R script and run it as it is. To see what the options in the command `finbif_occurrence` mean and what other options are available to control data retrieval, you can check the [manual the `finbif` package on CRAN](https://cloud.r-project.org/web/packages/finbif/finbif.pdf) (the central repository for R packages).
+# To see what the options in the command `finbif_occurrence` mean and what other options are available to control data retrieval, check the [manual the `finbif` package on CRAN](https://cloud.r-project.org/web/packages/finbif/finbif.pdf) (the central repository for R packages).
 
-``` r
 swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("default_vars", "bio_province"))
-```
 
-If reading in the data fails for some reason, here is a backup option for reading in the data in the Notebooks course environment:
-
-``` r
-swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
 ```
 
 ### **2. Data formatting**
+
+**2.0** **Start here if you are working on the exercises to get the additional 0.5 credits.**   
+First, let's load the `tidyverse` R package and then the pre-downloaded data into R. It is stored in the `shared` folder of our course RStudio environment in Noppe. Because the data are saved as an R object in an .rds file, we don't need an additional import command here. Now we use the command `readRDS` to read in the saved data.  
+
+``` r
+library(tidyverse)
+
+swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
+```
 
 **2.1** Before getting started on the exercises for data manipulation, let's make a copy of the data to keep original data intact. Then, we will simplify the formatting of dates and remove double entries for regions (`bio_province`). We will also remove observations with dates in winter because we don't expect swallows to occur then. Copy-paste these lines to your R script and run them as they are.
 
@@ -92,7 +85,7 @@ swallows$date_time = as.Date(format(swallows$date_time, "%Y-%m-%d"))
 swallows$bio_province <- gsub(",.*", "", swallows$bio_province)
 ```
 
-Now we are ready for some exercises!
+Now we are ready for some exercises! If you get stuck, have a look at the [lecture notes and exercises on data manipulation](https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html).
 
 ### **3. Exercises**
 
@@ -102,7 +95,7 @@ Now we are ready for some exercises!
 # Write the answer in your R script.
 ```
 
-**3.2** The column `bio_province` shows the region of the observation. Let's calculate the number of swallows observations (rows in the data) by region. Save the result in a data frame called `by_region`. 
+**3.2** The column `bio_province` shows the region of the observation. Let's count the number of swallows observations (rows in the data) by region. Save the result in an object called `by_region`. 
 
 ``` r
 # Write the answer in your R script.
@@ -110,23 +103,25 @@ Now we are ready for some exercises!
 
 Check the resulting data frame `by_region`. At the bottom there is a region called NA. If you look at the column `bio_province` in `swallows` carefully or run `tail(swallows)`, you will notice that some observations are missing the information on region.
 
-**3.3** Let's fix the problem by modifying the code from the previous step. Remove observations that have NA in the column `bio_province`.
+**3.3** Let's fix the problem by modifying the code from the previous step. Filter out the observations (rows) that have NA in the column `bio_province`.
 
 ``` r
 # Write the answer in your R script.
 ```
 
-**3.4** Use `by_region` to check which region had the most observations of barn swallows and print the top 5.
+**3.4** Arrange the counts in the data frame `by_region` to check which region had the most observations of barn swallows and print the top 5. You can use a pipe to combine the two operations.
 
 ``` r
 # Write the answer in your R script.
 ```
 
-### **4. Saving and exporting your script and saving the data for tomorrow**
+**First task for the extra 0.5 credits: report the top 5 regions.**
 
-Let's first save the R script as we will run through the answers tomorrow. Can you remember how to save and export it? You can find some instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
+### **4. Saving and exporting your script**
 
-Next, let's save the data so that we can continue with it without retrieving it from the database again. Here we will save the data in the `my-work` directory as an R object (.rds file) with the command `saveRDS()`:
+To save and export your R script, you can find the instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
+
+If you downloaded the data yourself, here is how you can save the data so that we can continue with it without retrieving it from the database again. Here we will save the data in the `my-work` directory as an R object (.rds file) with the command `saveRDS()`:
 
 ``` r
 saveRDS(swallows_data, "/home/rstudio/my-work/swallows_data.rds")
