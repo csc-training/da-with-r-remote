@@ -35,7 +35,7 @@ We will use data downloaded with an R package `finbif` that is an R interface to
 
 ### **1. Getting the data (optional)**
 
-This section shows how the data used in the following exercises was downloaded from FinBIF. **If you are carrying out these exercises for the addition 0.5 credits, it is recommended to use the pre-downloaded data and start from step 2.** 
+This section shows how the data used in the following exercises was downloaded from FinBIF. **If you are carrying out these exercises for the additional 0.5 credits, it is recommended to use the pre-downloaded data and start from step 2.** 
 
 ``` r
 # Install the packages `finbif`
@@ -64,7 +64,8 @@ swallows_data <- finbif_occurrence("Hirundo rustica", n=5000, select = c("defaul
 ### **2. Data formatting**
 
 **2.0** **Start here if you are working on the exercises to get the additional 0.5 credits.**   
-First, let's load the `tidyverse` R package and then the pre-downloaded data into R. It is stored in the `shared` folder of our course RStudio environment in Noppe. Because the data are saved as an R object in an .rds file, we don't need an additional import command here. Now we use the command `readRDS` to read in the saved data.  
+
+First, let's load the `tidyverse` R package and then load the pre-downloaded data into R. It is stored in the `shared` folder of our course RStudio environment in Noppe. Because the data are saved as an R object in an .rds file, we don't need an additional import command here. We use the command `readRDS` to read in the saved data.  
 
 ``` r
 library(tidyverse)
@@ -95,7 +96,7 @@ Now we are ready for some exercises! If you get stuck, have a look at the [lectu
 # Write the answer in your R script.
 ```
 
-**3.2** The column `bio_province` shows the region of the observation. Let's count the number of swallows observations (rows in the data) by region. Save the result in an object called `by_region`. 
+**3.2** The column `bio_province` shows the region of the observation. Let's count the number of swallow observations (rows in the data) by region. Save the result in an object called `by_region`. 
 
 ``` r
 # Write the answer in your R script.

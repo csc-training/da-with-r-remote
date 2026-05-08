@@ -38,31 +38,30 @@ First, the data has to be modified a little more to work for the plot we want to
 ``` r
 # Formatting the data for plotting
 
+library(tidyverse)
+
+# loading the data into R
 swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
 
 # making a copy of the data
 swallowplot <- swallows_data
 
-# setting format of the column ´date_time´ to year-month-day
+# setting format of the column `date_time` to year-month-day
 swallowplot$date_time = as.Date(format(swallowplot$date_time, "%Y-%m-%d"))
 
-# removing double entries in the column ´bio_province´ by replacing text with the function gsub
+# removing double entries in the column `bio_province` by replacing text with the function gsub
 swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
 
-# removing the year and the date from the column ´date_time´ with the function ´gsub´ to leave only the month 
-# the data set has observations from 2022 and 2023
+# removing the year and the date from the column `date_time` with the function `gsub` to leave only the month (the data have observations from 2022 and 2023)
 swallowplot$date_time <- gsub("2023-", "", swallowplot$date_time)
 swallowplot$date_time <- gsub("2022-", "", swallowplot$date_time)
 swallowplot$date_time <- gsub("-.*", "", swallowplot$date_time)
 
-# renaming the column ´date_time´ to ´month´, because the month is all we have left
+# renaming the column `date_time` to `month`, because the month is all we have left
 swallowplot <- rename(swallowplot, month = date_time)
 
-# converting the column ´month´ from characters to numbers
+# converting the column `month` from characters to numbers
 swallowplot$month <-  as.numeric(swallowplot$month)
-
-# let's make sure all out data is months from the year 2025
-swallowplot <- swallowplot |> filter(month < 13)
 
 # Removing observations with missing values for region (NA in the column `bio_province`) and count observations by region and by month.
 
