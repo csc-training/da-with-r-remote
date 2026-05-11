@@ -306,9 +306,9 @@ width = 15, height = 10)
 
 **8.4** Next we could save a `grid.arrange()` plot. First use `grid.arrange()` to combine plots 1 and 2, then use `ggsave()` to save the result as a pdf file (use a DPI value of 100).
 
-```r
-# if you don't have gridExtra loaded, then run: library(gridExtra)
+If you get an error saying `could not find function "grid.arrange"`, it means the package `gridExtra` hasn´t been loaded. Load it by running `library(gridExtra)`.
 
+```r
 plots_arranged <- grid.arrange(spp_weight_boxplot, spp_count_plot, 
 ncol = 2, widths = c(4, 6))
 

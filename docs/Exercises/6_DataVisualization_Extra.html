@@ -922,85 +922,75 @@ word-break: break-word;
 <div id="data-wrangling-for-plotting" class="section level3">
 <h3><strong>1. Data wrangling for plotting</strong></h3>
 <p>We will use the same data of barn swallow observations from the
-FinBIF database that we worked with in the Data Manipulation extra
-exercises (saved as an .rds file <code>swallows_data.rds</code>).</p>
-<p>First, the data has to be modified a little more to work for the plot
-we want to create. The steps are given below, but <strong>the exercises
-start at section 2, where you can load a pre-formatted data
-set.</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Formatting the data for plotting</span></span>
+FinBIF database that we worked with in the Data Manipulation independent
+exercises. We have to do some additional data wrangling to make the data
+suitable for plotting.</p>
+<p><strong>If you are working to get the additional 0.5 ECTS, start from
+step 2 where you can load the data set ready for plotting.</strong></p>
+<p>If you have downloaded your own data or want to start from the
+original data, you can use these steps to produce the same modified data
+set that is loaded below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/swallows_data.rds&quot;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows_data</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># loading the data into R</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>swallows_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/swallows_data.rds&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># making a copy of the data</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> swallows_data</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># setting format of the column `date_time` to year-month-day</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">format</span>(swallowplot<span class="sc">$</span>date_time, <span class="st">&quot;%Y-%m-%d&quot;</span>))</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># removing double entries in the column `bio_province` by replacing text with the function gsub</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>swallowplot<span class="sc">$</span>bio_province <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;,.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>bio_province)</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co"># removing the year and the date from the column `date_time` with the function `gsub` to leave only the month (the data have observations from 2022 and 2023)</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;2023-&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;2022-&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>swallowplot<span class="sc">$</span>date_time <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, swallowplot<span class="sc">$</span>date_time)</span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co"># renaming the column `date_time` to `month`, because the month is all we have left</span></span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>swallowplot <span class="ot">&lt;-</span> <span class="fu">rename</span>(swallowplot, <span class="at">month =</span> date_time)</span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co"># converting the column `month` from characters to numbers</span></span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>swallowplot<span class="sc">$</span>month <span class="ot">&lt;-</span>  <span class="fu">as.numeric</span>(swallowplot<span class="sc">$</span>month)</span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="co"># Removing observations with missing values for region (NA in the column `bio_province`) and count observations by region and by month.</span></span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>swallowplot_counts <span class="ot">&lt;-</span> swallowplot <span class="sc">|&gt;</span> </span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bio_province)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), </span>
-<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>  <span class="at">.by =</span> <span class="fu">c</span>(month, bio_province))</span></code></pre></div>
-<p>Ok! Now we’re ready to create some plots.</p>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>swallows<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(swallows<span class="sc">$</span>date_time), <span class="st">&#39;%b&#39;</span>) </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> swallows <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>month <span class="sc">==</span> <span class="st">&quot;Jan&quot;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>counts_for_plotting <span class="ot">&lt;-</span> swallows <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bio_province)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), </span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>            <span class="at">.by =</span> <span class="fu">c</span>(month, bio_province))</span></code></pre></div>
 </div>
 <div id="exercises" class="section level3">
 <h3><strong>2. Exercises</strong></h3>
-<p><strong>2.0.</strong> <strong>Start here if you are working for the
+<p><strong>2.1.</strong> <strong>Start here if you are working for the
 exercises for the extra 0.5 credits</strong>. First, let’s make sure
 <code>tidyverse</code> is loaded and load the data formatted for
 plotting into R. The dataset is stored in the <code>shared</code> folder
-of our RStudio workspace in Noppe. If you get stuck, check the <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html">lecture
+of our RStudio workspace in Noppe.</p>
+<p>If you get stuck, check the <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html">lecture
 notes and exercises for data visualization</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>swallowsplot_counts <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/swallowplot_counts.rds&quot;</span>)</span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>counts_for_plotting <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/home/rstudio/shared/counts_for_plotting.rds&quot;</span>)</span></code></pre></div>
 <p>Check the structure of the data. The beginning of the output should
 look something like the example below (although the exact appearance
 might differ, depending on when the data was downloaded).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">str</span>(swallowplot_counts)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="st">&#39;data.frame&#39;</span><span class="sc">:</span>   <span class="dv">137</span> obs. of  <span class="dv">3</span> variables<span class="sc">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a> <span class="er">$</span> month       <span class="sc">:</span> num  <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">10</span> <span class="dv">9</span> <span class="dv">9</span> ...</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a> <span class="sc">$</span> bio_province<span class="sc">:</span> chr  <span class="st">&quot;Etelä-Häme (EH)&quot;</span> <span class="st">&quot;Varsinais-Suomi (V)&quot;</span> <span class="st">&quot;Pohjois-Savo (PS)&quot;</span> <span class="st">&quot;Satakunta (St)&quot;</span> ...</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a> <span class="sc">$</span> count       <span class="sc">:</span> int  <span class="dv">8</span> <span class="dv">3</span> <span class="dv">17</span> <span class="dv">1</span> <span class="dv">15</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">9</span> ...</span></code></pre></div>
-<p><strong>2.1</strong> Make a bar plot of the observation counts by
-region using <code>swallowplot_counts</code>. Hints: use
-<code>geom_col()</code>. Check <code>swallowplot_counts</code> to see
-how the column with observations is called.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="st">&#39;data.frame&#39;</span><span class="sc">:</span>   <span class="dv">120</span> obs. of  <span class="dv">3</span> variables<span class="sc">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a> <span class="er">$</span> month       <span class="sc">:</span> chr  <span class="st">&quot;Apr&quot;</span> <span class="st">&quot;Apr&quot;</span> <span class="st">&quot;Apr&quot;</span> <span class="st">&quot;May&quot;</span> ...</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a> <span class="sc">$</span> bio_province<span class="sc">:</span> chr  <span class="st">&quot;Satakunta&quot;</span> <span class="st">&quot;South Häme&quot;</span> <span class="st">&quot;Varsinais-Suomi&quot;</span> <span class="st">&quot;Uusimaa&quot;</span> ...</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a> <span class="sc">$</span> count       <span class="sc">:</span> int  <span class="dv">3</span> <span class="dv">10</span> <span class="dv">7</span> <span class="dv">140</span> <span class="dv">65</span> <span class="dv">59</span> <span class="dv">94</span> <span class="dv">112</span> <span class="dv">12</span> <span class="dv">96</span> ...</span></code></pre></div>
+<p><strong>2.2</strong> Make a bar plot of the observation counts by
+month using <code>counts_for_plotting</code>. Hints: use
+<code>geom_col()</code>. Check <code>counts_for_plotting</code> for
+example by clicking it in the Environment panel to see how the column
+with counts is called. Month will be on the x axis, and counts on the y
+axis.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
-<p><strong>3.2</strong> What about a similar bar plot of observations
-but by month?</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
-<p><strong>2.3</strong> Next, let’s combine the above and make a line
-plot that shows month on the x axis, counts on the y axis, and the lines
-are coloured by region (<code>bio_province</code>). Hint: use
-<code>geom_line()</code>.</p>
+<p>Ok, that looks weird because the months are in the alphabetical
+order. Let’s re-order them by turning <code>month</code> into a factor
+and defining the order:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>counts_for_plotting<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">factor</span>(counts_for_plotting<span class="sc">$</span>month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, <span class="st">&quot;Jul&quot;</span>, <span class="st">&quot;Aug&quot;</span>, <span class="st">&quot;Sep&quot;</span>, <span class="st">&quot;Oct&quot;</span>, <span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span>))</span></code></pre></div>
+<p>Run the previous plot again. The months should now be in the correct
+order.</p>
+<p><strong>2.3</strong> Next, let’s look at the monthly observations by
+region and make a line plot that shows month on the x axis, counts on
+the y axis, and the lines are coloured by region
+(<code>bio_province</code>). Important: set both
+<code>color = bio_province</code> and group = <code>bio_province</code>
+in side the <code>aes()</code> function:<br />
+<code>aes(x = ... , y = ... , colour = bio_province, group = bio_province)</code>.
+Additional hint: use <code>geom_line()</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>2.4.</strong> Not looking too bad, but let’s make the plot
 look nicer by labelling the y axis ‘observations’ and giving the plot a
 title ‘Barn swallows by region’</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Write the answer in your R script</span></span></code></pre></div>
-<p><strong>Second task for the extra 0.5 credits: save the plot created
-in section 2.4 and return it as your answer for the plotting
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
+<p><strong>Second task for the extra 0.5 ECTS: save the plot created in
+section 2.4 and return it as your answer for the plotting
 section.</strong></p>
 <p>For help on saving plots, see the <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html">data
 visualization lecture notes and exercises</a>.</p>

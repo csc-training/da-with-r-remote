@@ -750,8 +750,9 @@ font-weight: bold;
     
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1010,9 +1011,9 @@ explanatory factor.</p>
 <p><strong>3.3</strong> Then, let’s inspect the diagnostics of our model
 with <code>autoplot(my_lm)</code>. Do you see anything in the model
 diagnostics that concerns you or is it ok to proceed?</p>
-<p>If you get an error about the function <code>autoplot</code> not
-being available, make sure you have run <code>library(ggfortify)</code>
-to load the package <code>ggfortify</code>.</p>
+<p>If you get an error about objects of class <lm> not being supported
+by autoplot, make sure you have run <code>library(ggfortify)</code> to
+load the package <code>ggfortify</code>.</p>
 <p><strong>3.4.</strong> Finally, use the function <code>anova()</code>
 to create an ANOVA table for your model. Does penguin flipper length
 differ among the species? What are the F statistic and P value of the

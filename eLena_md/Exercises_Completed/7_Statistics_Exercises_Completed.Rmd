@@ -108,7 +108,7 @@ Note that in many sources you might see a different syntax of the paired samples
 **2.1** We will use a data set built into R called `penguins`. Before starting, make sure you have read in the data, created a copy of it, and at the same time, omitted the missing observations as in the demonstration earlier. Then we inspect the contents with `str()`.
 
 ```r
-penguinsdata <- na.omit(data("penguins"))
+penguinsdata <- na.omit(penguins)
 str(penguinsdata)
 
 ```
@@ -164,7 +164,7 @@ flipper_lm <- lm(flipper_len ~ species, data = penguinsdata)
 autoplot(flipper_lm)
 ```
 
-If you get an error about the function `autoplot` not being available, make sure you have run `library(ggfortify)` to load the package `ggfortify`.
+If you get an error about objects of class <lm> not being supported by autoplot, make sure you have run `library(ggfortify)` to load the package `ggfortify`.
 
 **3.4.** Finally, use the function `anova()` to create an ANOVA table for your model. Does penguin flipper length differ among the species? What are the F statistic and P value of the test?
 
