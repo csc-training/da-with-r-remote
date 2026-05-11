@@ -133,13 +133,22 @@ country_climate <- data.frame(
 carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv")
 ```
 
-**6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
+**6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try re-importing the data with the header argument set to false: `header = FALSE`. How does the new data set differ from the previous one? 
 
-**6.3** The car colour labels contain accidental whitespaces. To fix this, try importing the data using the `strip.white` argument. 
+**6.3** The car colour labels contain accidental whitespaces. You can see this by running:  
 
-NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. 
+``` r
+unique(carSpeeds$Color) 
 
-Use `unique()` to check if it worked. Hint: you can refer to a specific column in a data frame with `dataframe$column`. 
+# Note that here we are referring to a specific column in a data frame with `dataframe$column`
+```
+
+To fix the problem with whitespaces, try importing the data using the `strip.white` argument:  
+`strip.white = TRUE, sep = ","`
+
+The `strip.white` argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files). In other words, we need to add `sep = ','` to the import command. 
+
+Use `unique()` to check if it worked.
 
 #### **Block 7: exporting data and saving scripts**
 
@@ -147,7 +156,7 @@ The first two steps were covered in the lecture, so skip to step 7.3 if you alre
 
 **7.1** Create a new folder for output files, called `data_output`.
 
-**7.2** Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file.
+**7.2** Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file. The output file name should be in quotation marks (because it is a character string and not an object in our R environment).
 
 ```r
 write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
