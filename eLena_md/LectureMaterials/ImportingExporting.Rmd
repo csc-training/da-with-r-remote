@@ -136,7 +136,7 @@ By default this whitespace will be kept in the R environment, such that e.g. ‘
 
 **Challenge:**
 
-Before we carry on working with the survey data, let's have a closer look at some of the arguments in `read.csv` (aside from `stringsAsFactors`). First we will load another data set into R, this time containing information on the speeds at which cars of different colors were clocked in 45 mph zones in different US states. 
+Before we carry on working with the survey data, let's have a closer look at some of the arguments in `read.csv`. First we will load another data set into R, this time containing information on the speeds at which cars of different colors were clocked in 45 mph zones in different US states. 
 
 We can have a look at the data by going through the steps in **Starting with Data Exercise Block 6** (~5-10 mins).
 
