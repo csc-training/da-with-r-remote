@@ -31,86 +31,71 @@ opts_knit$set(width=75)
 
 ### **1. Data wrangling for plotting**
 
-We will use the same data of barn swallow observations from the FinBIF database that we worked with in the Data Manipulation extra exercises (saved as an .rds file `swallows_data.rds`).
+We will use the same data of barn swallow observations from the FinBIF database that we worked with in the Data Manipulation independent exercises. We have to do some additional data wrangling to make the data suitable for plotting. 
 
-First, the data has to be modified a little more to work for the plot we want to create. The steps are given below, but **the exercises start at section 2, where you can load a pre-formatted data set.**
+**If you are working to get the additional 0.5 ECTS, start from step 2 where you can load the data set ready for plotting.** 
+
+If you have downloaded your own data or want to start from the original data, you can use these steps to produce the same modified data set that is loaded
+below.
 
 ``` r
-# Formatting the data for plotting
-
-library(tidyverse)
-
-# loading the data into R
 swallows_data <- readRDS("/home/rstudio/shared/swallows_data.rds")
 
-# making a copy of the data
-swallowplot <- swallows_data
+swallows <- swallows_data
 
-# setting format of the column `date_time` to year-month-day
-swallowplot$date_time = as.Date(format(swallowplot$date_time, "%Y-%m-%d"))
+swallows$month <- format(as.Date(swallows$date_time), '%b') 
 
-# removing double entries in the column `bio_province` by replacing text with the function gsub
-swallowplot$bio_province <- gsub(",.*", "", swallowplot$bio_province)
+swallows <- swallows |> filter(!month == "Jan")
 
-# removing the year and the date from the column `date_time` with the function `gsub` to leave only the month (the data have observations from 2022 and 2023)
-swallowplot$date_time <- gsub("2023-", "", swallowplot$date_time)
-swallowplot$date_time <- gsub("2022-", "", swallowplot$date_time)
-swallowplot$date_time <- gsub("-.*", "", swallowplot$date_time)
-
-# renaming the column `date_time` to `month`, because the month is all we have left
-swallowplot <- rename(swallowplot, month = date_time)
-
-# converting the column `month` from characters to numbers
-swallowplot$month <-  as.numeric(swallowplot$month)
-
-# Removing observations with missing values for region (NA in the column `bio_province`) and count observations by region and by month.
-
-swallowplot_counts <- swallowplot |> 
+counts_for_plotting <- swallows |> 
   filter(!is.na(bio_province)) |> 
   summarise(count = n(), 
-  .by = c(month, bio_province))
+            .by = c(month, bio_province))
 ```
-
-Ok! Now we're ready to create some plots.
 
 ### **2. Exercises**
 
-**2.0.** **Start here if you are working for the exercises for the extra 0.5 credits**. 
-First, let's make sure `tidyverse` is loaded and load the data formatted for plotting into R. The dataset is stored in the `shared` folder of our RStudio workspace in Noppe. If you get stuck, check the [lecture notes and exercises for data visualization](https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html).
+**2.1.** **Start here if you are working for the exercises for the extra 0.5 credits**. 
+First, let's make sure `tidyverse` is loaded and load the data formatted for plotting into R. The dataset is stored in the `shared` folder of our RStudio workspace in Noppe. 
+
+If you get stuck, check the [lecture notes and exercises for data visualization](https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html).
 
 ``` r
 library(tidyverse)
 
-swallowsplot_counts <- readRDS("/home/rstudio/shared/swallowplot_counts.rds")
+counts_for_plotting <- readRDS("/home/rstudio/shared/counts_for_plotting.rds")
 ```
 
 Check the structure of the data. The beginning of the output should look something like the example below (although the exact appearance might differ, depending on when the data was downloaded).
 
 ``` r
-str(swallowplot_counts)
+# Write the answer in your R script.
 ```
 
 ``` r
-'data.frame':	137 obs. of  3 variables:
- $ month       : num  4 4 4 4 4 1 10 10 9 9 ...
- $ bio_province: chr  "Etelä-Häme (EH)" "Varsinais-Suomi (V)" "Pohjois-Savo (PS)" "Satakunta (St)" ...
- $ count       : int  8 3 17 1 15 1 1 1 2 9 ...
+'data.frame':	120 obs. of  3 variables:
+ $ month       : chr  "Apr" "Apr" "Apr" "May" ...
+ $ bio_province: chr  "Satakunta" "South Häme" "Varsinais-Suomi" "Uusimaa" ...
+ $ count       : int  3 10 7 140 65 59 94 112 12 96 ...
 ```
 
 
-**2.1** Make a bar plot of the observation counts by region using `swallowplot_counts`. Hints: use `geom_col()`. Check `swallowplot_counts` to see how the column with observations is called.
+**2.2** Make a bar plot of the observation counts by month using `counts_for_plotting`. Hints: use `geom_col()`. Check `counts_for_plotting` for example by clicking it in the Environment panel to see how the column with counts is called. Month will be on the x axis, and counts on the y axis.
 
 ``` r
 # Write the answer in your R script.
 ```
 
-**3.2** What about a similar bar plot of observations but by month?
+Ok, that looks weird because the months are in the alphabetical order. Let's re-order them by turning `month` into a factor and defining the order:
 
 ``` r
-# Write the answer in your R script.
-```
+counts_for_plotting$month <- factor(counts_for_plotting$month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+``` 
 
-**2.3** Next, let's combine the above and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (`bio_province`). Hint: use `geom_line()`.
+Run the previous plot again. The months should now be in the correct order.
+
+**2.3** Next, let's look at the monthly observations by region and make a line plot that shows month on the x axis, counts on the y axis, and the lines are coloured by region (`bio_province`).  Important: set both `color = bio_province` and group = `bio_province` in side the `aes()` function:     
+`aes(x = ... , y = ... , colour = bio_province, group = bio_province)`. Additional hint: use `geom_line()`.
 
 ``` r
 # Write the answer in your R script.
@@ -119,10 +104,10 @@ str(swallowplot_counts)
 **2.4.** Not looking too bad, but let's make the plot look nicer by labelling the y axis 'observations' and giving the plot a title 'Barn swallows by region'
 
 ``` r
-# Write the answer in your R script
+# Write the answer in your R script.
 ```
 
-**Second task for the extra 0.5 credits: save the plot created in section 2.4 and return it as your answer for the plotting section.**
+**Second task for the extra 0.5 ECTS: save the plot created in section 2.4 and return it as your answer for the plotting section.**
 
 For help on saving plots, see the [data visualization lecture notes and exercises](https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html). 
 
@@ -133,4 +118,3 @@ If you have problems with these steps, take a screenshot of the plot.
 ### **3. Saving and exporting your script**
 
 If you don't remember how to save and export your data from RStudio, follow the instructions set out in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).
-

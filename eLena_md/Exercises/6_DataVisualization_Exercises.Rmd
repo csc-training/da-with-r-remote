@@ -207,4 +207,6 @@ width = 15, height = 10)
 
 **8.4** Next we could save a `grid.arrange()` plot. First use `grid.arrange()` to combine plots 1 and 2, then use `ggsave()` to save the result as a pdf (use a DPI value of 100).
 
+If you get an error saying `could not find function "grid.arrange"`, it means the package `gridExtra` hasn´t been loaded. Load it by running `library(gridExtra)`.
+
 **8.5** Now it's time to save and export everything we've created so far. Can you remember how to do this? If not, you can revisit the instructions in the **Starting with Data exercise sheet** (steps 7.3 and 7.4).

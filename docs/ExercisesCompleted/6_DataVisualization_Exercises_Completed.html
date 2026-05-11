@@ -750,8 +750,9 @@ font-weight: bold;
     
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1168,13 +1169,15 @@ a pdf file.</p>
 plot. First use <code>grid.arrange()</code> to combine plots 1 and 2,
 then use <code>ggsave()</code> to save the result as a pdf file (use a
 DPI value of 100).</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># if you don&#39;t have gridExtra loaded, then run: library(gridExtra)</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>plots_arranged <span class="ot">&lt;-</span> <span class="fu">grid.arrange</span>(spp_weight_boxplot, spp_count_plot, </span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>))</span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;fig_output/comboplot.pdf&quot;</span>, plots_arranged, </span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="at">width =</span> <span class="dv">10</span>, <span class="at">dpi =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p>If you get an error saying
+<code>could not find function &quot;grid.arrange&quot;</code>, it means the
+package <code>gridExtra</code> hasn´t been loaded. Load it by running
+<code>library(gridExtra)</code>.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>plots_arranged <span class="ot">&lt;-</span> <span class="fu">grid.arrange</span>(spp_weight_boxplot, spp_count_plot, </span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;fig_output/comboplot.pdf&quot;</span>, plots_arranged, </span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="at">width =</span> <span class="dv">10</span>, <span class="at">dpi =</span> <span class="dv">100</span>)</span></code></pre></div>
 <p><strong>8.5</strong> Now it’s time to save and export everything
 we’ve created so far. Can you remember how to do this? If not, you can
 revisit the instructions in the <strong>Starting with Data exercise

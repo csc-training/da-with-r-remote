@@ -750,8 +750,9 @@ font-weight: bold;
     
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1105,6 +1106,10 @@ a pdf file.</p>
 plot. First use <code>grid.arrange()</code> to combine plots 1 and 2,
 then use <code>ggsave()</code> to save the result as a pdf (use a DPI
 value of 100).</p>
+<p>If you get an error saying
+<code>could not find function &quot;grid.arrange&quot;</code>, it means the
+package <code>gridExtra</code> hasn´t been loaded. Load it by running
+<code>library(gridExtra)</code>.</p>
 <p><strong>8.5</strong> Now it’s time to save and export everything
 we’ve created so far. Can you remember how to do this? If not, you can
 revisit the instructions in the <strong>Starting with Data exercise
