@@ -393,7 +393,9 @@ If you think of how experimental data would look as a scatter plot, the points l
 To illustrate, let's return to the `penguins` data. We imported it above as `penguinsdata` without missing values:
 
 ``` r
-#penguinsdata <- na.omit(penguins)
+#penguinsdata <- penguins |> 
+#  na.omit()
+  
 str(penguinsdata)
 ```
 

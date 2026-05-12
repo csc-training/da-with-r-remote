@@ -974,8 +974,10 @@ bug, and the old syntax does not work anymore in recent R versions
 data, created a copy of it, and at the same time, omitted the missing
 observations as in the demonstration earlier. Then we inspect the
 contents with <code>str()</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>penguinsdata <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(penguins)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">str</span>(penguinsdata)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>penguinsdata <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">str</span>(penguinsdata)</span></code></pre></div>
 <p><strong>2.2</strong> We are interested in the correlation of penguin
 body mass and flipper length.</p>
 <p>The function <code>cor.test()</code> tests the null hypothesis that
