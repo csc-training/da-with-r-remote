@@ -7,7 +7,7 @@
 
     
     
-    <title>4_StartingWithData_Exercises_Completed.knit</title>
+    <title>7_Statistics_Exercises_Completed.knit</title>
 
         <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -917,251 +917,191 @@ white-space : pre-wrap !important;
 word-break: break-word;
 }
 </style>
-<div id="starting-with-data---exercise-sheet" class="section level1">
-<h1>Starting with data - exercise sheet</h1>
-<p><em>These exercises are partially derived from Software Carpentry
-teaching materials available under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0
-license</a>:</em></p>
-<p><a href="https://swcarpentry.github.io/r-novice-gapminder/" class="uri">https://swcarpentry.github.io/r-novice-gapminder/</a></p>
-<p><a href="https://swcarpentry.github.io/r-novice-inflammation/" class="uri">https://swcarpentry.github.io/r-novice-inflammation/</a></p>
-<p><a href="https://datacarpentry.org/R-ecology-lesson/" class="uri">https://datacarpentry.org/R-ecology-lesson/</a></p>
-<div id="block-1-downloading-and-importing-data" class="section level4">
-<h4><strong>Block 1: downloading and importing data</strong></h4>
-<p>This exercise block repeats the lecture contents - at this point it’s
-important that we’re all on the same page! We will need these data as we
-move on.</p>
-<p><strong>1.1</strong> Import some example data
-(<code>/home/rstudio(shared/portal_data_joined.csv</code>) into an
-object called <code>surveys</code>. You can use <code>head()</code> to
-check that everything got imported correctly.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div>
-<p><strong>1.2</strong> We just imported data from outside our current
-working directory. Let’s also try something inside the working directory
-- create a new folder called <code>testfolder</code> (Files pane on the
-bottom right –&gt; New folder).</p>
+<div id="statistics---exercise-sheet" class="section level1">
+<h1>Statistics - exercise sheet</h1>
+<div id="block-1-paired-samples-t-test" class="section level4">
+<h4><strong>Block 1: Paired samples <em>t</em>-test</strong></h4>
+<p><strong>1.1</strong> Let’s use the <code>sleep</code> data built into
+R to perform a paired-samples <em>t</em>-test. This data set shows the
+effect of two drowsiness-inducing drugs (hours of extra sleep compared
+to a control) on ten patients. Here the position (row number) of the
+observations within groups matters, as the test assumes observations to
+be <em>paired</em> in a meaningful way. In our case, the data are
+ordered by the patient ID.</p>
+<p>Let’s first assign the built-in <code>sleep</code> data into a data
+frame:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>sleepdata <span class="ot">&lt;-</span> sleep</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>sleepdata <span class="co"># the data set is small, so we can inspect the whole data set instead of using head() or str()</span></span></code></pre></div>
+<p><strong>1.2</strong> Then, let’s run independent samples
+<em>t</em>-test on <code>sleepdata</code> to compare the amount of extra
+sleep (<code>extra</code>) among two groups (<code>group</code>). As a
+reminder, the format of an independent samples <em>t</em>-test was:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># independent samples t-test:</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co"># t.test(y ~ x, data = dataset)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># solution:</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">t.test</span>(extra <span class="sc">~</span> group, <span class="at">data =</span> sleepdata)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># output:</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#   Welch Two Sample t-test</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># data:  extra by group</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># t = -1.8608, df = 17.776, p-value = 0.07939</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co"># alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># 95 percent confidence interval:</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#  -3.3654832  0.2054832</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co"># sample estimates:</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co"># mean in group 1 mean in group 2 </span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#           0.75            2.33 </span></span></code></pre></div>
+<p><strong>1.3</strong> To run the paired samples <em>t</em>-test, we
+have to change for formatting of the data from the <strong>long
+format</strong> to the <strong>wide format</strong>. We are taking
+column names (<code>names_from</code>) from the column
+<code>group</code>, and giving them names <code>med1</code> and
+<code>med2</code> for the two drugs being tested. The measurements of
+extra sleep (<code>values_from</code>) come from the column
+<code>extra</code> in the original <code>sleep</code> data set. To more
+about reshaping data sets this way, see the section Data
+Manipulation.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>sleep_wide <span class="ot">&lt;-</span> sleepdata <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="at">values_from =</span> extra,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>              <span class="at">names_prefix =</span> <span class="st">&quot;med&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>sleep_wide</span></code></pre></div>
+<p><strong>1.4</strong> Now we are ready to run the paired-samples
+<em>t</em>-test. It uses the same function as independent samples
+<em>t</em>-test, but the syntax for a paired test is different:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># paired samples t-test:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># y1 and y2 are response data columns, where observations on the same row belong together</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># in this case, they are different measurements on the same individual</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># t.test(Pair(y1, y2) ~ 1, data = dataframe)</span></span></code></pre></div>
+<p>Run the paired samples <em>t</em>-test and compare the result with
+the independent samples test results. How would you interpret the
+results? Why do you think the type of test affects the conclusion we’re
+able to make?</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">Pair</span>(med1, med2) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> sleep_wide)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># output:</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#   Paired t-test</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># data:  Pair(med1, med2)</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># t = -4.0621, df = 9, p-value = 0.002833</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># alternative hypothesis: true mean difference is not equal to 0</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># 95 percent confidence interval:</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># -2.4598858 -0.7001142</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co"># sample estimates:</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># mean difference </span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#           -1.58 </span></span></code></pre></div>
+<p>Independent samples <em>t</em>-test showed no clear difference in
+extra sleep between the two medications (p=0.08). A paired samples
+<em>t</em>-test, which takes into account that each medication was
+tested on the same patients in turn, shows a difference (p=0.003).
+Properly considering the paired nature of the data and variation among
+patients increased the sensitivity of the test.</p>
+<p>Note that in many sources you might see a different syntax of the
+paired samples <em>t</em>-test, which includes the option
+<code>paired = TRUE</code>. The syntax was changed in R v.4.4.0 to fix a
+bug, and the old syntax does not work anymore in recent R versions
+(including the one we use on this course).</p>
 </div>
-<div id="block-2-inspecting-data-frames" class="section level4">
-<h4><strong>Block 2: inspecting data frames</strong></h4>
-<p><strong>2.1</strong> Inspect the <code>surveys</code> data set using
-the following functions. We don’t need to memorize them now, but
-eventually this can be useful when you are working with your own
-data.</p>
-<ul>
-<li>Size:
-<ul>
-<li><code>dim()</code> - returns a vector with the number of rows in the
-first element, and the number of columns as the second element (the
-<strong>dim</strong>ensions of the object)</li>
-<li><code>nrow()</code> - number of rows</li>
-<li><code>ncol()</code> - number of columns</li>
-</ul></li>
-<li>Content:
-<ul>
-<li><code>head()</code> - first 6 rows</li>
-<li><code>tail()</code> - last 6 rows</li>
-</ul></li>
-<li>Names:
-<ul>
-<li><code>names()</code> - column names (synonym of
-<code>colnames()</code> for <code>data.frame</code> objects)</li>
-<li><code>rownames()</code> - row names</li>
-</ul></li>
-<li>Summary:
-<ul>
-<li><code>str()</code> - structure of the object and information about
-the class, length and content of each column</li>
-<li><code>summary()</code> - summary statistics for each column</li>
-</ul></li>
-</ul>
-<p><strong>2.2</strong> Based on the output of
-<code>str(surveys)</code>, can you answer the following questions?</p>
-<ul>
-<li>What is the class of the object <code>surveys</code>?</li>
-<li>How many rows and how many columns are in this object?</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## * class: data frame</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="do">## * how many rows: 34786,  how many columns: 13</span></span></code></pre></div>
+<div id="block-2-correlation" class="section level4">
+<h4><strong>Block 2: Correlation</strong></h4>
+<p><strong>2.1</strong> We will use a data set built into R called
+<code>penguins</code>. Before starting, make sure you have read in the
+data, created a copy of it, and at the same time, omitted the missing
+observations as in the demonstration earlier. Then we inspect the
+contents with <code>str()</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>penguinsdata <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">str</span>(penguinsdata)</span></code></pre></div>
+<p><strong>2.2</strong> We are interested in the correlation of penguin
+body mass and flipper length.</p>
+<p>The function <code>cor.test()</code> tests the null hypothesis that
+the variables are not correlated:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># cor.test(dataframe$variable1, dataframe$variable2, method = &quot;pearson&quot;)</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co"># note how $ is used to select the columns of the data frame containing the variables of interest</span></span></code></pre></div>
+<p>Use the function <code>cor.test</code> to test if the numeric
+variables <code>body_mass</code> and <code>flipper_len</code> in the
+data frame <code>penguinsdata</code> are correlated. To find more about
+the function, use <code>?cor.test</code>.</p>
+<p>The default method is Pearson correlation
+(<code>method = &quot;pearson&quot;</code>), which assumes the samples follow
+normal distribution. If this is not the case, we can specify to use
+Spearman correlation (<code>method = &quot;spearman&quot;</code>), which works
+better for non-normal data.</p>
+<p>What is the correlation coefficient between penguin body mass and
+flipper length? What is your conclusion - are the variables
+correlated?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">cor.test</span>(penguinsdata<span class="sc">$</span>body_mass, penguinsdata<span class="sc">$</span>flipper_len, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># output:</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#   Pearson&#39;s product-moment correlation</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># data:  penguinsdata$body_mass and penguinsdata$flipper_len</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># t = 32.562, df = 331, p-value &lt; 2.2e-16</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># alternative hypothesis: true correlation is not equal to 0</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># 95 percent confidence interval:</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># 0.8447622 0.8963550</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># sample estimates:</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#       cor </span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># 0.8729789 </span></span></code></pre></div>
+<p>Correlation coefficient (r) is 0.87 and p value is &lt; 2.2e-16,
+which indicates the variables are correlated.</p>
 </div>
-<div id="block-3-indexing-and-subsetting-data-frames" class="section level4">
-<h4><strong>Block 3: indexing and subsetting data frames</strong></h4>
-<p><strong>3.1</strong> Create a <code>data.frame</code>
-(<code>surveys_200</code>) containing only the data in row 200 of the
-<code>surveys</code> dataset.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>surveys_200 <span class="ot">&lt;-</span> surveys[<span class="dv">200</span>, ]</span></code></pre></div>
-<p><strong>3.2</strong> Notice how <code>nrow()</code> gave you the
-number of rows in a <code>data.frame</code>?</p>
-<ul>
-<li>Use that number to pull out just that last row in the data
-frame.</li>
-<li>Compare that with what you see as the last row using
-<code>tail()</code> to make sure it’s meeting expectations.</li>
-<li>Pull out that last row using <code>nrow()</code> instead of the row
-number.</li>
-<li>Create a new data frame (<code>surveys_last</code>) from that last
-row.</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">nrow</span>(surveys)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>surveys_last1 <span class="ot">&lt;-</span> surveys[<span class="dv">34786</span>, ]</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">tail</span>(surveys)</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># (Saving `n_rows` to improve readability)</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>n_rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(surveys)</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>surveys_last2 <span class="ot">&lt;-</span> surveys[n_rows, ]</span></code></pre></div>
-<p><strong>3.3</strong> Use <code>nrow()</code> to extract the row that
-is in the middle of the data frame. Store the content of this row in an
-object named <code>surveys_middle</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>surveys_middle <span class="ot">&lt;-</span> surveys[n_rows <span class="sc">/</span> <span class="dv">2</span>, ]</span></code></pre></div>
-<p><strong>3.4</strong> A trickier example: combine <code>nrow()</code>
-with the <code>-</code> notation above to reproduce the behavior of
-<code>head(surveys)</code>, keeping just the first through 6th rows of
-the surveys dataset. Don’t worry if you can’t get this one right!</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">head</span>(surveys)</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>surveys_head <span class="ot">&lt;-</span> surveys[<span class="sc">-</span>(<span class="dv">7</span><span class="sc">:</span>n_rows), ]</span></code></pre></div>
-</div>
-<div id="block-4-factors" class="section level4">
-<h4><strong>Block 4: factors</strong></h4>
-<p><strong>4.1</strong> First assign the gender data from
-<code>surveys</code> to a new object and convert it to a factor. You
-probably also remember there are some measurements where the gender
-information is either missing or undetermined, let’s call those
-“undetermined”.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;undetermined&quot;</span></span></code></pre></div>
-<p><strong>4.2</strong> Rename “F” and “M” to “female” and “male”,
-respectively.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;female&quot;</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;male&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)</span></span></code></pre></div>
-<p><strong>4.3</strong> Can you reorder the data so that the levels are
-ordered like this: <code>undetermined</code>, <code>male</code>,
-<code>female</code>? After this, use <code>plot()</code> to check how
-the data now look.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;undetermined&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">levels</span>(sex)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">plot</span>(sex)</span></code></pre></div>
-</div>
-<div id="block-5-more-on-data-frames" class="section level4">
-<h4><strong>Block 5: more on data frames</strong></h4>
-<p><strong>5.1</strong> We have seen how data frames are created when
-using <code>read.csv()</code>, but they can also be created by hand with
-the <code>data.frame()</code> function. There are a few mistakes in this
-hand-crafted <code>data.frame</code>. Can you spot and fix them? Don’t
-hesitate to experiment!</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>animal_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>          <span class="at">animal =</span> <span class="fu">c</span>(dog, cat, sea cucumber, sea urchin),</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>          <span class="at">feel =</span> <span class="fu">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>          <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">8</span> <span class="fl">1.1</span>, <span class="fl">0.8</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>          )</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># missing quotations around the names of the animals</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># missing entry in the feel column (one of the furry animals)</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co"># missing one comma in the weight column</span></span></code></pre></div>
-<p><strong>5.2</strong> Can you predict the class for each of the
-columns in the following example? Check your guesses using
-<code>str(country_climate)</code>:</p>
-<ul>
-<li>Are they what you expected? Why? Why not?</li>
-<li>What would have been different if we had added
-<code>stringsAsFactors = TRUE</code> when creating the data frame?</li>
-<li>What would you need to change to ensure that each column had the
-accurate data type?</li>
-</ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>country_climate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>       <span class="at">country =</span> <span class="fu">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Panama&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Australia&quot;</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>       <span class="at">climate =</span> <span class="fu">c</span>(<span class="st">&quot;cold&quot;</span>, <span class="st">&quot;hot&quot;</span>, <span class="st">&quot;temperate&quot;</span>, <span class="st">&quot;hot/temperate&quot;</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>       <span class="at">temperature =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="st">&quot;15&quot;</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>       <span class="at">northern_hemisphere =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="st">&quot;FALSE&quot;</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>       <span class="at">has_kangaroo =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="dv">1</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>       )</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>       </span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># country, climate, temperature, and northern_hemisphere are character vectors; has_kangaroo is numeric</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># removing quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the has_kangaroo column</span></span></code></pre></div>
-</div>
-<div id="block-6-arguments-for-csv-importing" class="section level4">
-<h4><strong>Block 6: arguments for CSV importing</strong></h4>
-<p><strong>6.1</strong> Import a new data set on car speeds
-(<code>/home/rstudio/shared/car-speeds.csv</code>) and assign it to an
-object called <code>carSpeeds</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
-<p><strong>6.2</strong> Have a look at the structure of
-<code>carSpeeds</code> using <code>str()</code>. Then try reimporting
-the data with the header argument set to false. How does the new data
-set differ from the previous one?</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="fu">str</span>(carSpeeds)</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co"># the first row of the data</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>carSpeeds[<span class="dv">1</span>, ]</span></code></pre></div>
-<p><strong>6.3</strong> The car colour labels contain accidental
-whitespaces. You can see this by running:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color) </span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># Note that here we are referring to a specific column in a data frame with `dataframe$column`</span></span></code></pre></div>
-<p>To fix the problem with whitespaces, try importing the data using the
-<code>strip.white</code> argument:<br />
-<code>strip.white = TRUE, sep = &quot;,&quot;</code></p>
-<p>The <code>strip.white</code> argument must be accompanied by the
-<code>sep</code> argument, by which we indicate the type of delimiter in
-the file (the comma for most .csv files). In other words, we need to add
-<code>sep = &#39;,&#39;</code> to the import command.</p>
-<p>Use <code>unique()</code> to check if it worked.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color) <span class="co"># right now we can see a problem here</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># [1] &quot;Blue&quot;  &quot; Red&quot;  &quot;White&quot; &quot;Red&quot;   &quot;Black&quot;</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&#39;/home/rstudio/shared/car-speeds.csv&#39;</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  <span class="at">strip.white =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&#39;,&#39;</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>  )</span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color)</span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co"># [1] &quot;Blue&quot;  &quot;Red&quot;   &quot;White&quot; &quot;Black&quot;</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co"># That looks better!</span></span></code></pre></div>
-</div>
-<div id="block-7-exporting-data-and-saving-scripts" class="section level4">
-<h4><strong>Block 7: exporting data and saving scripts</strong></h4>
-<p>The first two steps were covered in the lecture, so skip to step 7.3
-if you already ran them.</p>
-<p><strong>7.1</strong> Create a new folder for output files, called
-<code>data_output</code>.</p>
-<p><strong>7.2</strong> Export the car speeds data. The
-<code>write.csv()</code> function requires a minimum of two arguments,
-the data to be saved and the name of the output file. The output file
-name should be in quotation marks (because it is a character string and
-not an object in our R environment).</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>)</span></code></pre></div>
-<p><strong>7.3</strong> View the output file by clicking on on the file
-name and select <code>View</code> (or read the data back into R with
-<code>read.csv()</code> into a new object and inspect the object). It
-should have three columns (Color, Speed, State). What is wrong?</p>
-<p>There is an extra column of numbers that was not present in the
-data.</p>
-<p><strong>7.4</strong> Our <code>read.csv()</code> command above has
-inserted an extra column of row names into the data frame. We can use
-the argument <code>row.names</code> with <code>write.csv</code> to
-control this. R’s default for this argument is <code>TRUE</code>, and
-since it does not know what else to name the rows for the cars data set,
-it resorts to using row numbers. To correct this, we can set
-<code>row.names</code> to <code>FALSE</code>. Export your original
-carSpeeds data again with <code>write.csv</code> and this time add
-<code>row.names = FALSE</code>. View the file again to check if it
-worked.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><strong>7.5</strong> Save your script (File –&gt; Save as…).</p>
-<p><strong>7.6</strong> Export your data from RStudio Server.</p>
-<pre><code>- Go to the &quot;Files&quot; pane (on the right, next to &quot;Plots&quot;)
-
-- Tick the empty boxes next to the files / folders you would like to export
-
-- Click on &quot;More&quot; (look for a cogwheel symbol)
-
-- Click on &quot;Export&quot;. After this, specify a suitable name for the .zip file. The file will be saved into your default downloads folder. </code></pre>
+<div id="block-3-anova" class="section level4">
+<h4><strong>Block 3: ANOVA</strong></h4>
+<p><strong>3.1</strong> Our next task is to find out if the penguin
+flipper length differs among the three species (Adelie, Gentoo and
+Chinstrap) present in our <code>penguinsdata</code> data set. Flipper
+length is the numerical response factor and species is the categorical
+explanatory factor.</p>
+<p><strong>3.2</strong> First, create a linear model of
+<code>flipper_len</code>and <code>species</code> in the data frame
+<code>penguinsdata</code> using the function <code>lm()</code>.</p>
+<p>Hint: the syntax needed is
+<code>my_lm &lt;- lm(response_factor ~ explanatory_factor, data = dataframe)</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>flipper_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(flipper_len <span class="sc">~</span> species, <span class="at">data =</span> penguinsdata)</span></code></pre></div>
+<p><strong>3.3</strong> Then, let’s inspect the diagnostics of our model
+with <code>autoplot(my_lm)</code>. Do you see anything in the model
+diagnostics that concerns you or is it ok to proceed?</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">autoplot</span>(flipper_lm)</span></code></pre></div>
+<p>If you get an error about objects of class <lm> not being supported
+by autoplot, make sure you have run <code>library(ggfortify)</code> to
+load the package <code>ggfortify</code>.</p>
+<p><strong>3.4.</strong> Finally, use the function <code>anova()</code>
+to create an ANOVA table for your model. Does penguin flipper length
+differ among the species? What are the F statistic and P value of the
+test?</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">anova</span>(flipper_lm)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co"># output:</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#Analysis of Variance Table</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co"># Response: flipper_len</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#           Df Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co"># species     2  50526 25262.9  567.41 &lt; 2.2e-16 ***</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co"># Residuals 330  14693    44.5                      </span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># ---</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span></code></pre></div>
+<p>F value is 567.41 and P value is &lt; 2.2e-16. They show that flipper
+length differs among species.</p>
+<p><strong>3.5</strong> Optional: if you are fast, have a try creating
+the same ANOVA with the functions <code>aov()</code>and
+<code>summary()</code>. The command structure is
+<code>my_aov &lt;- aov(response_factor ~ explanatory_factor, data = data_frame)</code>.
+To find out more about the function <code>aov</code>, try
+<code>?aov</code>. When using <code>aov</code>, it is also possible to
+use the function <code>TukeyHSD</code> to find out which of the groups
+differ from each other (see <code>?TukeyHSD</code>).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>flipper_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(body_mass <span class="sc">~</span> species, <span class="at">data =</span> penguinsdata)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">summary</span>(flipper_aov)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="fu">TukeyHSD</span>(flipper_aov)</span></code></pre></div>
+<p><strong>3.6</strong> Now it’s time to save and export everything
+we’ve created during the course. Can you remember how to do this? If
+not, you can revisit the instructions in the <strong>Starting with Data
+exercise sheet</strong> (steps 7.3 and 7.4).</p>
 </div>
 </div>
 </div>
@@ -1173,8 +1113,8 @@ worked.</p>
           <div id="toc">
        <button type="button" class="close">×</button>
        <ul>
-       <li><a href="#starting-with-data---exercise-sheet" id="toc-starting-with-data---exercise-sheet">Starting with data -
-       exercise sheet</a></li>
+       <li><a href="#statistics---exercise-sheet" id="toc-statistics---exercise-sheet">Statistics - exercise
+       sheet</a></li>
        </ul>
      </div>
         </div>

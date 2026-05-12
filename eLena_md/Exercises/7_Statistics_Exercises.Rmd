@@ -70,7 +70,9 @@ Note that in many sources you might see a different syntax of the paired samples
 **2.1** We will use a data set built into R called `penguins`. Before starting, make sure you have read in the data, created a copy of it, and at the same time, omitted the missing observations as in the demonstration earlier. Then we inspect the contents with `str()`.
 
 ```r
-penguinsdata <- na.omit(penguins)
+penguinsdata <- penguins |> 
+    na.omit()
+
 str(penguinsdata)
 
 ```
