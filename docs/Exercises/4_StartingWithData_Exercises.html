@@ -750,8 +750,9 @@ font-weight: bold;
     
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1055,19 +1056,23 @@ accurate data type?</li>
 object called <code>carSpeeds</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
 <p><strong>6.2</strong> Have a look at the structure of
-<code>carSpeeds</code> using <code>str()</code>. Then try reimporting
-the data with the header argument set to false. How does the new data
-set differ from the previous one?</p>
+<code>carSpeeds</code> using <code>str()</code>. Then try re-importing
+the data with the header argument set to false:
+<code>header = FALSE</code>. How does the new data set differ from the
+previous one?</p>
 <p><strong>6.3</strong> The car colour labels contain accidental
-whitespaces. To fix this, try importing the data using the
-<code>strip.white</code> argument.</p>
-<p>NOTE - this argument must be accompanied by the <code>sep</code>
-argument, by which we indicate the type of delimiter in the file (the
-comma for most .csv files). In other words, we need to add
+whitespaces. You can see this by running:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">unique</span>(carSpeeds<span class="sc">$</span>Color) </span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Note that here we are referring to a specific column in a data frame with `dataframe$column`</span></span></code></pre></div>
+<p>To fix the problem with whitespaces, try importing the data using the
+<code>strip.white</code> argument:<br />
+<code>strip.white = TRUE, sep = &quot;,&quot;</code></p>
+<p>The <code>strip.white</code> argument must be accompanied by the
+<code>sep</code> argument, by which we indicate the type of delimiter in
+the file (the comma for most .csv files). In other words, we need to add
 <code>sep = &#39;,&#39;</code> to the import command.</p>
-<p>Use <code>unique()</code> to check if it worked. Hint: you can refer
-to a specific column in a data frame with
-<code>dataframe$column</code>.</p>
+<p>Use <code>unique()</code> to check if it worked.</p>
 </div>
 <div id="block-7-exporting-data-and-saving-scripts" class="section level4">
 <h4><strong>Block 7: exporting data and saving scripts</strong></h4>
@@ -1077,8 +1082,10 @@ if you already ran them.</p>
 <code>data_output</code>.</p>
 <p><strong>7.2</strong> Export the car speeds data. The
 <code>write.csv()</code> function requires a minimum of two arguments,
-the data to be saved and the name of the output file.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>)</span></code></pre></div>
+the data to be saved and the name of the output file. The output file
+name should be in quotation marks (because it is a character string and
+not an object in our R environment).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>)</span></code></pre></div>
 <p><strong>7.3</strong> View the output file by clicking on on the file
 name and select <code>View</code> (or read the data back into R with
 <code>read.csv()</code> into a new object and inspect the object). It
