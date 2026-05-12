@@ -948,7 +948,7 @@ data and start from step 2.</strong></p>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># Technically speaking, setting an environmental variable called FINBIF_ACCESS_TOKEN and giving the token as the value</span></span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">FINBIF_ACCESS_TOKEN =</span> <span class="st">&quot;xtmSOIxjPwq0pOMB1WvcZgFLU9QBklauOlonWl8K5oaLIx8RniJLrvcJU4v9H7Et&quot;</span>)</span>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># Note: this is not a real token and should be replaced with your own one</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># Note: this is not a real token and should be replaced with your own token</span></span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co"># Retrieving 5000 observations of the barn swallow (*Hirundo rustica*, haarapääsky) in 2025 from FinBIF with the R package `finbif`.</span></span>
 <span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
@@ -993,7 +993,7 @@ notes and exercises on data manipulation</a>.</p>
 <div id="exercises" class="section level3">
 <h3><strong>3. Exercises</strong></h3>
 <p><strong>3.1</strong> Look at the first lines of the data to get an
-overview of how the data look like.</p>
+overview of its structure and contents.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
 <p><strong>3.2</strong> The column <code>bio_province</code> shows the
 region of the observation. Let’s count the number of swallow
@@ -1006,14 +1006,14 @@ by running the following line</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(swallows<span class="sc">$</span>bio_province))</span></code></pre></div>
 <p>The answer shows that there are two observations with a missing value
 for region (column <code>bio_province</code>).</p>
-<p><strong>3.3</strong> To fix the problem of missing values, let’s
+<p><strong>3.4</strong> To fix the problem of missing values, let’s
 modify the code from the previous step. Remove observations (rows) that
 have NA (missing value) in the column <code>bio_province</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
-<p><strong>3.4</strong> Arrange the rows of
+<p><strong>3.5</strong> Arrange the rows of
 <code>counts_by_region</code> to show which region had the most
 observations of barn swallows and print the top 5.</p>
-<p>Depending on how you did the counting in step 3.3, your column with
+<p>Depending on how you did the counting in step 3.2, your column with
 counts is called either <code>count</code> or <code>n</code>. Make sure
 to use the correct column name here.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Write the answer in your R script.</span></span></code></pre></div>
