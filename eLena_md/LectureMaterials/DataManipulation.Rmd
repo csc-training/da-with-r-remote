@@ -295,6 +295,18 @@ surveys |>
   print(n = 15)
 ```
 
+Here is one example where tibbles and data frames work differently. If you read in the `surveys` data set with `read.csv` instead of the
+tidyverse `read_csv`, `print(n = 15)` won't work. Instead, you can use the `head()` function we already used earlier:
+
+
+```r
+surveys |>
+  filter(!is.na(weight)) |>
+  summarize(mean_weight = mean(weight), .by = c(sex, species_id)) |>
+  head(15)
+```
+
+
 **Challenge**
 
 There are a few other things we can try out using the split-apply-combine paradigm. Let's try these out by going through the exercises in **Data Manipulation Exercise Block 3** (10-15 mins).

@@ -1031,8 +1031,9 @@ weight on the log10 scale instead; see <code>scale_y_log10()</code>.</p>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div>
 <p><strong>4.3</strong> Create a boxplot for
-<code>hindfoot_length</code>. Overlay the boxplot layer on a jitter
-layer to show actual measurements.</p>
+<code>hindfoot_length</code> with <code>species_id</code> on the x axis.
+Overlay the boxplot layer on a jitter layer to show actual
+measurements.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species_id, <span class="at">y =</span> hindfoot_length)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">&quot;tomato&quot;</span>) <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="dv">0</span>) </span></code></pre></div>

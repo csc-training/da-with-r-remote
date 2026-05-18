@@ -152,7 +152,7 @@ ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
   scale_y_log10()
 ```
 
-**4.3** Create a boxplot for `hindfoot_length`. Overlay the boxplot layer on a jitter layer to show actual measurements.
+**4.3** Create a boxplot for `hindfoot_length` with `species_id` on the x axis. Overlay the boxplot layer on a jitter layer to show actual measurements.
 
 ```r
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
