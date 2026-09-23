@@ -940,13 +940,13 @@ format into R</p>
 <p>This exercise block repeats the lecture contents - at this point it’s
 important that we’re all on the same page! We will need these data as we
 move on.</p>
-<p>★ <strong>1.1</strong> Import some example data
+<p><strong>1.1</strong> ★ Import some example data
 (<code>/home/rstudio(shared/portal_data_joined.csv</code>) into an
 object called <code>surveys</code>. You can use <code>head()</code> to
 check that everything got imported correctly.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div>
-<p>★ <strong>1.2</strong> We just imported data from outside our
+<p><strong>1.2</strong> ★ We just imported data from outside our
 current working directory. Let’s also try something inside the working
 directory - create a new folder called <code>testfolder</code> (Files
 pane on the bottom right –&gt; New folder).</p>
@@ -959,7 +959,7 @@ with data</a></p>
 <p><em>Learning goals:</em> use functions to find out the properties of
 a data frame</p>
 <hr />
-<p>★ <strong>2.1</strong> Inspect the <code>surveys</code> data
+<p><strong>2.1</strong> ★ Inspect the <code>surveys</code> data
 set using the following functions. We don’t need to memorize them now,
 but eventually this can be useful when you are working with your own
 data.</p>
@@ -990,7 +990,7 @@ the class, length and content of each column</li>
 <li><code>summary()</code> - summary statistics for each column</li>
 </ul></li>
 </ul>
-<p>★ <strong>2.2</strong> Based on the output of
+<p><strong>2.2</strong> ★ Based on the output of
 <code>str(surveys)</code>, can you answer the following questions?</p>
 <ul>
 <li>What is the class of the object <code>surveys</code>?</li>
@@ -1059,20 +1059,20 @@ reorder the levels of a factor with <code>factor()</code> and
 brackets <code>[n]</code> to define a value in a vector</li>
 </ul>
 <hr />
-<p>★ <strong>4.1</strong> First assign the gender data from
+<p><strong>4.1</strong> ★ First assign the gender data from
 <code>surveys</code> to a new object and convert it to a factor. You
 probably also remember there are some measurements where the gender
 information is either missing or undetermined, let’s call those
 “undetermined”.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(surveys<span class="sc">$</span>sex)</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;undetermined&quot;</span></span></code></pre></div>
-<p>★ <strong>4.2</strong> Rename “F” and “M” to “female” and
+<p><strong>4.2</strong> ★ Rename “F” and “M” to “female” and
 “male”, respectively.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;female&quot;</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">levels</span>(sex)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;male&quot;</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)</span></span></code></pre></div>
-<p>★ <strong>4.3</strong> Can you reorder the data so that the
+<p><strong>4.3</strong> ★ Can you reorder the data so that the
 levels are ordered like this: <code>undetermined</code>,
 <code>male</code>, <code>female</code>? After this, use
 <code>plot()</code> to check how the data now look.</p>
@@ -1131,11 +1131,11 @@ and exporting data</a></p>
 <code>read.csv()</code> to avoid common problems when reading in
 spreadsheet data into R</p>
 <hr />
-<p>★ <strong>6.1</strong> Import a new data set on car speeds
+<p><strong>6.1</strong> ★ Import a new data set on car speeds
 (<code>/home/rstudio/shared/car-speeds.csv</code>) and assign it to an
 object called <code>carSpeeds</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>carSpeeds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/rstudio/shared/car-speeds.csv&quot;</span>)</span></code></pre></div>
-<p>★ <strong>6.2</strong> Have a look at the structure of
+<p><strong>6.2</strong> ★ Have a look at the structure of
 <code>carSpeeds</code> using <code>str()</code>. Then try reimporting
 the data with the header argument set to false. How does the new data
 set differ from the previous one?</p>
@@ -1189,9 +1189,9 @@ computer</li>
 <hr />
 <p>The first two steps were covered in the lecture, so skip to step 7.3
 if you already ran them.</p>
-<p>★ <strong>7.1</strong> Create a new folder for output files,
+<p><strong>7.1</strong> ★ Create a new folder for output files,
 called <code>data_output</code>.</p>
-<p>★ <strong>7.2</strong> Export the car speeds data. The
+<p><strong>7.2</strong> ★ Export the car speeds data. The
 <code>write.csv()</code> function requires a minimum of two arguments,
 the data to be saved and the name of the output file. The output file
 name should be in quotation marks (because it is a character string and
@@ -1214,8 +1214,8 @@ carSpeeds data again with <code>write.csv</code> and this time add
 <code>row.names = FALSE</code>. View the file again to check if it
 worked.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">write.csv</span>(carSpeeds, <span class="at">file =</span> <span class="st">&quot;data_output/car-speeds-cleaned.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p>★ <strong>7.5</strong> Save your script (File → Save as…).</p>
-<p>★ <strong>7.6</strong> Export your data from RStudio
+<p><strong>7.5</strong> ★ Save your script (File → Save as…).</p>
+<p><strong>7.6</strong> ★ Export your data from RStudio
 Server.</p>
 <pre><code>- Go to the &quot;Files&quot; pane (on the right, next to &quot;Plots&quot;)
 

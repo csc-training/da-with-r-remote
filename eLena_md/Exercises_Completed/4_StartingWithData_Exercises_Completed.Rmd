@@ -53,14 +53,14 @@ https://datacarpentry.org/R-ecology-lesson/
 This exercise block repeats the lecture contents - at this point it's important that we're all on the
 same page! We will need these data as we move on.
 
-`r r2symbols::sym("star-solid")` **1.1** Import some example data (`/home/rstudio(shared/portal_data_joined.csv`) into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
+**1.1** `r r2symbols::sym("star-solid")` Import some example data (`/home/rstudio(shared/portal_data_joined.csv`) into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
 
 ```r
 surveys <- read.csv("/home/rstudio/shared/portal_data_joined.csv")
 head(surveys)
 ```
 
-`r r2symbols::sym("star-solid")` **1.2** We just imported data from outside our current working directory. Let's also try something inside the working directory - create a new folder called `testfolder` (Files pane on the bottom right --> New folder).
+**1.2** `r r2symbols::sym("star-solid")` We just imported data from outside our current working directory. Let's also try something inside the working directory - create a new folder called `testfolder` (Files pane on the bottom right --> New folder).
 
 ---
 
@@ -72,7 +72,7 @@ head(surveys)
 
 ---
 
-`r r2symbols::sym("star-solid")` **2.1** Inspect the `surveys` data set using the following functions. We don't need to memorize them now, but eventually this can be useful when you are working with your own data.
+**2.1** `r r2symbols::sym("star-solid")`  Inspect the `surveys` data set using the following functions. We don't need to memorize them now, but eventually this can be useful when you are working with your own data.
 
 - Size:
   - `dim()` - returns a vector with the number of rows in the first element, and the number of columns as the second element (the **dim**ensions of the object)
@@ -88,7 +88,7 @@ head(surveys)
   - `str()` - structure of the object and information about the class, length and content of each column
   - `summary()` - summary statistics for each column
 
-`r r2symbols::sym("star-solid")` **2.2** Based on the output of `str(surveys)`, can you answer the following questions?
+**2.2** `r r2symbols::sym("star-solid")` Based on the output of `str(surveys)`, can you answer the following questions?
 
 - What is the class of the object `surveys`?
 - How many rows and how many columns are in this object?
@@ -156,14 +156,14 @@ surveys_head <- surveys[-(7:n_rows), ]
 
 ---
 
-`r r2symbols::sym("star-solid")` **4.1** First assign the gender data from `surveys` to a new object and convert it to a factor. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
+**4.1** `r r2symbols::sym("star-solid")` First assign the gender data from `surveys` to a new object and convert it to a factor. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
 
 ```r
 sex <- factor(surveys$sex)
 levels(sex)[1] <- "undetermined"
 ```
 
-`r r2symbols::sym("star-solid")` **4.2** Rename “F” and “M” to “female” and “male”, respectively.
+**4.2** `r r2symbols::sym("star-solid")`  Rename “F” and “M” to “female” and “male”, respectively.
 
 ```r
 levels(sex)[2] <- "female"
@@ -172,7 +172,7 @@ levels(sex)[3] <- "male"
 # levels(sex)[2:3] <- c("female", "male")
 ```
 
-`r r2symbols::sym("star-solid")` **4.3** Can you reorder the data so that the levels are ordered like this: `undetermined`, `male`, `female`? After this, use `plot()` to check how the data now look.
+**4.3** `r r2symbols::sym("star-solid")` Can you reorder the data so that the levels are ordered like this: `undetermined`, `male`, `female`? After this, use `plot()` to check how the data now look.
 
 ```r
 sex <- factor(sex, levels = c("undetermined", "male", "female"))
@@ -232,13 +232,13 @@ country_climate <- data.frame(
 
 ---
 
-`r r2symbols::sym("star-solid")` **6.1** Import a new data set on car speeds (`/home/rstudio/shared/car-speeds.csv`) and assign it to an object called `carSpeeds`.
+**6.1** `r r2symbols::sym("star-solid")` Import a new data set on car speeds (`/home/rstudio/shared/car-speeds.csv`) and assign it to an object called `carSpeeds`.
 
 ```r
 carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv")
 ```
 
-`r r2symbols::sym("star-solid")` **6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
+**6.2** `r r2symbols::sym("star-solid")` Have a look at the structure of `carSpeeds` using `str()`. Then try reimporting the data with the header argument set to false. How does the new data set differ from the previous one? 
 
 ```r
 str(carSpeeds)
@@ -297,9 +297,9 @@ ___
 
 The first two steps were covered in the lecture, so skip to step 7.3 if you already ran them.
 
-`r r2symbols::sym("star-solid")` **7.1** Create a new folder for output files, called `data_output`.
+**7.1** `r r2symbols::sym("star-solid")` Create a new folder for output files, called `data_output`.
 
-`r r2symbols::sym("star-solid")` **7.2** Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file. The output file name should be in quotation marks (because it is a character string and not an object in our R environment).
+**7.2** `r r2symbols::sym("star-solid")` Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file. The output file name should be in quotation marks (because it is a character string and not an object in our R environment).
 
 ```r
 write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
@@ -315,9 +315,9 @@ There is an extra column of numbers that was not present in the data.
 write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv", row.names = FALSE)
 ```
 
-`r r2symbols::sym("star-solid")` **7.5** Save your script (File &rarr; Save as...).
+**7.5** `r r2symbols::sym("star-solid")` Save your script (File &rarr; Save as...).
 
-`r r2symbols::sym("star-solid")` **7.6** Export your data from RStudio Server.
+**7.6** `r r2symbols::sym("star-solid")` Export your data from RStudio Server.
 
 ```
 - Go to the "Files" pane (on the right, next to "Plots")

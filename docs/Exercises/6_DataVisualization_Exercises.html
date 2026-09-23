@@ -939,17 +939,17 @@ visualization</a></p>
 </ul>
 <div id="block-1-preparation-and-scatter-plots" class="section level4">
 <h4><strong>Block 1: preparation and scatter plots</strong></h4>
-<p>★ <strong>1.1</strong> <code>ggplot2</code> is part of the
+<p><strong>1.1</strong> ★ <code>ggplot2</code> is part of the
 <code>tidyverse</code> package collection, so we’ll need to load it:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p>★ <strong>1.2</strong> Then import a version of the
+<p><strong>1.2</strong> ★ Then import a version of the
 <code>surveys</code> data set that we worked with previously
 (<code>surveys_complete.csv</code>). Assign it to a tibble called
 <code>surveys_complete</code>, using <code>read_csv()</code>.<br />
 You can also use a version of the data located in the
 <code>/shared</code> folder:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;/home/rstudio/shared/surveys_complete.csv&quot;</span>)</span></code></pre></div>
-<p>★ <strong>1.3</strong> Using <code>ggplot2</code> and the
+<p><strong>1.3</strong> ★ Using <code>ggplot2</code> and the
 <code>surveys_complete</code> data set, create a scatter plot with
 <code>weight</code> on the y axis and <code>species_id</code> on the x
 axis, with the plot types shown in different colors. Here is a reminder
@@ -970,7 +970,7 @@ geoms we can use.</p>
 </div>
 <div id="block-2-bar-plots-and-custom-colour-palette" class="section level4">
 <h4><strong>Block 2: bar plots and custom colour palette</strong></h4>
-<p>★ <strong>2.1</strong> Recreate the the bar plot we were just
+<p><strong>2.1</strong> ★ Recreate the the bar plot we were just
 examining, showing mean weights of each species. This time, also try
 adding the following custom palette to the plot (with the data colour by
 <code>species_id</code>). The palette contains a list of different RGB
@@ -1004,7 +1004,7 @@ on top of one another).</p>
 </div>
 <div id="block-4-box-and-violin-plots" class="section level4">
 <h4><strong>Block 4: box and violin plots</strong></h4>
-<p>★ <strong>4.1</strong> Box plots are useful summaries, but hide
+<p><strong>4.1</strong> ★ Box plots are useful summaries, but hide
 the <em>shape</em> of the distribution. For example, if the distribution
 is bimodal, we would not see it in a box plot. In addition to
 histograms, an alternative to the box plot is the violin plot, where the
@@ -1031,18 +1031,18 @@ measurements.</p>
 <h4><strong>Block 5: line plots and some preparation</strong></h4>
 <p>Take some time to construct the <code>yearly_counts</code> data set
 for yourself, and trying out a line plot.</p>
-<p>★ <strong>5.1</strong> The <code>yearly_counts</code> object
+<p><strong>5.1</strong> ★ The <code>yearly_counts</code> object
 should contain numbers of counts per year for each genus. We need to
 group the data and count records within each group:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="fu">count</span>(year, genus)</span></code></pre></div>
-<p>★ <strong>5.2</strong> Create a line plot of the
+<p><strong>5.2</strong> ★ Create a line plot of the
 <code>yearly_counts</code> data as follows. Remember that we can use the
 <code>color</code> argument does a nice job at grouping the data for
 us.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> yearly_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
-<p>★ <strong>5.3</strong> Let’s create another object, called
+<p><strong>5.3</strong> ★ Let’s create another object, called
 <code>yearly_sex_counts</code>. This should be similar to
 <code>yearly_counts</code>, but with the data additionally grouped by
 sex. We will need that in later exercises!</p>
@@ -1059,7 +1059,7 @@ columns of panels.</li>
 </ul>
 <p>We’ve tried <code>facet_wrap()</code>. Next, let’s check out
 <code>facet_grid()</code>.</p>
-<p>★ <strong>6.1</strong> You might remember this
+<p><strong>6.1</strong> ★ You might remember this
 <code>facet_wrap()</code> example that we covered earlier:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> yearly_sex_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -1098,10 +1098,10 @@ ggplot2 documentation</a>.</p>
 </div>
 <div id="block-8-arranging-saving-and-exporting" class="section level4">
 <h4><strong>Block 8: arranging, saving and exporting</strong></h4>
-<p>★ <strong>8.1</strong> If you don’t have it already, create a
+<p><strong>8.1</strong> ★ If you don’t have it already, create a
 folder called <code>fig_output</code> in your working directory.</p>
-<p>★ <strong>8.2</strong> Run through this rather big block of
-code to create a couple of plots that we were looking at earlier.</p>
+<p><strong>8.2</strong> ★Run through this rather big block of code
+to create a couple of plots that we were looking at earlier.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># plot 1</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>spp_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> surveys_complete, </span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>                             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> genus, </span>
@@ -1130,7 +1130,7 @@ value of 100).</p>
 <code>could not find function &quot;grid.arrange&quot;</code>, it means the
 package <code>gridExtra</code> hasn´t been loaded. Load it by running
 <code>library(gridExtra)</code>.</p>
-<p>★ <strong>8.5</strong> Now it’s time to save and export
+<p><strong>8.5</strong> ★ Now it’s time to save and export
 everything we’ve created so far. Can you remember how to do this? If
 not, you can revisit the instructions in the <strong>Starting with Data
 exercise sheet</strong> (steps 7.3 and 7.4).</p>

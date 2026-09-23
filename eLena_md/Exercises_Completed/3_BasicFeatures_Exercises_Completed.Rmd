@@ -51,9 +51,9 @@ https://datacarpentry.org/R-ecology-lesson/
 ---
 
 
-`r r2symbols::sym("star-solid")` **1.1** In RStudio, create a project called `RIntro` (note that R is case-sensitive).
+**1.1** `r r2symbols::sym("star-solid")`  In RStudio, create a project called `RIntro` (note that R is case-sensitive).
 
-`r r2symbols::sym("star-solid")` **1.2** Create the following objects. What are the values after each statement?
+**1.2** `r r2symbols::sym("star-solid")` Create the following objects. What are the values after each statement?
 
 ```r
 mass <- 47.5            # mass?
@@ -81,19 +81,19 @@ You can use the objects you already created as initial values or as intermediate
 
 ---
 
-`r r2symbols::sym("star-solid")` **2.1** Round the number 3.49339 to three decimal points.
+**2.1** `r r2symbols::sym("star-solid")`  Round the number 3.49339 to three decimal points.
 
 ```r
 round(3.49339, digits = 3)
 ```
 
-`r r2symbols::sym("star-solid")` **2.2** Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
+**2.2** `r r2symbols::sym("star-solid")` Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
 
 ```r
 weights <- c(23, 55, 97, 12)
 ```
 
-`r r2symbols::sym("star-solid")` **2.3** Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
+**2.3** `r r2symbols::sym("star-solid")` Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
 
 ```r
 names <- c("cat", "tortoise", "alpaca")
@@ -127,7 +127,7 @@ logical → numeric → character ← logical
 
 ---
 
-`r r2symbols::sym("star-solid")` **3.1** Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
+**3.1** `r r2symbols::sym("star-solid")` Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
 
 ```r
 heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
@@ -140,7 +140,7 @@ heights_no_na <- heights[complete.cases(heights)]
 
 ```
 
-`r r2symbols::sym("star-solid")` **3.2** Use the function `median()` to calculate the median of the `heights` vector.
+**3.2** `r r2symbols::sym("star-solid")` Use the function `median()` to calculate the median of the `heights` vector.
 
 ```r
 median(heights, na.rm = TRUE)
