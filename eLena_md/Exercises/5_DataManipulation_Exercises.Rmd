@@ -51,22 +51,22 @@ https://datacarpentry.org/R-ecology-lesson/
 
 ---
 
-`r r2symbols::sym("star-solid")` **1.1** Load the `tidyverse` package collection:
+**1.1** `r r2symbols::sym("star-solid")`  Load the `tidyverse` package collection:
 
 ```r
 library(tidyverse)
 ```
 
-`r r2symbols::sym("star-solid")` **1.2** Read in `portal_data_joined.csv` using `read_csv()`:
+**1.2** `r r2symbols::sym("star-solid")`  Read in `portal_data_joined.csv` using `read_csv()`:
 
 ```r
 surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 
 ```
 
-`r r2symbols::sym("star-solid")` **1.3** Using pipes, subset the `surveys` data to include animals collected before 1996 and retain only the columns `year`, `genus`, and `plot_type`.
+**1.3** `r r2symbols::sym("star-solid")`  Using pipes, subset the `surveys` data to include animals collected before 1996 and retain only the columns `year`, `genus`, and `plot_type`.
 
-`r r2symbols::sym("star-solid")` **1.4** Do the same, except this time keeping all the columns apart from `species_id`.
+**1.4** `r r2symbols::sym("star-solid")` Do the same, except this time keeping all the columns apart from `species_id`.
 
 ---
 
@@ -79,7 +79,7 @@ surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 ---
 
 
-`r r2symbols::sym("star-solid")` **2.1** Create a new data frame from the `surveys` data that meets the following criteria: 
+**2.1** `r r2symbols::sym("star-solid")` Create a new data frame from the `surveys` data that meets the following criteria: 
 
 - Contains only the `species_id` column and a new column called `hindfoot_half` containing values that are half the `hindfoot_length` values. 
 - In the `hindfoot_half` column, there are no `NA`s
@@ -100,7 +100,7 @@ surveys <- read_csv("/home/rstudio/shared/portal_data_joined.csv")
 
 ---
 
-`r r2symbols::sym("star-solid")` **3.1** Consider this example that we just had a look at:
+**3.1** `r r2symbols::sym("star-solid")` Consider this example that we just had a look at:
 
 ```r
 surveys |>
@@ -135,9 +135,9 @@ To make things easier, here is a list of `dplyr` functions:
 ---
 
 
-`r r2symbols::sym("star-solid")` **4.1** How many animals were caught in each `plot_type` surveyed?
+**4.1** `r r2symbols::sym("star-solid")` How many animals were caught in each `plot_type` surveyed?
 
-`r r2symbols::sym("star-solid")` **4.2** Use `summarize()` and `.by` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
+**4.2** `r r2symbols::sym("star-solid")` Use `summarize()` and `.by` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
 
 **4.3** What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`. Hint: you can use the argument `.by` also with some dplyr functions than `summarize`.
 
@@ -178,7 +178,7 @@ ___
 
 To make sure we're all on the same page, let's repeat the steps we just covered.
 
-`r r2symbols::sym("star-solid")` **6.1** Remove observations of animals for which `weight` and `hindfoot_length` are missing, or the `sex` has not been determined:
+**6.1** `r r2symbols::sym("star-solid")` Remove observations of animals for which `weight` and `hindfoot_length` are missing, or the `sex` has not been determined:
 
 ```r
 surveys_complete <- surveys |>
@@ -187,7 +187,7 @@ surveys_complete <- surveys |>
          !is.na(sex))              # remove missing sex
 ```
 
-`r r2symbols::sym("star-solid")` **6.2** Remove observations for rare species (i.e., that have been observed less than 50 times). We will do this in two steps: first, create a data set that counts how often each species has been observed, and filter out the rare species. Second, extract only the observations for these more common species.
+**6.2** `r r2symbols::sym("star-solid")` Remove observations for rare species (i.e., that have been observed less than 50 times). We will do this in two steps: first, create a data set that counts how often each species has been observed, and filter out the rare species. Second, extract only the observations for these more common species.
 
 ```r
 ## Extract the most common species_id
@@ -200,9 +200,9 @@ surveys_complete <- surveys_complete |>
   filter(species_id %in% species_counts$species_id)
 ```
 
-`r r2symbols::sym("star-solid")` **6.3** Check your data set by running `dim(surveys_complete)`. It should have 30463 rows and 13 columns!
+**6.3** `r r2symbols::sym("star-solid")` Check your data set by running `dim(surveys_complete)`. It should have 30463 rows and 13 columns!
 
-`r r2symbols::sym("star-solid")` **6.4** Save the data as a CSV file in the `data_output` folder.
+**6.4** `r r2symbols::sym("star-solid")` Save the data as a CSV file in the `data_output` folder.
 
 ```r
 write_csv(surveys_complete, file = "data_output/surveys_complete.csv")
