@@ -46,7 +46,7 @@ https://datacarpentry.org/R-ecology-lesson/
 -   [Navigating RStudio](https://csc-training.github.io/da-with-r-remote/LectureMaterials/NavigatingRStudio.html)
 -   [Writing and annotating R code](https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html)
 
-**Learning goals:** learn how to store values as objects  
+*Learning goals:* learn how to store values as objects  
 
 ---
 
@@ -73,7 +73,7 @@ You can use the objects you already created as initial values or as intermediate
 
 *Lecture materials:* [Writing and annotating R code](https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html)
 
-**Learning goals:**
+*Learning goals:*
 
 -   store multiple values as vectors: use `c()` to create different types of vectors
 -   use functions and modify how a function works with arguments
@@ -120,7 +120,7 @@ logical → numeric → character ← logical
 
 *Lecture materials:* [Writing and annotating R code](https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html)
 
-**Learning goals:**
+*Learning goals:*
 
 - removing missing values from a vector
 - conditional subsetting to select one or several values from a vector
@@ -176,9 +176,7 @@ length(heights_above_67)
 
 *Lecture materials:* [Finding help](https://csc-training.github.io/da-with-r-remote/LectureMaterials/FindingHelp.html)
 
-**Learning goals:**
-
-- use `?` or `help()` to access help files of R packages and functions
+*Learning goals:* use `?` or `help()` to access help files of R packages and functions
 
 ---
 
