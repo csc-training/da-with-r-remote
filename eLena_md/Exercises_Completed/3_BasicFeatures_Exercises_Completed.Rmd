@@ -99,7 +99,7 @@ weights <- c(23, 55, 97, 12)
 names <- c("cat", "tortoise", "alpaca")
 ```
 
-**2.4** We’ve seen that vectors can be of type character, numeric (or double), integer, and logical. What happens if we try to mix these data types in a single vector as in these examples? (hint: use `class()` to check the data type of your objects)
+**2.4** We’ve seen that vectors can be of type character, numeric (or double), integer, and logical. What happens if we try to mix these data types in a single vector as in these examples? (hint: check the environment panel or use `class()` to check the data type of your objects)
 
 ```r
 num_char <- c(1, 2, 3, "a")

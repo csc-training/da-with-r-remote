@@ -176,7 +176,7 @@ surveys |>
 
 *Lecture materials:* [Data manipulation](https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html) &rarr; section 7
 
-**Learning goals**: counting the number of observations for each level of a variable or combination of variables with `count()` 
+**Learning goals**: counting the number of observations for each level of a variable or combination of variables with `count()` or `n()`
 
 ---
 
@@ -187,7 +187,7 @@ surveys |>
     count(plot_type)
 ```
 
-**4.2** `r r2symbols::sym("star-solid")` Use `summarize()` `.by` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n`).
+**4.2** Use `summarize()` `.by` to find the mean, minimum and maximum hindfoot length for each species (using `species_id`). Also try adding the number of observations (hint: use `n()`).
 
 ```r
 surveys |>

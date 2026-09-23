@@ -1053,16 +1053,16 @@ this you will need to use <code>desc()</code> inside the
 manipulation</a> → section 7</p>
 <p><strong>Learning goals</strong>: counting the number of observations
 for each level of a variable or combination of variables with
-<code>count()</code></p>
+<code>count()</code> or <code>n()</code></p>
 <hr />
 <p><strong>4.1</strong> ★ How many animals were caught in each
 <code>plot_type</code> surveyed?</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    <span class="fu">count</span>(plot_type)</span></code></pre></div>
-<p><strong>4.2</strong> ★ Use <code>summarize()</code>
-<code>.by</code> to find the mean, minimum and maximum hindfoot length
-for each species (using <code>species_id</code>). Also try adding the
-number of observations (hint: use <code>n</code>).</p>
+<p><strong>4.2</strong> Use <code>summarize()</code> <code>.by</code> to
+find the mean, minimum and maximum hindfoot length for each species
+(using <code>species_id</code>). Also try adding the number of
+observations (hint: use <code>n()</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hindfoot_length)) <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
