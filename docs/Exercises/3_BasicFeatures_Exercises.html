@@ -750,6 +750,7 @@ font-weight: bold;
     
         <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -923,84 +924,124 @@ teaching materials available under the <a href="https://creativecommons.org/lice
 license</a>:</em></p>
 <p><a href="https://swcarpentry.github.io/r-novice-gapminder/" class="uri">https://swcarpentry.github.io/r-novice-gapminder/</a></p>
 <p><a href="https://datacarpentry.org/R-ecology-lesson/" class="uri">https://datacarpentry.org/R-ecology-lesson/</a></p>
+<hr />
 <div id="block-1-creating-a-project-working-with-objects" class="section level4">
 <h4><strong>Block 1: creating a project, working with
 objects</strong></h4>
+<p><em>Lecture materials:</em></p>
+<ul>
+<li><a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/NavigatingRStudio.html">Navigating
+RStudio</a></li>
+<li><a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html">Writing
+and annotating R code</a></li>
+</ul>
+<p><strong>Learning goals:</strong> learn how to store values as
+objects</p>
+<hr />
 <p><strong>1.1</strong> In RStudio, create a project called
 <code>RIntro</code> in the <code>my-work</code> directory, if not
 already created (note that R is case-sensitive).</p>
 <p><strong>1.2</strong> Create the following objects. What are the
 values after each statement?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mass <span class="ot">&lt;-</span> <span class="fl">47.5</span>            <span class="co"># mass?</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>age  <span class="ot">&lt;-</span> <span class="dv">122</span>             <span class="co"># age?</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mass <span class="ot">&lt;-</span> mass <span class="sc">*</span> <span class="fl">2.0</span>      <span class="co"># mass?</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>age  <span class="ot">&lt;-</span> age <span class="sc">-</span> <span class="dv">20</span>        <span class="co"># age?</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mass_index <span class="ot">&lt;-</span> mass<span class="sc">/</span>age  <span class="co"># mass_index?</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mass <span class="ot">&lt;-</span> <span class="fl">47.5</span>            <span class="co"># mass?</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>age  <span class="ot">&lt;-</span> <span class="dv">122</span>             <span class="co"># age?</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>mass <span class="ot">&lt;-</span> mass <span class="sc">*</span> <span class="fl">2.0</span>      <span class="co"># mass?</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>age  <span class="ot">&lt;-</span> age <span class="sc">-</span> <span class="dv">20</span>        <span class="co"># age?</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>mass_index <span class="ot">&lt;-</span> mass<span class="sc">/</span>age  <span class="co"># mass_index?</span></span></code></pre></div>
 <p><strong>1.3</strong> Take a moment to try out different mathematical
 expressions until you get the hang of it.</p>
 <p>You can use the objects you already created as initial values or as
 intermediates. You can also try adding annotations to your code and
 removing (as well as re-creating) your objects. Remember the guidelines
 we covered earlier for naming objects!</p>
+<hr />
 </div>
 <div id="block-2-functions-and-vectors" class="section level4">
 <h4><strong>Block 2: functions and vectors</strong></h4>
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html">Writing
+and annotating R code</a></p>
+<p><strong>Learning goals:</strong></p>
+<ul>
+<li>store multiple values as vectors: use <code>c()</code> to create
+different types of vectors</li>
+<li>use functions and modify how a function works with arguments</li>
+<li>understand R data types</li>
+</ul>
+<hr />
 <p><strong>2.1</strong> Round the number 3.49339 to three decimal
 points.</p>
 <p><strong>2.2</strong> Create a numeric vector called “weights” using
 the numbers: 23, 55, 97, 12.</p>
 <p><strong>2.3</strong> Create a character vector called “names” using
 these animal names: cat, tortoise, alpaca.</p>
-<p><strong>2.4</strong> We’ve seen that atomic vectors can be of type
+<p><strong>2.4</strong> We’ve seen that vectors can be of type
 character, numeric (or double), integer, and logical. What happens if we
-try to mix these types in a single vector?</p>
-<p><strong>2.5</strong> What will happen in each of these examples?
+try to mix these data types in a single vector as in these examples?
 (hint: use <code>class()</code> to check the data type of your
-objects):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>num_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>num_logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>char_logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>tricky <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;4&quot;</span>)</span></code></pre></div>
-<p><strong>2.6</strong>. You’ve probably noticed that objects of
+objects)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>num_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>num_logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>char_logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>tricky <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;4&quot;</span>)</span></code></pre></div>
+<p><strong>2.5</strong>. You’ve probably noticed that objects of
 different types get converted into a single, shared type within a
 vector. In R, we call converting objects from one class into another
 class <em>coercion</em>. These conversions happen according to a
 hierarchy, whereby some types get preferentially coerced into other
 types. Can you draw a diagram that represents the hierarchy of how these
 data types are coerced?</p>
+<hr />
 </div>
 <div id="block-3-continuing-with-vectors" class="section level4">
 <h4><strong>Block 3: continuing with vectors</strong></h4>
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html">Writing
+and annotating R code</a></p>
+<p><strong>Learning goals:</strong></p>
+<ul>
+<li>removing missing values from a vector</li>
+<li>conditional subsetting to select one or several values from a
+vector</li>
+</ul>
+<hr />
 <p><strong>3.1</strong> Using this vector of heights in inches, create a
 new vector, <code>heights_no_na</code>, with the NAs removed.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">63</span>, <span class="dv">69</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="cn">NA</span>, <span class="dv">68</span>, <span class="dv">61</span>, <span class="dv">70</span>, <span class="dv">61</span>, <span class="dv">59</span>, <span class="dv">64</span>, <span class="dv">69</span>, <span class="dv">63</span>, <span class="dv">63</span>, <span class="cn">NA</span>, <span class="dv">72</span>, <span class="dv">65</span>, <span class="dv">64</span>, <span class="dv">70</span>, <span class="dv">63</span>, <span class="dv">65</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">63</span>, <span class="dv">69</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="cn">NA</span>, <span class="dv">68</span>, <span class="dv">61</span>, <span class="dv">70</span>, <span class="dv">61</span>, <span class="dv">59</span>, <span class="dv">64</span>, <span class="dv">69</span>, <span class="dv">63</span>, <span class="dv">63</span>, <span class="cn">NA</span>, <span class="dv">72</span>, <span class="dv">65</span>, <span class="dv">64</span>, <span class="dv">70</span>, <span class="dv">63</span>, <span class="dv">65</span>)</span></code></pre></div>
 <p><strong>3.2</strong> Use the function <code>median()</code> to
 calculate the median of the <code>heights</code> vector.</p>
 <p><strong>3.3</strong> Use R to figure out how many people in the set
 are taller than 67 inches.</p>
 <p>To make things easier to remember, here is the list of comparisons
 and operators we discussed earlier (this one is useful to memorize):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## different comparisons:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># less than `&lt;`</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># greater than `&gt;`</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># less or equal `&lt;=`</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># greater or equal `&gt;=`</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># equal to `==`</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># not equal to `!=`</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## logical operators:</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># and `&amp;`</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># or `|`</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># not `!` </span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## different comparisons:</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># less than `&lt;`</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># greater than `&gt;`</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># less or equal `&lt;=`</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># greater or equal `&gt;=`</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># equal to `==`</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># not equal to `!=`</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="do">## logical operators:</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co"># and `&amp;`</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co"># or `|`</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co"># not `!` </span></span></code></pre></div>
+<hr />
 </div>
 <div id="optional-block-4-finding-help" class="section level4">
 <h4><strong>Optional: Block 4: finding help</strong></h4>
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/FindingHelp.html">Finding
+help</a></p>
+<p><strong>Learning goals:</strong></p>
+<ul>
+<li>use <code>?</code> or <code>help()</code> to access help files of R
+packages and functions</li>
+</ul>
+<hr />
 <p><strong>4.1</strong> Look at the help for the <code>c()</code>
 function. What kind of vector do you expect you will create if you
 evaluate the following?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>, <span class="st">&#39;f&#39;</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&#39;f&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>, <span class="st">&#39;f&#39;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&#39;f&#39;</span>)</span></code></pre></div>
 <p><strong>4.2</strong> Try to figure out how to use a completely new
 function based only on its documentation. Look at the help for the
 function <code>sample()</code> and find out how to use

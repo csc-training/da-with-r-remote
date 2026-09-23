@@ -82,7 +82,7 @@ To make things easier, here is a list of `dplyr` functions:
 - `select()`: subset columns
 - `filter()`: subset rows on conditions
 - `mutate()`: create new columns by using information from other columns
-- summarize()` and the argument `.by`: create summary statistics on grouped data
+- `summarize()` and the argument `.by`: create summary statistics on grouped data
 - `arrange()`: sort results
 - `count()`: count discrete values
 
