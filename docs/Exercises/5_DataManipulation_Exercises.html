@@ -923,24 +923,47 @@ word-break: break-word;
 teaching materials available under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0
 license</a>:</em></p>
 <p><a href="https://datacarpentry.org/R-ecology-lesson/" class="uri">https://datacarpentry.org/R-ecology-lesson/</a></p>
+<p>★ marks the most important exercises. Focus on these if you are
+running short on time.<br />
+<strong>Optional</strong> marks more challenging exercises. Do these if
+you have time and find the other exercises easy.</p>
+<hr />
 <div id="block-1-selecting-and-filtering-using-pipes" class="section level4">
 <h4><strong>Block 1: selecting and filtering using pipes</strong></h4>
-<p><strong>1.1</strong> Load the <code>tidyverse</code> package
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html">Data
+manipulation</a> → sections 1-4</p>
+<p><em>Learning goals:</em></p>
+<ul>
+<li>load an R package to use functions not included in base R</li>
+<li>read in a CSV file with <code>tidyverse</code> function
+<code>read_csv()</code> into a tibble</li>
+<li>use <code>tidyverse</code> functions <code>filter()</code> to subset
+rows and <code>select()</code> to subset columns</li>
+<li>use pipes <code>|&gt;</code> to combine several analysis steps</li>
+</ul>
+<hr />
+<p>★ <strong>1.1</strong> Load the <code>tidyverse</code> package
 collection:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p><strong>1.2</strong> Read in <code>portal_data_joined.csv</code>
-using <code>read_csv()</code>:</p>
+<p>★ <strong>1.2</strong> Read in
+<code>portal_data_joined.csv</code> using <code>read_csv()</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;/home/rstudio/shared/portal_data_joined.csv&quot;</span>)</span></code></pre></div>
-<p><strong>1.3</strong> Using pipes, subset the <code>surveys</code>
-data to include animals collected before 1996 and retain only the
-columns <code>year</code>, <code>genus</code>, and
+<p>★ <strong>1.3</strong> Using pipes, subset the
+<code>surveys</code> data to include animals collected before 1996 and
+retain only the columns <code>year</code>, <code>genus</code>, and
 <code>plot_type</code>.</p>
-<p><strong>1.4</strong> Do the same, except this time keeping all the
-columns apart from <code>species_id</code>.</p>
+<p>★ <strong>1.4</strong> Do the same, except this time keeping
+all the columns apart from <code>species_id</code>.</p>
+<hr />
 </div>
 <div id="block-2-the-mutate-function" class="section level4">
 <h4><strong>Block 2: the mutate function</strong></h4>
-<p><strong>2.1</strong> Create a new data frame from the
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html">Data
+manipulation</a> → section 5</p>
+<p><em>Learning goals:</em> use <code>mutate()</code> to create new
+columns based on existing variables</p>
+<hr />
+<p>★ <strong>2.1</strong> Create a new data frame from the
 <code>surveys</code> data that meets the following criteria:</p>
 <ul>
 <li>Contains only the <code>species_id</code> column and a new column
@@ -952,11 +975,22 @@ called <code>hindfoot_half</code> containing values that are half the
 </ul>
 <p><strong>Hint</strong>: think about how the commands should be ordered
 to produce this data frame!</p>
+<hr />
 </div>
 <div id="block-3-split-apply-combine-and-summarize" class="section level4">
 <h4><strong>Block 3: split-apply-combine and summarize</strong></h4>
-<p><strong>3.1</strong> Consider this example that we just had a look
-at:</p>
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html">Data
+manipulation</a> → section 6</p>
+<p><em>Learning goals:</em></p>
+<ul>
+<li>use <code>summarize()</code> and <code>.by</code> to calculate
+summary statistics for data grouped based on variables</li>
+<li>use <code>arrange()</code> to sort the resulting output based on
+values</li>
+</ul>
+<hr />
+<p>★ <strong>3.1</strong> Consider this example that we just had a
+look at:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight),</span>
@@ -983,12 +1017,19 @@ summary statistics on grouped data</li>
 instead? Try sorting the results by decreasing order of mean weight. For
 this you will need to use <code>desc()</code> inside the
 <code>arrange()</code> function.</p>
+<hr />
 </div>
 <div id="block-4-counting" class="section level4">
 <h4><strong>Block 4: counting</strong></h4>
-<p><strong>4.1</strong> How many animals were caught in each
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html">Data
+manipulation</a> → section 7</p>
+<p><strong>Learning goals</strong>: counting the number of observations
+for each level of a variable or combination of variables with
+<code>count()</code></p>
+<hr />
+<p>★ <strong>4.1</strong> How many animals were caught in each
 <code>plot_type</code> surveyed?</p>
-<p><strong>4.2</strong> Use <code>summarize()</code> and
+<p>★ <strong>4.2</strong> Use <code>summarize()</code> and
 <code>.by</code> to find the mean, minimum and maximum hindfoot length
 for each species (using <code>species_id</code>). Also try adding the
 number of observations (hint: use <code>n</code>).</p>
@@ -997,9 +1038,19 @@ year? Return the columns <code>year</code>, <code>genus</code>,
 <code>species_id</code>, and <code>weight</code>. Hint: you can use the
 argument <code>.by</code> also with some dplyr functions than
 <code>summarize</code>.</p>
+<hr />
 </div>
 <div id="optional-block-5-pivoting" class="section level4">
 <h4><strong>OPTIONAL Block 5: pivoting</strong></h4>
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html">Data
+manipulation</a> → section 8</p>
+<p><em>Learning goals:</em></p>
+<ul>
+<li>long and wide data formats</li>
+<li>using <code>pivot_longer()</code> and <code>pivot_wider()</code> to
+reshape the data from one format to the other</li>
+</ul>
+<hr />
 <p>This topic is quite time-consuming, so chances are that you are
 looking at this section independently.</p>
 <p><strong>5.1</strong> Pivot the <code>surveys</code> data frame with
@@ -1029,23 +1080,29 @@ into a data set with a column for <code>hindfoot_length</code> and
 <code>weight</code>. <em>Hint</em>: You only need to specify the
 <code>names_from</code> and <code>values_from</code> arguments for
 <code>pivot_wider()</code>.</p>
+<hr />
 </div>
 <div id="block-6-using-write_csv" class="section level4">
 <h4><strong>Block 6: using write_csv()</strong></h4>
+<p><em>Lecture materials:</em> <a href="https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataManipulation.html">Data
+manipulation</a> → section 9</p>
+<p><em>Learning goals:</em> export a data frame / tibble from R as a CSV
+file with <code>write_csv()</code></p>
+<hr />
 <p>To make sure we’re all on the same page, let’s repeat the steps we
 just covered.</p>
-<p><strong>6.1</strong> Remove observations of animals for which
+<p>★ <strong>6.1</strong> Remove observations of animals for which
 <code>weight</code> and <code>hindfoot_length</code> are missing, or the
 <code>sex</code> has not been determined:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> surveys <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight),           <span class="co"># remove missing weight</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(hindfoot_length),  <span class="co"># remove missing hindfoot_length</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(sex))              <span class="co"># remove missing sex</span></span></code></pre></div>
-<p><strong>6.2</strong> Remove observations for rare species (i.e., that
-have been observed less than 50 times). We will do this in two steps:
-first, create a data set that counts how often each species has been
-observed, and filter out the rare species. Second, extract only the
-observations for these more common species.</p>
+<p>★ <strong>6.2</strong> Remove observations for rare species
+(i.e., that have been observed less than 50 times). We will do this in
+two steps: first, create a data set that counts how often each species
+has been observed, and filter out the rare species. Second, extract only
+the observations for these more common species.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## Extract the most common species_id</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="fu">count</span>(species_id) <span class="sc">|&gt;</span> </span>
@@ -1054,10 +1111,10 @@ observations for these more common species.</p>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">## Only keep the most common species</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>surveys_complete <span class="ot">&lt;-</span> surveys_complete <span class="sc">|&gt;</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">filter</span>(species_id <span class="sc">%in%</span> species_counts<span class="sc">$</span>species_id)</span></code></pre></div>
-<p><strong>6.3</strong> Check your data set by running
+<p>★ <strong>6.3</strong> Check your data set by running
 <code>dim(surveys_complete)</code>. It should have 30463 rows and 13
 columns!</p>
-<p><strong>6.4</strong> Save the data as a CSV file in the
+<p>★ <strong>6.4</strong> Save the data as a CSV file in the
 <code>data_output</code> folder.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">write_csv</span>(surveys_complete, <span class="at">file =</span> <span class="st">&quot;data_output/surveys_complete.csv&quot;</span>)</span></code></pre></div>
 <p>If you run into troubles here, don’t worry. When we continue with

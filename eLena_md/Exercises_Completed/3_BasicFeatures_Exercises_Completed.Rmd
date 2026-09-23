@@ -28,19 +28,32 @@ opts_knit$set(width=75)
 
 # Basic features - exercise sheet
 
-
 *These exercises are partially derived from Software Carpentry teaching materials available under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode):*
 
 https://swcarpentry.github.io/r-novice-gapminder/
 
 https://datacarpentry.org/R-ecology-lesson/
 
+`r r2symbols::sym("star-solid")` marks the most important exercises. Focus on these if the content is completely new to you.  
+"Optional" marks more challenging exercises. Do these if you have time and find the other exercises easy.
+
+---
 
 #### **Block 1: creating a project, working with objects**
 
-**1.1** In RStudio, create a project called `RIntro` (note that R is case-sensitive).
+*Lecture materials:*
 
-**1.2** Create the following objects. What are the values after each statement?
+-   [Navigating RStudio](https://csc-training.github.io/da-with-r-remote/LectureMaterials/NavigatingRStudio.html)
+-   [Writing and annotating R code](https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html)
+
+**Learning goals:** learn how to store values as objects  
+
+---
+
+
+`r r2symbols::sym("star-solid")` **1.1** In RStudio, create a project called `RIntro` (note that R is case-sensitive).
+
+`r r2symbols::sym("star-solid")` **1.2** Create the following objects. What are the values after each statement?
 
 ```r
 mass <- 47.5            # mass?
@@ -54,31 +67,39 @@ mass_index <- mass/age  # mass_index?
 
 You can use the objects you already created as initial values or as intermediates. You can also try adding annotations to your code and removing (as well as re-creating) your objects. Remember the guidelines we covered earlier for naming objects!
 
+---
+
 #### **Block 2: functions and vectors**
 
-**2.1** Round the number 3.49339 to three decimal points.
+*Lecture materials:* [Writing and annotating R code](https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html)
+
+**Learning goals:**
+
+-   store multiple values as vectors: use `c()` to create different types of vectors
+-   use functions and modify how a function works with arguments
+-   understand R data types
+
+---
+
+`r r2symbols::sym("star-solid")` **2.1** Round the number 3.49339 to three decimal points.
 
 ```r
 round(3.49339, digits = 3)
 ```
 
-**2.2** Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
+`r r2symbols::sym("star-solid")` **2.2** Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
 
 ```r
 weights <- c(23, 55, 97, 12)
 ```
 
-**2.3** Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
+`r r2symbols::sym("star-solid")` **2.3** Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
 
 ```r
 names <- c("cat", "tortoise", "alpaca")
 ```
 
-**2.4** We’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. What happens if we try to mix these types in a single vector?
-
-R implicitly converts them to all be the same type.
-
-**2.5** What will happen in each of these examples? (hint: use `class()` to check the data type of your objects):
+**2.4** We’ve seen that vectors can be of type character, numeric (or double), integer, and logical. What happens if we try to mix these data types in a single vector as in these examples? (hint: use `class()` to check the data type of your objects)
 
 ```r
 num_char <- c(1, 2, 3, "a")
@@ -87,15 +108,26 @@ char_logical <- c("a", "b", "c", TRUE)
 tricky <- c(1, 2, 3, "4")
 ```
 
-Vectors can be of only one data type. R tries to convert (coerce) the content of this vector to find a “common denominator” that doesn’t lose any information.
+Vectors can be of only one data type. R implicitly converts the data to be all the same type. R tries to convert (coerce) the content of the vector to find a “common denominator” that doesn’t lose any information.
 
-**2.6**. You’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class *coercion*. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced? 
+**2.5**. You’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class *coercion*. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced? 
 
 logical → numeric → character ← logical
 
+---
+
 #### **Block 3: continuing with vectors**
 
-**3.1** Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
+*Lecture materials:* [Writing and annotating R code](https://csc-training.github.io/da-with-r-remote/LectureMaterials/WritingAndAnnotating.html)
+
+**Learning goals:**
+
+- removing missing values from a vector
+- conditional subsetting to select one or several values from a vector
+
+---
+
+`r r2symbols::sym("star-solid")` **3.1** Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
 
 ```r
 heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
@@ -108,7 +140,7 @@ heights_no_na <- heights[complete.cases(heights)]
 
 ```
 
-**3.2** Use the function `median()` to calculate the median of the `heights` vector.
+`r r2symbols::sym("star-solid")` **3.2** Use the function `median()` to calculate the median of the `heights` vector.
 
 ```r
 median(heights, na.rm = TRUE)
@@ -138,7 +170,18 @@ heights_above_67 <- heights_no_na[heights_no_na > 67]
 length(heights_above_67)
 ```
 
-#### **Block 4: finding help**
+---
+
+#### **Optional: Block 4: finding help**
+
+*Lecture materials:* [Finding help](https://csc-training.github.io/da-with-r-remote/LectureMaterials/FindingHelp.html)
+
+**Learning goals:**
+
+- use `?` or `help()` to access help files of R packages and functions
+
+---
+
 
 **4.1** Look at the help for the `c()` function. What kind of vector do you expect you will create if you evaluate the following?
 

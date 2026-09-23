@@ -37,18 +37,37 @@ https://swcarpentry.github.io/r-novice-inflammation/
 
 https://datacarpentry.org/R-ecology-lesson/
 
+`r r2symbols::sym("star-solid")` marks the most important exercises. Focus on these if you are running short on time.  
+**Optional** marks more challenging exercises. Do these if you have time and find the other exercises easy.  
+
+---
+
 #### **Block 1: downloading and importing data**
+
+*Lecture materials:* [Starting with data](https://csc-training.github.io/da-with-r-remote/LectureMaterials/StartingWithData.html)
+
+*Learning goals:* import a spreadsheet of data in CSV format into R 
+
+---
 
 This exercise block repeats the lecture contents - at this point it's important that we're all on the
 same page! We will need these data as we move on.
 
-**1.1** Import some example data (`/home/rstudio/shared/portal_data_joined.csv`) into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
+`r r2symbols::sym("star-solid")` **1.1** Import some example data (`/home/rstudio/shared/portal_data_joined.csv`) into an object called `surveys`. You can use `head()` to check that everything got imported correctly.
 
-**1.2** We just imported data from outside our current working directory. Let's also try something inside the working directory - create a new folder called `testfolder` (Files pane on the bottom right --> New folder).
+`r r2symbols::sym("star-solid")` **1.2** We just imported data from outside our current working directory. Let's also try something inside the working directory - create a new folder called `testfolder` (Files pane on the bottom right --> New folder).
+
+---
 
 #### **Block 2: inspecting data frames**
 
-**2.1** Inspect the `surveys` data set using the following functions. We don't need to memorize them now, but eventually this can be useful when you are working with your own data.
+*Lecture materials:* [Starting with data](https://csc-training.github.io/da-with-r-remote/LectureMaterials/StartingWithData.html)
+
+*Learning goals:* use functions to determine the properties of a data frame
+
+---
+
+`r r2symbols::sym("star-solid")` **2.1** Inspect the `surveys` data set using the following functions. We don't need to memorize them now, but eventually this can be useful when you are working with your own data.
 
 - Size:
   - `dim()` - returns a vector with the number of rows in the first element, and the number of columns as the second element (the **dim**ensions of the object)
@@ -64,12 +83,20 @@ same page! We will need these data as we move on.
   - `str()` - structure of the object and information about the class, length and content of each column
   - `summary()` - summary statistics for each column
 
-**2.2** Based on the output of `str(surveys)`, can you answer the following questions?
+`r r2symbols::sym("star-solid")` **2.2** Based on the output of `str(surveys)`, can you answer the following questions?
 
 - What is the class of the object `surveys`?
 - How many rows and how many columns are in this object?
 
+---
+
 #### **OPTIONAL Block 3: indexing and subsetting data frames**
+
+*Lecture materials:* [Starting with data](https://csc-training.github.io/da-with-r-remote/LectureMaterials/StartingWithData.html) &rarr; section 5
+
+*Learning goals:* use square brackets (`[rows, columns]`) and ranges of rows/columns (e.g. `1:5`) for selecting specific rows and columns of a data frame
+
+---
 
 **3.1** Create a `data.frame` (`surveys_200`) containing only the data in row 200 of the `surveys` dataset.
 
@@ -82,22 +109,39 @@ same page! We will need these data as we move on.
 
 **3.3** Use `nrow()` to extract the row that is in the middle of the data frame. Store the content of this row in an object named `surveys_middle`.
 
-**3.4** A trickier example: combine `nrow()` with the `-` notation above to reproduce the behavior of `head(surveys)`, keeping just the first through 6th rows of the surveys dataset. Don't worry if you can't get this one right!
+**3.4** A trickier example: combine `nrow()` with the `-` notation to exclude an index (e.g. `surveys[, -1]`) to reproduce the behavior of `head(surveys)`, keeping just the first through 6th rows of the surveys dataset. Don't worry if you can't get this one right!
+
+---
 
 #### **Block 4: factors**
 
-**4.1** First assign the gender data from `surveys` to a new object and convers it to a factor. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
+*Lecture materials:* [Starting with data](https://csc-training.github.io/da-with-r-remote/LectureMaterials/StartingWithData.html) &rarr; sections 6-8
+
+*Learning goals:* 
+
+- convert a character variable into a factor with and rename and reorder the levels of a factor with `factor()` and `levels()`
+- use `$` to define a column in a data frame and square brackets `[n]` to define a value in a vector  
+
+---
+
+`r r2symbols::sym("star-solid")` **4.1** First assign the gender data from `surveys` to a new object and convert it to a factor. You probably also remember there are some measurements where the gender information is either missing or undetermined, let's call those "undetermined".
 
 ```r
 sex <- factor(surveys$sex)
 levels(sex)[1] <- "undetermined"
 ```
 
-**4.2** Rename “F” and “M” to “female” and “male”, respectively.
+`r r2symbols::sym("star-solid")` **4.2** Rename “F” and “M” to “female” and “male”, respectively.
 
-**4.3** Can you reorder the data so that the levels are ordered like this: `undetermined`, `male`, `female`? After this, use `plot()` to check how the data now look.
+`r r2symbols::sym("star-solid")` **4.3** Can you reorder the data so that the levels are ordered like this: `undetermined`, `male`, `female`? After this, use `plot()` to check how the data now look.
+
+---
 
 #### **OPTIONAL Block 5: more on data frames**
+
+**Learning goals**: learn to spot problems with data types when importing data frames into R
+
+---
 
 
 **5.1** We have seen how data frames are created when using `read.csv()`, but they can also be created by hand with the `data.frame()` function. There are a few mistakes in this hand-crafted `data.frame`. Can you spot and fix them? Don’t hesitate to experiment!
@@ -125,15 +169,23 @@ country_climate <- data.frame(
        )
 ```
 
+---
+
 #### **Block 6: arguments for CSV importing**
 
-**6.1** Import a new data set on car speeds (`/home/rstudio/shared/car-speeds.csv`) and assign it to an object called `carSpeeds`.
+*Lecture materials:* [Importing and exporting data](https://csc-training.github.io/da-with-r-remote/LectureMaterials/ImportingExporting.html)
+
+**Learning goals**: use arguments with `read.csv()` to avoid common problems when reading in spreadsheet data into R
+
+---
+
+`r r2symbols::sym("star-solid")` **6.1** Import a new data set on car speeds (`/home/rstudio/shared/car-speeds.csv`) and assign it to an object called `carSpeeds`.
 
 ```r
 carSpeeds <- read.csv("/home/rstudio/shared/car-speeds.csv")
 ```
 
-**6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try re-importing the data with the header argument set to false: `header = FALSE`. How does the new data set differ from the previous one? 
+`r r2symbols::sym("star-solid")` **6.2** Have a look at the structure of `carSpeeds` using `str()`. Then try re-importing the data with the header argument set to false: `header = FALSE`. How does the new data set differ from the previous one? 
 
 **6.3** The car colour labels contain accidental whitespaces. You can see this by running:  
 
@@ -150,13 +202,26 @@ The `strip.white` argument must be accompanied by the `sep` argument, by which w
 
 Use `unique()` to check if it worked.
 
+___
+
 #### **Block 7: exporting data and saving scripts**
+
+*Lecture materials:* [Importing and exporting data](https://csc-training.github.io/da-with-r-remote/LectureMaterials/ImportingExporting.html)
+
+*Learning goals:* 
+
+- export a data frame from R into a CSV file
+- use arguments to avoid common problems with `write.csv()`
+- export data from the RStudio course environment to your own computer
+
+___
+
 
 The first two steps were covered in the lecture, so skip to step 7.3 if you already ran them.
 
-**7.1** Create a new folder for output files, called `data_output`.
+`r r2symbols::sym("star-solid")` **7.1** Create a new folder for output files, called `data_output`.
 
-**7.2** Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file. The output file name should be in quotation marks (because it is a character string and not an object in our R environment).
+`r r2symbols::sym("star-solid")` **7.2** Export the car speeds data. The `write.csv()` function requires a minimum of two arguments, the data to be saved and the name of the output file. The output file name should be in quotation marks (because it is a character string and not an object in our R environment).
 
 ```r
 write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
@@ -166,9 +231,9 @@ write.csv(carSpeeds, file = "data_output/car-speeds-cleaned.csv")
 
 **7.4** Our `read.csv()` command above has inserted an extra column of row names into the data frame. We can use the argument `row.names` with `write.csv` to control this. R’s default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`. Export your original carSpeeds data again with `write.csv` and this time add `row.names = FALSE`. View the file again to check if it worked.
 
-**7.5** Save your R script (File --> Save as...).
+`r r2symbols::sym("star-solid")` **7.5** Save your R script (File --> Save as...).
 
-**7.6** Export your data from RStudio Server.
+`r r2symbols::sym("star-solid")` **7.6** Export your data from RStudio Server.
 
 ```
 - Go to the "Files" pane (on the right, next to "Plots")
