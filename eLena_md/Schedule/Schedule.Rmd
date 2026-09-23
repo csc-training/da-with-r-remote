@@ -30,7 +30,6 @@ opts_knit$set(width=75)
 - Basic features of R 
 - Starting with data  
 - Data manipulation
-- Feedback
 
 #### **Day 2**
 
@@ -43,6 +42,6 @@ opts_knit$set(width=75)
 
 #### **Breaks**
 
-- 10:15 - 10:30 (morning coffee break)
+- 10:30 - 10:45 (morning coffee break)
 - 12:00 - 13:00 (lunch)
-- 14:15 - 14:30 (afternoon coffee break)
+- 14:30 - 14:45 (afternoon coffee break)
