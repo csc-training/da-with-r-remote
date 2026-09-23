@@ -191,7 +191,7 @@ ggplot(data = surveys_complete, mapping = aes(x = weight,
 
 At this point, let's complete Data Visualization **Exercise Block 1** (~ 10 mins). 
 
-The scatter plot resulting from exercise 1.4 should look like this:
+The scatter plot resulting from the exercise should look like this:
 
 ![](Images/R-ecology-scatter-challenge-1.png?raw=true)
 

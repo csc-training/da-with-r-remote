@@ -33,22 +33,32 @@ opts_knit$set(width=75)
 
 https://datacarpentry.org/R-ecology-lesson/
 
+*Lecture materials:* [Data visualization](https://csc-training.github.io/da-with-r-remote/LectureMaterials/DataVisualization.html)
+
+*Learning goals:*
+
+- get familiar with the `ggplot2` syntax
+- produce different types of plots with `ggplot2` 
+- split a plot into subplots (facets) based a variable
+- combine multiple plots into one figure
+- save and export good quality plots
+
 
 #### **Block 1: preparation and scatter plots**
 
-**1.1** `ggplot2` is part of the `tidyverse` package collection, so we'll need to load it:
+`r r2symbols::sym("star-solid")` **1.1** `ggplot2` is part of the `tidyverse` package collection, so we'll need to load it:
 
 ```r
 library(tidyverse)
 ```
 
-**1.2** Then import a version of the `surveys` data set that we worked with previously (`surveys_complete.csv`). Assign it to a tibble called `surveys_complete`, using `read_csv()`. We can use a version of the data located in the `/shared` folder.
+`r r2symbols::sym("star-solid")` **1.2** Then import a version of the `surveys` data set that we worked with previously (`surveys_complete.csv`). Assign it to a tibble called `surveys_complete`, using `read_csv()`. We can use a version of the data located in the `/shared` folder.
 
 ```r
 surveys_complete <- read_csv("/home/rstudio/shared/surveys_complete.csv")
 ```
 
-**1.3** Using `ggplot2` and the `surveys_complete` data set, create a scatter plot with `weight` on the y axis and `species_id` on the x axis, with the plot types shown in different colors. What do you think - is this a good way to show these type of data? If not, how would you go about it instead?
+`r r2symbols::sym("star-solid")` **1.3** Using `ggplot2` and the `surveys_complete` data set, create a scatter plot with `weight` on the y axis and `species_id` on the x axis, with the plot types shown in different colors. What do you think - is this a good way to show these type of data? If not, how would you go about it instead?
 
 ```r
 ggplot(data = surveys_complete, 
@@ -79,7 +89,7 @@ template +
 
 #### **Block 2: bar plots and custom colour palette**
   
-**2.1** Recreate the the bar plot we were just examining, showing mean weights of each species. This time, also try adding the following custom palette to the plot (with the data colour by `species_id`). The palette contains a list of different RGB values that can be used for creating color-blind plots.
+`r r2symbols::sym("star-solid")` **2.1** Recreate the the bar plot we were just examining, showing mean weights of each species. This time, also try adding the following custom palette to the plot (with the data colour by `species_id`). The palette contains a list of different RGB values that can be used for creating color-blind plots.
 
 ```r
 cPalette <- c("#000000","#004949","#009292","#ff6db6","#ffb6db",
@@ -126,7 +136,7 @@ ggplot(surveys_complete, aes(x = weight, color = sex)) +
 
 #### **Block 4: box and violin plots**
 
-**4.1** Box plots are useful summaries, but hide the *shape* of the distribution. For example, if the distribution is bimodal, we would not see it in a box plot. In addition to histograms, an alternative to the box plot is the violin plot, where the shape (of the density of points) is drawn. 
+`r r2symbols::sym("star-solid")` **4.1** Box plots are useful summaries, but hide the *shape* of the distribution. For example, if the distribution is bimodal, we would not see it in a box plot. In addition to histograms, an alternative to the box plot is the violin plot, where the shape (of the density of points) is drawn. 
 
 Try modifying the following code to create a violin plot instead (you can use `geom_violin()`). Can you think of anything else that could be done to improve the presentation of the data?
 
@@ -164,21 +174,21 @@ geom_boxplot(alpha = 0)
 
 Take some time to construct the `yearly_counts` data set for yourself, and trying out a line plot.
 
-**5.1** The `yearly_counts` object should contain numbers of counts per year for each genus. We need to group the data and count records within each group:
+`r r2symbols::sym("star-solid")` **5.1** The `yearly_counts` object should contain numbers of counts per year for each genus. We need to group the data and count records within each group:
 
 ```r
 yearly_counts <- surveys_complete |>
   count(year, genus)
 ```
 
-**5.2** Create a line plot of the `yearly_counts` data as follows. Remember that we can use the `color` argument does a nice job at grouping the data for us.
+`r r2symbols::sym("star-solid")` **5.2** Create a line plot of the `yearly_counts` data as follows. Remember that we can use the `color` argument does a nice job at grouping the data for us.
 
 ```r
 ggplot(data = yearly_counts, mapping = aes(x = year, y = n, color = genus)) +
     geom_line()
 ```
 
-**5.3** Let's create another object, called `yearly_sex_counts`. This should be similar to `yearly_counts`, but with the data additionally grouped by sex. We will need that in later exercises! 
+`r r2symbols::sym("star-solid")` **5.3** Let's create another object, called `yearly_sex_counts`. This should be similar to `yearly_counts`, but with the data additionally grouped by sex. We will need that in later exercises! 
 
 ```r
 yearly_sex_counts <- surveys_complete |>
@@ -194,7 +204,7 @@ Here's a reminder of the two options we have for faceting using `ggplot2`:
 
 We've tried `facet_wrap()`. Next, let's check out `facet_grid()`.
 
-**6.1** You might remember this `facet_wrap()` example that we covered earlier:
+`r r2symbols::sym("star-solid")` **6.1** You might remember this `facet_wrap()` example that we covered earlier:
 
 ```r
 ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
@@ -227,7 +237,7 @@ ggplot(data = yearly_sex_counts,
   facet_grid(cols = vars(genus))
 ```
 
-#### **Block 7: further customization**
+#### **OPTIONAL Block 7: further customization**
 
 **7.1** Try creating your own custom theme (you could call it `mytheme`) and using it to modify the appearance of the following plot. There's no right or wrong answer here, feel free to experiment!
 
@@ -270,9 +280,9 @@ y = hindfoot_length)) +
 
 #### **Block 8: arranging, saving and exporting**
 
-**8.1** If you don't have it already, create a folder called `fig_output` in your working directory.
+`r r2symbols::sym("star-solid")` **8.1** If you don't have it already, create a folder called `fig_output` in your working directory.
 
-**8.2** Run through this rather big block of code to create a couple of plots that we were looking at earlier.
+`r r2symbols::sym("star-solid")` **8.2** Run through this rather big block of code to create a couple of plots that we were looking at earlier.
 
 ```r
 # plot 1
@@ -292,7 +302,7 @@ spp_count_plot <- ggplot(data = yearly_counts,
   xlab("Year") + ylab("Abundance")
 ```
 
-**8.3** We can use `ggsave()` to save the plots. Try saving a single plot first. Instead of png, save the plot as a pdf file.
+`r r2symbols::sym("star-solid")` **8.3** We can use `ggsave()` to save the plots. Try saving a single plot first. Instead of png, save the plot as a pdf file.
 
 ```r
 ggsave("fig_output/plot1.png", my_plot, 
@@ -304,7 +314,7 @@ ggsave("fig_output/plot1.pdf", my_plot,
 width = 15, height = 10)
 ```
 
-**8.4** Next we could save a `grid.arrange()` plot. First use `grid.arrange()` to combine plots 1 and 2, then use `ggsave()` to save the result as a pdf file (use a DPI value of 100).
+`r r2symbols::sym("star-solid")` **8.4** Next we could save a `grid.arrange()` plot. First use `grid.arrange()` to combine plots 1 and 2, then use `ggsave()` to save the result as a pdf file (use a DPI value of 100).
 
 If you get an error saying `could not find function "grid.arrange"`, it means the package `gridExtra` hasn´t been loaded. Load it by running `library(gridExtra)`.
 

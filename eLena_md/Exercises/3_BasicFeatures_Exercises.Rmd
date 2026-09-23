@@ -14,7 +14,7 @@ output:
 ```{r setup, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
-library(icons)
+library(r2symbols)
 
 ## Global options
 options(max.print="75")
@@ -35,6 +35,9 @@ https://swcarpentry.github.io/r-novice-gapminder/
 
 https://datacarpentry.org/R-ecology-lesson/
 
+`r r2symbols::sym("star-solid")` marks the most important exercises. Focus on these if the content is completely new to you.  
+"Optional" marks more challenging exercises. Do these if you have time and find the other exercises easy.
+
 ---
 
 #### **Block 1: creating a project, working with objects**
@@ -49,7 +52,7 @@ https://datacarpentry.org/R-ecology-lesson/
 ---
 
 
-**1.1** In RStudio, create a project called `RIntro` in the `my-work` directory, if not already created (note that R is case-sensitive).
+`r r2symbols::sym("star-solid")` **1.1** In RStudio, create a project called `RIntro` in the `my-work` directory, if not already created (note that R is case-sensitive).
 
 **1.2** Create the following objects. What are the values after each statement?
 
@@ -79,11 +82,11 @@ You can use the objects you already created as initial values or as intermediate
 
 ---
 
-**2.1** Round the number 3.49339 to three decimal points.
+`r r2symbols::sym("star-solid")` **2.1** Round the number 3.49339 to three decimal points.
 
-**2.2** Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
+`r r2symbols::sym("star-solid")` **2.2** Create a numeric vector called "weights" using the numbers: 23, 55, 97, 12.
 
-**2.3** Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
+`r r2symbols::sym("star-solid")` **2.3** Create a character vector called "names" using these animal names: cat, tortoise, alpaca.
 
 **2.4** We’ve seen that vectors can be of type character, numeric (or double), integer, and logical. What happens if we try to mix these data types in a single vector as in these examples? (hint: use `class()` to check the data type of your objects)
 
@@ -109,13 +112,13 @@ tricky <- c(1, 2, 3, "4")
 
 ---
 
-**3.1** Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
+`r r2symbols::sym("star-solid")` **3.1** Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.
 
 ```r
 heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
 ```
 
-**3.2** Use the function `median()` to calculate the median of the `heights` vector.
+`r r2symbols::sym("star-solid")` **3.2** Use the function `median()` to calculate the median of the `heights` vector.
 
 **3.3** Use R to figure out how many people in the set are taller than 67 inches.
 
@@ -138,7 +141,7 @@ To make things easier to remember, here is the list of comparisons and operators
 
 ---
 
-#### **Optional: Block 4: finding help**
+#### **OPTIONAL: Block 4: finding help**
 
 *Lecture materials:* [Finding help](https://csc-training.github.io/da-with-r-remote/LectureMaterials/FindingHelp.html)
 
